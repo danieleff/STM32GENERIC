@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "stm32_gpio.h"
 
 #include "variant.h"
 

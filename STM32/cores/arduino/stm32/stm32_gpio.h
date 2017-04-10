@@ -5,6 +5,11 @@
 
 #include "variant.h"
 
+#define INPUT 0x0
+#define OUTPUT 0x1
+#define INPUT_PULLUP 0x2
+#define INPUT_PULLDOWN 0x3
+
 #ifndef GPIO_SPEED_FREQ_VERY_HIGH
     #define GPIO_SPEED_FREQ_VERY_HIGH GPIO_SPEED_FREQ_HIGH
 #endif
