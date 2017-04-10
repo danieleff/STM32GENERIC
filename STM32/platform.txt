@@ -1,0 +1,151 @@
+
+# STM32F4 ARM Core and platform.
+# ------------------------------
+#
+# For more info:
+# https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
+
+name=STM32 boards by danieleff
+version=1.0.0
+
+# STM compile variables
+# ----------------------
+compiler.extra_includes="-I{build.core.path}/stm32" "-I{build.core.path}/usb" "-I{build.system.path}/CMSIS" "-I{build.system.path}/{build.series}/CMSIS_Inc" "-I{build.system.path}/{build.series}/CMSIS_Src" "-I{build.system.path}/{build.series}/HAL_Inc" "-I{build.system.path}/{build.series}/HAL_Src"  "-I{build.system.path}/{build.series}/stm32_chip" 
+
+compiler.warning_flags=-w
+compiler.warning_flags.none=-w
+compiler.warning_flags.default=
+compiler.warning_flags.more=-Wall
+compiler.warning_flags.all=-Wall -Wextra
+
+compiler.path={runtime.tools.arm-none-eabi-gcc.path}/bin/
+
+compiler.S.cmd       = arm-none-eabi-gcc
+compiler.c.cmd       = arm-none-eabi-gcc
+compiler.cpp.cmd     = arm-none-eabi-g++
+compiler.ar.cmd      = arm-none-eabi-ar
+compiler.c.elf.cmd   = arm-none-eabi-gcc
+compiler.objcopy.cmd = arm-none-eabi-objcopy
+
+compiler.S.flags=-mcpu={build.mcu} -mthumb -c -x assembler-with-cpp
+
+compiler.c.flags=-mcpu={build.mcu} -mthumb -c -g -MMD -Os {compiler.warning_flags} -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD
+
+compiler.cpp.flags=-mcpu={build.mcu} -mthumb -c -Os {compiler.warning_flags} -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD
+
+compiler.ar.flags=rcs
+
+compiler.c.elf.flags=-mcpu={build.mcu} -mthumb -Os -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align
+
+compiler.objcopy.eep.flags=-O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0
+
+compiler.elf2hex.flags=-O binary
+compiler.elf2hex.cmd=arm-none-eabi-objcopy
+
+compiler.ldflags=
+compiler.size.cmd=arm-none-eabi-size
+compiler.define=-DARDUINO=
+
+# this can be overriden in boards.txt
+build.extra_flags=
+build.ldscript=ldscript.ld
+
+# These can be overridden in platform.local.txt
+compiler.c.extra_flags=
+compiler.c.elf.extra_flags=
+compiler.cpp.extra_flags=
+compiler.S.extra_flags=
+compiler.ar.extra_flags=
+compiler.elf2hex.extra_flags=
+
+# USB Flags
+# ---------
+build.usb_flags=-DUSBD_VID={build.vid} -DUSBD_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
+
+# Default usb manufacturer will be replaced at compile time using
+# numeric vendor ID if available or by board's specific value.
+build.usb_manufacturer="Unknown"
+
+
+# compile patterns
+# ---------------------
+
+## Compile c files
+recipe.c.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.c.flags} -D{build.series} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.c.extra_flags} {build.extra_flags} {compiler.extra_includes} {includes} "{source_file}" -o "{object_file}"
+
+## Compile c++ files
+recipe.cpp.o.pattern="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} -D{build.series} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.cpp.extra_flags} {build.extra_flags} {compiler.extra_includes} {includes} "{source_file}" -o "{object_file}"
+
+## Compile S files
+recipe.S.o.pattern="{compiler.path}{compiler.S.cmd}" {compiler.S.flags} -D{build.series} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} {compiler.S.extra_flags} {build.extra_flags} {compiler.extra_includes} {includes} "{source_file}" -o "{object_file}"
+
+## Create archives
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
+
+## Combine gc-sections, archives, and objects
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} "-T{build.variant.path}/{build.ldscript}" "-Wl,-Map,{build.path}/{build.project_name}.map" {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" "-L{build.path}" -Wl,--start-group {object_files} "{build.path}/{archive_file}" -Wl,--end-group -lm -lgcc --specs=nano.specs
+
+## Create output (.bin file)
+recipe.objcopy.bin.pattern="{compiler.path}{compiler.elf2hex.cmd}" {compiler.elf2hex.flags} {compiler.elf2hex.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.bin"
+
+## Save hex
+recipe.output.tmp_file={build.project_name}.bin
+recipe.output.save_file={build.project_name}.{build.variant}.bin
+
+## Compute size
+recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
+recipe.size.regex=^(?:\.text|\.data|\.rodata)\s+([0-9]+).*
+recipe.size.regex.data=^(?:\.data|\.bss|\._user_heap_stack)\s+([0-9]+).*
+recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
+
+
+# Uploader tool
+# -------------------
+
+#Upload to Nucleo via mass storage
+tools.nucleoFlasher.path={runtime.hardware.path}/tools/win/nucleoFlasher
+tools.nucleoFlasher.path.macosx={runtime.hardware.path}/tools/macosx/nucleoFlasher
+tools.nucleoFlasher.path.linux={runtime.hardware.path}/tools/linux/nucleoFlasher
+tools.nucleoFlasher.cmd.linux=nucleoFlasher
+tools.nucleoFlasher.cmd.windows=nucleoFlasher.bat
+tools.nucleoFlasher.cmd.macosx=nucleoFlasherMacOsX
+tools.nucleoFlasher.upload.params.verbose=
+tools.nucleoFlasher.upload.params.quiet=
+tools.nucleoFlasher.upload.pattern="{path}/{cmd}" {upload.verbose} -I "{build.path}/{build.project_name}.bin" -O "{massstorage_drive}"
+
+# stlink upload
+tools.stlink_upload.cmd=stlink_upload
+tools.stlink_upload.cmd.windows=stlink_upload.bat
+tools.stlink_upload.path.windows={runtime.hardware.path}/tools/win
+tools.stlink_upload.path.macosx={runtime.hardware.path}/tools/macosx
+tools.stlink_upload.path.linux={runtime.hardware.path}/tools/linux
+tools.stlink_upload.path.linux64={runtime.hardware.path}/tools/linux64
+tools.stlink_upload.upload.params.verbose=-d
+tools.stlink_upload.upload.params.quiet=
+tools.stlink_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "{build.path}/{build.project_name}.bin"
+
+
+# Upload using Maple bootloader over DFU
+tools.maple_upload.cmd=maple_upload
+tools.maple_upload.cmd.windows=maple_upload.bat
+tools.maple_upload.path={runtime.tools.STM32Tools.path}/tools/win
+tools.maple_upload.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
+tools.maple_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
+tools.maple_upload.path.linux64={runtime.tools.STM32Tools.path}/tools/linux64
+tools.maple_upload.upload.params.verbose=-d
+tools.maple_upload.upload.params.quiet=
+tools.maple_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "{build.path}/{build.project_name}.bin"
+
+#Added tool for generic STM32 upload via serial to Serial Port 1 (pins PA9 and PA10) - note. Boot0 line needs to high on board reset to enable upload via serial
+# at the end up the upload the program is automatically run, without the board being reset
+
+tools.serial_upload.cmd=serial_upload
+tools.serial_upload.cmd.windows=serial_upload.bat
+tools.serial_upload.cmd.macosx=serial_upload
+tools.serial_upload.path={runtime.tools.STM32Tools.path}/tools/win
+tools.serial_upload.path.macosx={runtime.tools.STM32Tools.path}/tools/macosx
+tools.serial_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
+tools.serial_upload.path.linux64={runtime.tools.STM32Tools.path}/tools/linux64
+tools.serial_upload.upload.params.verbose=-d
+tools.serial_upload.upload.params.quiet=n
+tools.serial_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "{build.path}/{build.project_name}.bin"

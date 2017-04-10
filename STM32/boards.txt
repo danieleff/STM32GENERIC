@@ -1,0 +1,192 @@
+# See: http://code.google.com/p/arduino/wiki/Platforms
+
+menu.upload_method=Upload method
+menu.nucleo_board=Nucleo board
+
+
+################################################################################
+# MapleMini_F103CB board
+
+MapleMini_F103CB.name=MapleMini F103CB
+
+MapleMini_F103CB.vid.0=0x0483
+MapleMini_F103CB.pid.0=0x5740
+
+MapleMini_F103CB.upload.protocol=nucleoFlasher
+MapleMini_F103CB.upload.maximum_size=131072
+MapleMini_F103CB.upload.maximum_data_size=20480
+
+MapleMini_F103CB.build.mcu=cortex-m3
+MapleMini_F103CB.build.board=MAPLE_MINI
+MapleMini_F103CB.build.core=arduino
+MapleMini_F103CB.build.variant=MAPLE_MINI
+MapleMini_F103CB.build.series=STM32F1
+MapleMini_F103CB.build.extra_flags=-DSTM32F103CB
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2=USB DFU - STM32duino bootloader (0x2000)
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.upload.protocol=maple_dfu
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.upload.tool=maple_upload
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.build.extra_flags=-DSTM32F103CB -DVECT_TAB_OFFSET=0x2000 -DSERIAL_USB -DUSB_DISC_PIN=PB9
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.build.ldscript=ldscript_bootloader_2000.ld
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.upload.usbID=1EAF:0003
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.upload.altID=2
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.flash.maximum_size=122880
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.maximum_data_size=122880
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod2.ram.maximum_size=20480
+
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1=USB DFU - Maple bootloader (original version) (0x5000)
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.upload.protocol=maple_dfu
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.upload.tool=maple_upload
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.build.extra_flags=-DSTM32F103CB -DVECT_TAB_OFFSET=0x5000 -DSERIAL_USB -DUSB_DISC_PIN=PB9
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.build.ldscript=ldscript_bootloader_5000.ld
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.upload.usbID=1EAF:0003
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.upload.altID=1
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.flash.maximum_size=110592
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.maximum_data_size=110592
+MapleMini_F103CB.menu.upload_method.DFUUploadMethod1.ram.maximum_size=17408
+
+MapleMini_F103CB.menu.upload_method.STLinkMethod=STLink 
+MapleMini_F103CB.menu.upload_method.STLinkMethod.upload.protocol=STLink
+MapleMini_F103CB.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+MapleMini_F103CB.menu.upload_method.STLinkMethod.build.upload_flags=-DSERIAL_USB -DUSB_DISC_PIN=PB9
+
+MapleMini_F103CB.menu.upload_method.serialMethod=Serial UART1, TX/PA9/26, RX/PA10/25, BOOT1=0, BOOT0(button)=1(press when reset)
+MapleMini_F103CB.menu.upload_method.serialMethod.upload.protocol=maple_serial
+MapleMini_F103CB.menu.upload_method.serialMethod.upload.tool=serial_upload
+
+MapleMini_F103CB.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+MapleMini_F103CB.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+MapleMini_F103CB.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+MapleMini_F103CB.menu.upload_method.BMPMethod.build.upload_flags=
+
+
+
+################################################################################
+# BluePill board
+
+BluePill.name=BluePill F103CB
+
+BluePill.vid.0=0x0483
+BluePill.pid.0=0x5740
+
+BluePill.upload.protocol=nucleoFlasher
+BluePill.upload.maximum_size=131072
+BluePill.upload.maximum_data_size=20480
+
+BluePill.build.mcu=cortex-m3
+BluePill.build.board=BLUEPILL
+BluePill.build.core=arduino
+BluePill.build.variant=BLUEPILL
+BluePill.build.series=STM32F1
+BluePill.build.extra_flags=-DSTM32F103CB
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+BluePill.menu.upload_method.DFUUploadMethod=USB DFU - STM32duino bootloader (0x2000)
+BluePill.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+BluePill.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+BluePill.menu.upload_method.DFUUploadMethod.build.extra_flags=-DSTM32F103CB -DVECT_TAB_OFFSET=0x2000 -DSERIAL_USB
+BluePill.menu.upload_method.DFUUploadMethod.build.ldscript=ldscript_bootloader_2000.ld
+BluePill.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+BluePill.menu.upload_method.DFUUploadMethod.upload.altID=2
+BluePill.menu.upload_method.DFUUploadMethod.flash.maximum_size=122880
+BluePill.menu.upload_method.DFUUploadMethod.maximum_data_size=122880
+BluePill.menu.upload_method.DFUUploadMethod.ram.maximum_size=20480
+
+BluePill.menu.upload_method.STLinkMethod=STLink 
+BluePill.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BluePill.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+BluePill.menu.upload_method.STLinkMethod.build.upload_flags=-DSERIAL_USB -DUSB_DISC_PIN=PB9
+
+BluePill.menu.upload_method.serialMethod=Serial UART1, TX/PA9/26, RX/PA10/25, BOOT0=1, BOOT1=0
+BluePill.menu.upload_method.serialMethod.upload.protocol=maple_serial
+BluePill.menu.upload_method.serialMethod.upload.tool=serial_upload
+
+BluePill.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+BluePill.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+BluePill.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+BluePill.menu.upload_method.BMPMethod.build.upload_flags=
+
+################################################################################
+# BLACK_F407VE board
+
+BLACK_F407VE.name=BLACK F407VE (upload: STLink)
+
+BLACK_F407VE.vid.0=0x0483
+BLACK_F407VE.pid.0=0x5711
+
+BLACK_F407VE.upload.maximum_size=1048576
+BLACK_F407VE.upload.maximum_data_size=196608
+
+BLACK_F407VE.build.mcu=cortex-m4
+BLACK_F407VE.build.core=arduino
+BLACK_F407VE.build.variant=BLACK_F407VE
+BLACK_F407VE.build.board=BLACK_F407VE
+BLACK_F407VE.build.series=STM32F4
+BLACK_F407VE.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000 -DSERIAL_USB
+
+BLACK_F407VE.upload.tool=stlink_upload
+BLACK_F407VE.upload.protocol=STLink
+
+################################################################################
+# NUCLEO 64 board
+
+NUCLEO_64.name=Nucleo-64 (Select board from submenu)
+
+NUCLEO_64.vid.0=0x0483
+NUCLEO_64.pid.0=0x5711
+
+NUCLEO_64.upload.maximum_size=524288
+NUCLEO_64.upload.maximum_data_size=131072
+
+NUCLEO_64.build.core=arduino
+NUCLEO_64.build.board=NUCLEO_64
+
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE=Nucleo-F411RE
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.mcu=cortex-m4
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.series=STM32F4
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.variant=NUCLEO_F411RE
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.massstorage_drive=NODE_F411RE
+
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB=Nucleo-F103RB
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.mcu=cortex-m3
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.series=STM32F1
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.variant=NUCLEO_F103RB
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.extra_flags=-DSTM32F103RB
+NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.massstorage_drive=NODE_F103RB
+
+
+NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
+NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
+NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+NUCLEO_64.menu.upload_method.STLinkMethod=STLink
+NUCLEO_64.menu.upload_method.STLinkMethod.upload.protocol=STLink
+NUCLEO_64.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+
+################################################################################
+# Discovery L053C8 board
+
+DISCOVERY_L053C8.name=Discovery L053C8 (upload: STLink)
+
+DISCOVERY_L053C8.vid.0=0x0483
+DISCOVERY_L053C8.pid.0=0x5711
+
+DISCOVERY_L053C8.upload.maximum_size=524288
+DISCOVERY_L053C8.upload.maximum_data_size=131072
+
+DISCOVERY_L053C8.build.core=arduino
+DISCOVERY_L053C8.build.board=DISCOVERY_L053C8
+
+DISCOVERY_L053C8.build.mcu=cortex-m0
+DISCOVERY_L053C8.build.series=STM32L0
+DISCOVERY_L053C8.build.variant=DISCOVERY_L053C8
+DISCOVERY_L053C8.build.extra_flags=-DSTM32L053C8 -DSERIAL_USB
+
+DISCOVERY_L053C8.upload.protocol=STLink
+DISCOVERY_L053C8.upload.tool=stlink_upload
+
