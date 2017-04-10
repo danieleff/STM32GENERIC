@@ -1,5 +1,5 @@
 
-# STM32F4 ARM Core and platform.
+# STM32 ARM Core and platform.
 # ------------------------------
 #
 # For more info:
