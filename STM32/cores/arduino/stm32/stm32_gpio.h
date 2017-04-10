@@ -36,6 +36,18 @@ inline void digitalWrite(uint8_t pin, uint8_t value) {
     
 }
 
+
+inline int digitalRead(uint8_t pin) {
+    if (pin < 0 || pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
+        return 0;
+    }
+    
+    stm32_port_pin_type port_pin = port_pin_list[pin];
+    
+    return HAL_GPIO_ReadPin(port_pin.port, port_pin.pin_mask);
+    
+}
+
 #ifdef __cplusplus
 }
 #endif
