@@ -49,7 +49,7 @@ void SerialUART::begin(const uint32_t baud) {
   }
   #endif
   
-  stm32_alternate_uart_init(instance, NULL, 0, NULL, 0);
+  stm32_af_uart_init(instance, NULL, 0, NULL, 0);
   
   handle->Init.BaudRate = baud; 
   handle->Init.WordLength = UART_WORDLENGTH_8B;

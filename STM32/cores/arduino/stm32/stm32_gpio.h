@@ -25,7 +25,7 @@ typedef struct {
 
 extern const stm32_port_pin_type port_pin_list[NUM_PINS];
 
-void stm32_alternate_uart_init(const USART_TypeDef *instance, 
+void stm32_af_uart_init(const USART_TypeDef *instance,
     GPIO_TypeDef *rxPort, uint32_t rxPin, 
     GPIO_TypeDef *txPort, uint32_t txPin);
 
