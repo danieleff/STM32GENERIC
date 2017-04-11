@@ -28,7 +28,7 @@ extern const stm32_port_pin_type port_pin_list[NUM_PINS];
 void stm32_gpio_clock(GPIO_TypeDef *port);
 
 inline void digitalWrite(uint8_t pin, uint8_t value) {
-    if (pin < 0 || pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
+    if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
         return;
     }
     
@@ -40,7 +40,7 @@ inline void digitalWrite(uint8_t pin, uint8_t value) {
 
 
 inline int digitalRead(uint8_t pin) {
-    if (pin < 0 || pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
+    if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
         return 0;
     }
     
