@@ -2,8 +2,6 @@
 
 #include "stm32_gpio.h"
 
-extern const int flash_size = 512 * 1024;
-
 const stm32_port_pin_type port_pin_list[] = {
   { GPIOA, GPIO_PIN_0 },
   { GPIOA, GPIO_PIN_1 },
