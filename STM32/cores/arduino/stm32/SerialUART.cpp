@@ -1,4 +1,5 @@
 #include "SerialUART.h"
+#include "stm32_gpio_af.h"
 
 SerialUART::SerialUART(USART_TypeDef *instance) {
     this->instance = instance;
