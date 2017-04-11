@@ -1,7 +1,7 @@
 #include "stm32_build_defines.h"
 
 #ifdef STM32F0
-    #include "stm32f0xx_ll_usb.c"
+    
 #endif
 #ifdef STM32F1
     #include "stm32f1xx_ll_usb.c"
@@ -10,7 +10,7 @@
     #include "stm32f2xx_ll_usb.c"
 #endif
 #ifdef STM32F3
-    #include "stm32f3xx_ll_usb.c"
+    
 #endif
 #ifdef STM32F4
     #include "stm32f4xx_ll_usb.c"
@@ -22,7 +22,7 @@
     
 #endif
 #ifdef STM32L1
-    #include "stm32l1xx_ll_usb.c"
+    
 #endif
 #ifdef STM32L4
     #include "stm32l4xx_ll_usb.c"
