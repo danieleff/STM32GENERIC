@@ -47,13 +47,26 @@ def find_header(name):
         if (name in line):
             include = define
             break
-        if ((name[:-2] + "xx") in line):
-            include = define
-            break
         if ((name[:-2] + "x" + name[-1:]) in line):
             include = define
             break
-   
+    
+    if not include:
+        define = False
+        for line in header_lines:
+            if '/* #define' in line:
+                define = line[line.index('#define ')+8:][:11]
+            
+            if '#endif' in line:
+                define = False
+                
+            if not define:
+                continue
+                
+            if ((name[:-2] + "xx") in line):
+                include = define
+                break
+    
     if not include:
         raise Exception(name)
     
@@ -288,6 +301,9 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
     file.write('\n')
     
     name_processed = []
+    
+    file.write('#if __IGNORE\n')
+        
     for mcu in mcus:
         name = mcu.attrib['RefName'] 
         name = name[:11]
@@ -301,17 +317,19 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         define = find_header(name)
         
         file.write('\n');
-        file.write('#if defined(' + name + ')\n')
-        file.write('  #define ' + define + '\n')
+        file.write('#elif defined(' + name + ')\n')
+        file.write('  #define ' + define + ' 1\n')
         file.write('  #define CMSIS_STARTUP_ASSEMBLY "startup_' + define.lower() + '.s"\n')
         file.write('  #define CHIP_PERIPHERAL_INCLUDE "stm32_' + name + '.h"\n')
-        file.write('#endif\n')
         
         mcu = load_mcu(name)
         mcu.find_remaps()
         mcu.process_pins()
         mcu.generate_source_code()
-      
+    file.write('#else \n')
+    file.write('#error UNKNOWN CHIP \n')
+    file.write('#endif\n')
+    
     file.write('\n')
     file.write('#endif')
 
