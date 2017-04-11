@@ -31,7 +31,7 @@ for line in boards:
             continue
 
         (upload, k) = key.split('.', 1)
-        variant_nucleos.setdefault(board + '_' + upload, variants[board])[k] = value
+        variant_nucleos.setdefault(board + '_' + upload, variants[board].copy())[k] = value
     
     elif key.startswith('menu.upload_method.'):
         key = key.replace('menu.upload_method.', '')

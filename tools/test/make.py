@@ -18,16 +18,17 @@ for project in projects:
         
         
         with open(path + '/stdout.txt', 'w') as out, open(path + '/stderr.txt', 'w') as err:
-            subprocesses[variant] = subprocess.Popen(['make', 'VARIANT=' + variant, 'PROJECT=' + project], stdout = out, stderr = err)
+            p = subprocess.Popen(['make', 'VARIANT=' + variant, 'PROJECT=' + project], stdout = out, stderr = err)
+            subprocesses[variant] = p
     
-    for variant, p in subprocesses.iteritems():
-        p.wait()
-        
-        if p.returncode == 0:
-            print '.',
-        else:
-            print
-            print variant + 'COMPILATION ERROR ! ' + str(p.returncode)
+    #for variant, p in subprocesses.iteritems():
+            p.wait()
+            
+            if p.returncode == 0:
+                print '.',
+            else:
+                print
+                print variant + 'COMPILATION ERROR ! ' + str(p.returncode)
 
 print
 print 'FINISH'
