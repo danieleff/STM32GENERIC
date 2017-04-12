@@ -77,6 +77,7 @@ void SPIClass::beginTransaction(SPISettings settings) {
 	}
 
 	HAL_SPI_Init(&spiHandle);
+	__HAL_SPI_ENABLE(&spiHandle);
 }
 
 void SPIClass::endTransaction() {

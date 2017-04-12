@@ -91,10 +91,19 @@ class SPIClass {
 };
 
 inline uint8_t SPIClass::transfer(uint8_t data) {
+
+	spiHandle.Instance->DR = data;
+	while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_RXNE) == RESET);
+	while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_BSY) == SET);
+
+	return spiHandle.Instance->DR;
+
+	/*
 	if (HAL_SPI_TransmitReceive(&spiHandle, &data, &data, 1, 1000) != HAL_OK) {
 		return 0;
 	}
 	return data;
+	*/
 }
 inline uint16_t SPIClass::transfer16(uint16_t data) {
 	if (HAL_SPI_TransmitReceive(&spiHandle, (uint8_t*)&data, (uint8_t*)&data, 2, 1000) != HAL_OK) {
