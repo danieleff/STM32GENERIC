@@ -79,6 +79,9 @@ void SPIClass::beginTransaction(SPISettings settings) {
 	HAL_SPI_Init(&spiHandle);
 }
 
+void SPIClass::endTransaction() {
+
+}
 void SPIClass::setBitOrder(uint8_t bitOrder) {
 	beginTransaction(SPISettings(settings.clock, bitOrder, settings.dataMode));
 }
