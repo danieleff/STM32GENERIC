@@ -128,13 +128,15 @@ void loop(void);
 
 #define analogInPinToBit(P) (P)
 
-#define digitalPinToPort(P) ( pgm_read_byte( digital_pin_to_port_PGM + (P) ) )
-#define digitalPinToBitMask(P) ( pgm_read_byte( digital_pin_to_bit_mask_PGM + (P) ) )
-#define digitalPinToTimer(P) ( pgm_read_byte( digital_pin_to_timer_PGM + (P) ) )
-#define analogInPinToBit(P) (P)
-#define portOutputRegister(P) ( (volatile uint8_t *)( pgm_read_word( port_to_output_PGM + (P))) )
-#define portInputRegister(P) ( (volatile uint8_t *)( pgm_read_word( port_to_input_PGM + (P))) )
-#define portModeRegister(P) ( (volatile uint8_t *)( pgm_read_word( port_to_mode_PGM + (P))) )
+#define digitalPinToPort(P) ( port_pin_list[P].port )
+#define digitalPinToBitMask(P) ( port_pin_list[P].pin_mask )
+#define portOutputRegister(P) ( &(P->ODR) )
+#define portInputRegister(P) ( &(P->IDR) )
+
+// #define digitalPinToTimer(P) ( pgm_read_byte( digital_pin_to_timer_PGM + (P) ) )
+// #define analogInPinToBit(P) (P)
+// #define portInputRegister(P) ( (volatile uint8_t *)( pgm_read_word( port_to_input_PGM + (P))) )
+// #define portModeRegister(P) ( (volatile uint8_t *)( pgm_read_word( port_to_mode_PGM + (P))) )
 
 #define NOT_A_PIN 0
 #define NOT_A_PORT 0
