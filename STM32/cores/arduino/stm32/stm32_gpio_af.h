@@ -17,7 +17,7 @@ typedef struct {
     GPIO_TypeDef *port;
     uint32_t pin;
     stm32_af_callback alternate;
-} stm32_af_pin_list;
+} stm32_af_pin_list_type;
 
 #else
 
