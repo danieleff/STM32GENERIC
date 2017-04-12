@@ -14,6 +14,9 @@
     #define GPIO_SPEED_FREQ_VERY_HIGH GPIO_SPEED_FREQ_HIGH
 #endif
 
+#define RwReg uint32_t
+
+
 #ifdef __cplusplus
 extern "C"{
 #endif
