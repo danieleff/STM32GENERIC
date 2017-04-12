@@ -57,6 +57,10 @@ class SPIClass {
     	spiHandle.Instance = instance;
     };
 
+    void stm32_set_mosi(uint8_t mosi);
+    void stm32_set_miso(uint8_t miso);
+    void stm32_set_sck(uint8_t sck);
+
     void begin();
     void end();
 

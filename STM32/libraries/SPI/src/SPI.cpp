@@ -91,3 +91,18 @@ void SPIClass::setDataMode(uint8_t dataMode) {
 void SPIClass::setClockDivider(uint8_t clockDevider) {
 	beginTransaction(SPISettings(apb_freq / clockDevider, settings.bitOrder, settings.dataMode));
 }
+
+void SPIClass::stm32_set_mosi(uint8_t mosi) {
+	mosiPort = port_pin_list[mosi].port;
+	mosiPin = port_pin_list[mosi].pin_mask;
+}
+
+void SPIClass::stm32_set_miso(uint8_t miso) {
+	misoPort = port_pin_list[miso].port;
+	misoPin = port_pin_list[miso].pin_mask;
+}
+
+void SPIClass::stm32_set_sck(uint8_t sck) {
+	sckPort = port_pin_list[sck].port;
+	sckPin = port_pin_list[sck].pin_mask;
+}
