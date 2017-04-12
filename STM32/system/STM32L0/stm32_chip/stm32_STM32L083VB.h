@@ -182,7 +182,7 @@ NUM_PINS,
 };
 */
 
-const alternate_pin_type alternate_i2c_scl [] = {
+const stm32_af_pin_list_type chip_af_i2c_scl [] = {
 //I2C1
     { I2C1  , GPIOA, GPIO_PIN_9  , GPIO_AF6_I2C1  }, 
     { I2C1  , GPIOB, GPIO_PIN_6  , GPIO_AF1_I2C1  }, 
@@ -195,7 +195,7 @@ const alternate_pin_type alternate_i2c_scl [] = {
     { I2C3  , GPIOC, GPIO_PIN_0  , GPIO_AF7_I2C3  }, 
 }; 
 
-const alternate_pin_type alternate_i2c_sda [] = {
+const stm32_af_pin_list_type chip_af_i2c_sda [] = {
 //I2C1
     { I2C1  , GPIOA, GPIO_PIN_10 , GPIO_AF6_I2C1  }, 
     { I2C1  , GPIOB, GPIO_PIN_7  , GPIO_AF1_I2C1  }, 
@@ -209,7 +209,7 @@ const alternate_pin_type alternate_i2c_sda [] = {
     { I2C3  , GPIOC, GPIO_PIN_9  , GPIO_AF7_I2C3  }, 
 }; 
 
-const alternate_pin_type alternate_spi_miso [] = {
+const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_11 , GPIO_AF0_SPI1  }, 
     { SPI1  , GPIOA, GPIO_PIN_6  , GPIO_AF0_SPI1  }, 
@@ -221,7 +221,7 @@ const alternate_pin_type alternate_spi_miso [] = {
     { SPI2  , GPIOD, GPIO_PIN_3  , GPIO_AF2_SPI2  }, 
 }; 
 
-const alternate_pin_type alternate_spi_mosi [] = {
+const stm32_af_pin_list_type chip_af_spi_mosi [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_12 , GPIO_AF0_SPI1  }, 
     { SPI1  , GPIOA, GPIO_PIN_7  , GPIO_AF0_SPI1  }, 
@@ -233,7 +233,7 @@ const alternate_pin_type alternate_spi_mosi [] = {
     { SPI2  , GPIOD, GPIO_PIN_4  , GPIO_AF1_SPI2  }, 
 }; 
 
-const alternate_pin_type alternate_spi_sck [] = {
+const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_5  , GPIO_AF0_SPI1  }, 
     { SPI1  , GPIOB, GPIO_PIN_3  , GPIO_AF0_SPI1  }, 
@@ -244,7 +244,7 @@ const alternate_pin_type alternate_spi_sck [] = {
     { SPI2  , GPIOD, GPIO_PIN_1  , GPIO_AF1_SPI2  }, 
 }; 
 
-const alternate_pin_type alternate_usart_rx [] = {
+const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_10 , GPIO_AF4_USART1}, 
     { USART1, GPIOB, GPIO_PIN_7  , GPIO_AF0_USART1}, 
@@ -262,7 +262,7 @@ const alternate_pin_type alternate_usart_rx [] = {
     { USART5, GPIOE, GPIO_PIN_11 , GPIO_AF6_USART5}, 
 }; 
 
-const alternate_pin_type alternate_usart_tx [] = {
+const stm32_af_pin_list_type chip_af_usart_tx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_9  , GPIO_AF4_USART1}, 
     { USART1, GPIOB, GPIO_PIN_6  , GPIO_AF0_USART1}, 
@@ -279,3 +279,18 @@ const alternate_pin_type alternate_usart_tx [] = {
     { USART5, GPIOC, GPIO_PIN_12 , GPIO_AF2_USART5}, 
     { USART5, GPIOE, GPIO_PIN_10 , GPIO_AF6_USART5}, 
 }; 
+
+const stm32_clock_freq_list_type stm32_clock_freq_list[] = {
+  {I2C1  , HAL_RCC_GetPCLK1Freq },  
+  {I2C2  , HAL_RCC_GetPCLK1Freq },  
+  {I2C3  , HAL_RCC_GetPCLK1Freq },  
+  {SPI2  , HAL_RCC_GetPCLK1Freq },  
+  {USART2, HAL_RCC_GetPCLK1Freq },  
+  {USART4, HAL_RCC_GetPCLK1Freq },  
+  {USART5, HAL_RCC_GetPCLK1Freq },  
+
+  {SPI1  , HAL_RCC_GetPCLK2Freq },  
+  {USART1, HAL_RCC_GetPCLK2Freq },  
+  {USART1, HAL_RCC_GetPCLK2Freq },  
+};
+

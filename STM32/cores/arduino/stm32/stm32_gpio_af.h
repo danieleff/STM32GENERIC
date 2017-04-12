@@ -10,14 +10,14 @@
 
 #ifdef STM32F1
 
-typedef void (*alternate_callback)();
+typedef void (*stm32_af_callback)();
 
 typedef struct {
     void *instance;
     GPIO_TypeDef *port;
     uint32_t pin;
-    alternate_callback alternate;
-} alternate_pin_type;
+    stm32_af_callback alternate;
+} stm32_af_pin_list;
 
 #else
 
@@ -26,9 +26,10 @@ typedef struct {
     GPIO_TypeDef *port;
     uint32_t pin;
     uint8_t alternate;
-} alternate_pin_type;
+} stm32_af_pin_list_type;
 
 #endif
+
 
 
 #ifdef __cplusplus
@@ -45,14 +46,19 @@ void stm32_af_spi_init(const SPI_TypeDef *instance,
 	GPIO_TypeDef *sckPort, uint32_t sckPin);
 
 /**
+ * Get the clock frequency associated with the peripheral instance
+ */
+uint32_t stm32_apb_clock_freq(void *instance);
+
+/**
  * Internal: set the AF function for the selected peripheral on the selected pin
  */
-void stm32_af_init(const alternate_pin_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull);
+void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull);
 
 /**
  * Internal: get the default pin for the given peripheral
  */
-GPIO_TypeDef *stm32_af_default(alternate_pin_type list[], int size, const void *instance, uint32_t *pin);
+GPIO_TypeDef *stm32_af_default(stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin);
 
 
 #ifdef __cplusplus

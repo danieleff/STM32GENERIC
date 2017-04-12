@@ -146,7 +146,7 @@ static void AF__HAL_AFIO_REMAP_USART3_ENABLE(void) { __HAL_AFIO_REMAP_USART3_ENA
 static void AF__HAL_AFIO_REMAP_USART3_PARTIAL(void) { __HAL_AFIO_REMAP_USART3_PARTIAL(); }
 static void AF__NO_REMAP(void) { __NO_REMAP(); }
 
-const alternate_pin_type alternate_i2c_scl [] = {
+const stm32_af_pin_list_type chip_af_i2c_scl [] = {
 //I2C1
     { I2C1  , GPIOB, GPIO_PIN_6  , AF__HAL_AFIO_REMAP_I2C1_DISABLE}, 
     { I2C1  , GPIOB, GPIO_PIN_8  , AF__HAL_AFIO_REMAP_I2C1_ENABLE}, 
@@ -154,7 +154,7 @@ const alternate_pin_type alternate_i2c_scl [] = {
     { I2C2  , GPIOB, GPIO_PIN_10 , AF_NO_REMAP    }, 
 }; 
 
-const alternate_pin_type alternate_i2c_sda [] = {
+const stm32_af_pin_list_type chip_af_i2c_sda [] = {
 //I2C1
     { I2C1  , GPIOB, GPIO_PIN_7  , AF__HAL_AFIO_REMAP_I2C1_DISABLE}, 
     { I2C1  , GPIOB, GPIO_PIN_9  , AF__HAL_AFIO_REMAP_I2C1_ENABLE}, 
@@ -162,7 +162,7 @@ const alternate_pin_type alternate_i2c_sda [] = {
     { I2C2  , GPIOB, GPIO_PIN_11 , AF_NO_REMAP    }, 
 }; 
 
-const alternate_pin_type alternate_spi_miso [] = {
+const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_6  , AF__HAL_AFIO_REMAP_SPI1_DISABLE}, 
     { SPI1  , GPIOB, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI1_ENABLE}, 
@@ -170,7 +170,7 @@ const alternate_pin_type alternate_spi_miso [] = {
     { SPI2  , GPIOB, GPIO_PIN_14 , AF_NO_REMAP    }, 
 }; 
 
-const alternate_pin_type alternate_spi_mosi [] = {
+const stm32_af_pin_list_type chip_af_spi_mosi [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_7  , AF__HAL_AFIO_REMAP_SPI1_DISABLE}, 
     { SPI1  , GPIOB, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_SPI1_ENABLE}, 
@@ -178,7 +178,7 @@ const alternate_pin_type alternate_spi_mosi [] = {
     { SPI2  , GPIOB, GPIO_PIN_15 , AF_NO_REMAP    }, 
 }; 
 
-const alternate_pin_type alternate_spi_sck [] = {
+const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_SPI1_DISABLE}, 
     { SPI1  , GPIOB, GPIO_PIN_3  , AF__HAL_AFIO_REMAP_SPI1_ENABLE}, 
@@ -186,7 +186,7 @@ const alternate_pin_type alternate_spi_sck [] = {
     { SPI2  , GPIOB, GPIO_PIN_13 , AF_NO_REMAP    }, 
 }; 
 
-const alternate_pin_type alternate_usart_rx [] = {
+const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_USART1_DISABLE}, 
     { USART1, GPIOB, GPIO_PIN_7  , AF__HAL_AFIO_REMAP_USART1_ENABLE}, 
@@ -197,7 +197,7 @@ const alternate_pin_type alternate_usart_rx [] = {
     { USART3, GPIOC, GPIO_PIN_11 , AF__HAL_AFIO_REMAP_USART3_PARTIAL}, 
 }; 
 
-const alternate_pin_type alternate_usart_tx [] = {
+const stm32_af_pin_list_type chip_af_usart_tx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_9  , AF__HAL_AFIO_REMAP_USART1_DISABLE}, 
     { USART1, GPIOB, GPIO_PIN_6  , AF__HAL_AFIO_REMAP_USART1_ENABLE}, 
@@ -207,3 +207,15 @@ const alternate_pin_type alternate_usart_tx [] = {
     { USART3, GPIOB, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_USART3_DISABLE}, 
     { USART3, GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_USART3_PARTIAL}, 
 }; 
+
+const stm32_clock_freq_list_type stm32_clock_freq_list[] = {
+  {I2C1  , HAL_RCC_GetPCLK1Freq },  
+  {I2C2  , HAL_RCC_GetPCLK1Freq },  
+  {SPI2  , HAL_RCC_GetPCLK1Freq },  
+  {USART2, HAL_RCC_GetPCLK1Freq },  
+  {USART3, HAL_RCC_GetPCLK1Freq },  
+
+  {SPI1  , HAL_RCC_GetPCLK2Freq },  
+  {USART1, HAL_RCC_GetPCLK2Freq },  
+};
+

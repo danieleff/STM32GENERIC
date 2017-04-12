@@ -108,7 +108,25 @@ class load_mcu:
         self.peripherals = []
         self.groups = {}
         self.group_signals = {}
-
+        
+    def load_rcc(self):
+        self.rcc_xml = 'RCC-' + self.mcu.find("stm:IP[@Name='RCC']", ns).attrib['Version'] + '_Modes.xml'
+        
+        self.rcc_root = ET.parse(os.path.join(cubemx_dir, 'db', 'mcu', 'IP', self.rcc_xml )).getroot()
+        
+        pclk1 = self.rcc_root.find(".//stm:RefParameter[@Name='APB1Freq_Value']",  ns)
+        pclk2 = self.rcc_root.find("stm:RefParameter[@Name='APB2Freq_Value']",  ns)
+        
+        if pclk1 is not None:
+            self.PCLK1_PERIPHERALS = pclk1.attrib['IP'].split(',')
+        else:
+            self.PCLK1_PERIPHERALS = []
+            
+        if pclk2 is not None:
+            self.PCLK2_PERIPHERALS = pclk2.attrib['IP'].split(',')
+        else:
+            self.PCLK2_PERIPHERALS = []
+        
     def find_remaps(self):
         for pin in self.remap_root.findall('stm:GPIO_Pin',  ns):
             pin_name = pin.attrib['Name']
@@ -228,7 +246,7 @@ class load_mcu:
                     continue
                 
                 source_code += '\n'
-                source_code += 'const alternate_pin_type alternate_'+(periph + '_' + sig).lower()+' [] = {\n'
+                source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
                 #print self.group_signals
                 old = False
                 for signal in sorted(set(self.group_signals[periph + '_' +sig])):
@@ -246,47 +264,32 @@ class load_mcu:
                             source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
                     
                 source_code += '}; \n'
-            
-        # for signal in sorted(self.remaps):
-            # if signal.startswith('SPI') or signal.startswith('I2C') or signal.startswith('USART'): # or signal.startswith('TIM'):
-                
-                # source_code += '\n'
-                # source_code += 'const alternate_'+signal.lower()+' alternate_list[] = {\n'
-                # for pin in self.remaps[signal]:
-                    # if pin in self.pins:
-                        # remap = self.remaps[signal][pin]
-                        
-                        # split = signal.split('_')
-                        # periph = split[0]
-                        # periph_signal = split[1]
-                        
-                        # if periph_signal not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK'] and not periph_signal.startswith('CH'):
-                            # continue
-                        
-                        # source_code += '    { ' + periph.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, // ' + periph_signal.ljust(5) + '\n'
-                # source_code += '}; \n'
-                        
-        # for periph in self.peripherals:
-            # for signal in self.signals[periph]:
-                # print signal
-                
-                # if signal not in self.defaultremaps: 
-                   # continue 
-                    
-                # source_code +=  ' {' + periph + ', '
-                
-                # source_code +=  '    .mosi_port = GPIO' + self.defaultremaps[signal][1:2] + ', \n'
-                # source_code +=  '    .mosi_pin =  GPIO_PIN_' + self.defaultremaps[signal][2:] + ', \n'
-                
-                # if self.mcu_name.startswith('STM32F1'):
-                    # source_code +=  '    .spi_alternate = ' + self.remaps[signal][self.defaultremaps[signal]] + ',\n'
-                    
-                # if not self.mcu_name.startswith('STM32F1'):
-                    # source_code +=  '    .mosi_alternate = ' + self.remaps[signal][self.defaultremaps[signal]] + ',\n'
-                    
-                # source_code += '  },\n'
         
-        #print source_code
+        source_code += '\n'
+        
+        source_code += 'const stm32_clock_freq_list_type stm32_clock_freq_list[] = {\n'
+        for periph in sorted(self.PCLK1_PERIPHERALS):
+            if not periph.startswith('USART') and not periph.startswith('SPI') and not periph.startswith('I2C'):
+                continue
+            
+            if periph not in self.peripherals:
+                continue
+            
+            source_code += '  {' + periph.ljust(6) + ', HAL_RCC_GetPCLK1Freq },  \n'
+        
+        source_code += '\n'
+        
+        for periph in sorted(self.PCLK2_PERIPHERALS):
+            if not periph.startswith('USART') and not periph.startswith('SPI') and not periph.startswith('I2C'):
+                continue
+            
+            if periph not in self.peripherals:
+                continue
+                
+            source_code += '  {' + periph.ljust(6) + ', HAL_RCC_GetPCLK2Freq },  \n'
+        
+        source_code += '};\n'
+        source_code += '\n'
         
         dir = system_dir + name[:7] + "/stm32_chip/"
         with open(dir + 'stm32_' + self.mcu_name + '.h', 'w') as file:
@@ -323,6 +326,7 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         file.write('  #define CHIP_PERIPHERAL_INCLUDE "stm32_' + name + '.h"\n')
         
         mcu = load_mcu(name)
+        mcu.load_rcc()
         mcu.find_remaps()
         mcu.process_pins()
         mcu.generate_source_code()

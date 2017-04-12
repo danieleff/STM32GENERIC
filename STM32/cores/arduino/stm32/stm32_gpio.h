@@ -23,9 +23,19 @@ typedef struct {
     uint32_t pin_mask;
 } stm32_port_pin_type;
 
+typedef uint32_t (*stm32_clock_freq_func)();
+
+typedef struct {
+    void *instance;
+    stm32_clock_freq_func clock_freq_func;
+} stm32_clock_freq_list_type;
+
 extern const stm32_port_pin_type port_pin_list[NUM_PINS];
 
-void stm32_gpio_clock(GPIO_TypeDef *port);
+/**
+ * Start clock for the fedined port
+ */
+void stm32_gpio_clock_enable(GPIO_TypeDef *port);
 
 inline void digitalWrite(uint8_t pin, uint8_t value) {
     if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {

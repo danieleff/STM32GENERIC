@@ -3,7 +3,7 @@
 
 #include "stm32_gpio_af.h"
 
-int8_t stm32_af_get(const alternate_pin_type list[], int size, const void *instance, const GPIO_TypeDef *port, const uint32_t pin) {
+int8_t stm32_af_get(const stm32_af_pin_list_type list[], int size, const void *instance, const GPIO_TypeDef *port, const uint32_t pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance
             && port == list[i].port
@@ -15,7 +15,7 @@ int8_t stm32_af_get(const alternate_pin_type list[], int size, const void *insta
     return 0;
 }
 
-void stm32_af_init(const alternate_pin_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
     if (port == NULL) {
         port = stm32_af_default(list, size, instance, &pin);
     }
