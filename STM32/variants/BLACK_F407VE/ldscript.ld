@@ -107,6 +107,8 @@ SECTIONS
     __bss_end__ = _ebss;
   } >RAM
 
+  PROVIDE ( _end = . );
+  
   /* Remove information from the standard libraries */
   /DISCARD/ :
   {
@@ -116,5 +118,4 @@ SECTIONS
   }
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-  ExtRAMData : {*(.ExtRAMData)} >MEMORY_ARRAY
 }

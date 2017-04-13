@@ -166,7 +166,7 @@ SECTIONS
     . = ALIGN(4);
   } >RAM
 
-
+  PROVIDE ( _end = . );
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

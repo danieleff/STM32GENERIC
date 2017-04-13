@@ -152,7 +152,7 @@ SECTIONS
     __bss_end__ = _ebss;
   } >RAM
 
-
+  PROVIDE ( _end = . );
 
   /* Remove information from the standard libraries */
   /DISCARD/ :
