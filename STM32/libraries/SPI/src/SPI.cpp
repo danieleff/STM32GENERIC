@@ -80,6 +80,10 @@ void SPIClass::beginTransaction(SPISettings settings) {
 	__HAL_SPI_ENABLE(&spiHandle);
 }
 
+void SPIClass::end() {
+	//TODO deinit GPIO
+}
+
 void SPIClass::endTransaction() {
 
 }
