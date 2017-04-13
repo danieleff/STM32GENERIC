@@ -21,7 +21,7 @@ inline uint32_t millis() {
 }
 
 inline uint32_t micros() {
-    return (HAL_GetTick()*1000) + (SysTick->VAL * 1000 / SysTick->LOAD);
+    return (HAL_GetTick()*1000) + ((SysTick->LOAD - SysTick->VAL) * 1000 / SysTick->LOAD);
 }
 
 #ifdef __cplusplus
