@@ -133,7 +133,7 @@ BLACK_F407VE.upload.protocol=STLink
 ################################################################################
 # NUCLEO 64 board
 
-NUCLEO_64.name=Nucleo-64 (Select board from submenu)
+NUCLEO_64.name=Nucleo-64 [BOARD PIN NUMBERS NOT WORKING YET!] (Select board from submenu)
 
 NUCLEO_64.vid.0=0x0483
 NUCLEO_64.pid.0=0x5711
