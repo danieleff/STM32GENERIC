@@ -219,8 +219,8 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
     { SPI3  , GPIOB, GPIO_PIN_3  , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOC, GPIO_PIN_10 , GPIO_AF6_SPI3  }, 
 //SPI4
-    { SPI4  , GPIOE, GPIO_PIN_12 , GPIO_AF5_SPI4  }, 
     { SPI4  , GPIOE, GPIO_PIN_2  , GPIO_AF5_SPI4  }, 
+    { SPI4  , GPIOE, GPIO_PIN_12 , GPIO_AF5_SPI4  }, 
 }; 
 
 const stm32_af_pin_list_type chip_af_usart_rx [] = {

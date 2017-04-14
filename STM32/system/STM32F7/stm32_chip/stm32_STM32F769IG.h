@@ -323,8 +323,8 @@ const stm32_af_pin_list_type chip_af_spi_miso [] = {
     { SPI3  , GPIOB, GPIO_PIN_4  , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOC, GPIO_PIN_11 , GPIO_AF6_SPI3  }, 
 //SPI4
-    { SPI4  , GPIOE, GPIO_PIN_13 , GPIO_AF5_SPI4  }, 
     { SPI4  , GPIOE, GPIO_PIN_5  , GPIO_AF5_SPI4  }, 
+    { SPI4  , GPIOE, GPIO_PIN_13 , GPIO_AF5_SPI4  }, 
 //SPI5
     { SPI5  , GPIOF, GPIO_PIN_8  , GPIO_AF5_SPI5  }, 
     { SPI5  , GPIOH, GPIO_PIN_7  , GPIO_AF5_SPI5  }, 
@@ -350,11 +350,11 @@ const stm32_af_pin_list_type chip_af_spi_mosi [] = {
     { SPI3  , GPIOC, GPIO_PIN_12 , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOD, GPIO_PIN_6  , GPIO_AF5_SPI3  }, 
 //SPI4
-    { SPI4  , GPIOE, GPIO_PIN_14 , GPIO_AF5_SPI4  }, 
     { SPI4  , GPIOE, GPIO_PIN_6  , GPIO_AF5_SPI4  }, 
+    { SPI4  , GPIOE, GPIO_PIN_14 , GPIO_AF5_SPI4  }, 
 //SPI5
-    { SPI5  , GPIOF, GPIO_PIN_11 , GPIO_AF5_SPI5  }, 
     { SPI5  , GPIOF, GPIO_PIN_9  , GPIO_AF5_SPI5  }, 
+    { SPI5  , GPIOF, GPIO_PIN_11 , GPIO_AF5_SPI5  }, 
 //SPI6
     { SPI6  , GPIOA, GPIO_PIN_7  , GPIO_AF8_SPI6  }, 
     { SPI6  , GPIOB, GPIO_PIN_5  , GPIO_AF8_SPI6  }, 
@@ -367,8 +367,8 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
     { SPI1  , GPIOB, GPIO_PIN_3  , GPIO_AF5_SPI1  }, 
     { SPI1  , GPIOG, GPIO_PIN_11 , GPIO_AF5_SPI1  }, 
 //SPI2
-    { SPI2  , GPIOA, GPIO_PIN_12 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOA, GPIO_PIN_9  , GPIO_AF5_SPI2  }, 
+    { SPI2  , GPIOA, GPIO_PIN_12 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOB, GPIO_PIN_10 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOB, GPIO_PIN_13 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOD, GPIO_PIN_3  , GPIO_AF5_SPI2  }, 
@@ -377,8 +377,8 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
     { SPI3  , GPIOB, GPIO_PIN_3  , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOC, GPIO_PIN_10 , GPIO_AF6_SPI3  }, 
 //SPI4
-    { SPI4  , GPIOE, GPIO_PIN_12 , GPIO_AF5_SPI4  }, 
     { SPI4  , GPIOE, GPIO_PIN_2  , GPIO_AF5_SPI4  }, 
+    { SPI4  , GPIOE, GPIO_PIN_12 , GPIO_AF5_SPI4  }, 
 //SPI5
     { SPI5  , GPIOF, GPIO_PIN_7  , GPIO_AF5_SPI5  }, 
     { SPI5  , GPIOH, GPIO_PIN_6  , GPIO_AF5_SPI5  }, 
@@ -391,8 +391,8 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
 const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_10 , GPIO_AF7_USART1}, 
-    { USART1, GPIOB, GPIO_PIN_15 , GPIO_AF4_USART1}, 
     { USART1, GPIOB, GPIO_PIN_7  , GPIO_AF7_USART1}, 
+    { USART1, GPIOB, GPIO_PIN_15 , GPIO_AF4_USART1}, 
 //USART2
     { USART2, GPIOA, GPIO_PIN_3  , GPIO_AF7_USART2}, 
     { USART2, GPIOD, GPIO_PIN_6  , GPIO_AF7_USART2}, 
@@ -408,8 +408,8 @@ const stm32_af_pin_list_type chip_af_usart_rx [] = {
 const stm32_af_pin_list_type chip_af_usart_tx [] = {
 //USART1
     { USART1, GPIOA, GPIO_PIN_9  , GPIO_AF7_USART1}, 
-    { USART1, GPIOB, GPIO_PIN_14 , GPIO_AF4_USART1}, 
     { USART1, GPIOB, GPIO_PIN_6  , GPIO_AF7_USART1}, 
+    { USART1, GPIOB, GPIO_PIN_14 , GPIO_AF4_USART1}, 
 //USART2
     { USART2, GPIOA, GPIO_PIN_2  , GPIO_AF7_USART2}, 
     { USART2, GPIOD, GPIO_PIN_5  , GPIO_AF7_USART2}, 

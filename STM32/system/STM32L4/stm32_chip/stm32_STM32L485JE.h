@@ -200,8 +200,8 @@ const stm32_af_pin_list_type chip_af_usart_rx [] = {
     { USART2, GPIOA, GPIO_PIN_3  , GPIO_AF7_USART2}, 
 //USART3
     { USART3, GPIOB, GPIO_PIN_11 , GPIO_AF7_USART3}, 
-    { USART3, GPIOC, GPIO_PIN_11 , GPIO_AF7_USART3}, 
     { USART3, GPIOC, GPIO_PIN_5  , GPIO_AF7_USART3}, 
+    { USART3, GPIOC, GPIO_PIN_11 , GPIO_AF7_USART3}, 
 }; 
 
 const stm32_af_pin_list_type chip_af_usart_tx [] = {
@@ -213,8 +213,8 @@ const stm32_af_pin_list_type chip_af_usart_tx [] = {
     { USART2, GPIOA, GPIO_PIN_2  , GPIO_AF7_USART2}, 
 //USART3
     { USART3, GPIOB, GPIO_PIN_10 , GPIO_AF7_USART3}, 
-    { USART3, GPIOC, GPIO_PIN_10 , GPIO_AF7_USART3}, 
     { USART3, GPIOC, GPIO_PIN_4  , GPIO_AF7_USART3}, 
+    { USART3, GPIOC, GPIO_PIN_10 , GPIO_AF7_USART3}, 
 }; 
 
 const stm32_clock_freq_list_type stm32_clock_freq_list[] = {

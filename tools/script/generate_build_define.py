@@ -83,6 +83,9 @@ ns = {'stm': 'http://mcd.rou.st.com/modules.php?name=mcu'}
 mcus = families.findall(".//Mcu")
 
 
+def natural_sort_key(s, _nsre=re.compile('([0-9]+)')):
+    return [int(text) if text.isdigit() else text.lower()
+            for text in re.split(_nsre, s)] 
 class load_mcu:
     def __init__(self, name):
         print name
@@ -253,7 +256,7 @@ class load_mcu:
                     if old != signal.split('_')[0]:
                         source_code += '//' + signal.split('_')[0] + '\n'
                     p = signal.split('_')[0]
-                    for pin in sorted(set(self.remaps[signal])):
+                    for pin in sorted(set(self.remaps[signal]), key = natural_sort_key):
                         if pin in self.pins:
                             remap = self.remaps[signal][pin]
                             
