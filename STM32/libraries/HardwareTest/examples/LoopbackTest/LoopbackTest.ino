@@ -23,13 +23,15 @@ void testGPIO() {
   int pinOut = PA0;
   int pinIn = PA1;
 
-  pinMode(pinOut, OUTPUT);
+  pinMode(pinOut, INPUT);
   pinMode(pinIn, INPUT_PULLUP);
 
   gpioTest.begin();
 
   gpioTest.assert(digitalRead(pinIn) == HIGH, "digitalRead(%i) should be HIGH (%i, %i not connected)", pinIn, pinOut, pinIn);
 
+  pinMode(pinOut, OUTPUT);
+  
   digitalWrite(pinOut, LOW);
   gpioTest.assert(digitalRead(pinIn) == LOW, "digitalRead(%i) should be LOW (%i - %i not connected)", pinIn, pinOut, pinIn);
 
