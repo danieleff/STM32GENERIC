@@ -1,6 +1,13 @@
 #include "SPI.h"
 
-SPIClass SPI(SPI1);
+#include "variant.h"
+
+#if defined(MOSI) || defined(MISO) || defined(SCK)
+	SPIClass SPI(SPI1, MOSI, MISO, SCK);
+#else
+	SPIClass SPI(SPI1);
+#endif
+
 
 void SPIClass::begin() {
 	apb_freq = stm32_apb_clock_freq((void*)spiHandle.Instance);

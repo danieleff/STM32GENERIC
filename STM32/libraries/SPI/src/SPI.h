@@ -56,6 +56,13 @@ class SPIClass {
     SPIClass(SPI_TypeDef *instance) {
     	spiHandle.Instance = instance;
     };
+    SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck) {
+		spiHandle.Instance = instance;
+
+		stm32_set_mosi(mosi);
+		stm32_set_miso(miso);
+		stm32_set_sck(sck);
+	};
 
     void stm32_set_mosi(uint8_t mosi);
     void stm32_set_miso(uint8_t miso);

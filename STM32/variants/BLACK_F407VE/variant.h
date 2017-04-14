@@ -1,6 +1,11 @@
 #ifndef VARIANT_H
 #define VARIANT_H
 
+// SPI board defaults
+#define MOSI PA7
+#define MISO PA6
+#define SCK PA5
+
 enum {
    PA0 ,
    PA1 ,
