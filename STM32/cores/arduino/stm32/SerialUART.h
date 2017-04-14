@@ -20,16 +20,16 @@ class SerialUART : public Stream  {
     using Print::write; // pull in write(str) and write(buf, size) from Print
     operator bool() { return true; }; // UART always active
     
-    USART_TypeDef *instance;
-    UART_HandleTypeDef *handle;
+    USART_TypeDef *instance = NULL;
+    UART_HandleTypeDef *handle = NULL;
     
-    uint8_t receive_buffer;
+    uint8_t receive_buffer = 0;
 
-    uint8_t *txBuffer;
+    uint8_t *txBuffer = NULL;
     volatile uint8_t txStart = 0;
     volatile uint8_t txEnd = 0;
 
-    uint8_t *rxBuffer;
+    uint8_t *rxBuffer = NULL;
     volatile uint8_t rxStart = 0;
     volatile uint8_t rxEnd = 0;
 

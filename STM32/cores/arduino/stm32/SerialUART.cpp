@@ -1,21 +1,65 @@
+/**
+ * TODO: Check if txBuffer is NULL in every method
+ * TODO: generate different BUFFER_SIZE values for different boards based on available memory
+ * TODO: add alternate pin selection functions
+ * TODO: add constructor with custom buffer parameter
+ */
 #include "SerialUART.h"
 #include "stm32_gpio_af.h"
 
+/**
+ * Set the underlying UART instance.
+ */
 SerialUART::SerialUART(USART_TypeDef *instance) {
     this->instance = instance;
 }
 
+/**
+ * Arduino always instantiates the Serial object.
+ *
+ * To save memory, this implementation will:
+ * - not use any memory if begin() is never called
+ * - use statically allocated memory, if begin() is called exactly in one SerialUARTs.
+ * - use statically allocated memory for the first, and malloc() for any subsequent calls to begin() on DIFFERENT SerialUARTs.
+ */
 
 void SerialUART::begin(const uint32_t baud) {
-  static uint8_t tx[BUFFER_SIZE];
-  txBuffer = (uint8_t*)tx;
- 
-  static uint8_t rx[BUFFER_SIZE];
-  rxBuffer = (uint8_t*)rx;
-  
-  static UART_HandleTypeDef h;
-  handle = &h;
-  
+  if (txBuffer == NULL) {
+	static uint8_t tx[BUFFER_SIZE];
+	static uint8_t static_tx_used = 0;
+
+	if (!static_tx_used) {
+	  txBuffer = (uint8_t*)tx;
+		static_tx_used = true;
+	} else {
+	  txBuffer = (uint8_t*)malloc(BUFFER_SIZE);
+	}
+  }
+
+  if (rxBuffer == NULL) {
+  	static uint8_t rx[BUFFER_SIZE];
+  	static uint8_t static_rx_used = 0;
+
+  	if (!static_rx_used) {
+  	  txBuffer = (uint8_t*)rx;
+  		static_rx_used = true;
+  	} else {
+  	  rxBuffer = (uint8_t*)malloc(BUFFER_SIZE);
+  	}
+  }
+
+  if (handle == NULL) {
+  	static UART_HandleTypeDef h = {};
+  	static uint8_t static_handle_used = 0;
+
+  	if (!static_handle_used) {
+  		handle = &h;
+  	static_handle_used = true;
+  	} else {
+  		handle = (UART_HandleTypeDef*)malloc(sizeof(UART_HandleTypeDef));
+  	}
+  }
+
   handle->Instance = instance;
   
   #ifdef USART1
