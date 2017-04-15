@@ -24,6 +24,12 @@ inline uint32_t micros() {
     return (HAL_GetTick()*1000) + ((SysTick->LOAD - SysTick->VAL) * 1000 / SysTick->LOAD);
 }
 
+inline void delayMicroseconds(uint32_t microseconds){
+  uint32_t start = micros();
+
+  while(start + microseconds > micros());
+}
+
 #ifdef __cplusplus
 }
 #endif
