@@ -223,8 +223,8 @@ DISCOVERY_L053C8.name=Discovery L053C8 (upload: STLink)
 DISCOVERY_L053C8.vid.0=0x0483
 DISCOVERY_L053C8.pid.0=0x5711
 
-DISCOVERY_L053C8.upload.maximum_size=524288
-DISCOVERY_L053C8.upload.maximum_data_size=131072
+DISCOVERY_L053C8.upload.maximum_size=65536
+DISCOVERY_L053C8.upload.maximum_data_size=8192
 
 DISCOVERY_L053C8.build.core=arduino
 DISCOVERY_L053C8.build.board=DISCOVERY_L053C8
