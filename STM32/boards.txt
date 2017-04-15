@@ -117,8 +117,8 @@ BLACK_F407VE.name=BLACK F407VE (upload: STLink)
 BLACK_F407VE.vid.0=0x0483
 BLACK_F407VE.pid.0=0x5711
 
-BLACK_F407VE.upload.maximum_size=1048576
-BLACK_F407VE.upload.maximum_data_size=196608
+BLACK_F407VE.upload.maximum_size=524288
+BLACK_F407VE.upload.maximum_data_size=131072
 
 BLACK_F407VE.build.mcu=cortex-m4
 BLACK_F407VE.build.core=arduino
