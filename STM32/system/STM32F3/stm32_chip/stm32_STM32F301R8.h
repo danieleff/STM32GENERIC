@@ -198,14 +198,32 @@ const stm32_af_pin_list_type chip_af_usart_tx [] = {
     { USART3, GPIOC, GPIO_PIN_10 , GPIO_AF7_USART3}, 
 }; 
 
-const stm32_clock_freq_list_type stm32_clock_freq_list[] = {
-  {I2C1  , HAL_RCC_GetPCLK1Freq },  
-  {I2C2  , HAL_RCC_GetPCLK1Freq },  
-  {I2C3  , HAL_RCC_GetPCLK1Freq },  
-  {SPI2  , HAL_RCC_GetPCLK1Freq },  
-  {SPI3  , HAL_RCC_GetPCLK1Freq },  
-  {USART2, HAL_RCC_GetPCLK1Freq },  
-  {USART3, HAL_RCC_GetPCLK1Freq },  
+const stm32_chip_adc1_channel_type chip_adc1_channel[] = {
+    { GPIOA, GPIO_PIN_0  , ADC_CHANNEL_1  }, 
+    { GPIOA, GPIO_PIN_1  , ADC_CHANNEL_2  }, 
+    { GPIOA, GPIO_PIN_2  , ADC_CHANNEL_3  }, 
+    { GPIOA, GPIO_PIN_3  , ADC_CHANNEL_4  }, 
+    { GPIOA, GPIO_PIN_4  , ADC_CHANNEL_5  }, 
+    { GPIOC, GPIO_PIN_0  , ADC_CHANNEL_6  }, 
+    { GPIOC, GPIO_PIN_1  , ADC_CHANNEL_7  }, 
+    { GPIOC, GPIO_PIN_2  , ADC_CHANNEL_8  }, 
+    { GPIOC, GPIO_PIN_3  , ADC_CHANNEL_9  }, 
+    { GPIOA, GPIO_PIN_6  , ADC_CHANNEL_10 }, 
+    { GPIOB, GPIO_PIN_0  , ADC_CHANNEL_11 }, 
+    { GPIOB, GPIO_PIN_1  , ADC_CHANNEL_12 }, 
+    { GPIOB, GPIO_PIN_13 , ADC_CHANNEL_13 }, 
+    { GPIOB, GPIO_PIN_11 , ADC_CHANNEL_14 }, 
+    { GPIOA, GPIO_PIN_7  , ADC_CHANNEL_15 }, 
+};
+
+const stm32_clock_freq_list_type chip_clock_freq_list[] = {
+    {I2C1  , HAL_RCC_GetPCLK1Freq },  
+    {I2C2  , HAL_RCC_GetPCLK1Freq },  
+    {I2C3  , HAL_RCC_GetPCLK1Freq },  
+    {SPI2  , HAL_RCC_GetPCLK1Freq },  
+    {SPI3  , HAL_RCC_GetPCLK1Freq },  
+    {USART2, HAL_RCC_GetPCLK1Freq },  
+    {USART3, HAL_RCC_GetPCLK1Freq },  
 
 };
 

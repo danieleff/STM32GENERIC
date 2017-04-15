@@ -31,6 +31,12 @@ typedef struct {
 #endif
 
 
+typedef struct {
+    GPIO_TypeDef *port;
+    uint32_t pin_mask;
+    uint32_t channel;
+} stm32_chip_adc1_channel_type;
+
 
 #ifdef __cplusplus
 extern "C"{
@@ -49,6 +55,11 @@ void stm32_af_spi_init(const SPI_TypeDef *instance,
  * Get the clock frequency associated with the peripheral instance
  */
 uint32_t stm32_apb_clock_freq(void *instance);
+
+/**
+ * Get the ADC1 channel for the specified port / pin
+ */
+uint8_t stm32_adc1_get_channel(GPIO_TypeDef *port, uint32_t pin_mask);
 
 /**
  * Internal: set the AF function for the selected peripheral on the selected pin

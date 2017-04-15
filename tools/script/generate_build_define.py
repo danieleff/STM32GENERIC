@@ -184,7 +184,9 @@ class load_mcu:
                 if not signal.startswith('USART') \
                     and not signal.startswith('SPI') \
                     and not signal.startswith('I2C') \
-                    and not signal.startswith('TIM'):
+                    and not signal.startswith('TIM') \
+                    and not signal.startswith('ADC1') \
+                    and not signal.startswith('ADC_'):
                     continue
                 
                 (periph, sig) = signal.split('_', 1)
@@ -241,11 +243,11 @@ class load_mcu:
         for af_function in self.af_functions:
             source_code += 'static void ' + af_function + '(void) { ' + af_function[2:] + '(); }\n'
 
-
+        
         for periph in sorted(self.groups):
             for sig in sorted(set(self.groups[periph])):
-
-                if sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK'] and not periph_signal.startswith('CH'):
+                
+                if sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK']:
                     continue
                 
                 source_code += '\n'
@@ -262,7 +264,6 @@ class load_mcu:
                             
                             split = signal.split('_')
                             p = split[0]
-                            periph_signal = split[1]
                             
                             source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
                     
@@ -270,7 +271,20 @@ class load_mcu:
         
         source_code += '\n'
         
-        source_code += 'const stm32_clock_freq_list_type stm32_clock_freq_list[] = {\n'
+        source_code += 'const stm32_chip_adc1_channel_type chip_adc1_channel[] = {\n'
+        
+        for instance_signal in sorted(self.defaultremaps.keys(), key = natural_sort_key):
+            if 'ADC1_IN' not in instance_signal and 'ADC_IN' not in instance_signal:
+                continue
+                
+            (_, channel) = instance_signal.split('_', 1)
+            pin = self.defaultremaps[instance_signal]
+            source_code += '    { GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ADC_CHANNEL_' + channel[2:].ljust(3) + '}, \n'
+        
+        source_code += '};\n'
+        source_code += '\n'
+        
+        source_code += 'const stm32_clock_freq_list_type chip_clock_freq_list[] = {\n'
         for periph in sorted(self.PCLK1_PERIPHERALS):
             if not periph.startswith('USART') and not periph.startswith('SPI') and not periph.startswith('I2C'):
                 continue
@@ -278,7 +292,7 @@ class load_mcu:
             if periph not in self.peripherals:
                 continue
             
-            source_code += '  {' + periph.ljust(6) + ', HAL_RCC_GetPCLK1Freq },  \n'
+            source_code += '    {' + periph.ljust(6) + ', HAL_RCC_GetPCLK1Freq },  \n'
         
         source_code += '\n'
         
@@ -289,7 +303,7 @@ class load_mcu:
             if periph not in self.peripherals:
                 continue
                 
-            source_code += '  {' + periph.ljust(6) + ', HAL_RCC_GetPCLK2Freq },  \n'
+            source_code += '    {' + periph.ljust(6) + ', HAL_RCC_GetPCLK2Freq },  \n'
         
         source_code += '};\n'
         source_code += '\n'

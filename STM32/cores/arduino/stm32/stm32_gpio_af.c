@@ -13,9 +13,9 @@ GPIO_TypeDef *stm32_af_default(stm32_af_pin_list_type list[], int size, const vo
 }
 
 uint32_t stm32_apb_clock_freq(void *instance) {
-	for(int i=0; i<sizeof(stm32_clock_freq_list) / sizeof(stm32_clock_freq_list[0]); i++) {
-		if (stm32_clock_freq_list[i].instance == instance) {
-			return (stm32_clock_freq_list[i].clock_freq_func)();
+	for(int i=0; i<sizeof(chip_clock_freq_list) / sizeof(chip_clock_freq_list[0]); i++) {
+		if (chip_clock_freq_list[i].instance == instance) {
+			return (chip_clock_freq_list[i].clock_freq_func)();
 		}
 	}
 	return 0;
