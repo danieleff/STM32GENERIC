@@ -21,6 +21,16 @@ uint32_t stm32_apb_clock_freq(void *instance) {
 	return 0;
 }
 
+uint8_t stm32_adc1_get_channel(GPIO_TypeDef *port, uint32_t pin_mask) {
+    for(int i=0; i<sizeof(chip_adc1_channel) / sizeof(chip_adc1_channel[0]); i++) {
+        if (chip_adc1_channel[i].port == port && chip_adc1_channel[i].pin_mask == pin_mask) {
+            return chip_adc1_channel[i].channel;
+        }
+    }
+
+    return -1;
+}
+
 void stm32_af_uart_init(const USART_TypeDef *instance,
     GPIO_TypeDef *rxPort, uint32_t rxPin,
     GPIO_TypeDef *txPort, uint32_t txPin) {
