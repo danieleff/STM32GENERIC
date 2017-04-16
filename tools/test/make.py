@@ -1,7 +1,7 @@
 import subprocess
 import os
 
-projects = ['test/examples/blinkTest/']
+projects = ['HardwareTest/examples/AutomaticCompilation/ADC/']
 
 variants = os.listdir('makefiles')
 
