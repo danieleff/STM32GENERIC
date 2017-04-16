@@ -43,8 +43,6 @@ int analogRead(uint8_t pin) {
         __HAL_RCC_ADC_CLK_ENABLE();
         #endif
         
-        stm32_adc_init(&handle);
-
         handle.Instance = ADC1;
         handle.Init.ScanConvMode = DISABLE;
         handle.Init.ContinuousConvMode = ENABLE;

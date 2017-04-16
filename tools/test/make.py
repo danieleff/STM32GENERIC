@@ -1,7 +1,10 @@
 import subprocess
 import os
 
-projects = ['HardwareTest/examples/AutomaticCompilation/ADC/']
+projects = [
+    'HardwareTest/examples/AutomaticCompilation/ADC/',
+    'HardwareTest/examples/AutomaticCompilation/PWM/'
+]
 
 variants = os.listdir('makefiles')
 

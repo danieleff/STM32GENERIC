@@ -40,6 +40,12 @@ extern const stm32_port_pin_type port_pin_list[NUM_PINS];
  */
 void stm32_gpio_clock_enable(GPIO_TypeDef *port);
 
+/**
+ * If PWM is used at least once, this method is set to the PWM disable function in stm32_PWM.c
+ */
+typedef void (*stm32_pwm_disable_callback_func)(GPIO_TypeDef *port, uint32_t pin);
+extern stm32_pwm_disable_callback_func stm32_pwm_disable_callback;
+
 inline void digitalWrite(uint8_t pin, uint8_t value) {
     if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
         return;

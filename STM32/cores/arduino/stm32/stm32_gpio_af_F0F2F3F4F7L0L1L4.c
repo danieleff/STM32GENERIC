@@ -16,6 +16,9 @@ int8_t stm32_af_get(const stm32_af_pin_list_type list[], int size, const void *i
 }
 
 void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+    if (stm32_pwm_disable_callback != NULL) {
+        (*stm32_pwm_disable_callback)(port, pin);
+    }
     if (port == NULL) {
         port = stm32_af_default(list, size, instance, &pin);
     }

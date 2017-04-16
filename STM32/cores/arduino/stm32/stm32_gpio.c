@@ -25,6 +25,10 @@ void stm32_gpio_clock(GPIO_TypeDef *port) {
 void pinMode(uint8_t pin, uint8_t mode) {
     stm32_port_pin_type port_pin = port_pin_list[pin];
     
+    if (stm32_pwm_disable_callback != NULL) {
+        (*stm32_pwm_disable_callback)(port_pin.port, port_pin.pin_mask);
+    }
+
     stm32_gpio_clock(port_pin.port);
     
     GPIO_InitTypeDef init;
