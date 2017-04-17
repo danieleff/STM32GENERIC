@@ -2,8 +2,11 @@ import subprocess
 import os
 
 projects = [
+    'HardwareTest/examples/AutomaticCompilation/Digital/',
     'HardwareTest/examples/AutomaticCompilation/ADC/',
-    'HardwareTest/examples/AutomaticCompilation/PWM/'
+    'HardwareTest/examples/AutomaticCompilation/PWM/',
+    'SPI/src/',
+    'Wire/src/',
 ]
 
 variants = os.listdir('makefiles')
