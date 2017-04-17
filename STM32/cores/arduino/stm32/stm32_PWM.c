@@ -1,6 +1,6 @@
 #include "stm32_gpio.h"
 
-static TIM_HandleTypeDef handle;
+TIM_HandleTypeDef *handle;
 
 static uint32_t counter;
 static uint32_t period;
@@ -9,6 +9,10 @@ static uint32_t period;
 
 stm32_pwm_disable_callback_func stm32_pwm_disable_callback = NULL;
 
+void (*pwm_callback_func)();
+
+void pwm_callback();
+
 typedef struct {
     GPIO_TypeDef *port;
     uint32_t pin_mask;
@@ -16,27 +20,32 @@ typedef struct {
     uint16_t duty_cycle;
 } stm32_pwm_type;
 
-stm32_pwm_type pwm_config[sizeof(port_pin_list) / sizeof(port_pin_list[0])];
+static stm32_pwm_type pwm_config[sizeof(port_pin_list) / sizeof(port_pin_list[0])];
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin);
 
 void analogWrite(uint8_t pin, int value) {
-    if (handle.Instance == NULL) {
+    static TIM_HandleTypeDef staticHandle;
+
+    if (handle == NULL) {
+        handle = &staticHandle;
+        pwm_callback_func = &pwm_callback;
+
         stm32_pwm_disable_callback = &stm32_pwm_disable;
 
         __HAL_RCC_TIM2_CLK_ENABLE();
         HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(TIM2_IRQn);
 
-        handle.Instance = TIM2;
-        handle.Init.Prescaler = 999;
-        handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+        handle->Instance = TIM2;
+        handle->Init.Prescaler = 999;
+        handle->Init.CounterMode = TIM_COUNTERMODE_UP;
         period = 256;
-        handle.Init.Period = period;
-        handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-        HAL_TIM_Base_Init(&handle);
+        handle->Init.Period = period;
+        handle->Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+        HAL_TIM_Base_Init(handle);
 
-        HAL_TIM_Base_Start_IT(&handle);
+        HAL_TIM_Base_Start_IT(handle);
     }
 
     for(int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
@@ -80,11 +89,7 @@ void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin_mask) {
     }
 }
 
-extern void TIM2_IRQHandler(void) {
-    HAL_TIM_IRQHandler(&handle);
-}
-
-extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+void pwm_callback() {
     counter += period;
     period = 256;
 
@@ -105,5 +110,16 @@ extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if (!period) {
         period = 256;
     }
-    __HAL_TIM_SET_AUTORELOAD(&handle, period);
+    __HAL_TIM_SET_AUTORELOAD(handle, period);
+}
+
+extern void TIM2_IRQHandler(void) {
+    HAL_TIM_IRQHandler(handle);
+}
+
+
+extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+    if (pwm_callback_func != NULL) {
+        (*pwm_callback_func)();
+    }
 }
