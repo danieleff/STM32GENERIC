@@ -19,6 +19,9 @@ class SerialUART : public Stream  {
     size_t write(const uint8_t c);
     using Print::write; // pull in write(str) and write(buf, size) from Print
     operator bool() { return true; }; // UART always active
+
+    void stm32_set_rx(uint8_t rx);
+    void stm32_set_tx(uint8_t tx);
     
     USART_TypeDef *instance = NULL;
     UART_HandleTypeDef *handle = NULL;
@@ -33,6 +36,10 @@ class SerialUART : public Stream  {
     volatile uint8_t rxStart = 0;
     volatile uint8_t rxEnd = 0;
 
+    GPIO_TypeDef *rxPort = NULL;
+    uint32_t rxPin = 0;
+    GPIO_TypeDef *txPort = NULL;
+    uint32_t txPin = 0;
 };
 
 #ifdef USART1

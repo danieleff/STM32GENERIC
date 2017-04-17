@@ -94,7 +94,7 @@ void SerialUART::begin(const uint32_t baud) {
   }
   #endif
   
-  stm32_af_uart_init(instance, NULL, 0, NULL, 0);
+  stm32_af_uart_init(instance, rxPort, rxPin, txPort, txPin);
   
   handle->Init.BaudRate = baud; 
   handle->Init.WordLength = UART_WORDLENGTH_8B;
@@ -139,6 +139,16 @@ size_t SerialUART::write(const uint8_t c) {
     HAL_UART_Transmit_IT(handle, &txBuffer[txStart % BUFFER_SIZE], 1);
   }
   return 1;
+}
+
+void SerialUART::stm32_set_rx(uint8_t rx) {
+    rxPort = port_pin_list[rx].port;
+    rxPin = port_pin_list[rx].pin_mask;
+}
+
+void SerialUART::stm32_set_tx(uint8_t tx) {
+    txPort = port_pin_list[tx].port;
+    txPin = port_pin_list[tx].pin_mask;
 }
 
 //// Interrupt
