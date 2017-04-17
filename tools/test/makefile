@@ -12,7 +12,7 @@ include makefiles/$(VARIANT)
 
 #### Source files
 
-PROJECT_SOURCES_C += $(wildcard $(PATH_PROJECT)*.cpp) 
+PROJECT_SOURCES_C += $(wildcard $(PATH_PROJECT)*.c) 
 PROJECT_SOURCES_CPP += $(wildcard $(PATH_PROJECT)*.cpp) 
 PROJECT_SOURCES_INO += $(wildcard $(PATH_PROJECT)*.ino)
 
