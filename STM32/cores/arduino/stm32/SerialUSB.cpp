@@ -26,17 +26,17 @@
 
 #ifdef SERIAL_USB
 
-#include "USBSerial.h"
+#include <SerialUSB.h>
 #include "variant.h"
 
 // Constructors ////////////////////////////////////////////////////////////////
-USBSerial::USBSerial(){
+SerialUSBClass::SerialUSBClass(){
   // Make sure Rx ring buffer is initialized back to empty.
   rx_buffer.iHead = rx_buffer.iTail = 0;
   //tx_buffer.iHead = tx_buffer.iTail = 0;
 }
 
-void USBSerial::init(void){
+void SerialUSBClass::init(void){
 /* Re-enumerate the USB */
   volatile unsigned int i;
 
@@ -64,35 +64,35 @@ void USBSerial::init(void){
 }
 
 
-void USBSerial::begin(uint32_t baud_count){
+void SerialUSBClass::begin(uint32_t baud_count){
   init();
   // suppress "unused parameter" warning
 	(void)baud_count;
 }
 
-void USBSerial::begin(uint32_t baud_count, uint8_t config){
+void SerialUSBClass::begin(uint32_t baud_count, uint8_t config){
   init();
 	//suppress "unused parameter" warning
 	(void)baud_count;
 	(void)config;
 }
 
-void USBSerial::end(void){
+void SerialUSBClass::end(void){
 
 }
 
 
-int USBSerial::availableForWrite(void){
+int SerialUSBClass::availableForWrite(void){
   //return (CDC_SERIAL_BUFFER_SIZE - available());
   //return (uint32_t)(CDC_SERIAL_BUFFER_SIZE + tx_buffer.iHead - tx_buffer.iTail) % CDC_SERIAL_BUFFER_SIZE;
 }
 
 
-int USBSerial::available(void){
+int SerialUSBClass::available(void){
   return (uint32_t)(CDC_SERIAL_BUFFER_SIZE + rx_buffer.iHead - rx_buffer.iTail) % CDC_SERIAL_BUFFER_SIZE;
 }
 
-int USBSerial::peek(void)
+int SerialUSBClass::peek(void)
 {
   if ( rx_buffer.iHead == rx_buffer.iTail )
     return -1;
@@ -100,7 +100,7 @@ int USBSerial::peek(void)
   return rx_buffer.buffer[rx_buffer.iTail];
 }
 
-int USBSerial::read(void)
+int SerialUSBClass::read(void)
 {
   // if the head isn't ahead of the tail, we don't have any characters
   if ( rx_buffer.iHead == rx_buffer.iTail )
@@ -112,11 +112,11 @@ int USBSerial::read(void)
   return uc;
 }
 
-void USBSerial::flush(void){
+void SerialUSBClass::flush(void){
   //It's not implemented yet.
 }
 
-size_t USBSerial::write(const uint8_t *buffer, size_t size){
+size_t SerialUSBClass::write(const uint8_t *buffer, size_t size){
    unsigned long timeout=millis()+5;
   if(hUsbDeviceFS.dev_state == USBD_STATE_CONFIGURED)
   {
@@ -149,11 +149,11 @@ size_t USBSerial::write(const uint8_t *buffer, size_t size){
   return 0; */
 }
 
-size_t USBSerial::write(uint8_t c) {
+size_t SerialUSBClass::write(uint8_t c) {
   return write(&c, 1);
 }
 
-void USBSerial::CDC_RxHandler (uint8_t* Buf, uint16_t Len){
+void SerialUSBClass::CDC_RxHandler (uint8_t* Buf, uint16_t Len){
 
   for(uint16_t i=0;i<Len;i++){
     if(available() < (CDC_SERIAL_BUFFER_SIZE - 1)){
@@ -172,7 +172,7 @@ void USBSerial::CDC_RxHandler (uint8_t* Buf, uint16_t Len){
 // actually ready to receive and display the data.
 // We add a short delay before returning to fix a bug observed by Federico
 // where the port is configured (lineState != 0) but not quite opened.
-USBSerial::operator bool()
+SerialUSBClass::operator bool()
 {
 	// this is here to avoid spurious opening after upload
 	if (millis() < 500)
@@ -189,32 +189,32 @@ USBSerial::operator bool()
 	return result;
 }
 
-uint32_t USBSerial::baud() {
+uint32_t SerialUSBClass::baud() {
 	//return _usbLineInfo.dwDTERate;
   return 0;
 }
 
-uint8_t USBSerial::stopbits() {
+uint8_t SerialUSBClass::stopbits() {
 	//return _usbLineInfo.bCharFormat;
   return 0;
 }
 
-uint8_t USBSerial::paritytype() {
+uint8_t SerialUSBClass::paritytype() {
 	//return _usbLineInfo.bParityType;
   return 0;
 }
 
-uint8_t USBSerial::numbits() {
+uint8_t SerialUSBClass::numbits() {
 	//return _usbLineInfo.bDataBits;
   return 0;
 }
 
-bool USBSerial::dtr() {
+bool SerialUSBClass::dtr() {
 	//return _usbLineInfo.lineState & 0x1;
   return 0;
 }
 
-bool USBSerial::rts() {
+bool SerialUSBClass::rts() {
 	//return _usbLineInfo.lineState & 0x2;
   return 0;
 }
@@ -240,6 +240,6 @@ extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){
   SerialUSB.CDC_RxHandler(data, len); 
 }
 
-USBSerial SerialUSB;
+SerialUSBClass SerialUSB;
 
 #endif

@@ -182,7 +182,7 @@ long map(long, long, long, long, long);
 #ifdef __cplusplus
 
 #include "SerialUART.h"
-#include "USBSerial.h"
+#include <SerialUSB.h>
 
 #endif
 

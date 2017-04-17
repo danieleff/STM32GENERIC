@@ -40,10 +40,10 @@
 //================================================================================
 //	Serial over CDC (Serial1 is the physical port)
 //================================================================================
-class USBSerial : public Stream{
+class SerialUSBClass : public Stream{
 
   public:
-    USBSerial();
+    SerialUSBClass();
     void begin(uint32_t baud_count);
     void begin(uint32_t baud_count, uint8_t config);
     void end(void);
@@ -93,6 +93,6 @@ class USBSerial : public Stream{
     GPIO_InitTypeDef GPIO_InitStruct;
 };
 
-extern USBSerial SerialUSB;
+extern SerialUSBClass SerialUSB;
 
 #endif
