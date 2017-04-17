@@ -30,10 +30,10 @@ int analogRead(uint8_t pin) {
     static ADC_HandleTypeDef handle = {};
 
     GPIO_InitTypeDef GPIO_InitStruct;
-    GPIO_InitStruct.Pin = port_pin_list[pin].pin_mask;
+    GPIO_InitStruct.Pin = variant_pin_list[pin].pin_mask;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(port_pin_list[pin].port, &GPIO_InitStruct);
+    HAL_GPIO_Init(variant_pin_list[pin].port, &GPIO_InitStruct);
 
     if (handle.Instance == NULL) {
         #ifdef __HAL_RCC_ADC1_CLK_ENABLE
@@ -73,7 +73,7 @@ int analogRead(uint8_t pin) {
     }
 
     ADC_ChannelConfTypeDef sConfig;
-    sConfig.Channel = stm32ADC1GetChannel(port_pin_list[pin].port, port_pin_list[pin].pin_mask);
+    sConfig.Channel = stm32ADC1GetChannel(variant_pin_list[pin].port, variant_pin_list[pin].pin_mask);
     sConfig.Rank = 1;
 
     #if STM32L0

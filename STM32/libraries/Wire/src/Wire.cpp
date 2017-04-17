@@ -303,13 +303,13 @@ void TwoWire::flush(void) {
 }
 
 void TwoWire::stm32SetSDA(uint8_t sda) {
-    sdaPort = port_pin_list[sda].port;
-    sdaPin = port_pin_list[sda].pin_mask;
+    sdaPort = variant_pin_list[sda].port;
+    sdaPin = variant_pin_list[sda].pin_mask;
 }
 
 void TwoWire::stm32SetSCL(uint8_t scl) {
-    sclPort = port_pin_list[scl].port;
-    sclPin = port_pin_list[scl].pin_mask;
+    sclPort = variant_pin_list[scl].port;
+    sclPin = variant_pin_list[scl].pin_mask;
 }
 
 

@@ -20,7 +20,7 @@ typedef struct {
     uint16_t duty_cycle;
 } stm32_pwm_type;
 
-static stm32_pwm_type pwm_config[sizeof(port_pin_list) / sizeof(port_pin_list[0])];
+static stm32_pwm_type pwm_config[sizeof(variant_pin_list) / sizeof(variant_pin_list[0])];
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin);
 
@@ -50,15 +50,15 @@ void analogWrite(uint8_t pin, int value) {
 
     for(int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
         if (pwm_config[i].port == NULL ||
-                (pwm_config[i].port == port_pin_list[pin].port
-                && pwm_config[i].pin_mask == port_pin_list[pin].pin_mask)) {
+                (pwm_config[i].port == variant_pin_list[pin].port
+                && pwm_config[i].pin_mask == variant_pin_list[pin].pin_mask)) {
 
             if (pwm_config[i].port == NULL) {
                 pinMode(pin, OUTPUT);
             }
 
-            pwm_config[i].port = port_pin_list[pin].port;
-            pwm_config[i].pin_mask = port_pin_list[pin].pin_mask;
+            pwm_config[i].port = variant_pin_list[pin].port;
+            pwm_config[i].pin_mask = variant_pin_list[pin].pin_mask;
             pwm_config[i].frequency = 255;
             pwm_config[i].duty_cycle = value;
             break;

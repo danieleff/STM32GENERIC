@@ -105,16 +105,16 @@ void SPIClass::setClockDivider(uint8_t clockDevider) {
 }
 
 void SPIClass::stm32SetMOSI(uint8_t mosi) {
-	mosiPort = port_pin_list[mosi].port;
-	mosiPin = port_pin_list[mosi].pin_mask;
+	mosiPort = variant_pin_list[mosi].port;
+	mosiPin = variant_pin_list[mosi].pin_mask;
 }
 
 void SPIClass::stm32SetMISO(uint8_t miso) {
-	misoPort = port_pin_list[miso].port;
-	misoPin = port_pin_list[miso].pin_mask;
+	misoPort = variant_pin_list[miso].port;
+	misoPin = variant_pin_list[miso].pin_mask;
 }
 
 void SPIClass::stm32SetSCK(uint8_t sck) {
-	sckPort = port_pin_list[sck].port;
-	sckPin = port_pin_list[sck].pin_mask;
+	sckPort = variant_pin_list[sck].port;
+	sckPin = variant_pin_list[sck].pin_mask;
 }

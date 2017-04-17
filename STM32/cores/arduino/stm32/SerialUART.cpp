@@ -142,13 +142,13 @@ size_t SerialUART::write(const uint8_t c) {
 }
 
 void SerialUART::stm32SetRX(uint8_t rx) {
-    rxPort = port_pin_list[rx].port;
-    rxPin = port_pin_list[rx].pin_mask;
+    rxPort = variant_pin_list[rx].port;
+    rxPin = variant_pin_list[rx].pin_mask;
 }
 
 void SerialUART::stm32SetTX(uint8_t tx) {
-    txPort = port_pin_list[tx].port;
-    txPin = port_pin_list[tx].pin_mask;
+    txPort = variant_pin_list[tx].port;
+    txPin = variant_pin_list[tx].pin_mask;
 }
 
 //// Interrupt

@@ -2,7 +2,7 @@
 
 #include "stm32_gpio.h"
 
-const stm32_port_pin_type port_pin_list[] = {
+const stm32_port_pin_type variant_pin_list[] = {
   { GPIOB, GPIO_PIN_11},
   { GPIOB, GPIO_PIN_10},
   { GPIOB, GPIO_PIN_2 },

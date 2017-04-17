@@ -33,7 +33,7 @@ typedef struct {
     stm32_clock_freq_func clock_freq_func;
 } stm32_clock_freq_list_type;
 
-extern const stm32_port_pin_type port_pin_list[NUM_PINS];
+extern const stm32_port_pin_type variant_pin_list[NUM_PINS];
 
 /**
  * Start clock for the fedined port
@@ -47,11 +47,11 @@ typedef void (*stm32_pwm_disable_callback_func)(GPIO_TypeDef *port, uint32_t pin
 extern stm32_pwm_disable_callback_func stm32_pwm_disable_callback;
 
 inline void digitalWrite(uint8_t pin, uint8_t value) {
-    if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
+    if (pin >= sizeof(variant_pin_list) / sizeof(variant_pin_list[0])) {
         return;
     }
     
-    stm32_port_pin_type port_pin = port_pin_list[pin];
+    stm32_port_pin_type port_pin = variant_pin_list[pin];
     
     HAL_GPIO_WritePin(port_pin.port, port_pin.pin_mask, value ? GPIO_PIN_SET : GPIO_PIN_RESET);
     
@@ -59,11 +59,11 @@ inline void digitalWrite(uint8_t pin, uint8_t value) {
 
 
 inline int digitalRead(uint8_t pin) {
-    if (pin >= sizeof(port_pin_list) / sizeof(port_pin_list[0])) {
+    if (pin >= sizeof(variant_pin_list) / sizeof(variant_pin_list[0])) {
         return 0;
     }
     
-    stm32_port_pin_type port_pin = port_pin_list[pin];
+    stm32_port_pin_type port_pin = variant_pin_list[pin];
     
     return HAL_GPIO_ReadPin(port_pin.port, port_pin.pin_mask);
     
