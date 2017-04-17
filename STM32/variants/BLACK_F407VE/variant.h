@@ -5,6 +5,7 @@
 #define MOSI PA7
 #define MISO PA6
 #define SCK PA5
+#define SS PA4
 
 enum {
    PA0 ,
