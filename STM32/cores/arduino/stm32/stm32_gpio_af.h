@@ -42,38 +42,38 @@ typedef struct {
 extern "C"{
 #endif
 
-void stm32_af_uart_init(const USART_TypeDef *instance,
+void stm32AfUARTInit(const USART_TypeDef *instance,
     GPIO_TypeDef *rxPort, uint32_t rxPin, 
     GPIO_TypeDef *txPort, uint32_t txPin);
 
-void stm32_af_spi_init(const SPI_TypeDef *instance,
+void stm32AfSPIInit(const SPI_TypeDef *instance,
     GPIO_TypeDef *mosiPort, uint32_t mosiPin,
     GPIO_TypeDef *misoPort, uint32_t misoPin,
 	GPIO_TypeDef *sckPort, uint32_t sckPin);
 
-void stm32_af_i2c_init(const I2C_TypeDef *instance,
+void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin);
 
 /**
  * Get the clock frequency associated with the peripheral instance
  */
-uint32_t stm32_apb_clock_freq(void *instance);
+uint32_t stm32GetClockFrequency(void *instance);
 
 /**
  * Get the ADC1 channel for the specified port / pin
  */
-uint8_t stm32_adc1_get_channel(GPIO_TypeDef *port, uint32_t pin_mask);
+uint8_t stm32ADC1GetChannel(GPIO_TypeDef *port, uint32_t pin_mask);
 
 /**
  * Internal: set the AF function for the selected peripheral on the selected pin
  */
-void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull);
+void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull);
 
 /**
  * Internal: get the default pin for the given peripheral
  */
-GPIO_TypeDef *stm32_af_default(stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin);
+GPIO_TypeDef *stm32AfGetDefault(stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin);
 
 
 #ifdef __cplusplus

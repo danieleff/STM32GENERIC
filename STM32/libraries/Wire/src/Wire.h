@@ -82,8 +82,8 @@ class TwoWire : public Stream {
     void onReceive( void (*)(int) );
     void onRequest( void (*)(void) );
 
-    void stm32_set_sda(uint8_t sda);
-    void stm32_set_scl(uint8_t scl);
+    void stm32SetSDA(uint8_t sda);
+    void stm32SetSCL(uint8_t scl);
 
     inline size_t write(unsigned long n) { return write((uint8_t)n); }
     inline size_t write(long n) { return write((uint8_t)n); }

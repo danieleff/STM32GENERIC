@@ -94,7 +94,7 @@ void SerialUART::begin(const uint32_t baud) {
   }
   #endif
   
-  stm32_af_uart_init(instance, rxPort, rxPin, txPort, txPin);
+  stm32AfUARTInit(instance, rxPort, rxPin, txPort, txPin);
   
   handle->Init.BaudRate = baud; 
   handle->Init.WordLength = UART_WORDLENGTH_8B;
@@ -141,12 +141,12 @@ size_t SerialUART::write(const uint8_t c) {
   return 1;
 }
 
-void SerialUART::stm32_set_rx(uint8_t rx) {
+void SerialUART::stm32SetRX(uint8_t rx) {
     rxPort = port_pin_list[rx].port;
     rxPin = port_pin_list[rx].pin_mask;
 }
 
-void SerialUART::stm32_set_tx(uint8_t tx) {
+void SerialUART::stm32SetTX(uint8_t tx) {
     txPort = port_pin_list[tx].port;
     txPin = port_pin_list[tx].pin_mask;
 }

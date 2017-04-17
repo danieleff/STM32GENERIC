@@ -31,7 +31,7 @@
     #include "stm32l4xx.h"
     #include "stm32l4xx_hal.h"
 #else
-    #error "STM32XX is not definedin boards.txt"
+    #error "STM32XX is not defined in boards.txt"
 #endif
 
 

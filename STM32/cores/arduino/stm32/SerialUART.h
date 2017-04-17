@@ -20,8 +20,8 @@ class SerialUART : public Stream  {
     using Print::write; // pull in write(str) and write(buf, size) from Print
     operator bool() { return true; }; // UART always active
 
-    void stm32_set_rx(uint8_t rx);
-    void stm32_set_tx(uint8_t tx);
+    void stm32SetRX(uint8_t rx);
+    void stm32SetTX(uint8_t tx);
     
     USART_TypeDef *instance = NULL;
     UART_HandleTypeDef *handle = NULL;

@@ -15,7 +15,7 @@ void TwoWire::begin(void) {
 
     isMaster = 1;
 
-    stm32_af_i2c_init(handle.Instance, sdaPort, sdaPin, sclPort, sclPin);
+    stm32AfI2CInit(handle.Instance, sdaPort, sdaPin, sclPort, sclPin);
 
     __HAL_RCC_I2C1_CLK_ENABLE();
 
@@ -302,12 +302,12 @@ void TwoWire::flush(void) {
 
 }
 
-void TwoWire::stm32_set_sda(uint8_t sda) {
+void TwoWire::stm32SetSDA(uint8_t sda) {
     sdaPort = port_pin_list[sda].port;
     sdaPin = port_pin_list[sda].pin_mask;
 }
 
-void TwoWire::stm32_set_scl(uint8_t scl) {
+void TwoWire::stm32SetSCL(uint8_t scl) {
     sclPort = port_pin_list[scl].port;
     sclPin = port_pin_list[scl].pin_mask;
 }

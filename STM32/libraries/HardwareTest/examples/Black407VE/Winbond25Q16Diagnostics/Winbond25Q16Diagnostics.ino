@@ -7,9 +7,9 @@
 SPIFlash flash(PB0);
 
 void setup() {
-  SPI.stm32_set_mosi(PB5);
-  SPI.stm32_set_miso(PB4);
-  SPI.stm32_set_sck(PB3);
+  SPI.stm32SetMOSI(PB5);
+  SPI.stm32SetMISO(PB4);
+  SPI.stm32SetSCK(PB3);
   
   Serial.begin(115200);
   

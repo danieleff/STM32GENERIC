@@ -2,7 +2,7 @@
 
 #include "stm32_gpio_af.h"
 
-stm32_af_callback stm32_af_get(const stm32_af_pin_list_type list[], int size, const void *instance, const GPIO_TypeDef *port, const uint32_t pin) {
+stm32_af_callback stm32AfGet(const stm32_af_pin_list_type list[], int size, const void *instance, const GPIO_TypeDef *port, const uint32_t pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance
             && port == list[i].port
@@ -14,12 +14,12 @@ stm32_af_callback stm32_af_get(const stm32_af_pin_list_type list[], int size, co
     return 0;
 }
 
-void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
     if (stm32_pwm_disable_callback != NULL) {
         (*stm32_pwm_disable_callback)(port, pin);
     }
     if (port == NULL) {
-        port = stm32_af_default(list, size, instance, &pin);
+        port = stm32AfDefault(list, size, instance, &pin);
     }
     stm32_gpio_clock(port);
     
@@ -30,7 +30,7 @@ void stm32_af_init(const stm32_af_pin_list_type list[], int size, const void *in
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
     HAL_GPIO_Init(port, &GPIO_InitStruct);
     
-    stm32_af_get(list, size, instance, port, pin)();
+    stm32AfGet(list, size, instance, port, pin)();
 }
 
 #endif

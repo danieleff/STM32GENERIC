@@ -17,12 +17,12 @@ TODO: IMPLEMENT You can set what is Serial from the boards menu. By default, it 
 Please refer to the [official documentation](https://www.arduino.cc/en/reference/serial) for
 the description of Serial functions.
 
-#### **`SerialUARTx.stm32_set_rx(uint8_t pin)`**
+#### **`SerialUARTx.stm32SetRX(uint8_t pin)`**
 
 Set the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.
 This must be called before begin()!
 
-#### **`SerialUARTx.stm32_set_tx(uint8_t pin)`**
+#### **`SerialUARTx.stm32SetTx(uint8_t pin)`**
 
 Set the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.
 This must be called before begin()!
@@ -67,7 +67,7 @@ To avoid confusion, it is better to use the constructor below with implicit pins
 Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.
 
 > Example: set up SPI2
-`SPIClass SPI_2(SPI2, Pmosi, Piso, Psck);`
+`SPIClass SPI_2(SPI2, mosi, iso, sck);`
 
 #### **`SPI.begin()`**
 
@@ -105,22 +105,22 @@ TODO not yet implemented
 
 TODO write doc
 
-#### **`SPI.stm32_set_mosi(uint8_t pin);`**
+#### **`SPI.stm32SetMOSI(uint8_t pin);`**
 
 TODO write doc
 This method must be called before begin()!
 
-#### **`SPI.stm32_set_miso(uint8_t pin);`**
+#### **`SPI.stm32SetMISO(uint8_t pin);`**
 
 TODO write doc
 This method must be called before begin()!
 
-#### **`SPI.stm32_set_sck(uint8_t pin);`**
+#### **`SPI.stm32SetSCK(uint8_t pin);`**
 
 TODO write doc
 This method must be called before begin()!
 
-#### **`SPI.stm32_set_instance(...);`**
+#### **`SPI.stm32SetInstance(...);`**
 
 TODO implement
 This method must be called before begin()!

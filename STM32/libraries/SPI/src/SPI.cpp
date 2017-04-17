@@ -10,7 +10,7 @@
 
 
 void SPIClass::begin() {
-	apb_freq = stm32_apb_clock_freq((void*)spiHandle.Instance);
+	apb_freq = stm32GetClockFrequency((void*)spiHandle.Instance);
 
 	spiHandle.Init.Mode = SPI_MODE_MASTER;
 	spiHandle.Init.Direction = SPI_DIRECTION_2LINES;
@@ -36,7 +36,7 @@ void SPIClass::begin() {
 		if (spiHandle.Instance == SPI6) __HAL_RCC_SPI6_CLK_ENABLE();
 	#endif
 
-	stm32_af_spi_init(spiHandle.Instance, mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
+	stm32AfSPIInit(spiHandle.Instance, mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
 };
 
 void SPIClass::beginTransaction(SPISettings settings) {
@@ -104,17 +104,17 @@ void SPIClass::setClockDivider(uint8_t clockDevider) {
 	beginTransaction(SPISettings(apb_freq / clockDevider, settings.bitOrder, settings.dataMode));
 }
 
-void SPIClass::stm32_set_mosi(uint8_t mosi) {
+void SPIClass::stm32SetMOSI(uint8_t mosi) {
 	mosiPort = port_pin_list[mosi].port;
 	mosiPin = port_pin_list[mosi].pin_mask;
 }
 
-void SPIClass::stm32_set_miso(uint8_t miso) {
+void SPIClass::stm32SetMISO(uint8_t miso) {
 	misoPort = port_pin_list[miso].port;
 	misoPin = port_pin_list[miso].pin_mask;
 }
 
-void SPIClass::stm32_set_sck(uint8_t sck) {
+void SPIClass::stm32SetSCK(uint8_t sck) {
 	sckPort = port_pin_list[sck].port;
 	sckPin = port_pin_list[sck].pin_mask;
 }

@@ -73,7 +73,7 @@ int analogRead(uint8_t pin) {
     }
 
     ADC_ChannelConfTypeDef sConfig;
-    sConfig.Channel = stm32_adc1_get_channel(port_pin_list[pin].port, port_pin_list[pin].pin_mask);
+    sConfig.Channel = stm32ADC1GetChannel(port_pin_list[pin].port, port_pin_list[pin].pin_mask);
     sConfig.Rank = 1;
 
     #if STM32L0
