@@ -50,3 +50,11 @@ void stm32_af_spi_init(const SPI_TypeDef *instance,
     stm32_af_init(chip_af_spi_sck, sizeof(chip_af_spi_sck) / sizeof(chip_af_spi_sck[0]), instance, sckPort, sckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
 
 }
+
+void stm32_af_i2c_init(const I2C_TypeDef *instance,
+    GPIO_TypeDef *sdaPort, uint32_t sdaPin,
+    GPIO_TypeDef *sclPort, uint32_t sclPin) {
+
+    stm32_af_init(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
+    stm32_af_init(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
+}

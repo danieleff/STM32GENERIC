@@ -51,6 +51,10 @@ void stm32_af_spi_init(const SPI_TypeDef *instance,
     GPIO_TypeDef *misoPort, uint32_t misoPin,
 	GPIO_TypeDef *sckPort, uint32_t sckPin);
 
+void stm32_af_i2c_init(const I2C_TypeDef *instance,
+    GPIO_TypeDef *sdaPort, uint32_t sdaPin,
+    GPIO_TypeDef *sclPort, uint32_t sclPin);
+
 /**
  * Get the clock frequency associated with the peripheral instance
  */
