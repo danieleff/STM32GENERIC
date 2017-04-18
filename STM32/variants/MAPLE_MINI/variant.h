@@ -1,6 +1,16 @@
 #ifndef VARIANT_H
 #define VARIANT_H
 
+#define LED_BUILTIN PB1
+
+#define MOSI PA7
+#define MISO PA6
+#define SCK PA5
+#define SS PA4
+
+#define SDA PB7
+#define SCL PB6
+
 enum {
     PB11, 
     PB10, 
@@ -41,8 +51,5 @@ enum {
     PD1,
     NUM_PINS
 };
-
-
-#define LED_BUILTIN PB1
 
 #endif
