@@ -133,6 +133,8 @@ int SerialUART::read() {
 }
 
 size_t SerialUART::write(const uint8_t c) {
+  while((txEnd + 1) % BUFFER_SIZE == txStart % BUFFER_SIZE);
+  
   txBuffer[txEnd % BUFFER_SIZE] = c;
   txEnd++;
   if (txEnd == txStart + 1) {
