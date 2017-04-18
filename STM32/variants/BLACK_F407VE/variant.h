@@ -95,6 +95,4 @@ NUM_PINS,
 
 #define LED_BUILTIN PA6
 
-#define Serial SerialUSB
-
 #endif

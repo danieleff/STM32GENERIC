@@ -45,6 +45,4 @@ enum {
 
 #define LED_BUILTIN PB1
 
-#define Serial SerialUSB
-
 #endif

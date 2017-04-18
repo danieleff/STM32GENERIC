@@ -44,6 +44,4 @@ NUM_PINS,
 
 #define LED_BUILTIN PC13
 
-#define Serial SerialUSB
-
 #endif

@@ -24,7 +24,7 @@
  *
  ****************************************************************************/
 
-#ifdef SERIAL_USB
+#ifdef MENU_USB_SERIAL
 
 #include <SerialUSB.h>
 #include "variant.h"

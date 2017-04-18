@@ -59,6 +59,4 @@ enum {
 
 #define LED_BUILTIN PA5
 
-#define Serial SerialUART2
-
 #endif
