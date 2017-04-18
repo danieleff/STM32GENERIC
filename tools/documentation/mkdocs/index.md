@@ -37,10 +37,10 @@ Please go to the [Arduino API implementation](arduino_api.md) page.
 ## General development direction
 
 * Self-test code to run on a board to check if the API works for that variant.
-* Automatic unit test compilation. This ensures that every code will work on every board.
+* Automatic unit test compilation. This ensures that a code change does not break other boards.
 * Automatic library compilation, to be as arduino-compatible as possible.
 * Benchmarks to pinpoint bottlenecks.
-* Hacker-friendly: Enable to use HAL/CMSIS; override every IRQ handler.
+* Hacker-friendly: Enable to use HAL/CMSIS; enable overriding of every IRQ handler.
 * Add DFU/MSC/HID/MIDI to USB. Rewrite USB to PluggableUSB to be more arduino-compatible.
 * Create SDIO library
 * Create I2S library
