@@ -1,0 +1,369 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "STM32GENERIC\n\n\nA generic \nArduino\n implementation for \nSTM32 boards\n.\n\n\nInstallation - Users\n\n\nTODO create boards manager package\n\n\nInstallation - Developers\n\n\n\n\nDownload the latest version from \nhttps://github.com/danieleff/STM32GENERIC\n\n\nUnzip it into [Arduino]/hardware folder\n\n\nInstall Arduino Zero from the board manager for the arm-none-eabi-gcc compiler\n\n\n\n\nUploading\n\n\nPlease go to the \nUploading\n page.\n\n\nList of boards\n\n\nPlease go to the \nBoards\n page.\n\n\nAPI documentation\n\n\nPlease go to the \nArduino API implementation\n page.\n\n\n\n\nGoals\n\n\n\n\nGeneric implementation using \nSTM32 HAL API\n to compile onto every STM32 board.\n\n\nFor the most used boards, optimize code paths using direct register access.\n\n\nMake adding boards easy\n\n\nMake as compatible with default libraries as  possible\n\n\n\n\nGeneral development direction\n\n\n\n\nSelf-test code to run on a board to check if the API works for that variant.\n\n\nAutomatic unit test compilation. This ensures that a code change does not break other boards.\n\n\nAutomatic library compilation, to be as arduino-compatible as possible.\n\n\nBenchmarks to pinpoint bottlenecks.\n\n\nHacker-friendly: Enable to use HAL/CMSIS; enable overriding of every IRQ handler.\n\n\nAdd DFU/MSC/HID/MIDI to USB. Rewrite USB to PluggableUSB to be more arduino-compatible.\n\n\nCreate SDIO library\n\n\nCreate I2S library\n\n\nCreate CAN library", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/#stm32generic", 
+            "text": "A generic  Arduino  implementation for  STM32 boards .", 
+            "title": "STM32GENERIC"
+        }, 
+        {
+            "location": "/#installation-users", 
+            "text": "TODO create boards manager package", 
+            "title": "Installation - Users"
+        }, 
+        {
+            "location": "/#installation-developers", 
+            "text": "Download the latest version from  https://github.com/danieleff/STM32GENERIC  Unzip it into [Arduino]/hardware folder  Install Arduino Zero from the board manager for the arm-none-eabi-gcc compiler", 
+            "title": "Installation - Developers"
+        }, 
+        {
+            "location": "/#uploading", 
+            "text": "Please go to the  Uploading  page.", 
+            "title": "Uploading"
+        }, 
+        {
+            "location": "/#list-of-boards", 
+            "text": "Please go to the  Boards  page.", 
+            "title": "List of boards"
+        }, 
+        {
+            "location": "/#api-documentation", 
+            "text": "Please go to the  Arduino API implementation  page.", 
+            "title": "API documentation"
+        }, 
+        {
+            "location": "/#goals", 
+            "text": "Generic implementation using  STM32 HAL API  to compile onto every STM32 board.  For the most used boards, optimize code paths using direct register access.  Make adding boards easy  Make as compatible with default libraries as  possible", 
+            "title": "Goals"
+        }, 
+        {
+            "location": "/#general-development-direction", 
+            "text": "Self-test code to run on a board to check if the API works for that variant.  Automatic unit test compilation. This ensures that a code change does not break other boards.  Automatic library compilation, to be as arduino-compatible as possible.  Benchmarks to pinpoint bottlenecks.  Hacker-friendly: Enable to use HAL/CMSIS; enable overriding of every IRQ handler.  Add DFU/MSC/HID/MIDI to USB. Rewrite USB to PluggableUSB to be more arduino-compatible.  Create SDIO library  Create I2S library  Create CAN library", 
+            "title": "General development direction"
+        }, 
+        {
+            "location": "/upload/", 
+            "text": "Uploading your sketch\n\n\n\n\n\n\n\n\nMethod\n\n\nConnection\n\n\nRequirements\n\n\n\n\n\n\n\n\n\n\nFlash Bootloader\n\n\nUSB\n\n\nUSB connector, Bootloader already installed\n\n\n\n\n\n\nSystem bootloader\n\n\nUART\n\n\nBOOT0 / BOOT1 pins accessible, USB to UART adapter\n\n\n\n\n\n\nSWD / ST-link / JTAG\n\n\nSWD pins\n\n\nProgrammer hardware, (included in Nucleo and Discovery boards)\n\n\n\n\n\n\nBlack Magic Probe", 
+            "title": "Uploading"
+        }, 
+        {
+            "location": "/upload/#uploading-your-sketch", 
+            "text": "Method  Connection  Requirements      Flash Bootloader  USB  USB connector, Bootloader already installed    System bootloader  UART  BOOT0 / BOOT1 pins accessible, USB to UART adapter    SWD / ST-link / JTAG  SWD pins  Programmer hardware, (included in Nucleo and Discovery boards)    Black Magic Probe", 
+            "title": "Uploading your sketch"
+        }, 
+        {
+            "location": "/menu_options/", 
+            "text": "Upload method\n\n\nSee the \nuploading\n page.\n\n\nUSB\n\n\nThe following options are available for USB\n\n\n\n\nSerial. A Virtual COM port will be available when connected. Note: On Windows 7, you will need to install drivers located in tool/win/drivers folder.\n\n\nDisabled, no USB. Note: If you use USB based uploading method, the board will not reset automatically.\n\n\n\n\nAutomatic Serial\n\n\nSelect the default for \nSerial\n:\n\n\nAutomatically selected:\n\n\n\n\nIf the board is Nucleo, automatic Serial is aliased to \nSerialUART2\n (ST-Link Virtual COM port).\n\n\nIf the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to \nSerialUART1\n.\n\n\nIf the upload method is based on USB (DFU), automatic Serial aliased to \nSerialUSB\n.\n\n\n\n\nSerialUSB\n\n\nSerialUART1", 
+            "title": "Menu options"
+        }, 
+        {
+            "location": "/menu_options/#upload-method", 
+            "text": "See the  uploading  page.", 
+            "title": "Upload method"
+        }, 
+        {
+            "location": "/menu_options/#usb", 
+            "text": "The following options are available for USB   Serial. A Virtual COM port will be available when connected. Note: On Windows 7, you will need to install drivers located in tool/win/drivers folder.  Disabled, no USB. Note: If you use USB based uploading method, the board will not reset automatically.", 
+            "title": "USB"
+        }, 
+        {
+            "location": "/menu_options/#automatic-serial", 
+            "text": "Select the default for  Serial :  Automatically selected:   If the board is Nucleo, automatic Serial is aliased to  SerialUART2  (ST-Link Virtual COM port).  If the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to  SerialUART1 .  If the upload method is based on USB (DFU), automatic Serial aliased to  SerialUSB .   SerialUSB  SerialUART1", 
+            "title": "Automatic Serial"
+        }, 
+        {
+            "location": "/arduino_api/", 
+            "text": "Overview\n\n\n\n\nSTM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.\n\n\nNon microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.\n\n\nAll non-standard functions are prefixed with \nstm32XXXX()\n\n\n\n\nuint32_t millis();\n\n\nReturns the milliseconds since the microcontroller started. Overflows in 50 days.\n\n\nuint32_t micros();\n\n\nReturns the microseconds since the microcontroller started. Overflows in 70 minutes.\n\n\ndelay(uint32_t millis);\n\n\nDelays the execution by the given milliseconds.\n\n\ndelayMicroseconds(uint32_t micros);\n\n\nDelays the execution by the given microseconds.\n\n\n\n\nExample: Print the milliseconds on \nSerial\n, every second:\n\n\n\n\nvoid setup() {\n  Serial.begin(9600);\n}\nvoid loop() {\n  Serial.println(millis());\n  delay(1000);\n}\n\n\n\n\n\n\nUses STM32 SysTick, set to interrupt 1ms intervals.\n\n\n\n\nNaming the pins in code:\n\n\n\n\nSTM32 chip pins have names: \nPA0\n, \nPA1\n...\n\n\nOn some boards (Nucleo, Maple), there are numbers / alternative names next to the pin: \n1\n, \nRX\n, \nA0\n.\n\n\nPredefined constants\n for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.\n\n\n\n\nGenerally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);\n\n\npinMode(uint8_t pin, uint8_t mode);\n\n\nSets the pin for digital reading / writing\n\n\n\n\n\n\n\n\nMode\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nOUTPUT\n\n\n0V - 3.3V\n\n\n\n\n\n\nINPUT\n\n\nThe pin does not have a pull down or pull up resistor\n\n\n\n\n\n\nINPUT_PULLUP\n\n\nWeak pull up resistor to default to HIGH if the pin is not connected to anything\n\n\n\n\n\n\nINPUT_PULLDOWN\n\n\nWeak pull down resistor to default to LOW if the pin is not connected to anything\n\n\n\n\n\n\n\n\npinMode() is needed for digitalRead() and digitalWrite() functions.\n\n\nThe system automatically sets the pinMode when using a peripheral library like analogRead(), analogWrite(), \nSPI\n or \nI2C\n, so you don't have to.\n\n\ndigitalRead(uint8_t pin);\n\n\nRead the voltage level on the specified pin. Returns LOW(0) if it is 0V, HIGH(1) if it is 3.3V\n\n\nAll pins can be used as digital input.\n\n\nNot all pins are 5V tolerant. Please check the chip reference manual \nPinouts and pin description\n section.\n\n\ndigitalWrite(uint8_t pin, uint8_t value);\n\n\nIf value if LOW(0), sets the pin to 0V. If value is HIGH(1), 3.3V.\n\nAll pins can be used as digital output.\n\n\n\n\nExample: Blink the \nLED\n on the board:\n\n\n\n\nvoid setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n  delay(1000);\n}\n\n\n\n\nint analogRead(uint8_t pin);\n\n\nRead the voltage level on the pin, and map the 0..3.3V range to 0..1023 range by default.\n\n\nNot all pins can be used as analog input!\n Please check the \nBoards page\n.\n\n\nanalogReadResolution()\n\n\nTODO not yet implemented\n\n\nanalogWrite(uint8_t pin, int value)\n\n\nSet PWM to the specified pin.\n\n\nAll pins can be used as analog/PWM output.\n\n\n\n\nUses the TIM2 clock interrupt with software PWM implementation to allow PWM on all pins.\n\n\n\n\nanalogWriteResolution()\n\n\nTODO not yet implemented\n\n\n\n\nExample: Dim the LED based on the voltage value on PA0\n\n\n\n\nvoid loop() {\n    analogWrite(LED_BUILTIN, analogRead(PA0));\n    delay(10);\n}\n\n\n\n\nattachInterrupt(...);\n\n\nTODO not yet implemented\n\n\nPredefined pin constants\n\n\nThe following constants are defined in the variant.h file for each variant:\nTODO not all implemented\n\n\n\n\n\n\n\n\nConstant\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nLED_BUILTIN\n\n\nThe primary LED on board, if there is any\n\n\n\n\n\n\nSTM32_LED_BUILTIN_ACTIVE_LOW\n\n\nIf set, the onboard LED lights up when output is set to LOW\n\n\n\n\n\n\nMOSI\n\n\nMOSI pin of the first \nSPI\n\n\n\n\n\n\nMISO\n\n\nMISO pin of the first SPI\n\n\n\n\n\n\nSCK\n\n\nSCK  pin of the first SPI\n\n\n\n\n\n\nRX\n\n\nRX of UART if it is used for \nSerial\n, else UART1\n\n\n\n\n\n\nTX\n\n\nTX of UART if it is used for \nSerial\n, else UART1\n\n\n\n\n\n\nSDA\n\n\nSDA pin of the first I2C\n\n\n\n\n\n\nSCL\n\n\nSCL pin of the first I2C", 
+            "title": "Arduino API"
+        }, 
+        {
+            "location": "/arduino_api/#overview", 
+            "text": "STM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.  Non microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.  All non-standard functions are prefixed with  stm32XXXX()", 
+            "title": "Overview"
+        }, 
+        {
+            "location": "/arduino_api/#uint32_t-millis", 
+            "text": "Returns the milliseconds since the microcontroller started. Overflows in 50 days.", 
+            "title": "uint32_t millis();"
+        }, 
+        {
+            "location": "/arduino_api/#uint32_t-micros", 
+            "text": "Returns the microseconds since the microcontroller started. Overflows in 70 minutes.", 
+            "title": "uint32_t micros();"
+        }, 
+        {
+            "location": "/arduino_api/#delayuint32_t-millis", 
+            "text": "Delays the execution by the given milliseconds.", 
+            "title": "delay(uint32_t millis);"
+        }, 
+        {
+            "location": "/arduino_api/#delaymicrosecondsuint32_t-micros", 
+            "text": "Delays the execution by the given microseconds.   Example: Print the milliseconds on  Serial , every second:   void setup() {\n  Serial.begin(9600);\n}\nvoid loop() {\n  Serial.println(millis());\n  delay(1000);\n}   Uses STM32 SysTick, set to interrupt 1ms intervals.   Naming the pins in code:   STM32 chip pins have names:  PA0 ,  PA1 ...  On some boards (Nucleo, Maple), there are numbers / alternative names next to the pin:  1 ,  RX ,  A0 .  Predefined constants  for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.   Generally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);", 
+            "title": "delayMicroseconds(uint32_t micros);"
+        }, 
+        {
+            "location": "/arduino_api/#pinmodeuint8_t-pin-uint8_t-mode", 
+            "text": "Sets the pin for digital reading / writing     Mode  Meaning      OUTPUT  0V - 3.3V    INPUT  The pin does not have a pull down or pull up resistor    INPUT_PULLUP  Weak pull up resistor to default to HIGH if the pin is not connected to anything    INPUT_PULLDOWN  Weak pull down resistor to default to LOW if the pin is not connected to anything     pinMode() is needed for digitalRead() and digitalWrite() functions.  The system automatically sets the pinMode when using a peripheral library like analogRead(), analogWrite(),  SPI  or  I2C , so you don't have to.", 
+            "title": "pinMode(uint8_t pin, uint8_t mode);"
+        }, 
+        {
+            "location": "/arduino_api/#digitalreaduint8_t-pin", 
+            "text": "Read the voltage level on the specified pin. Returns LOW(0) if it is 0V, HIGH(1) if it is 3.3V  All pins can be used as digital input.  Not all pins are 5V tolerant. Please check the chip reference manual  Pinouts and pin description  section.", 
+            "title": "digitalRead(uint8_t pin);"
+        }, 
+        {
+            "location": "/arduino_api/#digitalwriteuint8_t-pin-uint8_t-value", 
+            "text": "If value if LOW(0), sets the pin to 0V. If value is HIGH(1), 3.3V. All pins can be used as digital output.   Example: Blink the  LED  on the board:   void setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n  delay(1000);\n}", 
+            "title": "digitalWrite(uint8_t pin, uint8_t value);"
+        }, 
+        {
+            "location": "/arduino_api/#int-analogreaduint8_t-pin", 
+            "text": "Read the voltage level on the pin, and map the 0..3.3V range to 0..1023 range by default.  Not all pins can be used as analog input!  Please check the  Boards page .", 
+            "title": "int analogRead(uint8_t pin);"
+        }, 
+        {
+            "location": "/arduino_api/#analogreadresolution", 
+            "text": "TODO not yet implemented", 
+            "title": "analogReadResolution()"
+        }, 
+        {
+            "location": "/arduino_api/#analogwriteuint8_t-pin-int-value", 
+            "text": "Set PWM to the specified pin.  All pins can be used as analog/PWM output.   Uses the TIM2 clock interrupt with software PWM implementation to allow PWM on all pins.", 
+            "title": "analogWrite(uint8_t pin, int value)"
+        }, 
+        {
+            "location": "/arduino_api/#analogwriteresolution", 
+            "text": "TODO not yet implemented   Example: Dim the LED based on the voltage value on PA0   void loop() {\n    analogWrite(LED_BUILTIN, analogRead(PA0));\n    delay(10);\n}", 
+            "title": "analogWriteResolution()"
+        }, 
+        {
+            "location": "/arduino_api/#attachinterrupt", 
+            "text": "TODO not yet implemented", 
+            "title": "attachInterrupt(...);"
+        }, 
+        {
+            "location": "/arduino_api/#predefined-pin-constants", 
+            "text": "The following constants are defined in the variant.h file for each variant:\nTODO not all implemented     Constant  Meaning      LED_BUILTIN  The primary LED on board, if there is any    STM32_LED_BUILTIN_ACTIVE_LOW  If set, the onboard LED lights up when output is set to LOW    MOSI  MOSI pin of the first  SPI    MISO  MISO pin of the first SPI    SCK  SCK  pin of the first SPI    RX  RX of UART if it is used for  Serial , else UART1    TX  TX of UART if it is used for  Serial , else UART1    SDA  SDA pin of the first I2C    SCL  SCL pin of the first I2C", 
+            "title": "Predefined pin constants"
+        }, 
+        {
+            "location": "/arduino_libraries/", 
+            "text": "Standard libraries:\n\n\nSerial\n\n\nThere are two implementations of Serial: UART and USB.\n\n\nTODO: IMPLEMENT You can set what is Serial aliased to from the boards menu. By default, it is aligned with the upload method to help debugging.\n\n\n\n\nIf the board is Nucleo, automatic Serial is aliased to \nSerialUART2\n (ST-Link Virtual COM port).\n\n\nIf the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to \nSerialUART1\n.\n\n\nIf the upload method is based on USB (DFU), automatic Serial aliased to \nSerialUSB\n.\n\n\n\n\nSerial UART\n\n\nSerialUART1\nis bound to UART1, \nSerialUART2\n to UART2 etc...\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSerialUARTx.stm32SetRX(uint8_t pin)\n\n\nSet the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!\n\n\nSerialUARTx.stm32SetTx(uint8_t pin)\n\n\nSet the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!\n\n\n\n\nExample: The following code will echo the received bytes on UART2\n\n\n\n\nvoid setup() {\n    SerialUART2.set_rx(Pcd);\n    SerialUART2.set_tx(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}\n\n\n\n\nSerial USB\n\n\nIf the \nUSB menu\n is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.\n\n\nTODO explain windows 7 driver\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSPI\n\n\nThe first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nSPI.begin()\n\n\nEnables SPI on the pins\n\n\nSPI.end()\n\n\nDisables the SPI pin\n\n\nSPI.beginTransaction(SPISettings settings);\n\n\nStart SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nSPI.endTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.transfer16(...);\n\n\nTODO write doc\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.usingInterrupt();\n\n\nTODO not yet implemented\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.stm32SetMOSI(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetMISO(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetSCK(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetInstance(...);\n\n\nTODO implement\nThis method must be called before begin()!\n\n\n\n\nExample: TODO example for using libraries on multiple instances with the same SPI\n\n\n\n\nWire - I2C\n\n\nTODO write doc\n\n\nUSB\n\n\nTODO set USB in menu (show used pins, + mini PB9)", 
+            "title": "Arduino Standard Libraries"
+        }, 
+        {
+            "location": "/arduino_libraries/#standard-libraries", 
+            "text": "", 
+            "title": "Standard libraries:"
+        }, 
+        {
+            "location": "/arduino_libraries/#serial", 
+            "text": "There are two implementations of Serial: UART and USB.  TODO: IMPLEMENT You can set what is Serial aliased to from the boards menu. By default, it is aligned with the upload method to help debugging.   If the board is Nucleo, automatic Serial is aliased to  SerialUART2  (ST-Link Virtual COM port).  If the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to  SerialUART1 .  If the upload method is based on USB (DFU), automatic Serial aliased to  SerialUSB .", 
+            "title": "Serial"
+        }, 
+        {
+            "location": "/arduino_libraries/#serial-uart", 
+            "text": "SerialUART1 is bound to UART1,  SerialUART2  to UART2 etc...  Please refer to the  official documentation  for\nthe description of Serial functions.", 
+            "title": "Serial UART"
+        }, 
+        {
+            "location": "/arduino_libraries/#serialuartxstm32setrxuint8_t-pin", 
+            "text": "Set the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!", 
+            "title": "SerialUARTx.stm32SetRX(uint8_t pin)"
+        }, 
+        {
+            "location": "/arduino_libraries/#serialuartxstm32settxuint8_t-pin", 
+            "text": "Set the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!   Example: The following code will echo the received bytes on UART2   void setup() {\n    SerialUART2.set_rx(Pcd);\n    SerialUART2.set_tx(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}", 
+            "title": "SerialUARTx.stm32SetTx(uint8_t pin)"
+        }, 
+        {
+            "location": "/arduino_libraries/#serial-usb", 
+            "text": "If the  USB menu  is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.  TODO explain windows 7 driver  Please refer to the  official documentation  for\nthe description of Serial functions.", 
+            "title": "Serial USB"
+        }, 
+        {
+            "location": "/arduino_libraries/#spi", 
+            "text": "The first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.", 
+            "title": "SPI"
+        }, 
+        {
+            "location": "/arduino_libraries/#spiclassspi_typedef-instance", 
+            "text": "Create a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.", 
+            "title": "SPIClass(SPI_TypeDef *instance)"
+        }, 
+        {
+            "location": "/arduino_libraries/#spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck", 
+            "text": "Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.   Example: set up SPI2   SPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}", 
+            "title": "SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)"
+        }, 
+        {
+            "location": "/arduino_libraries/#spibegin", 
+            "text": "Enables SPI on the pins", 
+            "title": "SPI.begin()"
+        }, 
+        {
+            "location": "/arduino_libraries/#spiend", 
+            "text": "Disables the SPI pin", 
+            "title": "SPI.end()"
+        }, 
+        {
+            "location": "/arduino_libraries/#spibegintransactionspisettings-settings", 
+            "text": "Start SPI with the provided  SPISettings mySetting(speedMaximum, dataOrder, dataMode)  parameters.     Parameter  Description      speedMaximum  The maximum speed requested    dataOrder  MSBFIRST ,  LSBFIRST    dataMode  SPI_MODE0 ,  SPI_MODE1 ,  SPI_MODE2 , or  SPI_MODE3     Example:  SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));  TODO disable interrupt in pin if  usingInterrupt  was used", 
+            "title": "SPI.beginTransaction(SPISettings settings);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spiendtransaction", 
+            "text": "TODO enable interrupt in pin if  usingInterrupt  was used", 
+            "title": "SPI.endTransaction();"
+        }, 
+        {
+            "location": "/arduino_libraries/#spitransfer", 
+            "text": "TODO write doc", 
+            "title": "SPI.transfer(...);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spitransfer16", 
+            "text": "TODO write doc", 
+            "title": "SPI.transfer16(...);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spitransfer_1", 
+            "text": "TODO write doc", 
+            "title": "SPI.transfer(...);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spiusinginterrupt", 
+            "text": "TODO not yet implemented", 
+            "title": "SPI.usingInterrupt();"
+        }, 
+        {
+            "location": "/arduino_libraries/#spitransfer_2", 
+            "text": "TODO write doc", 
+            "title": "SPI.transfer(...);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spistm32setmosiuint8_t-pin", 
+            "text": "TODO write doc\nThis method must be called before begin()!", 
+            "title": "SPI.stm32SetMOSI(uint8_t pin);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spistm32setmisouint8_t-pin", 
+            "text": "TODO write doc\nThis method must be called before begin()!", 
+            "title": "SPI.stm32SetMISO(uint8_t pin);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spistm32setsckuint8_t-pin", 
+            "text": "TODO write doc\nThis method must be called before begin()!", 
+            "title": "SPI.stm32SetSCK(uint8_t pin);"
+        }, 
+        {
+            "location": "/arduino_libraries/#spistm32setinstance", 
+            "text": "TODO implement\nThis method must be called before begin()!   Example: TODO example for using libraries on multiple instances with the same SPI", 
+            "title": "SPI.stm32SetInstance(...);"
+        }, 
+        {
+            "location": "/arduino_libraries/#wire-i2c", 
+            "text": "TODO write doc", 
+            "title": "Wire - I2C"
+        }, 
+        {
+            "location": "/arduino_libraries/#usb", 
+            "text": "TODO set USB in menu (show used pins, + mini PB9)", 
+            "title": "USB"
+        }, 
+        {
+            "location": "/stm32_hal/", 
+            "text": "", 
+            "title": "STM32 HAL"
+        }, 
+        {
+            "location": "/libraries/", 
+            "text": "TODO automatically compile all libraries, and show results here", 
+            "title": "Libraries"
+        }, 
+        {
+            "location": "/boards/", 
+            "text": "Boards:\n\n\nTODO generate this page from boards.txt, cube db files, and variant.h for default pins.", 
+            "title": "Boards list"
+        }, 
+        {
+            "location": "/boards/#boards", 
+            "text": "TODO generate this page from boards.txt, cube db files, and variant.h for default pins.", 
+            "title": "Boards:"
+        }, 
+        {
+            "location": "/add_board/", 
+            "text": "Add your board:\n\n\nTODO explain all steps\n\n\n1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice.\n\n\nTODO make TEMPLATE folder\n\n\n2. Edit the ldscript.ld file\n\n\n3. Edit the variant.h file\n\n\n4. Edit the variant.cpp file\n\n\n5. Edit the systemclock_config.c file\n\n\n6. Edit the boards.txt file\n\n\n7. Restart\n\n\n8. Run the blink example on your new board\n\n\n9. Run the \ntests\n on the board to check if it is working", 
+            "title": "Adding a board"
+        }, 
+        {
+            "location": "/add_board/#add-your-board", 
+            "text": "TODO explain all steps", 
+            "title": "Add your board:"
+        }, 
+        {
+            "location": "/add_board/#1-create-a-copy-of-the-stm32variantstemplate-folder-with-a-name-of-your-choice", 
+            "text": "TODO make TEMPLATE folder", 
+            "title": "1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice."
+        }, 
+        {
+            "location": "/add_board/#2-edit-the-ldscriptld-file", 
+            "text": "", 
+            "title": "2. Edit the ldscript.ld file"
+        }, 
+        {
+            "location": "/add_board/#3-edit-the-varianth-file", 
+            "text": "", 
+            "title": "3. Edit the variant.h file"
+        }, 
+        {
+            "location": "/add_board/#4-edit-the-variantcpp-file", 
+            "text": "", 
+            "title": "4. Edit the variant.cpp file"
+        }, 
+        {
+            "location": "/add_board/#5-edit-the-systemclock_configc-file", 
+            "text": "", 
+            "title": "5. Edit the systemclock_config.c file"
+        }, 
+        {
+            "location": "/add_board/#6-edit-the-boardstxt-file", 
+            "text": "", 
+            "title": "6. Edit the boards.txt file"
+        }, 
+        {
+            "location": "/add_board/#7-restart", 
+            "text": "", 
+            "title": "7. Restart"
+        }, 
+        {
+            "location": "/add_board/#8-run-the-blink-example-on-your-new-board", 
+            "text": "", 
+            "title": "8. Run the blink example on your new board"
+        }, 
+        {
+            "location": "/add_board/#9-run-the-tests-on-the-board-to-check-if-it-is-working", 
+            "text": "", 
+            "title": "9. Run the tests on the board to check if it is working"
+        }, 
+        {
+            "location": "/test/", 
+            "text": "Self tesing boards\n\n\nTo automatically check if the board works, there are tests in the library.\nThese work by connecting pins to \n\n\nGeneric STM32 Arduino API test\n\n\nThis test should work on almost all STM32 boards. \n\n\n\n\nFrom the arduino menu, select File/Examples/Examples for XXX/SelfTest\n\n\nConnect PA0 to PA1 to test digital/analog/read/write/interrupt\n\n\nConnect SPI MOSI to SPI MISO to test SPI\n\n\nSelect a free UART (not used for Serial) on the board, connect the RX to TX, set the SerialUartToTest macro in the sketch\n\n\nRun the sketch\n\n\n\n\nThe result should be short blink on the board LED.\nIf there was a failure, it is shown as a long LED \n\n\nThe results are also", 
+            "title": "Testnga board"
+        }, 
+        {
+            "location": "/test/#self-tesing-boards", 
+            "text": "To automatically check if the board works, there are tests in the library.\nThese work by connecting pins to", 
+            "title": "Self tesing boards"
+        }, 
+        {
+            "location": "/test/#generic-stm32-arduino-api-test", 
+            "text": "This test should work on almost all STM32 boards.    From the arduino menu, select File/Examples/Examples for XXX/SelfTest  Connect PA0 to PA1 to test digital/analog/read/write/interrupt  Connect SPI MOSI to SPI MISO to test SPI  Select a free UART (not used for Serial) on the board, connect the RX to TX, set the SerialUartToTest macro in the sketch  Run the sketch   The result should be short blink on the board LED.\nIf there was a failure, it is shown as a long LED   The results are also", 
+            "title": "Generic STM32 Arduino API test"
+        }
+    ]
+}

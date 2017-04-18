@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Arduino API - STM32GENERIC</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+         
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">STM32GENERIC</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Installation</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../upload/">Uploading</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../menu_options/">Menu options</a>
+</li>
+
+                    
+                        
+<li class="active">
+    <a href="./">Arduino API</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../arduino_libraries/">Arduino Standard Libraries</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../stm32_hal/">STM32 HAL</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../libraries/">Libraries</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../boards/">Boards list</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../add_board/">Adding a board</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../test/">Testnga board</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../menu_options/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../arduino_libraries/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+    
+        <li class="main active"><a href="#overview">Overview</a></li>
+        
+            <li><a href="#uint32_t-millis">uint32_t millis();</a></li>
+        
+            <li><a href="#uint32_t-micros">uint32_t micros();</a></li>
+        
+            <li><a href="#delayuint32_t-millis">delay(uint32_t millis);</a></li>
+        
+            <li><a href="#delaymicrosecondsuint32_t-micros">delayMicroseconds(uint32_t micros);</a></li>
+        
+            <li><a href="#pinmodeuint8_t-pin-uint8_t-mode">pinMode(uint8_t pin, uint8_t mode);</a></li>
+        
+            <li><a href="#digitalreaduint8_t-pin">digitalRead(uint8_t pin);</a></li>
+        
+            <li><a href="#digitalwriteuint8_t-pin-uint8_t-value">digitalWrite(uint8_t pin, uint8_t value);</a></li>
+        
+            <li><a href="#int-analogreaduint8_t-pin">int analogRead(uint8_t pin);</a></li>
+        
+            <li><a href="#analogreadresolution">analogReadResolution()</a></li>
+        
+            <li><a href="#analogwriteuint8_t-pin-int-value">analogWrite(uint8_t pin, int value)</a></li>
+        
+            <li><a href="#analogwriteresolution">analogWriteResolution()</a></li>
+        
+            <li><a href="#attachinterrupt">attachInterrupt(...);</a></li>
+        
+            <li><a href="#predefined-pin-constants">Predefined pin constants</a></li>
+        
+    
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h2 id="overview">Overview</h2>
+<ul>
+<li>STM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.</li>
+<li>Non microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.</li>
+<li>All non-standard functions are prefixed with <code>stm32XXXX()</code></li>
+</ul>
+<h4 id="uint32_t-millis"><strong><code>uint32_t millis();</code></strong></h4>
+<p>Returns the milliseconds since the microcontroller started. Overflows in 50 days.</p>
+<h4 id="uint32_t-micros"><strong><code>uint32_t micros();</code></strong></h4>
+<p>Returns the microseconds since the microcontroller started. Overflows in 70 minutes.</p>
+<h4 id="delayuint32_t-millis"><strong><code>delay(uint32_t millis);</code></strong></h4>
+<p>Delays the execution by the given milliseconds.</p>
+<h4 id="delaymicrosecondsuint32_t-micros"><strong><code>delayMicroseconds(uint32_t micros);</code></strong></h4>
+<p>Delays the execution by the given microseconds.</p>
+<blockquote>
+<p>Example: Print the milliseconds on <a href="../arduino_api#serial">Serial</a>, every second:</p>
+</blockquote>
+<pre><code class="c++">void setup() {
+  Serial.begin(9600);
+}
+void loop() {
+  Serial.println(millis());
+  delay(1000);
+}
+</code></pre>
+
+<blockquote>
+<p>Uses STM32 SysTick, set to interrupt 1ms intervals.</p>
+</blockquote>
+<p>Naming the pins in code:</p>
+<ul>
+<li>STM32 chip pins have names: <code>PA0</code>, <code>PA1</code>...</li>
+<li>On some boards (Nucleo, Maple), there are numbers / alternative names next to the pin: <code>1</code>, <code>RX</code>, <code>A0</code>.</li>
+<li><a href="../predefined_pin_constants">Predefined constants</a> for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.</li>
+</ul>
+<p>Generally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);</p>
+<h4 id="pinmodeuint8_t-pin-uint8_t-mode"><strong><code>pinMode(uint8_t pin, uint8_t mode);</code></strong></h4>
+<p>Sets the pin for digital reading / writing</p>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OUTPUT</td>
+<td>0V - 3.3V</td>
+</tr>
+<tr>
+<td>INPUT</td>
+<td>The pin does not have a pull down or pull up resistor</td>
+</tr>
+<tr>
+<td>INPUT_PULLUP</td>
+<td>Weak pull up resistor to default to HIGH if the pin is not connected to anything</td>
+</tr>
+<tr>
+<td>INPUT_PULLDOWN</td>
+<td>Weak pull down resistor to default to LOW if the pin is not connected to anything</td>
+</tr>
+</tbody>
+</table>
+<p>pinMode() is needed for digitalRead() and digitalWrite() functions.</p>
+<p>The system automatically sets the pinMode when using a peripheral library like analogRead(), analogWrite(), <a href="#spi">SPI</a> or <a href="#wire-i2c">I2C</a>, so you don't have to.</p>
+<h4 id="digitalreaduint8_t-pin"><strong><code>digitalRead(uint8_t pin);</code></strong></h4>
+<p>Read the voltage level on the specified pin. Returns LOW(0) if it is 0V, HIGH(1) if it is 3.3V</p>
+<p><strong>All pins can be used as digital input.</strong></p>
+<p>Not all pins are 5V tolerant. Please check the chip reference manual <code>Pinouts and pin description</code> section.</p>
+<h4 id="digitalwriteuint8_t-pin-uint8_t-value"><strong><code>digitalWrite(uint8_t pin, uint8_t value);</code></strong></h4>
+<p>If value if LOW(0), sets the pin to 0V. If value is HIGH(1), 3.3V.
+<strong>All pins can be used as digital output.</strong></p>
+<blockquote>
+<p>Example: Blink the <a href="#predefined_pin_constants">LED</a> on the board:</p>
+</blockquote>
+<pre><code class="c++">void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+  delay(1000);
+}
+</code></pre>
+
+<h4 id="int-analogreaduint8_t-pin"><strong><code>int analogRead(uint8_t pin);</code></strong></h4>
+<p>Read the voltage level on the pin, and map the 0..3.3V range to 0..1023 range by default.</p>
+<p><strong>Not all pins can be used as analog input!</strong> Please check the <a href="../boards/">Boards page</a>.</p>
+<h4 id="analogreadresolution"><strong><code>analogReadResolution()</code></strong></h4>
+<p>TODO not yet implemented</p>
+<h4 id="analogwriteuint8_t-pin-int-value"><strong><code>analogWrite(uint8_t pin, int value)</code></strong></h4>
+<p>Set PWM to the specified pin.</p>
+<p><strong>All pins can be used as analog/PWM output.</strong></p>
+<blockquote>
+<p>Uses the TIM2 clock interrupt with software PWM implementation to allow PWM on all pins.</p>
+</blockquote>
+<h4 id="analogwriteresolution"><strong><code>analogWriteResolution()</code></strong></h4>
+<p>TODO not yet implemented</p>
+<blockquote>
+<p>Example: Dim the LED based on the voltage value on PA0</p>
+</blockquote>
+<pre><code class="c++">void loop() {
+    analogWrite(LED_BUILTIN, analogRead(PA0));
+    delay(10);
+}
+</code></pre>
+
+<h4 id="attachinterrupt"><strong><code>attachInterrupt(...);</code></strong></h4>
+<p>TODO not yet implemented</p>
+<h3 id="predefined-pin-constants">Predefined pin constants</h3>
+<p>The following constants are defined in the variant.h file for each variant:
+TODO not all implemented</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LED_BUILTIN</td>
+<td>The primary LED on board, if there is any</td>
+</tr>
+<tr>
+<td>STM32_LED_BUILTIN_ACTIVE_LOW</td>
+<td>If set, the onboard LED lights up when output is set to LOW</td>
+</tr>
+<tr>
+<td>MOSI</td>
+<td>MOSI pin of the first <a href="../arduino_libraries/#spi">SPI</a></td>
+</tr>
+<tr>
+<td>MISO</td>
+<td>MISO pin of the first SPI</td>
+</tr>
+<tr>
+<td>SCK</td>
+<td>SCK  pin of the first SPI</td>
+</tr>
+<tr>
+<td>RX</td>
+<td>RX of UART if it is used for <a href="../arduino_libraries/#serial-uart">Serial</a>, else UART1</td>
+</tr>
+<tr>
+<td>TX</td>
+<td>TX of UART if it is used for <a href="../arduino_libraries/#serial-uart">Serial</a>, else UART1</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>SDA pin of the first I2C</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>SCL pin of the first I2C</td>
+</tr>
+</tbody>
+</table></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
