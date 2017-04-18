@@ -127,9 +127,7 @@ Constant          | Meaning
 LED_BUILTIN       | The primary LED on board, if there is any
 STM32_LED_BUILTIN_ACTIVE_LOW | If set, the onboard LED lights up when output is set to LOW
 MOSI              | MOSI pin of the first [SPI](arduino_libraries.md#spi)
-MISO              | MISO pin of the first SPI
-SCK               | SCK  pin of the first SPI
-RX                | RX of UART if it is used for [Serial](arduino_libraries.md#serial-uart), else UART1
-TX                | TX of UART if it is used for [Serial](arduino_libraries.md#serial-uart), else UART1
-SDA               | SDA pin of the first I2C
-SCL               | SCL pin of the first I2C
+MISO              | MISO pin of the first [SPI](arduino_libraries.md#spi)
+SCK               | SCK  pin of the first [SPI](arduino_libraries.md#spi)
+SDA               | SDA pin of the first [I2C](arduino_libraries.md#wire-i2c)
+SCL               | SCL pin of the first [I2C](arduino_libraries.md#wire-i2c)

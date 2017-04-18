@@ -27,8 +27,8 @@ This must be called before begin()!
 > Example: The following code will echo the received bytes on UART2
 ```c++
 void setup() {
-    SerialUART2.set_rx(Pcd);
-    SerialUART2.set_tx(Pab);
+    SerialUART2.stm32SetRX(Pcd);
+    SerialUART2.stm32SetTx(Pab);
     SerualUART2.begin(115200);
 }
 void loop() {
