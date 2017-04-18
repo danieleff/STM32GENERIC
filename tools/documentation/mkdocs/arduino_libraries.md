@@ -4,7 +4,7 @@
 
 There are two implementations of Serial: UART and USB.
 
-TODO: IMPLEMENT You can set what is Serial from the boards menu. By default, it is aligned with the upload method to help debugging.
+TODO: IMPLEMENT You can set what is Serial aliased to from the boards menu. By default, it is aligned with the upload method to help debugging.
 
 * If the board is Nucleo, automatic Serial is aliased to [SerialUART2](Serial UART) (ST-Link Virtual COM port).
 * If the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to [SerialUART1](Serial UART).
@@ -45,7 +45,7 @@ void loop() {
 
 ## Serial USB
 
-If the [USB menu](#USB) is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.
+If the [USB menu](menu_options) is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.
 
 TODO explain windows 7 driver
 
@@ -54,7 +54,7 @@ the description of Serial functions.
 
 ## SPI
 
-The first SPI, connected to SPI1 instance.
+The first SPI is connected to SPI1 instance.
 To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.
 
 #### **`SPIClass(SPI_TypeDef *instance)`**
@@ -67,23 +67,44 @@ To avoid confusion, it is better to use the constructor below with implicit pins
 Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.
 
 > Example: set up SPI2
-`SPIClass SPI_2(SPI2, mosi, iso, sck);`
+
+```c++
+SPIClass SPI_2(SPI2, mosi, iso, sck);
+void setup() {
+    SPI_2.begin();
+}
+
+```
 
 #### **`SPI.begin()`**
 
-Configures the SPI pins to the 
+Enables SPI on the pins
 
 #### **`SPI.end()`**
 
-Disables the SPI
+Disables the SPI pin
 
-#### **`SPI.beginTransaction(...);`**
+#### **`SPI.beginTransaction(SPISettings settings);`**
 
-TODO write doc
+Start SPI with the provided `SPISettings mySetting(speedMaximum, dataOrder, dataMode)` parameters.
 
-#### **`SPI.endTransaction(...);`**
+Parameter|Description
+---         |---
+speedMaximum| The maximum speed requested
+dataOrder   | `MSBFIRST`, `LSBFIRST` 
+dataMode    | `SPI_MODE0`, `SPI_MODE1`, `SPI_MODE2`, or `SPI_MODE3` 
 
-TODO write doc
+Example:
+
+```c++
+SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
+```
+
+TODO disable interrupt in pin if `usingInterrupt` was used
+
+#### **`SPI.endTransaction();`**
+
+TODO enable interrupt in pin if `usingInterrupt` was used
 
 #### **`SPI.transfer(...);`**
 

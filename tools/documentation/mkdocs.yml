@@ -8,6 +8,7 @@ pages:
     - Arduino API: arduino_api.md
     - Arduino Standard Libraries: arduino_libraries.md
     - STM32 HAL: stm32_hal.md
+- Libraries: libraries.md
 - STM32 Boards:
     - Boards list: boards.md
     - Adding a board: add_board.md

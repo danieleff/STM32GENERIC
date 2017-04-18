@@ -2,6 +2,7 @@
 
 * STM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.
 * Non microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.
+* All non-standard functions are prefixed with `stm32XXXX()`
 
 #### **`uint32_t millis();`**
 
@@ -31,7 +32,7 @@ void loop() {
 }
 ```
 
-> The implementation is in the stm32_clock.* files. Uses STM32 SysTick, set to interrupt 1ms intervals.
+> Uses STM32 SysTick, set to interrupt 1ms intervals.
 
 Naming the pins in code:
 
@@ -39,7 +40,7 @@ Naming the pins in code:
 * On some boards (Nucleo, Maple), there are numbers / alternative names next to the pin: `1`, `RX`, `A0`.
 * [Predefined constants](predefined_pin_constants) for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.
 
-Generally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see AAA, use digitalWrite(AAA, HIGH);
+Generally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);
 
 #### **`pinMode(uint8_t pin, uint8_t mode);`**
 
@@ -125,10 +126,10 @@ Constant          | Meaning
 ------------------|-----------
 LED_BUILTIN       | The primary LED on board, if there is any
 STM32_LED_BUILTIN_ACTIVE_LOW | If set, the onboard LED lights up when output is set to LOW
-MOSI              | MOSI pin of the first [SPI](#spi)
+MOSI              | MOSI pin of the first [SPI](arduino_libraries.md#spi)
 MISO              | MISO pin of the first SPI
 SCK               | SCK  pin of the first SPI
-RX                | RX of UART if it is used for [Serial](serial_uart), else UART1
-TX                | TX of UART if it is used for [Serial](serial_uart), else UART1
+RX                | RX of UART if it is used for [Serial](arduino_libraries.md#serial-uart), else UART1
+TX                | TX of UART if it is used for [Serial](arduino_libraries.md#serial-uart), else UART1
 SDA               | SDA pin of the first I2C
 SCL               | SCL pin of the first I2C
