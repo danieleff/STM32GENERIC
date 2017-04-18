@@ -1,6 +1,6 @@
 # See: http://code.google.com/p/arduino/wiki/Platforms
 
-menu.serial=Serial alias
+menu.serial=Serial communication
 menu.nucleo_board=Nucleo board
 menu.upload_method=Upload method
 menu.usb=USB

@@ -1,15 +1,19 @@
-# Upload method
+# Arduino tools menu
+
+The following options can be selected in the Arduino tools menu, below the selected board:
+
+### Upload method
 
 See the [uploading](upload) page.
 
-# USB
+### USB
 
 The following options are available for USB
 
 * Serial. A Virtual COM port will be available when connected. Note: On Windows 7, you will need to install drivers located in tool/win/drivers folder.
 * Disabled, no USB. Note: If you use USB based uploading method, the board will not reset automatically.
 
-# Automatic Serial
+### Default serial communication selection
 
 Select the default for `Serial`:
 

@@ -2,13 +2,9 @@
 
 ## Serial
 
-There are two implementations of Serial: UART and USB.
+There are two implementations of Serial: UART and USB. 
 
-TODO: IMPLEMENT You can set what is Serial aliased to from the boards menu. By default, it is aligned with the upload method to help debugging.
-
-* If the board is Nucleo, automatic Serial is aliased to [SerialUART2](Serial UART) (ST-Link Virtual COM port).
-* If the upload method is based on UART (Serial upload, ST-Link), automatic Serial is aliased to [SerialUART1](Serial UART).
-* If the upload method is based on USB (DFU), automatic Serial aliased to [SerialUSB](Serial USB).
+Please check the [Menu option](menu_options#automatic-serial) to see which one is selected.
 
 ## Serial UART
 
