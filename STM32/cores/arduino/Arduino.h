@@ -128,8 +128,8 @@ void loop(void);
 
 #define analogInPinToBit(P) (P)
 
-#define digitalPinToPort(P) ( port_pin_list[P].port )
-#define digitalPinToBitMask(P) ( port_pin_list[P].pin_mask )
+#define digitalPinToPort(P) ( variant_pin_list[P].port )
+#define digitalPinToBitMask(P) ( variant_pin_list[P].pin_mask )
 #define portOutputRegister(P) ( &(P->ODR) )
 #define portInputRegister(P) ( &(P->IDR) )
 
