@@ -19,7 +19,24 @@ void stm32_gpio_clock(GPIO_TypeDef *port) {
     #ifdef GPIOE
     if (port == GPIOE) __HAL_RCC_GPIOE_CLK_ENABLE();
     #endif
-    
+    #ifdef GPIOF
+    if (port == GPIOF) __HAL_RCC_GPIOF_CLK_ENABLE();
+    #endif
+    #ifdef GPIOG
+    if (port == GPIOG) __HAL_RCC_GPIOG_CLK_ENABLE();
+    #endif
+    #ifdef GPIOH
+    if (port == GPIOH) __HAL_RCC_GPIOH_CLK_ENABLE();
+    #endif
+    #ifdef GPIOI
+    if (port == GPIOI) __HAL_RCC_GPIOI_CLK_ENABLE();
+    #endif
+    #ifdef GPIOJ
+    if (port == GPIOJ) __HAL_RCC_GPIOJ_CLK_ENABLE();
+    #endif
+    #ifdef GPIOK
+    if (port == GPIOK) __HAL_RCC_GPIOK_CLK_ENABLE();
+    #endif
 }
 
 void pinMode(uint8_t pin, uint8_t mode) {
