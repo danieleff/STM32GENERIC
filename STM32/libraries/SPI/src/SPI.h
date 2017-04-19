@@ -100,11 +100,12 @@ class SPIClass {
 
 inline uint8_t SPIClass::transfer(uint8_t data) {
 
-	spiHandle.Instance->DR = data;
+	*(volatile uint8_t*)&spiHandle.Instance->DR = data;
+
 	while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_RXNE) == RESET);
 	while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_BSY) == SET);
 
-	return spiHandle.Instance->DR;
+	return *(volatile uint8_t*)&spiHandle.Instance->DR;
 
 	/*
 	if (HAL_SPI_TransmitReceive(&spiHandle, &data, &data, 1, 1000) != HAL_OK) {
