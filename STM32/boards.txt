@@ -264,7 +264,7 @@ NUCLEO_64.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 ################################################################################
 # Discovery L053C8 board
 
-DISCOVERY_L053C8.name=Discovery L053C8 (upload: STLink)
+DISCOVERY_L053C8.name=Discovery L053C8
 
 DISCOVERY_L053C8.vid.0=0x0483
 DISCOVERY_L053C8.pid.0=0x5711
@@ -283,11 +283,20 @@ DISCOVERY_L053C8.build.extra_flags=-DSTM32L053C8
 DISCOVERY_L053C8.upload.protocol=STLink
 DISCOVERY_L053C8.upload.tool=stlink_upload
 
+DISCOVERY_L053C8.menu.upload_method.MassStorageMethod=Mass Storage
+DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.upload.protocol=
+DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.massstorage_drive=DISCOVERY
+
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod=STLink
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.protocol=STLink
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
 DISCOVERY_L053C8.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 DISCOVERY_L053C8.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
 DISCOVERY_L053C8.menu.usb.Disabled=Disabled, no USB
 
-DISCOVERY_L053C8.menu.serial.SerialUSB=SerialUSB
-DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-DISCOVERY_L053C8.menu.serial.SerialUART1=SerialUART1
+DISCOVERY_L053C8.menu.serial.SerialUART1=SerialUART1 [Through ST-Link Virtual COM port] [PA9/PA10]
 DISCOVERY_L053C8.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+DISCOVERY_L053C8.menu.serial.SerialUSB=SerialUSB (USB connector)
+DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
