@@ -118,3 +118,7 @@ void SPIClass::stm32SetSCK(uint8_t sck) {
 	sckPort = variant_pin_list[sck].port;
 	sckPin = variant_pin_list[sck].pin_mask;
 }
+
+void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
+	spiHandle.Instance = instance;
+}

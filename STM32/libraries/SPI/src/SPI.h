@@ -67,6 +67,7 @@ class SPIClass {
     void stm32SetMOSI(uint8_t mosi);
     void stm32SetMISO(uint8_t miso);
     void stm32SetSCK(uint8_t sck);
+    void stm32SetInstance(SPI_TypeDef *instance);
 
     void begin();
     void end();
