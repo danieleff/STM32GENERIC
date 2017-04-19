@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/upload/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,25 +21,25 @@
         
     <url>
      <loc>/menu_options/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/arduino_api/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/arduino_libraries/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/stm32_hal/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -48,7 +48,7 @@
     
     <url>
      <loc>/libraries/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -57,22 +57,30 @@
         
     <url>
      <loc>/boards/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/add_board/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/test/</loc>
-     <lastmod>2017-04-18</lastmod>
+     <lastmod>2017-04-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
+    
+
+    
+    <url>
+     <loc>/about/</loc>
+     <lastmod>2017-04-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
     
 
 </urlset>

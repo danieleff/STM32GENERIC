@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Arduino Standard Libraries - STM32GENERIC</title>
+        <title>About - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -77,8 +77,8 @@
 
                     
                         
-<li class="active">
-    <a href="./">Arduino Standard Libraries</a>
+<li >
+    <a href="../arduino_libraries/">Arduino Standard Libraries</a>
 </li>
 
                     
@@ -126,8 +126,8 @@
             
             
             
-                <li >
-                    <a href="../about/">About</a>
+                <li class="active">
+                    <a href="./">About</a>
                 </li>
             
             
@@ -141,12 +141,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../arduino_api/">
+                        <a rel="next" href="../test/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../stm32_hal/">
+                    <li class="disabled">
+                        <a rel="prev" >
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -161,20 +161,13 @@
     <ul class="nav bs-sidenav">
     
     
-        <li class="main active"><a href="#standard-libraries">Standard libraries:</a></li>
-        
-            <li><a href="#serial">Serial</a></li>
-        
-            <li><a href="#serial-uart">Serial UART</a></li>
-        
-            <li><a href="#serial-usb">Serial USB</a></li>
-        
-            <li><a href="#spi">SPI</a></li>
-        
-            <li><a href="#wire-i2c">Wire - I2C</a></li>
+        <li class="main active"><a href="#goals">Goals</a></li>
         
     
-        <li class="main "><a href="#usb">USB</a></li>
+        <li class="main "><a href="#project-structure">Project structure</a></li>
+        
+    
+        <li class="main "><a href="#general-development-direction">General development direction</a></li>
         
     
     
@@ -182,123 +175,80 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="standard-libraries">Standard libraries:</h1>
-<h2 id="serial">Serial</h2>
-<p>There are two implementations of Serial: UART and USB. </p>
-<p>Please check the <a href="../menu_options#automatic-serial">Menu option</a> to see which one is selected.</p>
-<h2 id="serial-uart">Serial UART</h2>
-<p><strong><code>SerialUART1</code></strong>is bound to UART1, <strong><code>SerialUART2</code></strong> to UART2 etc...</p>
-<p>Please refer to the <a href="https://www.arduino.cc/en/reference/serial">official documentation</a> for
-the description of Serial functions.</p>
-<h4 id="serialuartxstm32setrxuint8_t-pin"><strong><code>SerialUARTx.stm32SetRX(uint8_t pin)</code></strong></h4>
-<p>Set the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.
-This must be called before begin()!</p>
-<h4 id="serialuartxstm32settxuint8_t-pin"><strong><code>SerialUARTx.stm32SetTx(uint8_t pin)</code></strong></h4>
-<p>Set the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.
-This must be called before begin()!</p>
-<blockquote>
-<p>Example: The following code will echo the received bytes on UART2</p>
-</blockquote>
-<pre><code class="c++">void setup() {
-    SerialUART2.stm32SetRX(Pcd);
-    SerialUART2.stm32SetTx(Pab);
-    SerualUART2.begin(115200);
-}
-void loop() {
-    int data = SerialUART2.read();
-    if (data != -1) {
-        SerialUART2.write(data);
-    }
-}
-</code></pre>
-
-<h2 id="serial-usb">Serial USB</h2>
-<p>If the <a href="../menu_options">USB menu</a> is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.</p>
-<p>TODO explain windows 7 driver</p>
-<p>Please refer to the <a href="https://www.arduino.cc/en/reference/serial">official documentation</a> for
-the description of Serial functions.</p>
-<h2 id="spi">SPI</h2>
-<p>The first SPI is connected to SPI1 instance.
-To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.</p>
-<h4 id="spiclassspi_typedef-instance"><strong><code>SPIClass(SPI_TypeDef *instance)</code></strong></h4>
-<p>Create a SPI object that is connected to the instance, on the default mosi/miso/sck. 
-To avoid confusion, it is better to use the constructor below with implicit pins.</p>
-<h4 id="spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck"><strong><code>SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)</code></strong></h4>
-<p>Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.</p>
-<blockquote>
-<p>Example: set up SPI2</p>
-</blockquote>
-<pre><code class="c++">SPIClass SPI_2(SPI2, mosi, iso, sck);
-void setup() {
-    SPI_2.begin();
-}
-
-</code></pre>
-
-<h4 id="spibegin"><strong><code>SPI.begin()</code></strong></h4>
-<p>Enables SPI on the pins</p>
-<h4 id="spiend"><strong><code>SPI.end()</code></strong></h4>
-<p>Disables the SPI pin</p>
-<h4 id="spibegintransactionspisettings-settings"><strong><code>SPI.beginTransaction(SPISettings settings);</code></strong></h4>
-<p>Start SPI with the provided <code>SPISettings mySetting(speedMaximum, dataOrder, dataMode)</code> parameters.</p>
+<h2 id="goals">Goals</h2>
+<ul>
+<li>Generic implementation using <code>STM32 HAL API</code> to compile onto every STM32 board.</li>
+<li>For the most used boards, optimize code paths using direct register access.</li>
+<li>Make adding boards easy</li>
+<li>Make as compatible with default libraries as  possible</li>
+</ul>
+<h2 id="project-structure">Project structure</h2>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
+<th>Director</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>speedMaximum</td>
-<td>The maximum speed requested</td>
+<td><code>system/CMSIS</code></td>
+<td>CMSIS header files from ARM for cortex-M0/M3/M4/M7 microcontrollers</td>
 </tr>
 <tr>
-<td>dataOrder</td>
-<td><code>MSBFIRST</code>, <code>LSBFIRST</code></td>
+<td><code>system/STM32XX/CMSIS_Inc</code></td>
+<td>CMSIS header files specific STM32 chips, contains memory layout and register access for every chip</td>
 </tr>
 <tr>
-<td>dataMode</td>
-<td><code>SPI_MODE0</code>, <code>SPI_MODE1</code>, <code>SPI_MODE2</code>, or <code>SPI_MODE3</code></td>
+<td><code>system/STM32XX/CMSIS_Src</code></td>
+<td>CMSIS startup assembly files specific STM32 chips, contains ISR vector for interrupt handlers and reset handler default implementation</td>
+</tr>
+<tr>
+<td><code>system/STM32XX/HAL_Inc</code></td>
+<td>STM32 Hardware Abstraction Layer headers for every chip series</td>
+</tr>
+<tr>
+<td><code>system/STM32XX/HAL_Src</code></td>
+<td>STM32 Hardware Abstraction Layer implementation for every chip series</td>
+</tr>
+<tr>
+<td><code>system/STM32XX/stm32_chip</code></td>
+<td>For every chip, default and alternate pins, clock frequencies, cannels for peripherals: SPI, I2C, ADC... autogenerated from CubeMX db/*.xml files with tools/script/generate_build_define.py.</td>
+</tr>
+<tr>
+<td><code>cores/arduino/</code></td>
+<td>Arduino API definitions and Arduino-utility functions.</td>
+</tr>
+<tr>
+<td><code>cores/arduino/stm32_HAL</code></td>
+<td>Select (compile) the specific files from <code>system/STM32XX/HAL_Src</code>, based on boards.txt <code>*.build.series</code> value</td>
+</tr>
+<tr>
+<td><code>cores/arduino/usb</code></td>
+<td>STM32 USB Middleware</td>
+</tr>
+<tr>
+<td><code>cores/arduino/stm32</code></td>
+<td>STM32 implementation of the Arduino API. First implementation is a light wrapper around HAL</td>
+</tr>
+<tr>
+<td><code>variants/.../*</code></td>
+<td>Variant specific files: <code>ldscript.ld</code> for memory layout, <code>systemclock_config.c</code> for clock setup, generated by STM32CubeMX, <code>variant.*</code> for variant pin layout and pin definitions (pin layout can be copy/pasted from <code>system/STM32XX/stm32_chip/*</code>).</td>
 </tr>
 </tbody>
 </table>
-<p>Example:</p>
-<pre><code class="c++">SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
-</code></pre>
-
-<p>TODO disable interrupt in pin if <code>usingInterrupt</code> was used</p>
-<h4 id="spiendtransaction"><strong><code>SPI.endTransaction();</code></strong></h4>
-<p>TODO enable interrupt in pin if <code>usingInterrupt</code> was used</p>
-<h4 id="spitransfer"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spitransfer16"><strong><code>SPI.transfer16(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spitransfer_1"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spiusinginterrupt"><strong><code>SPI.usingInterrupt();</code></strong></h4>
-<p>TODO not yet implemented</p>
-<h4 id="spitransfer_2"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spistm32setmosiuint8_t-pin"><strong><code>SPI.stm32SetMOSI(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setmisouint8_t-pin"><strong><code>SPI.stm32SetMISO(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setsckuint8_t-pin"><strong><code>SPI.stm32SetSCK(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setinstance"><strong><code>SPI.stm32SetInstance(...);</code></strong></h4>
-<p>TODO implement
-This method must be called before begin()!</p>
-<blockquote>
-<p>Example: TODO example for using libraries on multiple instances with the same SPI</p>
-</blockquote>
-<h2 id="wire-i2c">Wire - I2C</h2>
-<p>TODO write doc</p>
-<h1 id="usb">USB</h1>
-<p>TODO set USB in menu (show used pins, + mini PB9)</p></div>
+<h2 id="general-development-direction">General development direction</h2>
+<ul>
+<li>Self-test code to run on a board to check if the API works for that variant.</li>
+<li>Automatic unit test compilation. This ensures that a code change does not break other boards.</li>
+<li>Automatic library compilation, to be as arduino-compatible as possible.</li>
+<li>Benchmarks to pinpoint bottlenecks.</li>
+<li>Hacker-friendly: Enable to use HAL/CMSIS; enable overriding of every IRQ handler.</li>
+<li>Add DFU/MSC/HID/MIDI to USB. Rewrite USB to PluggableUSB to be more arduino-compatible.</li>
+<li>Create SDIO library</li>
+<li>Create I2S library</li>
+<li>Create CAN library</li>
+</ul></div>
         </div>
 
         <footer class="col-md-12">

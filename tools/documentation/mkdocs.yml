@@ -12,5 +12,6 @@ pages:
 - STM32 Boards:
     - Boards list: boards.md
     - Adding a board: add_board.md
-    - Testnga board: test.md
-    
+    - Testing a board: test.md
+- About: about.md
+

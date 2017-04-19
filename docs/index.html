@@ -117,11 +117,17 @@
                     
                         
 <li >
-    <a href="test/">Testnga board</a>
+    <a href="test/">Testing a board</a>
 </li>
 
                     
                     </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="about/">About</a>
                 </li>
             
             
@@ -167,10 +173,6 @@
         
             <li><a href="#api-documentation">API documentation</a></li>
         
-            <li><a href="#goals">Goals</a></li>
-        
-            <li><a href="#general-development-direction">General development direction</a></li>
-        
     
     
     </ul>
@@ -192,27 +194,7 @@
 <h2 id="list-of-boards">List of boards</h2>
 <p>Please go to the <a href="./boards">Boards</a> page.</p>
 <h2 id="api-documentation">API documentation</h2>
-<p>Please go to the <a href="arduino_api/">Arduino API implementation</a> page.</p>
-<hr />
-<h2 id="goals">Goals</h2>
-<ul>
-<li>Generic implementation using <code>STM32 HAL API</code> to compile onto every STM32 board.</li>
-<li>For the most used boards, optimize code paths using direct register access.</li>
-<li>Make adding boards easy</li>
-<li>Make as compatible with default libraries as  possible</li>
-</ul>
-<h2 id="general-development-direction">General development direction</h2>
-<ul>
-<li>Self-test code to run on a board to check if the API works for that variant.</li>
-<li>Automatic unit test compilation. This ensures that a code change does not break other boards.</li>
-<li>Automatic library compilation, to be as arduino-compatible as possible.</li>
-<li>Benchmarks to pinpoint bottlenecks.</li>
-<li>Hacker-friendly: Enable to use HAL/CMSIS; enable overriding of every IRQ handler.</li>
-<li>Add DFU/MSC/HID/MIDI to USB. Rewrite USB to PluggableUSB to be more arduino-compatible.</li>
-<li>Create SDIO library</li>
-<li>Create I2S library</li>
-<li>Create CAN library</li>
-</ul></div>
+<p>Please go to the <a href="arduino_api/">Arduino API implementation</a> page.</p></div>
         </div>
 
         <footer class="col-md-12">
