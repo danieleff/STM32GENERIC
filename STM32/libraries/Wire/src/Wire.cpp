@@ -302,6 +302,10 @@ void TwoWire::flush(void) {
 
 }
 
+void TwoWire::stm32SetInstance(I2C_TypeDef *instance) {
+    handle.Instance = instance;
+}
+
 void TwoWire::stm32SetSDA(uint8_t sda) {
     sdaPort = variant_pin_list[sda].port;
     sdaPin = variant_pin_list[sda].pin_mask;

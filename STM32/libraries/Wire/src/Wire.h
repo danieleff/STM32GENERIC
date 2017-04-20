@@ -82,6 +82,7 @@ class TwoWire : public Stream {
     void onReceive( void (*)(int) );
     void onRequest( void (*)(void) );
 
+    void stm32SetInstance(I2C_TypeDef *instance);
     void stm32SetSDA(uint8_t sda);
     void stm32SetSCL(uint8_t scl);
 
