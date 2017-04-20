@@ -17,7 +17,26 @@ void TwoWire::begin(void) {
 
     stm32AfI2CInit(handle.Instance, sdaPort, sdaPin, sclPort, sclPin);
 
-    __HAL_RCC_I2C1_CLK_ENABLE();
+    #ifdef I2C1
+    if (handle.Instance == I2C1) {
+        __HAL_RCC_I2C1_CLK_ENABLE();
+    }
+    #endif
+    #ifdef I2C2
+    if (handle.Instance == I2C2) {
+        __HAL_RCC_I2C2_CLK_ENABLE();
+    }
+    #endif
+    #ifdef I2C3
+    if (handle.Instance == I2C3) {
+        __HAL_RCC_I2C3_CLK_ENABLE();
+    }
+    #endif
+    #ifdef I2C4
+    if (handle.Instance == I2C4) {
+        __HAL_RCC_I2C4_CLK_ENABLE();
+    }
+    #endif
 
     #if defined(STM32F1) || defined(STM32F2) || defined(STM32F4) || defined(STM32L1)
         handle.Init.ClockSpeed = 100000;
