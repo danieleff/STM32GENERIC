@@ -48,29 +48,51 @@ void TwoWire::begin(void) {
     setClock(100000);
 }
 
-/* TODO implement
 void TwoWire::begin(uint8_t address) {
     isMaster = 0;
     this->address = address << 1;
 
-    __HAL_RCC_I2C1_CLK_ENABLE();
+    stm32AfI2CInit(handle.Instance, sdaPort, sdaPin, sclPort, sclPin);
 
-    stm32_af_i2c_init(handle.Instance, sdaPort, sdaPin, sclPort, sclPin);
+    #ifdef I2C1
+    if (handle.Instance == I2C1) {
+        __HAL_RCC_I2C1_CLK_ENABLE();
+        HAL_NVIC_SetPriority(I2C1_EV_IRQn, 1, 0);
+        HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
+    }
+    #endif
+    #ifdef I2C2
+    if (handle.Instance == I2C2) {
+        __HAL_RCC_I2C2_CLK_ENABLE();
+        HAL_NVIC_SetPriority(I2C2_EV_IRQn, 0, 0);
+        HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
+    }
+    #endif
+    #ifdef I2C3
+    if (handle.Instance == I2C3) {
+        __HAL_RCC_I2C3_CLK_ENABLE();
+        HAL_NVIC_SetPriority(I2C3_EV_IRQn, 0, 0);
+        HAL_NVIC_EnableIRQ(I2C3_EV_IRQn);
+    }
+    #endif
+    #ifdef I2C4
+    if (handle.Instance == I2C4) {
+        __HAL_RCC_I2C4_CLK_ENABLE();
+        HAL_NVIC_SetPriority(I2C4_EV_IRQn, 0, 0);
+        HAL_NVIC_EnableIRQ(I2C4_EV_IRQn);
+    }
+    #endif
 
-    handle.Init.ClockSpeed = 100000;
-    handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
-    handle.Init.OwnAddress1 = address;
+    handle.Init.OwnAddress1 = this -> address;
     handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
     handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
     handle.Init.OwnAddress2 = 0;
     handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
     handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-    HAL_I2C_Init(&handle);
 
-    start IRQ
-
+    setClock(100000);
+    HAL_I2C_Slave_Receive_IT(&handle, rxBuffer, 1);
 }
-*/
 
 void TwoWire::begin(int address) {
   begin((uint8_t)address);
