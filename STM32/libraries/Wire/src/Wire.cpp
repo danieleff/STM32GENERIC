@@ -38,48 +38,14 @@ void TwoWire::begin(void) {
     }
     #endif
 
-    #if defined(STM32F1) || defined(STM32F2) || defined(STM32F4) || defined(STM32L1)
-        handle.Init.ClockSpeed = 100000;
-        handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
-    #else
-        uint32_t clock_source = stm32_apb_clock_freq(handle.Instance);
-        //Timing values from AN4235 / I2C Timing Configuration Tool
-        //TODO reverse engineer the timing tool?
-        //TODO get timing values for 400Khz
-
-        //Timing values for 100Khz speed for some common I2C clock sources
-        if (clock_source == 16000000) {
-            handle.Init.Timing = 0x00303D5B;
-        } else if (clock_source == 32000000) {
-            handle.Init.Timing = 0x00707CBB;
-        } else if (clock_source == 36000000) {
-            handle.Init.Timing = 0x00808CD2;
-        } else if (clock_source == 50000000) {
-            handle.Init.Timing = 0x00C0EAFF;
-        } else if (clock_source == 72000000) {
-            handle.Init.Timing = 0x10808DD3;
-        } else if (clock_source == 80000000) {
-            handle.Init.Timing = 0x10909CEC;
-        } else if (clock_source == 100000000) {
-            handle.Init.Timing = 0x10C0ECFF;
-        } else if (clock_source == 168000000) {
-            handle.Init.Timing = 0x60505F8C;
-        } else if (clock_source == 216000000) {
-            handle.Init.Timing = 0xA0404E72;
-        } else {
-            return;
-            //TODO error handler?
-        }
-
-    #endif
-
     handle.Init.OwnAddress1 = 0;
     handle.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
     handle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
     handle.Init.OwnAddress2 = 0;
     handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
     handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-    HAL_I2C_Init(&handle);
+
+    setClock(100000);
 }
 
 /* TODO implement
@@ -114,12 +80,51 @@ void TwoWire::end(void) {
   HAL_I2C_DeInit(&handle);
 }
 
-/*
+
 void TwoWire::setClock(uint32_t frequency) {
-    handle.Init.ClockSpeed = frequency;
+
+    #if defined(STM32F1) || defined(STM32F2) || defined(STM32F4) || defined(STM32L1)
+        handle.Init.ClockSpeed = 100000;
+        handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
+    #else
+        uint32_t clock_source = stm32_apb_clock_freq(handle.Instance);
+        //Timing values from AN4235 / I2C Timing Configuration Tool
+        //TODO reverse engineer the timing tool?
+        //TODO get timing values for 400Khz
+
+        //Timing values for 100Khz speed for some common I2C clock sources
+        if (frequency == 100000) {
+            if (clock_source == 16000000) {
+                handle.Init.Timing = 0x00303D5B;
+            } else if (clock_source == 32000000) {
+                handle.Init.Timing = 0x00707CBB;
+            } else if (clock_source == 36000000) {
+                handle.Init.Timing = 0x00808CD2;
+            } else if (clock_source == 50000000) {
+                handle.Init.Timing = 0x00C0EAFF;
+            } else if (clock_source == 72000000) {
+                handle.Init.Timing = 0x10808DD3;
+            } else if (clock_source == 80000000) {
+                handle.Init.Timing = 0x10909CEC;
+            } else if (clock_source == 100000000) {
+                handle.Init.Timing = 0x10C0ECFF;
+            } else if (clock_source == 168000000) {
+                handle.Init.Timing = 0x60505F8C;
+            } else if (clock_source == 216000000) {
+                handle.Init.Timing = 0xA0404E72;
+            } else {
+                return;
+                //TODO error handler?
+            }
+        } else {
+            // Use 100Khz default for now...
+        }
+
+    #endif
+
     HAL_I2C_Init(&handle);
 }
-*/
+
 
 uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint32_t iaddress, uint8_t isize, uint8_t sendStop) {
   if (isMaster == true) {
