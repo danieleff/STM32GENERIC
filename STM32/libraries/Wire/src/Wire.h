@@ -32,7 +32,7 @@
 #define WIRE_HAS_END 1
 
 class TwoWire : public Stream {
-  private:
+  public:
     uint8_t rxBuffer[BUFFER_LENGTH];
     uint8_t rxBufferIndex;
     uint8_t rxBufferLength;
@@ -45,19 +45,19 @@ class TwoWire : public Stream {
     uint8_t isMaster;
     uint8_t address;
 
-    void (*user_onRequest)(void);
-    void (*user_onReceive)(int);
-    static void onRequestService(void);
-    static void onReceiveService(uint8_t*, int);
+    uint8_t slaveBuffer;
 
-    I2C_HandleTypeDef handle;
+    void (*user_onRequest)(void) = NULL;
+    void (*user_onReceive)(int) = NULL;
+    void onRequestService(void);
+    void onReceiveService(uint8_t*, int);
+
 
     GPIO_TypeDef *sdaPort = NULL;
     uint32_t sdaPin = 0;
     GPIO_TypeDef *sclPort = NULL;
     uint32_t sclPin = 0;
 
-  public:
     TwoWire(I2C_TypeDef *instance);
     void begin();
     void begin(uint8_t);
@@ -91,6 +91,8 @@ class TwoWire : public Stream {
     inline size_t write(unsigned int n) { return write((uint8_t)n); }
     inline size_t write(int n) { return write((uint8_t)n); }
     using Print::write;
+
+    I2C_HandleTypeDef handle;
 };
 
 extern TwoWire Wire;

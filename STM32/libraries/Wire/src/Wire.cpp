@@ -2,6 +2,10 @@
 #include "stm32_gpio_af.h"
 #include <Arduino.h>
 
+/** TwoWire object used when in slave interrupt
+ */
+TwoWire *slaveTwoWire[4];
+
 TwoWire::TwoWire(I2C_TypeDef *instance) {
     handle.Instance = instance;
 }
@@ -56,6 +60,7 @@ void TwoWire::begin(uint8_t address) {
 
     #ifdef I2C1
     if (handle.Instance == I2C1) {
+        slaveTwoWire[0] = this;
         __HAL_RCC_I2C1_CLK_ENABLE();
         HAL_NVIC_SetPriority(I2C1_EV_IRQn, 1, 0);
         HAL_NVIC_EnableIRQ(I2C1_EV_IRQn);
@@ -63,6 +68,7 @@ void TwoWire::begin(uint8_t address) {
     #endif
     #ifdef I2C2
     if (handle.Instance == I2C2) {
+        slaveTwoWire[1] = this;
         __HAL_RCC_I2C2_CLK_ENABLE();
         HAL_NVIC_SetPriority(I2C2_EV_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(I2C2_EV_IRQn);
@@ -70,6 +76,7 @@ void TwoWire::begin(uint8_t address) {
     #endif
     #ifdef I2C3
     if (handle.Instance == I2C3) {
+        slaveTwoWire[2] = this;
         __HAL_RCC_I2C3_CLK_ENABLE();
         HAL_NVIC_SetPriority(I2C3_EV_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(I2C3_EV_IRQn);
@@ -77,6 +84,7 @@ void TwoWire::begin(uint8_t address) {
     #endif
     #ifdef I2C4
     if (handle.Instance == I2C4) {
+        slaveTwoWire[3] = this;
         __HAL_RCC_I2C4_CLK_ENABLE();
         HAL_NVIC_SetPriority(I2C4_EV_IRQn, 0, 0);
         HAL_NVIC_EnableIRQ(I2C4_EV_IRQn);
@@ -91,7 +99,13 @@ void TwoWire::begin(uint8_t address) {
     handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
     setClock(100000);
-    HAL_I2C_Slave_Receive_IT(&handle, rxBuffer, 1);
+    HAL_I2C_Slave_Receive_IT(&handle, &slaveBuffer, 1);
+
+    //TODO rewrite IRQ handling to not use HAL_I2C_EV_IRQHandler, so F1 can also work
+    #ifndef STM32F1
+    HAL_I2C_EnableListen_IT(&handle);
+    #endif
+
 }
 
 void TwoWire::begin(int address) {
@@ -172,11 +186,12 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint32_t iaddres
     if(quantity > BUFFER_LENGTH){
       quantity = BUFFER_LENGTH;
     }
+
     // perform blocking read into buffer
     //uint8_t read = twi_readFrom(address, rxBuffer, quantity, sendStop);
     uint8_t read = 0;
 
-    if (HAL_I2C_Master_Receive(&handle, address << 1, rxBuffer, quantity, HAL_MAX_DELAY) == HAL_OK) {
+    if (HAL_I2C_Master_Receive(&handle, address << 1, rxBuffer, quantity, 1000) == HAL_OK) {
         read = quantity;
     }
 
@@ -282,8 +297,19 @@ size_t TwoWire::write(uint8_t data) {
     }else{
         // in slave send mode
         // reply to master
-        //TODO HAL_slave_
-        HAL_I2C_Slave_Transmit_IT(&handle, &data, 1);
+
+        if (HAL_I2C_Slave_Transmit_IT(&handle, &data, 1) != HAL_OK) {
+            if(txBufferLength >= BUFFER_LENGTH){
+                  setWriteError();
+                  return 0;
+            }
+            // put byte in tx buffer
+            txBuffer[txBufferIndex] = data;
+            ++txBufferIndex;
+            // update amount in buffer
+            txBufferLength = txBufferIndex;
+        }
+
     }
     return 1;
 }
@@ -300,7 +326,11 @@ size_t TwoWire::write(const uint8_t *data, size_t quantity) {
     } else {
         // in slave send mode
         // reply to master
-        HAL_I2C_Slave_Transmit_IT(&handle, (uint8_t *)data, quantity);
+        if (HAL_I2C_Slave_Transmit_IT(&handle, (uint8_t *)data, quantity) != HAL_OK) {
+            for(size_t i = 0; i < quantity; ++i){
+              write(data[i]);
+            }
+        }
     }
     return quantity;
 }
@@ -360,12 +390,102 @@ void TwoWire::stm32SetSDA(uint8_t sda) {
 void TwoWire::stm32SetSCL(uint8_t scl) {
     sclPort = variant_pin_list[scl].port;
     sclPin = variant_pin_list[scl].pin_mask;
+
 }
 
+TwoWire *interruptWire;
 
-/*
- * TODO implement HAL_I2C_SlaveRxCpltCallback and HAL_I2C_SlaveTxCpltCallback for slave mode
- */
+#ifdef I2C1
+extern "C" void I2C1_EV_IRQHandler(void ) {
+    interruptWire = slaveTwoWire[0];
+    HAL_I2C_EV_IRQHandler(&interruptWire->handle);
+}
+#endif
+#ifdef I2C2
+extern "C" void I2C2_EV_IRQHandler(void ) {
+    interruptWire = slaveTwoWire[1];
+    HAL_I2C_EV_IRQHandler(&interruptWire->handle);
+}
+#endif
+#ifdef I2C3
+extern "C" void I2C3_EV_IRQHandler(void ) {
+    interruptWire = slaveTwoWire[2];
+    HAL_I2C_EV_IRQHandler(&interruptWire->handle);
+}
+#endif
+#ifdef I2C4
+extern "C" void I2C4_EV_IRQHandler(void ) {
+    interruptWire = slaveTwoWire[3];
+    HAL_I2C_EV_IRQHandler(&interruptWire->handle);
+}
+#endif
+
+extern "C" void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *handle) {
+    HAL_I2C_Slave_Receive_IT(&interruptWire->handle, &interruptWire->slaveBuffer, 1);
+
+    if (interruptWire != NULL) {
+        interruptWire->onReceiveService(&interruptWire->slaveBuffer, 1);
+    }
+}
+
+extern "C" void HAL_I2C_AddrCallback(I2C_HandleTypeDef *handle, uint8_t TransferDirection, uint16_t AddrMatchCode) {
+    if (interruptWire != NULL && TransferDirection == 0) {
+        interruptWire->user_onRequest();
+
+        if (interruptWire->txBufferLength > 0) {
+
+            handle->pBuffPtr    = interruptWire->txBuffer;
+            handle->XferCount   = interruptWire->txBufferLength;
+            handle->XferSize    = interruptWire->txBufferLength;
+
+            interruptWire->txBufferIndex = 0;
+            interruptWire->txBufferLength = 0;
+
+            __HAL_I2C_ENABLE_IT(handle, I2C_IT_EVT | I2C_IT_BUF);
+        }
+    }
+
+}
+
+// behind the scenes function that is called when data is received
+void TwoWire::onReceiveService(uint8_t* inBytes, int numBytes) {
+  // don't bother if user hasn't registered a callback
+  if(!user_onReceive){
+    return;
+  }
+
+  // don't bother if rx buffer is in use by a master requestFrom() op
+  // i know this drops data, but it allows for slight stupidity
+  // meaning, they may not have read all the master requestFrom() data yet
+  if(rxBufferIndex < rxBufferLength){
+    return;
+  }
+  // copy twi rx buffer into local read buffer
+  // this enables new reads to happen in parallel
+  for(uint8_t i = 0; i < numBytes; ++i){
+    rxBuffer[i] = inBytes[i];
+  }
+  // set rx iterator vars
+  rxBufferIndex = 0;
+  rxBufferLength = numBytes;
+  // alert user program
+  user_onReceive(numBytes);
+}
+
+// behind the scenes function that is called when data is requested
+void TwoWire::onRequestService() {
+  // don't bother if user hasn't registered a callback
+  if(!user_onRequest){
+    return;
+  }
+
+  // reset tx buffer iterator vars
+  // !!! this will kill any pending pre-master sendTo() activity
+  txBufferIndex = 0;
+  txBufferLength = 0;
+  // alert user program
+  user_onRequest();
+}
 
 // sets function called on slave write
 void TwoWire::onReceive( void (*function)(int) ) {
