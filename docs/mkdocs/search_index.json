@@ -146,129 +146,129 @@
             "title": "Predefined pin constants"
         }, 
         {
-            "location": "/arduino_libraries/", 
-            "text": "Standard libraries:\n\n\nSerial\n\n\nThere are two implementations of Serial: UART and USB. \n\n\nPlease check the \nMenu option\n to see which one is selected.\n\n\nSerial UART\n\n\nSerialUART1\nis bound to UART1, \nSerialUART2\n to UART2 etc...\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSerialUARTx.stm32SetRX(uint8_t pin)\n\n\nSet the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!\n\n\nSerialUARTx.stm32SetTx(uint8_t pin)\n\n\nSet the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!\n\n\n\n\nExample: The following code will echo the received bytes on UART2\n\n\n\n\nvoid setup() {\n    SerialUART2.stm32SetRX(Pcd);\n    SerialUART2.stm32SetTx(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}\n\n\n\n\nSerial USB\n\n\nIf the \nUSB menu\n is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.\n\n\nTODO explain windows 7 driver\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSPI\n\n\nThe first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nSPI.begin()\n\n\nEnables SPI on the pins\n\n\nSPI.end()\n\n\nDisables the SPI pin\n\n\nSPI.beginTransaction(SPISettings settings);\n\n\nStart SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nSPI.endTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.transfer16(...);\n\n\nTODO write doc\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.usingInterrupt();\n\n\nTODO not yet implemented\n\n\nSPI.transfer(...);\n\n\nTODO write doc\n\n\nSPI.stm32SetMOSI(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetMISO(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetSCK(uint8_t pin);\n\n\nTODO write doc\nThis method must be called before begin()!\n\n\nSPI.stm32SetInstance(...);\n\n\nTODO implement\nThis method must be called before begin()!\n\n\n\n\nExample: TODO example for using libraries on multiple instances with the same SPI\n\n\n\n\nWire - I2C\n\n\nTODO write doc\n\n\nUSB\n\n\nTODO set USB in menu (show used pins, + mini PB9)", 
-            "title": "Arduino Standard Libraries"
+            "location": "/spi/", 
+            "text": "SPI\n\n\nThe first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\nPlease check the documentation of the chip to see which pins can be used.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nbegin()\n\n\nEnables SPI on the pins\n\n\nend()\n\n\nDisables SPI on the pins\n\n\nbeginTransaction(SPISettings settings);\n\n\nInitializes SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nendTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\ntransfer16(...);\n\n\nTODO write doc\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nusingInterrupt();\n\n\nTODO not yet implemented\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nstm32SetMOSI(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMISO(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCK(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(SPI_TypeDef *instance);\n\n\nSet the SPI instance (SPI1/SPI2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nSPI\n in it, but you want to use SPI2:\n\n\n\n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
+            "title": "SPI"
         }, 
         {
-            "location": "/arduino_libraries/#standard-libraries", 
-            "text": "", 
-            "title": "Standard libraries:"
-        }, 
-        {
-            "location": "/arduino_libraries/#serial", 
-            "text": "There are two implementations of Serial: UART and USB.   Please check the  Menu option  to see which one is selected.", 
-            "title": "Serial"
-        }, 
-        {
-            "location": "/arduino_libraries/#serial-uart", 
-            "text": "SerialUART1 is bound to UART1,  SerialUART2  to UART2 etc...  Please refer to the  official documentation  for\nthe description of Serial functions.", 
-            "title": "Serial UART"
-        }, 
-        {
-            "location": "/arduino_libraries/#serialuartxstm32setrxuint8_t-pin", 
-            "text": "Set the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!", 
-            "title": "SerialUARTx.stm32SetRX(uint8_t pin)"
-        }, 
-        {
-            "location": "/arduino_libraries/#serialuartxstm32settxuint8_t-pin", 
-            "text": "Set the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!   Example: The following code will echo the received bytes on UART2   void setup() {\n    SerialUART2.stm32SetRX(Pcd);\n    SerialUART2.stm32SetTx(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}", 
-            "title": "SerialUARTx.stm32SetTx(uint8_t pin)"
-        }, 
-        {
-            "location": "/arduino_libraries/#serial-usb", 
-            "text": "If the  USB menu  is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.  TODO explain windows 7 driver  Please refer to the  official documentation  for\nthe description of Serial functions.", 
-            "title": "Serial USB"
-        }, 
-        {
-            "location": "/arduino_libraries/#spi", 
+            "location": "/spi/#spi", 
             "text": "The first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.", 
             "title": "SPI"
         }, 
         {
-            "location": "/arduino_libraries/#spiclassspi_typedef-instance", 
+            "location": "/spi/#spiclassspi_typedef-instance", 
             "text": "Create a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.", 
             "title": "SPIClass(SPI_TypeDef *instance)"
         }, 
         {
-            "location": "/arduino_libraries/#spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck", 
-            "text": "Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.   Example: set up SPI2   SPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}", 
+            "location": "/spi/#spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck", 
+            "text": "Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.  Please check the documentation of the chip to see which pins can be used.   Example: set up SPI2   SPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}", 
             "title": "SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)"
         }, 
         {
-            "location": "/arduino_libraries/#spibegin", 
+            "location": "/spi/#begin", 
             "text": "Enables SPI on the pins", 
-            "title": "SPI.begin()"
+            "title": "begin()"
         }, 
         {
-            "location": "/arduino_libraries/#spiend", 
-            "text": "Disables the SPI pin", 
-            "title": "SPI.end()"
+            "location": "/spi/#end", 
+            "text": "Disables SPI on the pins", 
+            "title": "end()"
         }, 
         {
-            "location": "/arduino_libraries/#spibegintransactionspisettings-settings", 
-            "text": "Start SPI with the provided  SPISettings mySetting(speedMaximum, dataOrder, dataMode)  parameters.     Parameter  Description      speedMaximum  The maximum speed requested    dataOrder  MSBFIRST ,  LSBFIRST    dataMode  SPI_MODE0 ,  SPI_MODE1 ,  SPI_MODE2 , or  SPI_MODE3     Example:  SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));  TODO disable interrupt in pin if  usingInterrupt  was used", 
-            "title": "SPI.beginTransaction(SPISettings settings);"
+            "location": "/spi/#begintransactionspisettings-settings", 
+            "text": "Initializes SPI with the provided  SPISettings mySetting(speedMaximum, dataOrder, dataMode)  parameters.     Parameter  Description      speedMaximum  The maximum speed requested    dataOrder  MSBFIRST ,  LSBFIRST    dataMode  SPI_MODE0 ,  SPI_MODE1 ,  SPI_MODE2 , or  SPI_MODE3     Example:  SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));  TODO disable interrupt in pin if  usingInterrupt  was used", 
+            "title": "beginTransaction(SPISettings settings);"
         }, 
         {
-            "location": "/arduino_libraries/#spiendtransaction", 
+            "location": "/spi/#endtransaction", 
             "text": "TODO enable interrupt in pin if  usingInterrupt  was used", 
-            "title": "SPI.endTransaction();"
+            "title": "endTransaction();"
         }, 
         {
-            "location": "/arduino_libraries/#spitransfer", 
+            "location": "/spi/#transfer", 
             "text": "TODO write doc", 
-            "title": "SPI.transfer(...);"
+            "title": "transfer(...);"
         }, 
         {
-            "location": "/arduino_libraries/#spitransfer16", 
+            "location": "/spi/#transfer16", 
             "text": "TODO write doc", 
-            "title": "SPI.transfer16(...);"
+            "title": "transfer16(...);"
         }, 
         {
-            "location": "/arduino_libraries/#spitransfer_1", 
+            "location": "/spi/#transfer_1", 
             "text": "TODO write doc", 
-            "title": "SPI.transfer(...);"
+            "title": "transfer(...);"
         }, 
         {
-            "location": "/arduino_libraries/#spiusinginterrupt", 
+            "location": "/spi/#usinginterrupt", 
             "text": "TODO not yet implemented", 
-            "title": "SPI.usingInterrupt();"
+            "title": "usingInterrupt();"
         }, 
         {
-            "location": "/arduino_libraries/#spitransfer_2", 
+            "location": "/spi/#transfer_2", 
             "text": "TODO write doc", 
-            "title": "SPI.transfer(...);"
+            "title": "transfer(...);"
         }, 
         {
-            "location": "/arduino_libraries/#spistm32setmosiuint8_t-pin", 
-            "text": "TODO write doc\nThis method must be called before begin()!", 
-            "title": "SPI.stm32SetMOSI(uint8_t pin);"
+            "location": "/spi/#stm32setmosiuint8_t-pin", 
+            "text": "Set the MOSI pin used by this SPI.  This method must be called before begin()!", 
+            "title": "stm32SetMOSI(uint8_t pin);"
         }, 
         {
-            "location": "/arduino_libraries/#spistm32setmisouint8_t-pin", 
-            "text": "TODO write doc\nThis method must be called before begin()!", 
-            "title": "SPI.stm32SetMISO(uint8_t pin);"
+            "location": "/spi/#stm32setmisouint8_t-pin", 
+            "text": "Set the MOSI pin used by this SPI.  This method must be called before begin()!", 
+            "title": "stm32SetMISO(uint8_t pin);"
         }, 
         {
-            "location": "/arduino_libraries/#spistm32setsckuint8_t-pin", 
-            "text": "TODO write doc\nThis method must be called before begin()!", 
-            "title": "SPI.stm32SetSCK(uint8_t pin);"
+            "location": "/spi/#stm32setsckuint8_t-pin", 
+            "text": "Set the MOSI pin used by this SPI.  This method must be called before begin()!", 
+            "title": "stm32SetSCK(uint8_t pin);"
         }, 
         {
-            "location": "/arduino_libraries/#spistm32setinstance", 
-            "text": "TODO implement\nThis method must be called before begin()!   Example: TODO example for using libraries on multiple instances with the same SPI", 
-            "title": "SPI.stm32SetInstance(...);"
+            "location": "/spi/#stm32setinstancespi_typedef-instance", 
+            "text": "Set the SPI instance (SPI1/SPI2/...) used by this object.  This method must be called before begin()!   Example: If you want to use a library that has hardcoded  SPI  in it, but you want to use SPI2:   void setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
+            "title": "stm32SetInstance(SPI_TypeDef *instance);"
         }, 
         {
-            "location": "/arduino_libraries/#wire-i2c", 
+            "location": "/i2c/", 
+            "text": "Wire - I2C\n\n\nTODO write doc", 
+            "title": "I2C"
+        }, 
+        {
+            "location": "/i2c/#wire-i2c", 
             "text": "TODO write doc", 
             "title": "Wire - I2C"
         }, 
         {
-            "location": "/arduino_libraries/#usb", 
-            "text": "TODO set USB in menu (show used pins, + mini PB9)", 
-            "title": "USB"
+            "location": "/uart/", 
+            "text": "Serial UART\n\n\nThere are two implementations of Serial communication: UART and USB. \n\n\nThis page describes the UART based.\n\n\nPlease check the \nMenu option\n to see which one is selected.\n\n\nSerialUART1\nis bound to UART1, \nSerialUART2\n to UART2 etc...\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSerialUARTx.stm32SetRX(uint8_t pin)\n\n\nSet the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!\n\n\nSerialUARTx.stm32SetTx(uint8_t pin)\n\n\nSet the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!\n\n\n\n\nExample: The following code will echo the received bytes on UART2\n\n\n\n\nvoid setup() {\n    SerialUART2.stm32SetRX(Pcd);\n    SerialUART2.stm32SetTX(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}", 
+            "title": "Serial UART"
+        }, 
+        {
+            "location": "/uart/#serial-uart", 
+            "text": "There are two implementations of Serial communication: UART and USB.   This page describes the UART based.  Please check the  Menu option  to see which one is selected.  SerialUART1 is bound to UART1,  SerialUART2  to UART2 etc...  Please refer to the  official documentation  for\nthe description of Serial functions.", 
+            "title": "Serial UART"
+        }, 
+        {
+            "location": "/uart/#serialuartxstm32setrxuint8_t-pin", 
+            "text": "Set the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!", 
+            "title": "SerialUARTx.stm32SetRX(uint8_t pin)"
+        }, 
+        {
+            "location": "/uart/#serialuartxstm32settxuint8_t-pin", 
+            "text": "Set the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!   Example: The following code will echo the received bytes on UART2   void setup() {\n    SerialUART2.stm32SetRX(Pcd);\n    SerialUART2.stm32SetTX(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}", 
+            "title": "SerialUARTx.stm32SetTx(uint8_t pin)"
+        }, 
+        {
+            "location": "/usb_cdc/", 
+            "text": "Serial UART\n\n\nThere are two implementations of Serial communication: UART and USB. \n\n\nThis page describes the USB based.\n\n\nPlease check the \nMenu option\n to see which one is selected as \nSerial\n.\n\n\nIf the \nUSB menu\n is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.\n\n\nTODO explain windows 7 driver\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.", 
+            "title": "Serial USB"
+        }, 
+        {
+            "location": "/usb_cdc/#serial-uart", 
+            "text": "There are two implementations of Serial communication: UART and USB.   This page describes the USB based.  Please check the  Menu option  to see which one is selected as  Serial .  If the  USB menu  is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.  TODO explain windows 7 driver  Please refer to the  official documentation  for\nthe description of Serial functions.", 
+            "title": "Serial UART"
         }, 
         {
             "location": "/stm32_hal/", 

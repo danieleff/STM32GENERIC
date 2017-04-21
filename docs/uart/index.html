@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Arduino Standard Libraries - STM32GENERIC</title>
+        <title>Serial UART - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -77,8 +77,26 @@
 
                     
                         
+<li >
+    <a href="../spi/">SPI</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../i2c/">I2C</a>
+</li>
+
+                    
+                        
 <li class="active">
-    <a href="./">Arduino Standard Libraries</a>
+    <a href="./">Serial UART</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../usb_cdc/">Serial USB</a>
 </li>
 
                     
@@ -141,12 +159,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../arduino_api/">
+                        <a rel="next" href="../i2c/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../stm32_hal/">
+                        <a rel="prev" href="../usb_cdc/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -161,20 +179,11 @@
     <ul class="nav bs-sidenav">
     
     
-        <li class="main active"><a href="#standard-libraries">Standard libraries:</a></li>
+        <li class="main active"><a href="#serial-uart">Serial UART</a></li>
         
-            <li><a href="#serial">Serial</a></li>
+            <li><a href="#serialuartxstm32setrxuint8_t-pin">SerialUARTx.stm32SetRX(uint8_t pin)</a></li>
         
-            <li><a href="#serial-uart">Serial UART</a></li>
-        
-            <li><a href="#serial-usb">Serial USB</a></li>
-        
-            <li><a href="#spi">SPI</a></li>
-        
-            <li><a href="#wire-i2c">Wire - I2C</a></li>
-        
-    
-        <li class="main "><a href="#usb">USB</a></li>
+            <li><a href="#serialuartxstm32settxuint8_t-pin">SerialUARTx.stm32SetTx(uint8_t pin)</a></li>
         
     
     
@@ -182,11 +191,10 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="standard-libraries">Standard libraries:</h1>
-<h2 id="serial">Serial</h2>
-<p>There are two implementations of Serial: UART and USB. </p>
-<p>Please check the <a href="../menu_options#automatic-serial">Menu option</a> to see which one is selected.</p>
 <h2 id="serial-uart">Serial UART</h2>
+<p>There are two implementations of Serial communication: UART and USB. </p>
+<p>This page describes the UART based.</p>
+<p>Please check the <a href="../menu_options#automatic-serial">Menu option</a> to see which one is selected.</p>
 <p><strong><code>SerialUART1</code></strong>is bound to UART1, <strong><code>SerialUART2</code></strong> to UART2 etc...</p>
 <p>Please refer to the <a href="https://www.arduino.cc/en/reference/serial">official documentation</a> for
 the description of Serial functions.</p>
@@ -201,7 +209,7 @@ This must be called before begin()!</p>
 </blockquote>
 <pre><code class="c++">void setup() {
     SerialUART2.stm32SetRX(Pcd);
-    SerialUART2.stm32SetTx(Pab);
+    SerialUART2.stm32SetTX(Pab);
     SerualUART2.begin(115200);
 }
 void loop() {
@@ -210,95 +218,7 @@ void loop() {
         SerialUART2.write(data);
     }
 }
-</code></pre>
-
-<h2 id="serial-usb">Serial USB</h2>
-<p>If the <a href="../menu_options">USB menu</a> is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.</p>
-<p>TODO explain windows 7 driver</p>
-<p>Please refer to the <a href="https://www.arduino.cc/en/reference/serial">official documentation</a> for
-the description of Serial functions.</p>
-<h2 id="spi">SPI</h2>
-<p>The first SPI is connected to SPI1 instance.
-To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.</p>
-<h4 id="spiclassspi_typedef-instance"><strong><code>SPIClass(SPI_TypeDef *instance)</code></strong></h4>
-<p>Create a SPI object that is connected to the instance, on the default mosi/miso/sck. 
-To avoid confusion, it is better to use the constructor below with implicit pins.</p>
-<h4 id="spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck"><strong><code>SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)</code></strong></h4>
-<p>Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.</p>
-<blockquote>
-<p>Example: set up SPI2</p>
-</blockquote>
-<pre><code class="c++">SPIClass SPI_2(SPI2, mosi, iso, sck);
-void setup() {
-    SPI_2.begin();
-}
-
-</code></pre>
-
-<h4 id="spibegin"><strong><code>SPI.begin()</code></strong></h4>
-<p>Enables SPI on the pins</p>
-<h4 id="spiend"><strong><code>SPI.end()</code></strong></h4>
-<p>Disables the SPI pin</p>
-<h4 id="spibegintransactionspisettings-settings"><strong><code>SPI.beginTransaction(SPISettings settings);</code></strong></h4>
-<p>Start SPI with the provided <code>SPISettings mySetting(speedMaximum, dataOrder, dataMode)</code> parameters.</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>speedMaximum</td>
-<td>The maximum speed requested</td>
-</tr>
-<tr>
-<td>dataOrder</td>
-<td><code>MSBFIRST</code>, <code>LSBFIRST</code></td>
-</tr>
-<tr>
-<td>dataMode</td>
-<td><code>SPI_MODE0</code>, <code>SPI_MODE1</code>, <code>SPI_MODE2</code>, or <code>SPI_MODE3</code></td>
-</tr>
-</tbody>
-</table>
-<p>Example:</p>
-<pre><code class="c++">SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
-</code></pre>
-
-<p>TODO disable interrupt in pin if <code>usingInterrupt</code> was used</p>
-<h4 id="spiendtransaction"><strong><code>SPI.endTransaction();</code></strong></h4>
-<p>TODO enable interrupt in pin if <code>usingInterrupt</code> was used</p>
-<h4 id="spitransfer"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spitransfer16"><strong><code>SPI.transfer16(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spitransfer_1"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spiusinginterrupt"><strong><code>SPI.usingInterrupt();</code></strong></h4>
-<p>TODO not yet implemented</p>
-<h4 id="spitransfer_2"><strong><code>SPI.transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="spistm32setmosiuint8_t-pin"><strong><code>SPI.stm32SetMOSI(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setmisouint8_t-pin"><strong><code>SPI.stm32SetMISO(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setsckuint8_t-pin"><strong><code>SPI.stm32SetSCK(uint8_t pin);</code></strong></h4>
-<p>TODO write doc
-This method must be called before begin()!</p>
-<h4 id="spistm32setinstance"><strong><code>SPI.stm32SetInstance(...);</code></strong></h4>
-<p>TODO implement
-This method must be called before begin()!</p>
-<blockquote>
-<p>Example: TODO example for using libraries on multiple instances with the same SPI</p>
-</blockquote>
-<h2 id="wire-i2c">Wire - I2C</h2>
-<p>TODO write doc</p>
-<h1 id="usb">USB</h1>
-<p>TODO set USB in menu (show used pins, + mini PB9)</p></div>
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">

@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Libraries - STM32GENERIC</title>
+        <title>Serial USB - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -95,8 +95,8 @@
 
                     
                         
-<li >
-    <a href="../usb_cdc/">Serial USB</a>
+<li class="active">
+    <a href="./">Serial USB</a>
 </li>
 
                     
@@ -111,8 +111,8 @@
             
             
             
-                <li class="active">
-                    <a href="./">Libraries</a>
+                <li >
+                    <a href="../libraries/">Libraries</a>
                 </li>
             
             
@@ -159,12 +159,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../stm32_hal/">
+                        <a rel="next" href="../uart/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../boards/">
+                        <a rel="prev" href="../stm32_hal/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -179,12 +179,22 @@
     <ul class="nav bs-sidenav">
     
     
+        <li class="main active"><a href="#serial-uart">Serial UART</a></li>
+        
+    
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<p>TODO automatically compile all libraries, and show results here</p></div>
+<h2 id="serial-uart">Serial UART</h2>
+<p>There are two implementations of Serial communication: UART and USB. </p>
+<p>This page describes the USB based.</p>
+<p>Please check the <a href="../menu_options#automatic-serial">Menu option</a> to see which one is selected as <code>Serial</code>.</p>
+<p>If the <a href="../menu_options">USB menu</a> is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.</p>
+<p>TODO explain windows 7 driver</p>
+<p>Please refer to the <a href="https://www.arduino.cc/en/reference/serial">official documentation</a> for
+the description of Serial functions.</p></div>
         </div>
 
         <footer class="col-md-12">

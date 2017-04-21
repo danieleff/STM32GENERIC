@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Libraries - STM32GENERIC</title>
+        <title>SPI - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -77,8 +77,8 @@
 
                     
                         
-<li >
-    <a href="../spi/">SPI</a>
+<li class="active">
+    <a href="./">SPI</a>
 </li>
 
                     
@@ -111,8 +111,8 @@
             
             
             
-                <li class="active">
-                    <a href="./">Libraries</a>
+                <li >
+                    <a href="../libraries/">Libraries</a>
                 </li>
             
             
@@ -159,12 +159,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../stm32_hal/">
+                        <a rel="next" href="../arduino_api/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../boards/">
+                        <a rel="prev" href="../i2c/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -179,12 +179,133 @@
     <ul class="nav bs-sidenav">
     
     
+        <li class="main active"><a href="#spi">SPI</a></li>
+        
+            <li><a href="#spiclassspi_typedef-instance">SPIClass(SPI_TypeDef *instance)</a></li>
+        
+            <li><a href="#spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck">SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)</a></li>
+        
+            <li><a href="#begin">begin()</a></li>
+        
+            <li><a href="#end">end()</a></li>
+        
+            <li><a href="#begintransactionspisettings-settings">beginTransaction(SPISettings settings);</a></li>
+        
+            <li><a href="#endtransaction">endTransaction();</a></li>
+        
+            <li><a href="#transfer">transfer(...);</a></li>
+        
+            <li><a href="#transfer16">transfer16(...);</a></li>
+        
+            <li><a href="#transfer_1">transfer(...);</a></li>
+        
+            <li><a href="#usinginterrupt">usingInterrupt();</a></li>
+        
+            <li><a href="#transfer_2">transfer(...);</a></li>
+        
+            <li><a href="#stm32setmosiuint8_t-pin">stm32SetMOSI(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setmisouint8_t-pin">stm32SetMISO(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setsckuint8_t-pin">stm32SetSCK(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setinstancespi_typedef-instance">stm32SetInstance(SPI_TypeDef *instance);</a></li>
+        
+    
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<p>TODO automatically compile all libraries, and show results here</p></div>
+<h2 id="spi">SPI</h2>
+<p>The first SPI is connected to SPI1 instance.
+To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.</p>
+<h4 id="spiclassspi_typedef-instance"><strong><code>SPIClass(SPI_TypeDef *instance)</code></strong></h4>
+<p>Create a SPI object that is connected to the instance, on the default mosi/miso/sck. 
+To avoid confusion, it is better to use the constructor below with implicit pins.</p>
+<h4 id="spiclassspi_typedef-instance-uint8_t-mosi-uint8_t-miso-uint8_t-sck"><strong><code>SPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)</code></strong></h4>
+<p>Create a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.</p>
+<p>Please check the documentation of the chip to see which pins can be used.</p>
+<blockquote>
+<p>Example: set up SPI2</p>
+</blockquote>
+<pre><code class="c++">SPIClass SPI_2(SPI2, mosi, iso, sck);
+void setup() {
+    SPI_2.begin();
+}
+
+</code></pre>
+
+<h4 id="begin"><strong><code>begin()</code></strong></h4>
+<p>Enables SPI on the pins</p>
+<h4 id="end"><strong><code>end()</code></strong></h4>
+<p>Disables SPI on the pins</p>
+<h4 id="begintransactionspisettings-settings"><strong><code>beginTransaction(SPISettings settings);</code></strong></h4>
+<p>Initializes SPI with the provided <code>SPISettings mySetting(speedMaximum, dataOrder, dataMode)</code> parameters.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>speedMaximum</td>
+<td>The maximum speed requested</td>
+</tr>
+<tr>
+<td>dataOrder</td>
+<td><code>MSBFIRST</code>, <code>LSBFIRST</code></td>
+</tr>
+<tr>
+<td>dataMode</td>
+<td><code>SPI_MODE0</code>, <code>SPI_MODE1</code>, <code>SPI_MODE2</code>, or <code>SPI_MODE3</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre><code class="c++">SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
+</code></pre>
+
+<p>TODO disable interrupt in pin if <code>usingInterrupt</code> was used</p>
+<h4 id="endtransaction"><strong><code>endTransaction();</code></strong></h4>
+<p>TODO enable interrupt in pin if <code>usingInterrupt</code> was used</p>
+<h4 id="transfer"><strong><code>transfer(...);</code></strong></h4>
+<p>TODO write doc</p>
+<h4 id="transfer16"><strong><code>transfer16(...);</code></strong></h4>
+<p>TODO write doc</p>
+<h4 id="transfer_1"><strong><code>transfer(...);</code></strong></h4>
+<p>TODO write doc</p>
+<h4 id="usinginterrupt"><strong><code>usingInterrupt();</code></strong></h4>
+<p>TODO not yet implemented</p>
+<h4 id="transfer_2"><strong><code>transfer(...);</code></strong></h4>
+<p>TODO write doc</p>
+<h4 id="stm32setmosiuint8_t-pin"><strong><code>stm32SetMOSI(uint8_t pin);</code></strong></h4>
+<p>Set the MOSI pin used by this SPI.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setmisouint8_t-pin"><strong><code>stm32SetMISO(uint8_t pin);</code></strong></h4>
+<p>Set the MOSI pin used by this SPI.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setsckuint8_t-pin"><strong><code>stm32SetSCK(uint8_t pin);</code></strong></h4>
+<p>Set the MOSI pin used by this SPI.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setinstancespi_typedef-instance"><strong><code>stm32SetInstance(SPI_TypeDef *instance);</code></strong></h4>
+<p>Set the SPI instance (SPI1/SPI2/...) used by this object.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<blockquote>
+<p>Example: If you want to use a library that has hardcoded <code>SPI</code> in it, but you want to use SPI2:</p>
+</blockquote>
+<pre><code class="c++">void setup() {
+    SPI.stm32SetInstance(SPI2);
+    SPI.stm32SetMOSI(mosi);
+    SPI.stm32SetMISO(miso);
+    SPI.stm32SetSCK(sck);
+    ...
+    library.begin();
+}
+
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">

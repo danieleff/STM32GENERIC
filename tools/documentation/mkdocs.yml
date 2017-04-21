@@ -6,7 +6,10 @@ pages:
 - Documentation:
     - Menu options: menu_options.md
     - Arduino API: arduino_api.md
-    - Arduino Standard Libraries: arduino_libraries.md
+    - SPI: spi.md
+    - I2C: i2c.md
+    - Serial UART: uart.md
+    - Serial USB: usb_cdc.md
     - STM32 HAL: stm32_hal.md
 - Libraries: libraries.md
 - STM32 Boards:
