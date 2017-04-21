@@ -37,12 +37,12 @@
         }, 
         {
             "location": "/upload/", 
-            "text": "Uploading your sketch\n\n\n\n\n\n\n\n\nMethod\n\n\nConnection\n\n\nRequirements\n\n\n\n\n\n\n\n\n\n\nFlash Bootloader\n\n\nUSB\n\n\nUSB connector, Bootloader already installed\n\n\n\n\n\n\nSystem bootloader\n\n\nUART\n\n\nBOOT0 / BOOT1 pins accessible, USB to UART adapter\n\n\n\n\n\n\nSWD / ST-link / JTAG\n\n\nSWD pins\n\n\nProgrammer hardware, (included in Nucleo and Discovery boards)\n\n\n\n\n\n\nBlack Magic Probe", 
+            "text": "Uploading your sketch\n\n\nSelect the upload method from the Tools / upload menu option.\n\n\n\n\n\n\n\n\nMethod\n\n\nConnection\n\n\nRequirements\n\n\n\n\n\n\n\n\n\n\nSWD / JTAG\n\n\nSWD pins\n\n\nSWD Programmer hardware, (included in Nucleo and Discovery boards)\n\n\n\n\n\n\nMass storage\n\n\nSWD pins\n\n\nST-Link V2.1, (included in Nucleo and Discovery boards)\n\n\n\n\n\n\nSystem bootloader\n\n\nUART1\n\n\nBOOT0 / BOOT1 pins accessible, USB to UART adapter\n\n\n\n\n\n\nUSB Flash bootloader\n\n\nUSB\n\n\nUSB connector, Bootloader already installed using other method\n\n\n\n\n\n\nBlack Magic Probe\n\n\nUSB\n\n\nBlack Magic Probe", 
             "title": "Uploading"
         }, 
         {
             "location": "/upload/#uploading-your-sketch", 
-            "text": "Method  Connection  Requirements      Flash Bootloader  USB  USB connector, Bootloader already installed    System bootloader  UART  BOOT0 / BOOT1 pins accessible, USB to UART adapter    SWD / ST-link / JTAG  SWD pins  Programmer hardware, (included in Nucleo and Discovery boards)    Black Magic Probe", 
+            "text": "Select the upload method from the Tools / upload menu option.     Method  Connection  Requirements      SWD / JTAG  SWD pins  SWD Programmer hardware, (included in Nucleo and Discovery boards)    Mass storage  SWD pins  ST-Link V2.1, (included in Nucleo and Discovery boards)    System bootloader  UART1  BOOT0 / BOOT1 pins accessible, USB to UART adapter    USB Flash bootloader  USB  USB connector, Bootloader already installed using other method    Black Magic Probe  USB  Black Magic Probe", 
             "title": "Uploading your sketch"
         }, 
         {
