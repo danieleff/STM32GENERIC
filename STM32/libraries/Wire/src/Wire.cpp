@@ -497,4 +497,10 @@ void TwoWire::onRequest( void (*function)(void) ) {
     user_onRequest = function;
 }
 
-TwoWire Wire = TwoWire(I2C1);
+
+#if defined(SDA) || defined(SCL)
+    TwoWire Wire = TwoWire(I2C1, SDA, SCL);
+#else
+    TwoWire Wire = TwoWire(I2C1);
+#endif
+
