@@ -1,7 +1,15 @@
 ## SPI
 
-The first SPI is connected to SPI1 instance.
-To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.
+To use the hardware SPI, include it in your code:
+```c++
+#include "SPI.h"
+```
+
+The first SPI object is explicitly created, and is connected to the SPI1 instance.
+
+**Please check your board documentation to see which pins is SPI connected to by default.**
+
+To use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.
 
 #### **`SPIClass(SPI_TypeDef *instance)`**
 
@@ -82,25 +90,27 @@ Set the MOSI pin used by this SPI.
 
 #### **`stm32SetMISO(uint8_t pin);`**
 
-Set the MOSI pin used by this SPI.
+Set the alternative MISO pin used by this SPI.
 
 **This method must be called before begin()!**
 
 #### **`stm32SetSCK(uint8_t pin);`**
 
-Set the MOSI pin used by this SPI.
+Set the alternative SCK pin used by this SPI.
 
 **This method must be called before begin()!**
 
 #### **`stm32SetInstance(SPI_TypeDef *instance);`**
 
-Set the SPI instance (SPI1/SPI2/...) used by this object.
+Set the alternative SPI instance (SPI1/SPI2/...) used by this object.
 
 **This method must be called before begin()!**
 
 > Example: If you want to use a library that has hardcoded `SPI` in it, but you want to use SPI2:
 
 ```c++
+#include "SPI.h"
+
 void setup() {
     SPI.stm32SetInstance(SPI2);
     SPI.stm32SetMOSI(mosi);

@@ -147,12 +147,12 @@
         }, 
         {
             "location": "/spi/", 
-            "text": "SPI\n\n\nThe first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\nPlease check the documentation of the chip to see which pins can be used.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nbegin()\n\n\nEnables SPI on the pins\n\n\nend()\n\n\nDisables SPI on the pins\n\n\nbeginTransaction(SPISettings settings);\n\n\nInitializes SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nendTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\ntransfer16(...);\n\n\nTODO write doc\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nusingInterrupt();\n\n\nTODO not yet implemented\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nstm32SetMOSI(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMISO(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCK(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(SPI_TypeDef *instance);\n\n\nSet the SPI instance (SPI1/SPI2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nSPI\n in it, but you want to use SPI2:\n\n\n\n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
+            "text": "SPI\n\n\nTo use the hardware SPI, include it in your code:\n\n\n#include \nSPI.h\n\n\n\n\n\nThe first SPI object is explicitly created, and is connected to the SPI1 instance.\n\n\nPlease check your board documentation to see which pins is SPI connected to by default.\n\n\nTo use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\nPlease check the documentation of the chip to see which pins can be used.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nbegin()\n\n\nEnables SPI on the pins\n\n\nend()\n\n\nDisables SPI on the pins\n\n\nbeginTransaction(SPISettings settings);\n\n\nInitializes SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nendTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\ntransfer16(...);\n\n\nTODO write doc\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nusingInterrupt();\n\n\nTODO not yet implemented\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nstm32SetMOSI(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMISO(uint8_t pin);\n\n\nSet the alternative MISO pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCK(uint8_t pin);\n\n\nSet the alternative SCK pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(SPI_TypeDef *instance);\n\n\nSet the alternative SPI instance (SPI1/SPI2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nSPI\n in it, but you want to use SPI2:\n\n\n\n\n#include \nSPI.h\n\n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
             "title": "SPI"
         }, 
         {
             "location": "/spi/#spi", 
-            "text": "The first SPI is connected to SPI1 instance.\nTo use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.", 
+            "text": "To use the hardware SPI, include it in your code:  #include  SPI.h   The first SPI object is explicitly created, and is connected to the SPI1 instance.  Please check your board documentation to see which pins is SPI connected to by default.  To use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.", 
             "title": "SPI"
         }, 
         {
@@ -217,28 +217,98 @@
         }, 
         {
             "location": "/spi/#stm32setmisouint8_t-pin", 
-            "text": "Set the MOSI pin used by this SPI.  This method must be called before begin()!", 
+            "text": "Set the alternative MISO pin used by this SPI.  This method must be called before begin()!", 
             "title": "stm32SetMISO(uint8_t pin);"
         }, 
         {
             "location": "/spi/#stm32setsckuint8_t-pin", 
-            "text": "Set the MOSI pin used by this SPI.  This method must be called before begin()!", 
+            "text": "Set the alternative SCK pin used by this SPI.  This method must be called before begin()!", 
             "title": "stm32SetSCK(uint8_t pin);"
         }, 
         {
             "location": "/spi/#stm32setinstancespi_typedef-instance", 
-            "text": "Set the SPI instance (SPI1/SPI2/...) used by this object.  This method must be called before begin()!   Example: If you want to use a library that has hardcoded  SPI  in it, but you want to use SPI2:   void setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
+            "text": "Set the alternative SPI instance (SPI1/SPI2/...) used by this object.  This method must be called before begin()!   Example: If you want to use a library that has hardcoded  SPI  in it, but you want to use SPI2:   #include  SPI.h \n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
             "title": "stm32SetInstance(SPI_TypeDef *instance);"
         }, 
         {
             "location": "/i2c/", 
-            "text": "Wire - I2C\n\n\nTODO write doc", 
+            "text": "I2C\n\n\nTo use the hardware I2C, include it in your code:\n\n\n#include \nWire.h\n\n\n\n\n\nThe first I2C object is explicitly created, and is connected to the I2C1 instance.\n\n\nPlease check your board documentation to see which pins is I2C connected to by default.\n\n\nTo use additional I2C, use the constructors to create your object, or the stm32SetInstance() method.\n\n\nbegin()\n\n\nStart the I2C in master mode with default 100Khz speed.\n\n\nbegin(uint8_t address)\n\n\nStart the I2C in slave mode with default 100Khz speed. Slave mode currently does not work in F1 chips.\n\n\nbeginTransmission(uint8_t address)\n\n\nSet the address for the next transmission.\n\n\nwrite(uint8_t data)\n\n\nMaster mode: writes the data into a buffer to be send out in \nendTransmission\n.\n\n\nSlave mode: Send response to master. Currently can only be used inside the onRequest callback.\n\n\nendTransmission()\n\n\nSend the buffer to the slave.\n\n\nuint8_t requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)\n\n\nRequests data from the slave. Returns the number of bytes read into the receive buffer.\n\n\nThe data then can be retrieved using \nread()\n. \n\n\nint available()\n\n\nReturns data available in the receive buffer.\n\n\nint read()\n\n\nReturns the next byte in the receive buffer, or -1, if no more data available.\n\n\nSetClock(uint32_t frequency)\n\n\nSet the I2C clock frequency, and reinitializes the I2C peripheral.\n\n\nonReceive(void (*callback)(int))\n\n\nSets the callback function in slave mode. When data is received, this will be called. \n\n\nThe current implementation calls this for every byte received.\n\n\nonRequest(void (*callback)(void))\n\n\nSets the callback function in slave mode. When data is requested, this will be called.\n\n\nYou can respond to the master using the \nwrite()\n method.\n\n\nstm32SetSDA(uint8_t pin);\n\n\nSet the SDA pin used by this I2C.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCL(uint8_t pin);\n\n\nSet the alternative SCL pin used by this I2C.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(I2C_TypeDef *instance);\n\n\nSet the alternative I2C instance (I2C1/I2C2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nI2C\n in it, but you want to use I2C2:\n\n\n\n\n#include \nWire.h\n\n\nvoid setup() {\n    Wire.stm32SetInstance(I2C2);\n    Wire.stm32SetSDA(sda);\n    Wire.stm32SetSCL(scl);\n    ...\n    library.begin();\n}", 
             "title": "I2C"
         }, 
         {
-            "location": "/i2c/#wire-i2c", 
-            "text": "TODO write doc", 
-            "title": "Wire - I2C"
+            "location": "/i2c/#i2c", 
+            "text": "To use the hardware I2C, include it in your code:  #include  Wire.h   The first I2C object is explicitly created, and is connected to the I2C1 instance.  Please check your board documentation to see which pins is I2C connected to by default.  To use additional I2C, use the constructors to create your object, or the stm32SetInstance() method.", 
+            "title": "I2C"
+        }, 
+        {
+            "location": "/i2c/#begin", 
+            "text": "Start the I2C in master mode with default 100Khz speed.", 
+            "title": "begin()"
+        }, 
+        {
+            "location": "/i2c/#beginuint8_t-address", 
+            "text": "Start the I2C in slave mode with default 100Khz speed. Slave mode currently does not work in F1 chips.", 
+            "title": "begin(uint8_t address)"
+        }, 
+        {
+            "location": "/i2c/#begintransmissionuint8_t-address", 
+            "text": "Set the address for the next transmission.", 
+            "title": "beginTransmission(uint8_t address)"
+        }, 
+        {
+            "location": "/i2c/#writeuint8_t-data", 
+            "text": "Master mode: writes the data into a buffer to be send out in  endTransmission .  Slave mode: Send response to master. Currently can only be used inside the onRequest callback.", 
+            "title": "write(uint8_t data)"
+        }, 
+        {
+            "location": "/i2c/#endtransmission", 
+            "text": "Send the buffer to the slave.", 
+            "title": "endTransmission()"
+        }, 
+        {
+            "location": "/i2c/#uint8_t-requestfromuint8_t-address-uint8_t-quantity-uint8_t-sendstop", 
+            "text": "Requests data from the slave. Returns the number of bytes read into the receive buffer.  The data then can be retrieved using  read() .", 
+            "title": "uint8_t requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)"
+        }, 
+        {
+            "location": "/i2c/#int-available", 
+            "text": "Returns data available in the receive buffer.", 
+            "title": "int available()"
+        }, 
+        {
+            "location": "/i2c/#int-read", 
+            "text": "Returns the next byte in the receive buffer, or -1, if no more data available.", 
+            "title": "int read()"
+        }, 
+        {
+            "location": "/i2c/#setclockuint32_t-frequency", 
+            "text": "Set the I2C clock frequency, and reinitializes the I2C peripheral.", 
+            "title": "SetClock(uint32_t frequency)"
+        }, 
+        {
+            "location": "/i2c/#onreceivevoid-callbackint", 
+            "text": "Sets the callback function in slave mode. When data is received, this will be called.   The current implementation calls this for every byte received.", 
+            "title": "onReceive(void (*callback)(int))"
+        }, 
+        {
+            "location": "/i2c/#onrequestvoid-callbackvoid", 
+            "text": "Sets the callback function in slave mode. When data is requested, this will be called.  You can respond to the master using the  write()  method.", 
+            "title": "onRequest(void (*callback)(void))"
+        }, 
+        {
+            "location": "/i2c/#stm32setsdauint8_t-pin", 
+            "text": "Set the SDA pin used by this I2C.  This method must be called before begin()!", 
+            "title": "stm32SetSDA(uint8_t pin);"
+        }, 
+        {
+            "location": "/i2c/#stm32setscluint8_t-pin", 
+            "text": "Set the alternative SCL pin used by this I2C.  This method must be called before begin()!", 
+            "title": "stm32SetSCL(uint8_t pin);"
+        }, 
+        {
+            "location": "/i2c/#stm32setinstancei2c_typedef-instance", 
+            "text": "Set the alternative I2C instance (I2C1/I2C2/...) used by this object.  This method must be called before begin()!   Example: If you want to use a library that has hardcoded  I2C  in it, but you want to use I2C2:   #include  Wire.h \n\nvoid setup() {\n    Wire.stm32SetInstance(I2C2);\n    Wire.stm32SetSDA(sda);\n    Wire.stm32SetSCL(scl);\n    ...\n    library.begin();\n}", 
+            "title": "stm32SetInstance(I2C_TypeDef *instance);"
         }, 
         {
             "location": "/uart/", 

@@ -218,8 +218,13 @@
                 <div class="col-md-9" role="main">
 
 <h2 id="spi">SPI</h2>
-<p>The first SPI is connected to SPI1 instance.
-To use additional SPI, use the constructors to create your object, or the stm32_set_instance() method.</p>
+<p>To use the hardware SPI, include it in your code:</p>
+<pre><code class="c++">#include &quot;SPI.h&quot;
+</code></pre>
+
+<p>The first SPI object is explicitly created, and is connected to the SPI1 instance.</p>
+<p><strong>Please check your board documentation to see which pins is SPI connected to by default.</strong></p>
+<p>To use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.</p>
 <h4 id="spiclassspi_typedef-instance"><strong><code>SPIClass(SPI_TypeDef *instance)</code></strong></h4>
 <p>Create a SPI object that is connected to the instance, on the default mosi/miso/sck. 
 To avoid confusion, it is better to use the constructor below with implicit pins.</p>
@@ -285,18 +290,20 @@ void setup() {
 <p>Set the MOSI pin used by this SPI.</p>
 <p><strong>This method must be called before begin()!</strong></p>
 <h4 id="stm32setmisouint8_t-pin"><strong><code>stm32SetMISO(uint8_t pin);</code></strong></h4>
-<p>Set the MOSI pin used by this SPI.</p>
+<p>Set the alternative MISO pin used by this SPI.</p>
 <p><strong>This method must be called before begin()!</strong></p>
 <h4 id="stm32setsckuint8_t-pin"><strong><code>stm32SetSCK(uint8_t pin);</code></strong></h4>
-<p>Set the MOSI pin used by this SPI.</p>
+<p>Set the alternative SCK pin used by this SPI.</p>
 <p><strong>This method must be called before begin()!</strong></p>
 <h4 id="stm32setinstancespi_typedef-instance"><strong><code>stm32SetInstance(SPI_TypeDef *instance);</code></strong></h4>
-<p>Set the SPI instance (SPI1/SPI2/...) used by this object.</p>
+<p>Set the alternative SPI instance (SPI1/SPI2/...) used by this object.</p>
 <p><strong>This method must be called before begin()!</strong></p>
 <blockquote>
 <p>Example: If you want to use a library that has hardcoded <code>SPI</code> in it, but you want to use SPI2:</p>
 </blockquote>
-<pre><code class="c++">void setup() {
+<pre><code class="c++">#include &quot;SPI.h&quot;
+
+void setup() {
     SPI.stm32SetInstance(SPI2);
     SPI.stm32SetMOSI(mosi);
     SPI.stm32SetMISO(miso);

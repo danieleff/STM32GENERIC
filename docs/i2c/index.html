@@ -179,7 +179,35 @@
     <ul class="nav bs-sidenav">
     
     
-        <li class="main active"><a href="#wire-i2c">Wire - I2C</a></li>
+        <li class="main active"><a href="#i2c">I2C</a></li>
+        
+            <li><a href="#begin">begin()</a></li>
+        
+            <li><a href="#beginuint8_t-address">begin(uint8_t address)</a></li>
+        
+            <li><a href="#begintransmissionuint8_t-address">beginTransmission(uint8_t address)</a></li>
+        
+            <li><a href="#writeuint8_t-data">write(uint8_t data)</a></li>
+        
+            <li><a href="#endtransmission">endTransmission()</a></li>
+        
+            <li><a href="#uint8_t-requestfromuint8_t-address-uint8_t-quantity-uint8_t-sendstop">uint8_t requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)</a></li>
+        
+            <li><a href="#int-available">int available()</a></li>
+        
+            <li><a href="#int-read">int read()</a></li>
+        
+            <li><a href="#setclockuint32_t-frequency">SetClock(uint32_t frequency)</a></li>
+        
+            <li><a href="#onreceivevoid-callbackint">onReceive(void (*callback)(int))</a></li>
+        
+            <li><a href="#onrequestvoid-callbackvoid">onRequest(void (*callback)(void))</a></li>
+        
+            <li><a href="#stm32setsdauint8_t-pin">stm32SetSDA(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setscluint8_t-pin">stm32SetSCL(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setinstancei2c_typedef-instance">stm32SetInstance(I2C_TypeDef *instance);</a></li>
         
     
     
@@ -187,8 +215,63 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h2 id="wire-i2c">Wire - I2C</h2>
-<p>TODO write doc</p></div>
+<h2 id="i2c">I2C</h2>
+<p>To use the hardware I2C, include it in your code:</p>
+<pre><code class="c++">#include &quot;Wire.h&quot;
+</code></pre>
+
+<p>The first I2C object is explicitly created, and is connected to the I2C1 instance.</p>
+<p><strong>Please check your board documentation to see which pins is I2C connected to by default.</strong></p>
+<p>To use additional I2C, use the constructors to create your object, or the stm32SetInstance() method.</p>
+<h4 id="begin"><strong><code>begin()</code></strong></h4>
+<p>Start the I2C in master mode with default 100Khz speed.</p>
+<h4 id="beginuint8_t-address"><strong><code>begin(uint8_t address)</code></strong></h4>
+<p>Start the I2C in slave mode with default 100Khz speed. Slave mode currently does not work in F1 chips.</p>
+<h4 id="begintransmissionuint8_t-address"><strong><code>beginTransmission(uint8_t address)</code></strong></h4>
+<p>Set the address for the next transmission.</p>
+<h4 id="writeuint8_t-data"><strong><code>write(uint8_t data)</code></strong></h4>
+<p>Master mode: writes the data into a buffer to be send out in <code>endTransmission</code>.</p>
+<p>Slave mode: Send response to master. Currently can only be used inside the onRequest callback.</p>
+<h4 id="endtransmission"><strong><code>endTransmission()</code></strong></h4>
+<p>Send the buffer to the slave.</p>
+<h4 id="uint8_t-requestfromuint8_t-address-uint8_t-quantity-uint8_t-sendstop"><strong><code>uint8_t requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)</code></strong></h4>
+<p>Requests data from the slave. Returns the number of bytes read into the receive buffer.</p>
+<p>The data then can be retrieved using <code>read()</code>. </p>
+<h4 id="int-available"><strong><code>int available()</code></strong></h4>
+<p>Returns data available in the receive buffer.</p>
+<h4 id="int-read"><strong><code>int read()</code></strong></h4>
+<p>Returns the next byte in the receive buffer, or -1, if no more data available.</p>
+<h4 id="setclockuint32_t-frequency"><strong><code>SetClock(uint32_t frequency)</code></strong></h4>
+<p>Set the I2C clock frequency, and reinitializes the I2C peripheral.</p>
+<h4 id="onreceivevoid-callbackint"><strong><code>onReceive(void (*callback)(int))</code></strong></h4>
+<p>Sets the callback function in slave mode. When data is received, this will be called. </p>
+<p>The current implementation calls this for every byte received.</p>
+<h4 id="onrequestvoid-callbackvoid"><strong><code>onRequest(void (*callback)(void))</code></strong></h4>
+<p>Sets the callback function in slave mode. When data is requested, this will be called.</p>
+<p>You can respond to the master using the <code>write()</code> method.</p>
+<h4 id="stm32setsdauint8_t-pin"><strong><code>stm32SetSDA(uint8_t pin);</code></strong></h4>
+<p>Set the SDA pin used by this I2C.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setscluint8_t-pin"><strong><code>stm32SetSCL(uint8_t pin);</code></strong></h4>
+<p>Set the alternative SCL pin used by this I2C.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setinstancei2c_typedef-instance"><strong><code>stm32SetInstance(I2C_TypeDef *instance);</code></strong></h4>
+<p>Set the alternative I2C instance (I2C1/I2C2/...) used by this object.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<blockquote>
+<p>Example: If you want to use a library that has hardcoded <code>I2C</code> in it, but you want to use I2C2:</p>
+</blockquote>
+<pre><code class="c++">#include &quot;Wire.h&quot;
+
+void setup() {
+    Wire.stm32SetInstance(I2C2);
+    Wire.stm32SetSDA(sda);
+    Wire.stm32SetSCL(scl);
+    ...
+    library.begin();
+}
+
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
