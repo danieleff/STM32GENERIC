@@ -178,20 +178,31 @@ class load_mcu:
             if not pin.attrib['Type'] == 'I/O':
                 continue
             
-            signals = pin.findall('stm:Signal',  ns)
-            for signal_element in signals:
-                signal = signal_element.attrib['Name']
-                if not signal.startswith('USART') \
-                    and not signal.startswith('SPI') \
-                    and not signal.startswith('I2C') \
-                    and not signal.startswith('TIM') \
-                    and not signal.startswith('ADC1') \
-                    and not signal.startswith('ADC_'):
+            instance_signal_elements = pin.findall('stm:Signal',  ns)
+            for instance_signal_element in instance_signal_elements:
+                instance_signal = instance_signal_element.attrib['Name']
+                
+                if not instance_signal.startswith('USART') \
+                    and not instance_signal.startswith('SPI') \
+                    and not instance_signal.startswith('I2C') \
+                    and not instance_signal.startswith('TIM') \
+                    and not instance_signal.startswith('ADC1') \
+                    and not instance_signal.startswith('ADC_') \
+                    and not instance_signal.startswith('I2S') \
+                    and not instance_signal.startswith('SDIO') \
+                    and not instance_signal.startswith('SDMMC'):
                     continue
                 
                 (instance, sig) = instance_signal.split('_', 1)
-                
-                if instance[:-1].isdigit():
+
+                if instance == 'SDIO':
+                    instance = 'SDIO1'
+                if instance == 'SDMMC1':
+                    instance = 'SDIO1'
+                if instance == 'SDMMC2':
+                    instance = 'SDIO2'
+                    
+                if instance[-1].isdigit():
                     periph = instance[:-1]
                 else:
                     periph = instance
@@ -250,11 +261,24 @@ class load_mcu:
 
         
         for periph in sorted(self.groups):
+            source_code += '\n'
+            source_code += '// --------------------' + periph + '--------------------'
+            source_code += '\n'
+            if 'SDIO' in periph:
+                source_code += '#define STM32_CHIP_HAS_SDIO'
+                source_code += '\n'
+            if 'I2S' in periph:
+                source_code += '#define STM32_CHIP_HAS_I2S'
+                source_code += '\n'
+            
             for sig in sorted(set(self.groups[periph])):
-                
-                if 'SDIO' not in periph and sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK']:
+            
+                if 'SDIO' not in periph and 'I2S' not in periph and sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK', 'NSS']:
                     continue
-                
+                    
+                if 'I2S' == periph and sig == 'CKIN':
+                    continue
+                    
                 source_code += '\n'
                 source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
                 #print self.group_signals
@@ -270,6 +294,8 @@ class load_mcu:
                             split = signal.split('_')
                             p = split[0]
                             
+                            p = p.replace('I2S', 'SPI');
+                
                             source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
                     
                 source_code += '}; \n'
@@ -283,6 +309,9 @@ class load_mcu:
                 continue
                 
             (_, channel) = instance_signal.split('_', 1)
+            if not channel[2:].isdigit():
+                continue
+                
             pin = self.defaultremaps[instance_signal]
             source_code += '    { GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ADC_CHANNEL_' + channel[2:].ljust(3) + '}, \n'
         
