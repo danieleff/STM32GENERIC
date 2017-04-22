@@ -4,7 +4,7 @@
 //GPIO remap/alternate function xml: GPIO-STM32F107_gpio_v1_0_Modes.xml
 
 /*
-const stm32_port_pin_type port_pin_list[] = {
+const stm32_port_pin_type variant_pin_list[] = {
   { GPIOA, GPIO_PIN_0 },
   { GPIOA, GPIO_PIN_1 },
   { GPIOA, GPIO_PIN_2 },
@@ -207,6 +207,10 @@ static void AF__HAL_AFIO_REMAP_USART3_DISABLE(void) { __HAL_AFIO_REMAP_USART3_DI
 static void AF__HAL_AFIO_REMAP_USART3_ENABLE(void) { __HAL_AFIO_REMAP_USART3_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_USART3_PARTIAL(void) { __HAL_AFIO_REMAP_USART3_PARTIAL(); }
 
+// --------------------ADC--------------------
+
+// --------------------I2C--------------------
+
 const stm32_af_pin_list_type chip_af_i2c_scl [] = {
 //I2C1
     { I2C1  , GPIOB, GPIO_PIN_6  , AF__HAL_AFIO_REMAP_I2C1_DISABLE}, 
@@ -218,6 +222,42 @@ const stm32_af_pin_list_type chip_af_i2c_sda [] = {
     { I2C1  , GPIOB, GPIO_PIN_7  , AF__HAL_AFIO_REMAP_I2C1_DISABLE}, 
     { I2C1  , GPIOB, GPIO_PIN_9  , AF__HAL_AFIO_REMAP_I2C1_ENABLE}, 
 }; 
+
+// --------------------I2S--------------------
+#define STM32_CHIP_HAS_I2S
+
+const stm32_af_pin_list_type chip_af_i2s_ck [] = {
+//I2S2
+    { SPI2  , GPIOB, GPIO_PIN_13 , AF_NO_REMAP    }, 
+//I2S3
+    { SPI3  , GPIOB, GPIO_PIN_3  , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
+    { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+}; 
+
+const stm32_af_pin_list_type chip_af_i2s_mck [] = {
+//I2S2
+    { SPI2  , GPIOC, GPIO_PIN_6  , AF_NO_REMAP    }, 
+//I2S3
+    { SPI3  , GPIOC, GPIO_PIN_7  , AF_NO_REMAP    }, 
+}; 
+
+const stm32_af_pin_list_type chip_af_i2s_sd [] = {
+//I2S2
+    { SPI2  , GPIOB, GPIO_PIN_15 , AF_NO_REMAP    }, 
+//I2S3
+    { SPI3  , GPIOB, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
+    { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+}; 
+
+const stm32_af_pin_list_type chip_af_i2s_ws [] = {
+//I2S2
+    { SPI2  , GPIOB, GPIO_PIN_12 , AF_NO_REMAP    }, 
+//I2S3
+    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOA, GPIO_PIN_15 , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
+}; 
+
+// --------------------SPI--------------------
 
 const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI1
@@ -241,6 +281,17 @@ const stm32_af_pin_list_type chip_af_spi_mosi [] = {
     { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
 }; 
 
+const stm32_af_pin_list_type chip_af_spi_nss [] = {
+//SPI1
+    { SPI1  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI1_DISABLE}, 
+    { SPI1  , GPIOA, GPIO_PIN_15 , AF__HAL_AFIO_REMAP_SPI1_ENABLE}, 
+//SPI2
+    { SPI2  , GPIOB, GPIO_PIN_12 , AF_NO_REMAP    }, 
+//SPI3
+    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOA, GPIO_PIN_15 , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
+}; 
+
 const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_SPI1_DISABLE}, 
@@ -251,6 +302,10 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
     { SPI3  , GPIOB, GPIO_PIN_3  , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
     { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
 }; 
+
+// --------------------TIM--------------------
+
+// --------------------USART--------------------
 
 const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART1

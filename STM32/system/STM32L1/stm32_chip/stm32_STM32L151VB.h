@@ -4,7 +4,7 @@
 //GPIO remap/alternate function xml: GPIO-STM32L152x8_gpio_v1_0_Modes.xml
 
 /*
-const stm32_port_pin_type port_pin_list[] = {
+const stm32_port_pin_type variant_pin_list[] = {
   { GPIOA, GPIO_PIN_0 },
   { GPIOA, GPIO_PIN_1 },
   { GPIOA, GPIO_PIN_2 },
@@ -180,6 +180,10 @@ NUM_PINS,
 };
 */
 
+// --------------------ADC--------------------
+
+// --------------------I2C--------------------
+
 const stm32_af_pin_list_type chip_af_i2c_scl [] = {
 //I2C1
     { I2C1  , GPIOB, GPIO_PIN_6  , GPIO_AF4_I2C1  }, 
@@ -195,6 +199,8 @@ const stm32_af_pin_list_type chip_af_i2c_sda [] = {
 //I2C2
     { I2C2  , GPIOB, GPIO_PIN_11 , GPIO_AF4_I2C2  }, 
 }; 
+
+// --------------------SPI--------------------
 
 const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI1
@@ -218,6 +224,16 @@ const stm32_af_pin_list_type chip_af_spi_mosi [] = {
     { SPI2  , GPIOD, GPIO_PIN_4  , GPIO_AF5_SPI2  }, 
 }; 
 
+const stm32_af_pin_list_type chip_af_spi_nss [] = {
+//SPI1
+    { SPI1  , GPIOA, GPIO_PIN_4  , GPIO_AF5_SPI1  }, 
+    { SPI1  , GPIOA, GPIO_PIN_15 , GPIO_AF5_SPI1  }, 
+    { SPI1  , GPIOE, GPIO_PIN_12 , GPIO_AF5_SPI1  }, 
+//SPI2
+    { SPI2  , GPIOB, GPIO_PIN_12 , GPIO_AF5_SPI2  }, 
+    { SPI2  , GPIOD, GPIO_PIN_0  , GPIO_AF5_SPI2  }, 
+}; 
+
 const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_5  , GPIO_AF5_SPI1  }, 
@@ -227,6 +243,14 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
     { SPI2  , GPIOB, GPIO_PIN_13 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOD, GPIO_PIN_1  , GPIO_AF5_SPI2  }, 
 }; 
+
+// --------------------TIM--------------------
+
+// --------------------TIM1--------------------
+
+// --------------------TIMX--------------------
+
+// --------------------USART--------------------
 
 const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART1
