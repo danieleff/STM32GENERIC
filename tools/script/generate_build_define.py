@@ -226,7 +226,7 @@ class load_mcu:
         gpio_pins = [pin for pin in self.pins if pin.startswith('P') and pin != 'PDR_ON']
         
         source_code += '/*\n'
-        source_code += 'const stm32_port_pin_type port_pin_list[] = {\n'
+        source_code += 'const stm32_port_pin_type variant_pin_list[] = {\n'
         
         for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
              source_code += '  { GPIO' +  pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(2) + '},\n'
