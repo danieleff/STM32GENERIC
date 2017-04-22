@@ -55,6 +55,40 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin);
 
+#if defined(SDIO) || defined(SDMMC)
+
+#ifndef SD_TypeDef
+#define SD_TypeDef SDIO_TypeDef
+#endif
+
+void stm32AfSDIO1BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin);
+
+void stm32AfSDIO4BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin,
+    GPIO_TypeDef *d1Port, uint32_t d1Pin,
+    GPIO_TypeDef *d2Port, uint32_t d2Pin,
+    GPIO_TypeDef *d3Port, uint32_t d3Pin);
+
+void stm32AfSDIO8BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin,
+    GPIO_TypeDef *d1Port, uint32_t d1Pin,
+    GPIO_TypeDef *d2Port, uint32_t d2Pin,
+    GPIO_TypeDef *d3Port, uint32_t d3Pin,
+    GPIO_TypeDef *d4Port, uint32_t d4Pin,
+    GPIO_TypeDef *d5Port, uint32_t d5Pin,
+    GPIO_TypeDef *d6Port, uint32_t d6Pin,
+    GPIO_TypeDef *d7Port, uint32_t d7Pin);
+
+#endif
+
+
 /**
  * Get the clock frequency associated with the peripheral instance
  */

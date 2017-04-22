@@ -58,3 +58,60 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     stm32AfInit(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
     stm32AfInit(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
 }
+
+#ifdef STM32_CHIP_HAS_SDIO
+
+void stm32AfSDIO1BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin
+    ) {
+
+    stm32AfInit(chip_af_sdio_ck, sizeof(chip_af_sdio_ck) / sizeof(chip_af_sdio_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_cmd, sizeof(chip_af_sdio_cmd) / sizeof(chip_af_sdio_cmd[0]), instance, cmdPort, cmdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d0, sizeof(chip_af_sdio_d0) / sizeof(chip_af_sdio_d0[0]), instance, d0Port, d0Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+}
+
+void stm32AfSDIO4BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin,
+    GPIO_TypeDef *d1Port, uint32_t d1Pin,
+    GPIO_TypeDef *d2Port, uint32_t d2Pin,
+    GPIO_TypeDef *d3Port, uint32_t d3Pin
+    ) {
+
+    stm32AfInit(chip_af_sdio_ck, sizeof(chip_af_sdio_ck) / sizeof(chip_af_sdio_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_cmd, sizeof(chip_af_sdio_cmd) / sizeof(chip_af_sdio_cmd[0]), instance, cmdPort, cmdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d0, sizeof(chip_af_sdio_d0) / sizeof(chip_af_sdio_d0[0]), instance, d0Port, d0Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d1, sizeof(chip_af_sdio_d1) / sizeof(chip_af_sdio_d1[0]), instance, d1Port, d1Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d2, sizeof(chip_af_sdio_d2) / sizeof(chip_af_sdio_d2[0]), instance, d2Port, d2Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d3, sizeof(chip_af_sdio_d3) / sizeof(chip_af_sdio_d3[0]), instance, d3Port, d3Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+}
+
+void stm32AfSDIO8BitInit(const SD_TypeDef *instance,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *cmdPort, uint32_t cmdPin,
+    GPIO_TypeDef *d0Port, uint32_t d0Pin,
+    GPIO_TypeDef *d1Port, uint32_t d1Pin,
+    GPIO_TypeDef *d2Port, uint32_t d2Pin,
+    GPIO_TypeDef *d3Port, uint32_t d3Pin,
+    GPIO_TypeDef *d4Port, uint32_t d4Pin,
+    GPIO_TypeDef *d5Port, uint32_t d5Pin,
+    GPIO_TypeDef *d6Port, uint32_t d6Pin,
+    GPIO_TypeDef *d7Port, uint32_t d7Pin
+    ) {
+
+    stm32AfInit(chip_af_sdio_ck, sizeof(chip_af_sdio_ck) / sizeof(chip_af_sdio_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_cmd, sizeof(chip_af_sdio_cmd) / sizeof(chip_af_sdio_cmd[0]), instance, cmdPort, cmdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d0, sizeof(chip_af_sdio_d0) / sizeof(chip_af_sdio_d0[0]), instance, d0Port, d0Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d1, sizeof(chip_af_sdio_d1) / sizeof(chip_af_sdio_d1[0]), instance, d1Port, d1Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d2, sizeof(chip_af_sdio_d2) / sizeof(chip_af_sdio_d2[0]), instance, d2Port, d2Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d3, sizeof(chip_af_sdio_d3) / sizeof(chip_af_sdio_d3[0]), instance, d3Port, d3Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d4, sizeof(chip_af_sdio_d4) / sizeof(chip_af_sdio_d4[0]), instance, d4Port, d4Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d5, sizeof(chip_af_sdio_d5) / sizeof(chip_af_sdio_d5[0]), instance, d5Port, d5Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d6, sizeof(chip_af_sdio_d6) / sizeof(chip_af_sdio_d6[0]), instance, d6Port, d6Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_sdio_d7, sizeof(chip_af_sdio_d7) / sizeof(chip_af_sdio_d7[0]), instance, d7Port, d7Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+}
+
+#endif
