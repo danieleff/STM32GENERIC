@@ -138,11 +138,11 @@ class load_mcu:
             
             gpio_signals = pin.findall('stm:PinSignal',  ns)
             for gpio_signal in gpio_signals:
-                signal = gpio_signal.attrib['Name']
+                instance_signal = gpio_signal.attrib['Name']
                 
-                periph = signal.split('_')[0]
-                if signal not in self.remaps:
-                    self.remaps[signal] = {}
+                instance = instance_signal.split('_')[0]
+                if instance_signal not in self.remaps:
+                    self.remaps[instance_signal] = {}
                 
                 if self.mcu_name.startswith('STM32F1'):
                     remap_function = False
@@ -150,22 +150,22 @@ class load_mcu:
                     remap_block = gpio_signal.find('stm:RemapBlock', ns)
                     if remap_block is not None:
                         if 'DefaultRemap' in remap_block.attrib:
-                            remap_function = 'AF__HAL_AFIO_REMAP_' + periph + '_DISABLE'
-                            self.defaultremaps[signal] = pin_name
+                            remap_function = 'AF__HAL_AFIO_REMAP_' + instance + '_DISABLE'
+                            self.defaultremaps[instance_signal] = pin_name
                         else:
                             remap_function = 'AF' + remap_block.find('stm:SpecificParameter', ns).find('stm:PossibleValue', ns).text
                     else:
                         remap_function = 'AF__NO_REMAP'
-                        if signal not in self.defaultremaps:
-                            self.defaultremaps[signal] = pin_name
+                        if instance_signal not in self.defaultremaps:
+                            self.defaultremaps[instance_signal] = pin_name
                             
-                    self.remaps[signal][pin_name] = remap_function
+                    self.remaps[instance_signal][pin_name] = remap_function
                     if remap_function not in self.af_functions:
                         self.af_functions.append(remap_function)
                     
                 else:
                     gpio_af = gpio_signal.find("stm:SpecificParameter[@Name='GPIO_AF']", ns)
-                    self.remaps[signal][pin_name] = gpio_af.find("stm:PossibleValue", ns).text
+                    self.remaps[instance_signal][pin_name] = gpio_af.find("stm:PossibleValue", ns).text
             
     def process_pins(self):
         for pin in self.mcu_pins:
@@ -189,21 +189,26 @@ class load_mcu:
                     and not signal.startswith('ADC_'):
                     continue
                 
-                (periph, sig) = signal.split('_', 1)
+                (instance, sig) = instance_signal.split('_', 1)
                 
-                if periph not in self.peripherals:
-                    self.peripherals.append(periph)
+                if instance[:-1].isdigit():
+                    periph = instance[:-1]
+                else:
+                    periph = instance
                 
-                self.groups.setdefault(periph[:-1], []).append(sig)
+                if instance not in self.peripherals:
+                    self.peripherals.append(instance)
                 
-                self.group_signals.setdefault(periph[:-1] + '_' + sig, []).append(signal)
+                self.groups.setdefault(periph, []).append(sig)
                 
-                if signal not in self.defaultremaps:
-                    self.defaultremaps[signal] = pin_name
+                self.group_signals.setdefault(periph + '_' + sig, []).append(instance_signal)
+                
+                if instance_signal not in self.defaultremaps:
+                    self.defaultremaps[instance_signal] = pin_name
 
-                if signal not in self.remaps:
-                    self.remaps[signal] = {}
-                    self.remaps[signal][pin_name] = 'AF_NO_REMAP'
+                if instance_signal not in self.remaps:
+                    self.remaps[instance_signal] = {}
+                    self.remaps[instance_signal][pin_name] = 'AF_NO_REMAP'
 
     def generate_source_code(self):
         self.peripherals.sort()
@@ -247,7 +252,7 @@ class load_mcu:
         for periph in sorted(self.groups):
             for sig in sorted(set(self.groups[periph])):
                 
-                if sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK']:
+                if 'SDIO' not in periph and sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK']:
                     continue
                 
                 source_code += '\n'
