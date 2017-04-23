@@ -144,7 +144,7 @@ BLACK_F407VE.pid.0=0x5711
 BLACK_F407VE.upload.maximum_size=524288
 BLACK_F407VE.upload.maximum_data_size=131072
 
-BLACK_F407VE.build.mcu=cortex-m4
+BLACK_F407VE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 BLACK_F407VE.build.core=arduino
 BLACK_F407VE.build.variant=BLACK_F407VE
 BLACK_F407VE.build.board=BLACK_F407VE
@@ -209,7 +209,7 @@ NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.massstorage_drive=NODE_F103RB
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE=Nucleo-F303RE
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.upload.maximum_size=524288
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.upload.maximum_data_size=81920
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.mcu=cortex-m4
+NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.series=STM32F3
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.variant=NUCLEO_F303RE
 NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
@@ -218,7 +218,7 @@ NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.massstorage_drive=NODE_F303RE
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE=Nucleo-F411RE
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.upload.maximum_size=524288
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.upload.maximum_data_size=131072
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.mcu=cortex-m4
+NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.series=STM32F4
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.variant=NUCLEO_F411RE
 NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
@@ -245,7 +245,7 @@ NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.massstorage_drive=NODE_L152RE
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG=Nucleo-L476RG
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.upload.maximum_size=1024
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.upload.maximum_data_size=131072
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.mcu=cortex-m4
+NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.series=STM32L4
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.variant=NUCLEO_L476RG
 NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
@@ -316,7 +316,7 @@ DISCOVERY_F407VG.upload.maximum_data_size=131072
 DISCOVERY_F407VG.build.core=arduino
 DISCOVERY_F407VG.build.board=DISCOVERY_F407VG
 
-DISCOVERY_F407VG.build.mcu=cortex-m4
+DISCOVERY_F407VG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F407VG.build.series=STM32F4
 DISCOVERY_F407VG.build.variant=DISCOVERY_F407VG
 DISCOVERY_F407VG.build.extra_flags=-DSTM32F407VG -DHSE_VALUE=8000000
