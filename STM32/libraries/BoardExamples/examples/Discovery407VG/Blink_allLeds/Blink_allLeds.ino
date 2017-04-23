@@ -3,13 +3,13 @@
 
 #define GREENLED                PD12
 #define ORANGELED               PD13
-#define GREDLED                 PD14
+#define REDLED                  PD14
 #define BLUELED                 PD15
 #define REDLEDOTGOVERCURRENT     PD5
 
 
 #define NUMLEDS 5
-const uint8_t Led[] = {GREENLED, ORANGELED, GREDLED, BLUELED, REDLEDOTGOVERCURRENT};
+const uint8_t Led[] = {GREENLED, ORANGELED, REDLED, BLUELED, REDLEDOTGOVERCURRENT};
 
 void setup()
 {
