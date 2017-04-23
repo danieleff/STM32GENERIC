@@ -10,6 +10,12 @@ TwoWire::TwoWire(I2C_TypeDef *instance) {
     handle.Instance = instance;
 }
 
+TwoWire::TwoWire(I2C_TypeDef *instance, uint8_t sda, uint8_t scl) {
+    handle.Instance = instance;
+    stm32SetSDA(sda);
+    stm32SetSCL(scl);
+}
+
 void TwoWire::begin(void) {
     rxBufferIndex = 0;
     rxBufferLength = 0;

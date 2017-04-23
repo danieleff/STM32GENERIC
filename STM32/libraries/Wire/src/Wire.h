@@ -59,6 +59,9 @@ class TwoWire : public Stream {
     uint32_t sclPin = 0;
 
     TwoWire(I2C_TypeDef *instance);
+    
+    TwoWire(I2C_TypeDef *instance, uint8_t sda, uint8_t scl);
+    
     void begin();
     void begin(uint8_t);
     void begin(int);
