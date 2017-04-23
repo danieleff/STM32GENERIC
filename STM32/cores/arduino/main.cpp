@@ -32,6 +32,11 @@ void setupUSB() { }
 
 int main(void)
 {
+    //Used by FreeRTOS, see http://www.freertos.org/RTOS-Cortex-M3-M4.html
+    #ifdef NVIC_PRIORITYGROUP_4
+    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+    #endif
+
 	init();
 
 	initVariant();
