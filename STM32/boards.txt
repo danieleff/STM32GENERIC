@@ -333,6 +333,38 @@ DISCOVERY_F407VG.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Se
 DISCOVERY_F407VG.menu.serial.SerialUART1=SerialUART1 [PA9/PA10]
 DISCOVERY_F407VG.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
+################################################################################
+# Discovery F429ZI board
+
+DISCOVERY_F429ZI.name = Discovery F429ZI
+
+# are this the ST-LINK USB IDs ?
+DISCOVERY_F429ZI.vid.0=0x0483
+DISCOVERY_F429ZI.pid.0=0x3748
+
+# TBD: correct memory settings here and in ldscript !!
+DISCOVERY_F429ZI.upload.maximum_size=1048576
+DISCOVERY_F429ZI.upload.maximum_data_size=131072
+
+DISCOVERY_F429ZI.build.core=arduino
+DISCOVERY_F429ZI.build.board=DISCOVERY_F429ZI
+
+DISCOVERY_F429ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+DISCOVERY_F429ZI.build.series=STM32F4
+DISCOVERY_F429ZI.build.variant=DISCOVERY_F429ZI
+DISCOVERY_F429ZI.build.extra_flags=-DSTM32F429ZI -DHSE_VALUE=8000000
+
+DISCOVERY_F429ZI.upload.protocol=STLink
+DISCOVERY_F429ZI.upload.tool=stlink_upload
+
+DISCOVERY_F429ZI.menu.usb.SerialUSB=Serial [Virtual COM port]
+DISCOVERY_F429ZI.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+DISCOVERY_F429ZI.menu.usb.Disabled=Disabled, no USB
+
+DISCOVERY_F429ZI.menu.serial.SerialUSB=SerialUSB
+DISCOVERY_F429ZI.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+DISCOVERY_F429ZI.menu.serial.SerialUART1=SerialUART1 [PA9/PA10]
+DISCOVERY_F429ZI.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
 ################################################################################
 # Discovery F746NG board
