@@ -137,7 +137,7 @@ size_t SerialUART::write(const uint8_t c) {
   
   txBuffer[txEnd % BUFFER_SIZE] = c;
   txEnd++;
-  if (txEnd == txStart + 1) {
+  if (txEnd % BUFFER_SIZE == (txStart + 1) % BUFFER_SIZE) {
     HAL_UART_Transmit_IT(handle, &txBuffer[txStart % BUFFER_SIZE], 1);
   }
   return 1;
