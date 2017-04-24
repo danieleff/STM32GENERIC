@@ -14,7 +14,7 @@ const uint8_t Led[] = {GREENLED, REDLED, OTGFSOC_LED};
 void setup()
 {
   for (int n = 0; n < NUMLEDS; n++)  pinMode(Led[n], OUTPUT);
-  //pinMode(OTGFSOC_LED,PULL_DOWN); // needed to protect STMPS2141 FAULT output from shortcutting PC5 on power fault
+  //pinMode(OTGFSOC_LED,PULL_UP); // needed to protect STMPS2141 FAULT output from shortcutting PC5 on power fault
 }
 
 void setLed(uint8_t n, uint8_t state)
