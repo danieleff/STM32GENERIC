@@ -38,7 +38,7 @@ extern const stm32_port_pin_type variant_pin_list[NUM_PINS];
 /**
  * Start clock for the fedined port
  */
-void stm32_gpio_clock_enable(GPIO_TypeDef *port);
+void stm32GpioClockEnable(GPIO_TypeDef *port);
 
 /**
  * If PWM is used at least once, this method is set to the PWM disable function in stm32_PWM.c
