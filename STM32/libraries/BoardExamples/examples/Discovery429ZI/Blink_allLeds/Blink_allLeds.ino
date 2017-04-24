@@ -6,8 +6,6 @@
 #define REDLED                  PG14
 #define OTGFSOC_LED              PC5
 
-
-
 #define NUMLEDS 3
 const uint8_t Led[] = {GREENLED, REDLED, OTGFSOC_LED};
 

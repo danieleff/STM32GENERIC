@@ -2,6 +2,13 @@
 #define VARIANT_H
 
 #define LED_BUILTIN PG13
+#define LED_GREEN                   LED_BUILTIN
+#define LED_RED                     PG14 
+#define LED_RED_OTG_OVERCURRENT     PC5
+
+//On-board user button
+#define USER_BTN                    PA0  
+
 
 // Connected to on board LIS3DSH accelerometer, CS: PE3
 #define MOSI PA7

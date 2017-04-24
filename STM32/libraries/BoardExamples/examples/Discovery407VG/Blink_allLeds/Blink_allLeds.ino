@@ -1,15 +1,17 @@
 // blink all LEDs 
-// STM32F4 Discovery
+// STM32F4 Discovery ( STM32F407VG )
 
-#define GREENLED                PD12
-#define ORANGELED               PD13
-#define REDLED                  PD14
-#define BLUELED                 PD15
-#define REDLEDOTGOVERCURRENT     PD5
-
+/*
+#define LED_BUILTIN                 PD12 //18
+#define LED_GREEN                   LED_BUILTIN
+#define LED_BLUE                    PD15 //58
+#define LED_RED                     PD13 //19
+#define LED_ORANGE                  PD13 //57
+#define LED_RED_OTG_OVERCURRENT     PD5
+*/
 
 #define NUMLEDS 5
-const uint8_t Led[] = {GREENLED, ORANGELED, REDLED, BLUELED, REDLEDOTGOVERCURRENT};
+const uint8_t Led[] = {LED_GREEN, LED_ORANGE, LED_RED, LED_BLUE, LED_RED_OTG_OVERCURRENT};
 
 void setup()
 {
