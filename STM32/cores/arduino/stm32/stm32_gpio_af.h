@@ -51,6 +51,11 @@ void stm32AfSPIInit(const SPI_TypeDef *instance,
     GPIO_TypeDef *misoPort, uint32_t misoPin,
 	GPIO_TypeDef *sckPort, uint32_t sckPin);
 
+void stm32AfI2SInit(const SPI_TypeDef *instance,
+    GPIO_TypeDef *sdPort, uint32_t sdPin,
+    GPIO_TypeDef *wsPort, uint32_t wsPin,
+    GPIO_TypeDef *ckPort, uint32_t ckPin);
+
 void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin);
