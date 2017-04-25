@@ -1,27 +1,25 @@
 #ifndef VARIANT_H
 #define VARIANT_H
 
-//On-board LED pin number           PIN  // Arduino Pin Number         
-#define LED_BUILTIN                 PD12 // 18
+//On-board LED pin number           PIN 
+#define LED_BUILTIN PG13
 #define LED_GREEN                   LED_BUILTIN
-#define LED_BLUE                    PD15 // 58
-#define LED_RED                     PD14 // 19
-#define LED_ORANGE                  PD13 // 57
-#define LED_RED_OTG_OVERCURRENT     PD5 // be careful with this led. When using it configure the output as PULL_UP.
+#define LED_RED                     PG14 
+#define LED_RED_OTG_OVERCURRENT     PC5 // be careful with this led. When using it configure the output as PULL_UP.
 
 //On-board user button
-#define USER_BTN                    PA0  // 2
+#define USER_BTN                    PA0  
 
 
 // Connected to on board LIS3DSH accelerometer, CS: PE3
-#define MOSI                        PA7
-#define MISO                        PA6
-#define SCK                         PA5
-#define SS                          PA4
+#define MOSI PA7
+#define MISO PA6
+#define SCK PA5
+#define SS PA4
 
 // Connected to on board CS43L22 audio
-#define SDA                         PB9
-#define SCL                         PB6
+#define SDA PB9
+#define SCL PB6
 
 enum {
    PA0 ,
@@ -104,6 +102,38 @@ enum {
    PE13,
    PE14,
    PE15,
+   PF0 ,
+   PF1 ,
+   PF2 ,
+   PF3 ,
+   PF4 ,
+   PF5 ,
+   PF6 ,
+   PF7 ,
+   PF8 ,
+   PF9 ,
+   PF10,
+   PF11,
+   PF12,
+   PF13,
+   PF14,
+   PF15,
+   PG0 ,
+   PG1 ,
+   PG2 ,
+   PG3 ,
+   PG4 ,
+   PG5 ,
+   PG6 ,
+   PG7 ,
+   PG8 ,
+   PG9 ,
+   PG10,
+   PG11,
+   PG12,
+   PG13,
+   PG14,
+   PG15,
    PH0 ,
    PH1 ,
 NUM_PINS,
