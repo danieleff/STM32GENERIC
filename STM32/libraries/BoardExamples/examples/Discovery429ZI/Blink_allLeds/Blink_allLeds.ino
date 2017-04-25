@@ -2,12 +2,10 @@
 // STM32F429 Discovery
 
 #define GREENLED                PG13
-
 #define REDLED                  PG14
-#define OTGFSOC_LED              PC5
 
-#define NUMLEDS 3
-const uint8_t Led[] = {GREENLED, REDLED, OTGFSOC_LED};
+#define NUMLEDS 2
+const uint8_t Led[] = {GREENLED, REDLED};
 
 void setup()
 {

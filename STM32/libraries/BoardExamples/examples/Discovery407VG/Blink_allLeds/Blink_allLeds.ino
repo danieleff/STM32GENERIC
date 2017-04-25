@@ -7,16 +7,15 @@
 #define LED_BLUE                    PD15 //58
 #define LED_RED                     PD13 //19
 #define LED_ORANGE                  PD13 //57
-#define LED_RED_OTG_OVERCURRENT     PD5
+
 */
 
-#define NUMLEDS 5
-const uint8_t Led[] = {LED_GREEN, LED_ORANGE, LED_RED, LED_BLUE, LED_RED_OTG_OVERCURRENT};
+#define NUMLEDS 4
+const uint8_t Led[] = {LED_GREEN, LED_ORANGE, LED_RED, LED_BLUE};
 
 void setup()
 {
   for (int n = 0; n < NUMLEDS; n++)  pinMode(Led[n], OUTPUT);
-  //pinMode(REDLEDOTGOVERCURRENT,PULL_UP); // needed to protect STMPS2141 FAULT output from shortcutting PC5 on power fault
 }
 
 void setLed(uint8_t n, uint8_t state)

@@ -7,7 +7,7 @@
 #define LED_BLUE                    PD15 // 58
 #define LED_RED                     PD14 // 19
 #define LED_ORANGE                  PD13 // 57
-#define LED_RED_OTG_OVERCURRENT     PD5
+#define LED_RED_OTG_OVERCURRENT     PD5 // be careful with this led. When using it configure the output as PULL_UP.
 
 //On-board user button
 #define USER_BTN                    PA0  // 2
