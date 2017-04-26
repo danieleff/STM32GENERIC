@@ -362,58 +362,53 @@
         }, 
         {
             "location": "/add_board/", 
-            "text": "Add your board:\n\n\nTODO explain all steps\n\n\n1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice.\n\n\nTODO make TEMPLATE folder\n\n\n2. Edit the ldscript.ld file\n\n\n3. Edit the variant.h file\n\n\n4. Edit the variant.cpp file\n\n\n5. Edit the systemclock_config.c file\n\n\n6. Edit the boards.txt file\n\n\n7. Restart\n\n\n8. Run the blink example on your new board\n\n\n9. Run the \ntests\n on the board to check if it is working", 
+            "text": "Add your board:\n\n\n1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice.\n\n\nTODO create TEMPLATE, for now just use an existing one\n\n\n2. Edit the ldscript.ld file\n\n\n\n\nChange the _estack to point to the end of RAM\n\n\nFLASH LENGTH to be the size of RAM of the microcontroller\n\n\nRAM LENGTH to be the size of RAM of the microcontroller\n\n\n\n\nTODO CCRAM? SDRAM?\n\n\n3. Edit the variant.h file\n\n\n\n\nCopy the \nenum {\n... from \nsystem/STM32XX/stm32_chip/stm32_STM32XXXXXX.h\n file. \n\n\nIf the board has pin name - pin number assigments (for example arduino headers), rearrange the enum accordingly.\n\n\nChange LED_BUILTIN, MOSI, MISO... macros to point to the primary LED, primary SPI, primary I2C pins.\n\n\nAdd board specific macros if the board has extra leds, buttons, SPI CS select lines etc...\n\n\n\n\n4. Edit the variant.cpp file\n\n\n\n\nCopy the \nconst stm32_port_pin_type variant_pin_list[] = {\n from \nsystem/STM32XX/stm32_chip/stm32_STM32XXXXXX.h\n file.\n\n\nRearrange to be the same as \nenum {\n in \nvariant.h\n\n\n\n\n5. Edit the systemclock_config.c file\n\n\n\n\nRun STM32CubeMX, select the chip for your board\n\n\nIf the board has external crystal, set RCC HSE to crystal. In clock configuration, set PLL Source to HSE, set HSE to the frequency of the board crystal.\n\n\nSet some peripherals (SPI, I2C, SDIO, USB, ...), so that the clock configuration will generate extra code needed for those peripherals, and bounds check the frequencies.\n\n\nGo to clock configuration, set everything to maximum :), let CubeMX figure out the rest.\n\n\nClick generate. Set toolchain/IDE to SW4STM32. Clik OK\n\n\nFrom the generated src/main.c, copy \nvoid SystemClock_Config(void) {\n into your \nvariant/.../systemclock_config.c\n\n\n\n\n6. Edit the boards.txt file\n\n\nTODO create template. For now, copy an existing board\n\n\n\n\nRename the board\n\n\nChange \nbuild.mcu=\n to your cortex-mX version\n\n\nChange \nbuild.series=\n to STM32XX, where XX is the chip series\n\n\nChange \nbuild.extra_flags=-DSTM32XXXXXX\n to be the exact chip version\n\n\nChange \nupload.maximum_size=\n and \nupload.maximum_data_size=\n to the RAM/FLASH size of the chip\n\n\nIf the external crystal is not the board default in \nsystem/STM32XX/HAL_SRC/system_stm32XXxx.c\n, add \n-DHSE_VALUE=8000000\n to \nxxx.build.extra_flags\n\n\nTODO explain upload / usb / serial menu options\n\n\n\n\n7. Restart\n\n\nRestart Arduino IDE\n\n\n8. Run the blink example on your new board\n\n\nRun examples / basic / blink", 
             "title": "Adding a board"
         }, 
         {
             "location": "/add_board/#add-your-board", 
-            "text": "TODO explain all steps", 
+            "text": "", 
             "title": "Add your board:"
         }, 
         {
             "location": "/add_board/#1-create-a-copy-of-the-stm32variantstemplate-folder-with-a-name-of-your-choice", 
-            "text": "TODO make TEMPLATE folder", 
+            "text": "TODO create TEMPLATE, for now just use an existing one", 
             "title": "1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice."
         }, 
         {
             "location": "/add_board/#2-edit-the-ldscriptld-file", 
-            "text": "", 
+            "text": "Change the _estack to point to the end of RAM  FLASH LENGTH to be the size of RAM of the microcontroller  RAM LENGTH to be the size of RAM of the microcontroller   TODO CCRAM? SDRAM?", 
             "title": "2. Edit the ldscript.ld file"
         }, 
         {
             "location": "/add_board/#3-edit-the-varianth-file", 
-            "text": "", 
+            "text": "Copy the  enum { ... from  system/STM32XX/stm32_chip/stm32_STM32XXXXXX.h  file.   If the board has pin name - pin number assigments (for example arduino headers), rearrange the enum accordingly.  Change LED_BUILTIN, MOSI, MISO... macros to point to the primary LED, primary SPI, primary I2C pins.  Add board specific macros if the board has extra leds, buttons, SPI CS select lines etc...", 
             "title": "3. Edit the variant.h file"
         }, 
         {
             "location": "/add_board/#4-edit-the-variantcpp-file", 
-            "text": "", 
+            "text": "Copy the  const stm32_port_pin_type variant_pin_list[] = {  from  system/STM32XX/stm32_chip/stm32_STM32XXXXXX.h  file.  Rearrange to be the same as  enum {  in  variant.h", 
             "title": "4. Edit the variant.cpp file"
         }, 
         {
             "location": "/add_board/#5-edit-the-systemclock_configc-file", 
-            "text": "", 
+            "text": "Run STM32CubeMX, select the chip for your board  If the board has external crystal, set RCC HSE to crystal. In clock configuration, set PLL Source to HSE, set HSE to the frequency of the board crystal.  Set some peripherals (SPI, I2C, SDIO, USB, ...), so that the clock configuration will generate extra code needed for those peripherals, and bounds check the frequencies.  Go to clock configuration, set everything to maximum :), let CubeMX figure out the rest.  Click generate. Set toolchain/IDE to SW4STM32. Clik OK  From the generated src/main.c, copy  void SystemClock_Config(void) {  into your  variant/.../systemclock_config.c", 
             "title": "5. Edit the systemclock_config.c file"
         }, 
         {
             "location": "/add_board/#6-edit-the-boardstxt-file", 
-            "text": "", 
+            "text": "TODO create template. For now, copy an existing board   Rename the board  Change  build.mcu=  to your cortex-mX version  Change  build.series=  to STM32XX, where XX is the chip series  Change  build.extra_flags=-DSTM32XXXXXX  to be the exact chip version  Change  upload.maximum_size=  and  upload.maximum_data_size=  to the RAM/FLASH size of the chip  If the external crystal is not the board default in  system/STM32XX/HAL_SRC/system_stm32XXxx.c , add  -DHSE_VALUE=8000000  to  xxx.build.extra_flags  TODO explain upload / usb / serial menu options", 
             "title": "6. Edit the boards.txt file"
         }, 
         {
             "location": "/add_board/#7-restart", 
-            "text": "", 
+            "text": "Restart Arduino IDE", 
             "title": "7. Restart"
         }, 
         {
             "location": "/add_board/#8-run-the-blink-example-on-your-new-board", 
-            "text": "", 
+            "text": "Run examples / basic / blink", 
             "title": "8. Run the blink example on your new board"
-        }, 
-        {
-            "location": "/add_board/#9-run-the-tests-on-the-board-to-check-if-it-is-working", 
-            "text": "", 
-            "title": "9. Run the tests on the board to check if it is working"
         }, 
         {
             "location": "/test/", 
