@@ -181,14 +181,14 @@ BLACK_F407XX.menu.subboard.BLACK_F407VE.build.extra_flags=-DSTM32F407VE -DHSE_VA
 BLACK_F407XX.menu.subboard.BLACK_F407ZE=BLACK F407ZE (V3.0)
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_size=1232896
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_data_size=131072
-BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.variant=BLACK_F407VE
-BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.variant=BLACK_F407ZE
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.extra_flags=-DSTM32F407ZE -DHSE_VALUE=8000000
 
 BLACK_F407XX.menu.subboard.BLACK_F407ZG=BLACK F407ZG (M4 DEMO)
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_size=1232896
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_data_size=131072
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.variant=BLACK_F407ZG
-BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VALUE=8000000
 
 ################################################################################
 # NUCLEO 64 board
