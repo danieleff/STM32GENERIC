@@ -44,15 +44,22 @@ class SerialUART : public Stream  {
 
 #ifdef USART1
 extern SerialUART SerialUART1;
+#define Serial1 SerialUART1
 #endif
+
 #ifdef USART2
 extern SerialUART SerialUART2;
+#define Serial2 SerialUART2
 #endif
+
 #ifdef USART3
 extern SerialUART SerialUART3;
+#define Serial3 SerialUART3
 #endif
+
 #ifdef USART4
 extern SerialUART SerialUART4;
+#define Serial4 SerialUART4
 #endif
 
 #endif // _UART_CLASS_

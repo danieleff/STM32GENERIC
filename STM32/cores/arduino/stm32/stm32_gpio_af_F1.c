@@ -21,7 +21,7 @@ void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *inst
     if (port == NULL) {
         port = stm32AfDefault(list, size, instance, &pin);
     }
-    stm32_gpio_clock(port);
+    stm32GpioClock(port);
     
     GPIO_InitTypeDef GPIO_InitStruct;
     GPIO_InitStruct.Pin = pin;

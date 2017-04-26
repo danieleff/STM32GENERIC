@@ -177,7 +177,7 @@ BLACK_F407VE.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=Seri
 ################################################################################
 # NUCLEO 64 board
 
-NUCLEO_64.name=Nucleo-64 [BOARD PIN NUMBERS NOT WORKING YET!] (Select board from submenu)
+NUCLEO_64.name=Nucleo-64 boards
 
 NUCLEO_64.vid.0=0x0483
 NUCLEO_64.pid.0=0x5711
