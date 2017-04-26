@@ -1,7 +1,7 @@
 # See: http://code.google.com/p/arduino/wiki/Platforms
 
 menu.serial=Serial communication
-menu.nucleo_board=Nucleo board
+menu.subboard=Specific Board
 menu.upload_method=Upload method
 menu.usb=USB
 
@@ -134,45 +134,61 @@ BluePill.menu.serial.SerialUART1=SerialUART1
 BluePill.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
 ################################################################################
-# BLACK_F407VE board
+# BLACK_F407XX board
 
-BLACK_F407VE.name=BLACK F407VE
+BLACK_F407XX.name=BLACK F407VE/ZE/ZG boards
 
-BLACK_F407VE.vid.0=0x0483
-BLACK_F407VE.pid.0=0x5711
+BLACK_F407XX.vid.0=0x0483
+BLACK_F407XX.pid.0=0x5711
 
-BLACK_F407VE.upload.maximum_size=524288
-BLACK_F407VE.upload.maximum_data_size=131072
+BLACK_F407XX.upload.maximum_size=524288
+BLACK_F407XX.upload.maximum_data_size=131072
 
-BLACK_F407VE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-BLACK_F407VE.build.core=arduino
-BLACK_F407VE.build.variant=BLACK_F407VE
-BLACK_F407VE.build.board=BLACK_F407VE
-BLACK_F407VE.build.series=STM32F4
-BLACK_F407VE.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000
+BLACK_F407XX.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+BLACK_F407XX.build.core=arduino
+BLACK_F407XX.build.board=BLACK_F407XX
+BLACK_F407XX.build.series=STM32F4
 
-BLACK_F407VE.upload.tool=stlink_upload
-BLACK_F407VE.upload.protocol=STLink
+BLACK_F407XX.upload.tool=stlink_upload
+BLACK_F407XX.upload.protocol=STLink
 
-BLACK_F407VE.menu.upload_method.STLinkMethod=STLink [Automatic serial = SerialUSB]
-BLACK_F407VE.menu.upload_method.STLinkMethod.upload.protocol=STLink
-BLACK_F407VE.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
-BLACK_F407VE.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+BLACK_F407XX.menu.upload_method.STLinkMethod=STLink [Automatic serial = SerialUSB]
+BLACK_F407XX.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BLACK_F407XX.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+BLACK_F407XX.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
 
-BLACK_F407VE.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
-BLACK_F407VE.menu.upload_method.serialMethod.upload.protocol=maple_serial
-BLACK_F407VE.menu.upload_method.serialMethod.upload.tool=serial_upload
-BLACK_F407VE.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+BLACK_F407XX.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+BLACK_F407XX.menu.upload_method.serialMethod.upload.protocol=maple_serial
+BLACK_F407XX.menu.upload_method.serialMethod.upload.tool=serial_upload
+BLACK_F407XX.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
 
-BLACK_F407VE.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
-BLACK_F407VE.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-BLACK_F407VE.menu.usb.Disabled=Disabled, no USB
+BLACK_F407XX.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
+BLACK_F407XX.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+BLACK_F407XX.menu.usb.Disabled=Disabled, no USB
 
-BLACK_F407VE.menu.serial.Automatic=Automatically selected based on upload method
-BLACK_F407VE.menu.serial.SerialUSB=SerialUSB
-BLACK_F407VE.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-BLACK_F407VE.menu.serial.SerialUART1=SerialUART1
-BLACK_F407VE.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+BLACK_F407XX.menu.serial.Automatic=Automatically selected based on upload method
+BLACK_F407XX.menu.serial.SerialUSB=SerialUSB
+BLACK_F407XX.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+BLACK_F407XX.menu.serial.SerialUART1=SerialUART1
+BLACK_F407XX.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+
+BLACK_F407XX.menu.subboard.BLACK_F407VE=BLACK F407VE (V2.0)
+BLACK_F407XX.menu.subboard.BLACK_F407VE.upload.maximum_size=524288
+BLACK_F407XX.menu.subboard.BLACK_F407VE.upload.maximum_data_size=131072
+BLACK_F407XX.menu.subboard.BLACK_F407VE.build.variant=BLACK_F407VE
+BLACK_F407XX.menu.subboard.BLACK_F407VE.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000
+
+BLACK_F407XX.menu.subboard.BLACK_F407ZE=BLACK F407ZE (V3.0)
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_size=1232896
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_data_size=131072
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.variant=BLACK_F407ZE
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.extra_flags=-DSTM32F407ZE -DHSE_VALUE=8000000
+
+BLACK_F407XX.menu.subboard.BLACK_F407ZG=BLACK F407ZG (M4 DEMO)
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_size=1232896
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_data_size=131072
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.variant=BLACK_F407ZG
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VALUE=8000000
 
 ################################################################################
 # NUCLEO 64 board
@@ -188,68 +204,68 @@ NUCLEO_64.build.board=NUCLEO_64
 
 NUCLEO_64.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
 
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8=Nucleo-F030R8
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.upload.maximum_size=65536
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.upload.maximum_data_size=8192
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.build.mcu=cortex-m0
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.build.series=STM32F0
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.build.variant=NUCLEO_F030R8
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.build.extra_flags=-DSTM32F030R8
-NUCLEO_64.menu.nucleo_board.Nucleo_F030R8.massstorage_drive=NODE_F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8=Nucleo-F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.upload.maximum_size=65536
+NUCLEO_64.menu.subboard.Nucleo_F030R8.upload.maximum_data_size=8192
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.mcu=cortex-m0
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.series=STM32F0
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.variant=NUCLEO_F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.extra_flags=-DSTM32F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.massstorage_drive=NODE_F030R8
 
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB=Nucleo-F103RB
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.upload.maximum_size=131072
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.upload.maximum_data_size=20480
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.mcu=cortex-m3
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.series=STM32F1
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.variant=NUCLEO_F103RB
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.build.extra_flags=-DSTM32F103RB
-NUCLEO_64.menu.nucleo_board.Nucleo_F103RB.massstorage_drive=NODE_F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB=Nucleo-F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB.upload.maximum_size=131072
+NUCLEO_64.menu.subboard.Nucleo_F103RB.upload.maximum_data_size=20480
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.mcu=cortex-m3
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.series=STM32F1
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.variant=NUCLEO_F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.extra_flags=-DSTM32F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB.massstorage_drive=NODE_F103RB
 
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE=Nucleo-F303RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.upload.maximum_size=524288
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.upload.maximum_data_size=81920
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.series=STM32F3
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.variant=NUCLEO_F303RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F303RE.massstorage_drive=NODE_F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE=Nucleo-F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE.upload.maximum_size=524288
+NUCLEO_64.menu.subboard.Nucleo_F303RE.upload.maximum_data_size=81920
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.series=STM32F3
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.variant=NUCLEO_F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE.massstorage_drive=NODE_F303RE
 
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE=Nucleo-F411RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.upload.maximum_size=524288
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.upload.maximum_data_size=131072
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.series=STM32F4
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.variant=NUCLEO_F411RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
-NUCLEO_64.menu.nucleo_board.Nucleo_F411RE.massstorage_drive=NODE_F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE=Nucleo-F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_size=524288
+NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_data_size=131072
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.series=STM32F4
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.variant=NUCLEO_F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE.massstorage_drive=NODE_F411RE
 
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8=Nucleo-L053R8
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.upload.maximum_size=65536
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.upload.maximum_data_size=8192
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.build.mcu=cortex-m0
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.build.series=STM32L0
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.build.variant=NUCLEO_L053R8
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.build.extra_flags=-DSTM32L053R8
-NUCLEO_64.menu.nucleo_board.Nucleo_L053R8.massstorage_drive=NODE_L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8=Nucleo-L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8.upload.maximum_size=65536
+NUCLEO_64.menu.subboard.Nucleo_L053R8.upload.maximum_data_size=8192
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.mcu=cortex-m0
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.series=STM32L0
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.variant=NUCLEO_L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.extra_flags=-DSTM32L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8.massstorage_drive=NODE_L053R8
 
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE=Nucleo-L152RE
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.upload.maximum_size=524288
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.upload.maximum_data_size=81920
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.build.mcu=cortex-m3
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.build.series=STM32L1
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.build.variant=NUCLEO_L152RE
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.build.extra_flags=-DSTM32L152RE
-NUCLEO_64.menu.nucleo_board.Nucleo_L152RE.massstorage_drive=NODE_L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE=Nucleo-L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE.upload.maximum_size=524288
+NUCLEO_64.menu.subboard.Nucleo_L152RE.upload.maximum_data_size=81920
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.mcu=cortex-m3
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.series=STM32L1
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.variant=NUCLEO_L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.extra_flags=-DSTM32L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE.massstorage_drive=NODE_L152RE
 
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG=Nucleo-L476RG
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.upload.maximum_size=1024
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.upload.maximum_data_size=131072
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.series=STM32L4
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.variant=NUCLEO_L476RG
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
-NUCLEO_64.menu.nucleo_board.Nucleo_L476RG.massstorage_drive=NODE_L476RG
+NUCLEO_64.menu.subboard.Nucleo_L476RG=Nucleo-L476RG
+NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_size=1024
+NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_data_size=131072
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.series=STM32L4
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.variant=NUCLEO_L476RG
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
+NUCLEO_64.menu.subboard.Nucleo_L476RG.massstorage_drive=NODE_L476RG
 
 
 NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
