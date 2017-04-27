@@ -1,4 +1,4 @@
-/* 
+/*
   STM32F4 Discovery basic audio codec setup example
 
   This example sets up the CS43L22 and generates a sawtooth sound
@@ -6,11 +6,10 @@
 
   April 2014, ChrisMicro
 
-  Special thanks to Daniel Fekete for his gread STM32GENERIC support  
+  Special thanks to Daniel Fekete for his gread STM32GENERIC support
 
 */
-  
- 
+
 // The CS43L22 is a Low Power, Stereo DAC w/Headphone & Speaker Amps
 //
 // related links:
@@ -18,7 +17,7 @@
 // https://github.com/abhishek-kakkar/STM32F4Player/blob/master/STM32F4_Discovery_demo/codec_CS43L22.c
 // https://www.mikrocontroller.net/topic/413574#4814689
 
- 
+
 #include <Wire.h>
 #include "I2S.h"
 
@@ -39,16 +38,13 @@ void codec_writeReg(unsigned char reg, unsigned char data)
   error = Wire.endTransmission();
 }
 
-// each register retries until success
-// if communication fails the device will hang
 // codec setup from
 // https://github.com/mubase/STM32F4-Arduino-core/blob/master/cores/maple/libmaple/stm32f4codec/codec.h
 // TBD: to be refactured
-
-void codec_reg_setup(void) 
+void codec_reg_setup(void)
 {
   Wire.begin();
-  
+
   codec_writeReg(0x02, 0x01); // power save registers -> all on
   codec_writeReg(0x00, 0x99);
   codec_writeReg(0x47, 0x80); //inits
@@ -71,16 +67,16 @@ void codec_reg_setup(void)
 void setup()
 {
   pinMode(USER_BTN,      INPUT); //user button for sound stop, mandatory for STM MCUs if you want to use the button
-  pinMode(AUDIOCODEC_CS, OUTPUT); // the chip select pin of the codec needs to be enabled 
-  
+  pinMode(AUDIOCODEC_CS, OUTPUT); // the chip select pin of the codec needs to be enabled
+
   //digitalWrite(AUDIOCODEC_CS, HIGH);
   // start I2S
   // I2S will also produce MCK for the codec of aroung 12Mhz
   // without MCK the CS43L22 is not working
-  I2S.begin(I2S_PHILIPS_MODE, 44000, 16);  
+  I2S.begin(I2S_PHILIPS_MODE, 44000, 16);
 
   digitalWrite(AUDIOCODEC_CS, HIGH); // enable codec
-    
+
   Wire.begin(); // start the I2C driver for codec register setup
   codec_reg_setup();
 
@@ -89,18 +85,15 @@ void setup()
 void loop()
 {
   static uint16_t n;
+  
   I2S.write(n += 300); // produce sound: simple triangle waveform
 
-  if  ( digitalRead( USER_BTN ) ) 
+  if  ( digitalRead( USER_BTN ) ) // sound on/off when button pressed
   {
-    while (1) // stop sound when user button pressed
-    {
-
-    }
+    while(1);
   }
 
 }
-
 
 
 
