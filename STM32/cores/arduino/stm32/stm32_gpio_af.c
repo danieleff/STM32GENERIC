@@ -61,6 +61,18 @@ void stm32AfI2SInit(const SPI_TypeDef *instance,
     stm32AfInit(chip_af_i2s_ck, sizeof(chip_af_i2s_ck) / sizeof(chip_af_i2s_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
 }
 
+void stm32AfI2SInitWithMck(const SPI_TypeDef *instance,
+    GPIO_TypeDef *sdPort, uint32_t sdPin,
+    GPIO_TypeDef *wsPort, uint32_t wsPin,
+    GPIO_TypeDef *ckPort, uint32_t ckPin,
+    GPIO_TypeDef *mckPort, uint32_t mckPin) {
+
+    stm32AfInit(chip_af_i2s_sd, sizeof(chip_af_i2s_sd) / sizeof(chip_af_i2s_sd[0]), instance, sdPort, sdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_i2s_ws, sizeof(chip_af_i2s_ws) / sizeof(chip_af_i2s_ws[0]), instance, wsPort, wsPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_i2s_ck, sizeof(chip_af_i2s_ck) / sizeof(chip_af_i2s_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInit(chip_af_i2s_mck, sizeof(chip_af_i2s_mck) / sizeof(chip_af_i2s_mck[0]), instance, mckPort, mckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+}
+
 void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin) {
