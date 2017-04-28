@@ -346,8 +346,8 @@ DISCOVERY_F407VG.menu.usb.Disabled=Disabled, no USB
 
 DISCOVERY_F407VG.menu.serial.SerialUSB=SerialUSB
 DISCOVERY_F407VG.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-DISCOVERY_F407VG.menu.serial.SerialUART1=SerialUART1 [PA9/PA10]
-DISCOVERY_F407VG.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+DISCOVERY_F407VG.menu.serial.SerialUART2=SerialUART2 [PA2/PA3]
+DISCOVERY_F407VG.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
 
 ################################################################################
 # Discovery F429ZI board
