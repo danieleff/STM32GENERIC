@@ -21,7 +21,17 @@ inline uint32_t millis() {
 }
 
 inline uint32_t micros() {
-    return (HAL_GetTick()*1000) + ((SysTick->LOAD - SysTick->VAL) * 1000 / SysTick->LOAD);
+  // by Pito 4/2017
+  uint32_t m = HAL_GetTick();
+  uint32_t u = SysTick->LOAD - SysTick->VAL;
+  uint32_t m1 = HAL_GetTick();
+  uint32_t u1 = SysTick->LOAD - SysTick->VAL;
+
+  if (m1 > m) {
+    return ( m1 * 1000 + (u1 * 1000) / SysTick->LOAD);
+  } else {
+    return ( m * 1000 + (u * 1000) / SysTick->LOAD);
+  }
 }
 
 inline void delayMicroseconds(uint32_t microseconds){
