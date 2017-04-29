@@ -131,38 +131,22 @@ void TwoWire::setClock(uint32_t frequency) {
         handle.Init.ClockSpeed = frequency;
         handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
     #else
-        uint32_t clock_source = stm32_apb_clock_freq(handle.Instance);
-        //Timing values from AN4235 / I2C Timing Configuration Tool
-        //TODO reverse engineer the timing tool?
-        //TODO get timing values for 400Khz
 
-        //Timing values for 100Khz speed for some common I2C clock sources
-        if (frequency == 100000) {
-            if (clock_source == 16000000) {
-                handle.Init.Timing = 0x00303D5B;
-            } else if (clock_source == 32000000) {
-                handle.Init.Timing = 0x00707CBB;
-            } else if (clock_source == 36000000) {
-                handle.Init.Timing = 0x00808CD2;
-            } else if (clock_source == 50000000) {
-                handle.Init.Timing = 0x00C0EAFF;
-            } else if (clock_source == 72000000) {
-                handle.Init.Timing = 0x10808DD3;
-            } else if (clock_source == 80000000) {
-                handle.Init.Timing = 0x10909CEC;
-            } else if (clock_source == 100000000) {
-                handle.Init.Timing = 0x10C0ECFF;
-            } else if (clock_source == 168000000) {
-                handle.Init.Timing = 0x60505F8C;
-            } else if (clock_source == 216000000) {
-                handle.Init.Timing = 0xA0404E72;
-            } else {
-                return;
-                //TODO error handler?
-            }
-        } else {
-            // Use 100Khz default for now...
-        }
+        // I2C1_100KHZ_TIMING needs to be #defined in variant.h for these boards
+        // Open STM32CubeMX, select your chip, clock configuration according to systemclock_config.c
+        // Enable all I2Cs, go to I2Cx configuration, parameter settings, copy the Timing value.
+        #ifdef I2C1
+            if (handle.Instance == I2C1) handle.Init.Timing = I2C1_100KHZ_TIMING;
+        #endif
+        #ifdef I2C2
+            if (handle.Instance == I2C2) handle.Init.Timing = I2C2_100KHZ_TIMING;
+        #endif
+        #ifdef I2C3
+            if (handle.Instance == I2C3) handle.Init.Timing = I2C3_100KHZ_TIMING;
+        #endif
+        #ifdef I2C4
+            if (handle.Instance == I2C4) handle.Init.Timing = I2C4_100KHZ_TIMING;
+        #endif
 
     #endif
 
