@@ -126,7 +126,7 @@ void TwoWire::end(void) {
 void TwoWire::setClock(uint32_t frequency) {
 
     #if defined(STM32F1) || defined(STM32F2) || defined(STM32F4) || defined(STM32L1)
-        handle.Init.ClockSpeed = 100000;
+        handle.Init.ClockSpeed = frequency;
         handle.Init.DutyCycle = I2C_DUTYCYCLE_2;
     #else
         uint32_t clock_source = stm32_apb_clock_freq(handle.Instance);
