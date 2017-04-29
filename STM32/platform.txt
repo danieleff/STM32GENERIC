@@ -27,11 +27,11 @@ compiler.ar.cmd=arm-none-eabi-ar
 compiler.c.elf.cmd=arm-none-eabi-gcc
 compiler.objcopy.cmd=arm-none-eabi-objcopy
 
-compiler.S.flags=-mcpu={build.mcu} -mthumb -c -g -x assembler-with-cpp
+compiler.S.flags=-mcpu={build.mcu} -DF_CPU={build.f_cpu} -mthumb -c -g -x assembler-with-cpp
 
-compiler.c.flags=-mcpu={build.mcu} -mthumb -c -g -MMD -Os {compiler.warning_flags} -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD
+compiler.c.flags=-mcpu={build.mcu} -DF_CPU={build.f_cpu} -mthumb -c -g -MMD -Os {compiler.warning_flags} -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD
 
-compiler.cpp.flags=-mcpu={build.mcu} -mthumb -c -g -Os {compiler.warning_flags} -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD
+compiler.cpp.flags=-mcpu={build.mcu} -DF_CPU={build.f_cpu} -mthumb -c -g -Os {compiler.warning_flags} -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD
 
 compiler.ar.flags=rcs
 
