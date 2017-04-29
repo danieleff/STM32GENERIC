@@ -11,9 +11,6 @@ menu.usb=USB
 
 MapleMini_F103CB.name=MapleMini F103CB
 
-MapleMini_F103CB.vid.0=0x0483
-MapleMini_F103CB.pid.0=0x5740
-
 MapleMini_F103CB.upload.protocol=nucleoFlasher
 MapleMini_F103CB.upload.maximum_size=131072
 MapleMini_F103CB.upload.maximum_data_size=20480
@@ -81,9 +78,6 @@ MapleMini_F103CB.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 
 BluePill.name=BluePill F103CB
 
-BluePill.vid.0=0x0483
-BluePill.pid.0=0x5740
-
 BluePill.upload.protocol=nucleoFlasher
 BluePill.upload.maximum_size=131072
 BluePill.upload.maximum_data_size=20480
@@ -138,9 +132,6 @@ BluePill.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUA
 
 BLACK_F407XX.name=BLACK F407VE/ZE/ZG boards
 
-BLACK_F407XX.vid.0=0x0483
-BLACK_F407XX.pid.0=0x5711
-
 BLACK_F407XX.upload.maximum_size=524288
 BLACK_F407XX.upload.maximum_data_size=131072
 
@@ -194,10 +185,6 @@ BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VA
 # NUCLEO 64 board
 
 NUCLEO_64.name=Nucleo-64 boards
-
-NUCLEO_64.vid.0=0x0483
-NUCLEO_64.pid.0=0x5711
-
 
 NUCLEO_64.build.core=arduino
 NUCLEO_64.build.board=NUCLEO_64
@@ -282,9 +269,6 @@ NUCLEO_64.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_L053C8.name=Discovery L053C8
 
-DISCOVERY_L053C8.vid.0=0x0483
-DISCOVERY_L053C8.pid.0=0x5711
-
 DISCOVERY_L053C8.upload.maximum_size=65536
 DISCOVERY_L053C8.upload.maximum_data_size=8192
 
@@ -323,9 +307,6 @@ DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Se
 
 DISCOVERY_F407VG.name=Discovery F407VG
 
-DISCOVERY_F407VG.vid.0=0x0483
-DISCOVERY_F407VG.pid.0=0x5711
-
 DISCOVERY_F407VG.upload.maximum_size=1048576
 DISCOVERY_F407VG.upload.maximum_data_size=131072
 
@@ -353,10 +334,6 @@ DISCOVERY_F407VG.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=
 # Discovery F429ZI board
 
 DISCOVERY_F429ZI.name = Discovery F429ZI
-
-# are this the ST-LINK USB IDs ?
-DISCOVERY_F429ZI.vid.0=0x0483
-DISCOVERY_F429ZI.pid.0=0x3748
 
 # TBD: correct memory settings here and in ldscript !!
 DISCOVERY_F429ZI.upload.maximum_size=1048576
@@ -387,9 +364,6 @@ DISCOVERY_F429ZI.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 # Discovery F746NG board
 
 DISCOVERY_F746NG.name=Discovery F746NG
-
-DISCOVERY_F746NG.vid.0=0x0483
-DISCOVERY_F746NG.pid.0=0x5711
 
 DISCOVERY_F746NG.upload.maximum_size=1048576
 DISCOVERY_F746NG.upload.maximum_data_size=327680
