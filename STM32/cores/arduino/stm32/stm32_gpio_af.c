@@ -51,6 +51,8 @@ void stm32AfSPIInit(const SPI_TypeDef *instance,
 
 }
 
+#ifdef STM32_CHIP_HAS_I2S
+
 void stm32AfI2SInit(const SPI_TypeDef *instance,
     GPIO_TypeDef *sdPort, uint32_t sdPin,
     GPIO_TypeDef *wsPort, uint32_t wsPin,
@@ -80,6 +82,8 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     stm32AfInit(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
     stm32AfInit(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
 }
+
+#endif
 
 #ifdef STM32_CHIP_HAS_SDIO
 
