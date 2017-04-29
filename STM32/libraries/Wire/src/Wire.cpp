@@ -1,3 +1,5 @@
+//TODO I2C slave mode for chips that use something else than I2C_IT_BUF
+
 #include "Wire.h"
 #include "stm32_gpio_af.h"
 #include <Arduino.h>
@@ -447,7 +449,9 @@ extern "C" void HAL_I2C_AddrCallback(I2C_HandleTypeDef *handle, uint8_t Transfer
             interruptWire->txBufferIndex = 0;
             interruptWire->txBufferLength = 0;
 
+            #ifdef I2C_IT_BUF
             __HAL_I2C_ENABLE_IT(handle, I2C_IT_EVT | I2C_IT_BUF);
+            #endif
         }
     }
 
