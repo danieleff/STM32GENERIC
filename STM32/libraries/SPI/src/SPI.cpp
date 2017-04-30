@@ -155,19 +155,19 @@ void SPIClass::beginTransaction(SPISettings settings) {
 	}
 	this->settings = settings;
 
-	if (settings.clock > apb_freq / 2) {
+	if (settings.clock >= apb_freq / 2) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
-	} else if (settings.clock > apb_freq / 4) {
+	} else if (settings.clock >= apb_freq / 4) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
-	} else if (settings.clock > apb_freq / 8) {
+	} else if (settings.clock >= apb_freq / 8) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
-	} else if (settings.clock > apb_freq / 16) {
+	} else if (settings.clock >= apb_freq / 16) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
-	} else if (settings.clock > apb_freq / 32) {
+	} else if (settings.clock >= apb_freq / 32) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
-	} else if (settings.clock > apb_freq / 64) {
+	} else if (settings.clock >= apb_freq / 64) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
-	} else if (settings.clock > apb_freq / 128) {
+	} else if (settings.clock >= apb_freq / 128) {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
 	}  else {
 		spiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
@@ -232,8 +232,15 @@ void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
 }
 uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length) {
 	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, receiveBuf, length, 1000);
-	// DMA handles configured in Begin. Need to change the MINC mode since dmaSend may have been called last
-	hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
+	// DMA handles configured in Begin.
+	if (length == 0) return 0;
+	if (!transmitBuf) {
+		transmitBuf = &spi_ff_buffer;
+		hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
+	} else {
+		//Need to change the MINC mode since dmaSend with MINC 0 or Null transmitBuf may have been called last
+		hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
+	}
 
 	HAL_DMA_Init(&hdma_spi_tx);
 	HAL_DMA_Init(&hdma_spi_rx);
