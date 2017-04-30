@@ -41,7 +41,7 @@ void SerialUART::begin(const uint32_t baud) {
   	static uint8_t static_rx_used = 0;
 
   	if (!static_rx_used) {
-  	  txBuffer = (uint8_t*)rx;
+  	  rxBuffer = (uint8_t*)rx;
   		static_rx_used = true;
   	} else {
   	  rxBuffer = (uint8_t*)malloc(BUFFER_SIZE);

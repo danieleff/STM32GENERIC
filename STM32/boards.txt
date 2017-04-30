@@ -11,9 +11,6 @@ menu.usb=USB
 
 MapleMini_F103CB.name=MapleMini F103CB
 
-MapleMini_F103CB.vid.0=0x0483
-MapleMini_F103CB.pid.0=0x5740
-
 MapleMini_F103CB.upload.protocol=nucleoFlasher
 MapleMini_F103CB.upload.maximum_size=131072
 MapleMini_F103CB.upload.maximum_data_size=20480
@@ -24,6 +21,7 @@ MapleMini_F103CB.build.core=arduino
 MapleMini_F103CB.build.variant=MAPLE_MINI
 MapleMini_F103CB.build.series=STM32F1
 MapleMini_F103CB.build.extra_flags=-DSTM32F103CB
+MapleMini_F103CB.build.f_cpu=72000000L
 
 #---------------------------- UPLOAD METHODS ---------------------------
 
@@ -81,9 +79,6 @@ MapleMini_F103CB.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 
 BluePill.name=BluePill F103CB
 
-BluePill.vid.0=0x0483
-BluePill.pid.0=0x5740
-
 BluePill.upload.protocol=nucleoFlasher
 BluePill.upload.maximum_size=131072
 BluePill.upload.maximum_data_size=20480
@@ -94,6 +89,7 @@ BluePill.build.core=arduino
 BluePill.build.variant=BLUEPILL
 BluePill.build.series=STM32F1
 BluePill.build.extra_flags=-DSTM32F103CB
+BluePill.build.f_cpu=72000000L
 
 #---------------------------- UPLOAD METHODS ---------------------------
 
@@ -138,9 +134,6 @@ BluePill.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUA
 
 BLACK_F407XX.name=BLACK F407VE/ZE/ZG boards
 
-BLACK_F407XX.vid.0=0x0483
-BLACK_F407XX.pid.0=0x5711
-
 BLACK_F407XX.upload.maximum_size=524288
 BLACK_F407XX.upload.maximum_data_size=131072
 
@@ -148,6 +141,7 @@ BLACK_F407XX.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 BLACK_F407XX.build.core=arduino
 BLACK_F407XX.build.board=BLACK_F407XX
 BLACK_F407XX.build.series=STM32F4
+BLACK_F407XX.build.f_cpu=168000000L
 
 BLACK_F407XX.upload.tool=stlink_upload
 BLACK_F407XX.upload.protocol=STLink
@@ -195,10 +189,6 @@ BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VA
 
 NUCLEO_64.name=Nucleo-64 boards
 
-NUCLEO_64.vid.0=0x0483
-NUCLEO_64.pid.0=0x5711
-
-
 NUCLEO_64.build.core=arduino
 NUCLEO_64.build.board=NUCLEO_64
 
@@ -212,6 +202,7 @@ NUCLEO_64.menu.subboard.Nucleo_F030R8.build.series=STM32F0
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.variant=NUCLEO_F030R8
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.extra_flags=-DSTM32F030R8
 NUCLEO_64.menu.subboard.Nucleo_F030R8.massstorage_drive=NODE_F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.f_cpu=48000000L
 
 NUCLEO_64.menu.subboard.Nucleo_F103RB=Nucleo-F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.upload.maximum_size=131072
@@ -221,6 +212,7 @@ NUCLEO_64.menu.subboard.Nucleo_F103RB.build.series=STM32F1
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.variant=NUCLEO_F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.extra_flags=-DSTM32F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.massstorage_drive=NODE_F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.f_cpu=64000000L
 
 NUCLEO_64.menu.subboard.Nucleo_F303RE=Nucleo-F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.upload.maximum_size=524288
@@ -230,6 +222,7 @@ NUCLEO_64.menu.subboard.Nucleo_F303RE.build.series=STM32F3
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.variant=NUCLEO_F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.massstorage_drive=NODE_F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.f_cpu=72000000L
 
 NUCLEO_64.menu.subboard.Nucleo_F411RE=Nucleo-F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_size=524288
@@ -239,6 +232,7 @@ NUCLEO_64.menu.subboard.Nucleo_F411RE.build.series=STM32F4
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.variant=NUCLEO_F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.massstorage_drive=NODE_F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.f_cpu=100000000L
 
 NUCLEO_64.menu.subboard.Nucleo_L053R8=Nucleo-L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.upload.maximum_size=65536
@@ -248,6 +242,7 @@ NUCLEO_64.menu.subboard.Nucleo_L053R8.build.series=STM32L0
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.variant=NUCLEO_L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.extra_flags=-DSTM32L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.massstorage_drive=NODE_L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.f_cpu=32000000L
 
 NUCLEO_64.menu.subboard.Nucleo_L152RE=Nucleo-L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.upload.maximum_size=524288
@@ -257,6 +252,7 @@ NUCLEO_64.menu.subboard.Nucleo_L152RE.build.series=STM32L1
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.variant=NUCLEO_L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.extra_flags=-DSTM32L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.massstorage_drive=NODE_L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.f_cpu=32000000L
 
 NUCLEO_64.menu.subboard.Nucleo_L476RG=Nucleo-L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_size=1024
@@ -266,7 +262,7 @@ NUCLEO_64.menu.subboard.Nucleo_L476RG.build.series=STM32L4
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.variant=NUCLEO_L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.massstorage_drive=NODE_L476RG
-
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.f_cpu=80000000L
 
 NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
 NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
@@ -282,9 +278,6 @@ NUCLEO_64.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_L053C8.name=Discovery L053C8
 
-DISCOVERY_L053C8.vid.0=0x0483
-DISCOVERY_L053C8.pid.0=0x5711
-
 DISCOVERY_L053C8.upload.maximum_size=65536
 DISCOVERY_L053C8.upload.maximum_data_size=8192
 
@@ -295,6 +288,7 @@ DISCOVERY_L053C8.build.mcu=cortex-m0
 DISCOVERY_L053C8.build.series=STM32L0
 DISCOVERY_L053C8.build.variant=DISCOVERY_L053C8
 DISCOVERY_L053C8.build.extra_flags=-DSTM32L053C8
+DISCOVERY_L053C8.build.f_cpu=32000000L
 
 DISCOVERY_L053C8.upload.protocol=STLink
 DISCOVERY_L053C8.upload.tool=stlink_upload
@@ -323,9 +317,6 @@ DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Se
 
 DISCOVERY_F407VG.name=Discovery F407VG
 
-DISCOVERY_F407VG.vid.0=0x0483
-DISCOVERY_F407VG.pid.0=0x5711
-
 DISCOVERY_F407VG.upload.maximum_size=1048576
 DISCOVERY_F407VG.upload.maximum_data_size=131072
 
@@ -336,6 +327,7 @@ DISCOVERY_F407VG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F407VG.build.series=STM32F4
 DISCOVERY_F407VG.build.variant=DISCOVERY_F407VG
 DISCOVERY_F407VG.build.extra_flags=-DSTM32F407VG -DHSE_VALUE=8000000
+DISCOVERY_F407VG.build.f_cpu=168000000L
 
 DISCOVERY_F407VG.upload.protocol=STLink
 DISCOVERY_F407VG.upload.tool=stlink_upload
@@ -346,17 +338,13 @@ DISCOVERY_F407VG.menu.usb.Disabled=Disabled, no USB
 
 DISCOVERY_F407VG.menu.serial.SerialUSB=SerialUSB
 DISCOVERY_F407VG.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-DISCOVERY_F407VG.menu.serial.SerialUART1=SerialUART1 [PA9/PA10]
-DISCOVERY_F407VG.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+DISCOVERY_F407VG.menu.serial.SerialUART2=SerialUART2 [PA2/PA3]
+DISCOVERY_F407VG.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
 
 ################################################################################
 # Discovery F429ZI board
 
 DISCOVERY_F429ZI.name = Discovery F429ZI
-
-# are this the ST-LINK USB IDs ?
-DISCOVERY_F429ZI.vid.0=0x0483
-DISCOVERY_F429ZI.pid.0=0x3748
 
 # TBD: correct memory settings here and in ldscript !!
 DISCOVERY_F429ZI.upload.maximum_size=1048576
@@ -370,6 +358,8 @@ DISCOVERY_F429ZI.build.series=STM32F4
 DISCOVERY_F429ZI.build.variant=DISCOVERY_F429ZI
 
 DISCOVERY_F429ZI.build.extra_flags=-DSTM32F429ZI -DSTM32F429xx -DHSE_VALUE=8000000
+# TODO f_cpu, and check SystemClock_Config() 
+# DISCOVERY_F429ZI.build.f_cpu=168000000L
 
 DISCOVERY_F429ZI.upload.protocol=STLink
 DISCOVERY_F429ZI.upload.tool=stlink_upload
@@ -388,9 +378,6 @@ DISCOVERY_F429ZI.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 
 DISCOVERY_F746NG.name=Discovery F746NG
 
-DISCOVERY_F746NG.vid.0=0x0483
-DISCOVERY_F746NG.pid.0=0x5711
-
 DISCOVERY_F746NG.upload.maximum_size=1048576
 DISCOVERY_F746NG.upload.maximum_data_size=327680
 
@@ -401,6 +388,7 @@ DISCOVERY_F746NG.build.mcu=cortex-m7
 DISCOVERY_F746NG.build.series=STM32F7
 DISCOVERY_F746NG.build.variant=DISCOVERY_F746NG
 DISCOVERY_F746NG.build.extra_flags=-DSTM32F746NG
+DISCOVERY_F746NG.build.f_cpu=218000000L
 
 DISCOVERY_F746NG.upload.protocol=STLink
 DISCOVERY_F746NG.upload.tool=stlink_upload
