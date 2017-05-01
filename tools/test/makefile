@@ -1,4 +1,5 @@
-PATH_COMPILER = C:\Users\$(USERNAME)\AppData\Local\Arduino15\packages\arduino\tools\arm-none-eabi-gcc\4.8.3-2014q1
+PATH_COMPILER = D:\programs\gcc-arm
+#PATH_COMPILER = C:\Users\$(USERNAME)\AppData\Local\Arduino15\packages\arduino\tools\arm-none-eabi-gcc\4.8.3-2014q1
 
 PATH_ROOT = ../../STM32/
 PATH_PROJECT = $(PATH_ROOT)/libraries/$(PROJECT)
@@ -9,6 +10,11 @@ PATH_BUILD_CORE = $(PATH_BUILD_ROOT)/core/
 PATH_BUILD_PROJECT = $(PATH_BUILD_ROOT)/$(PROJECT)/
 
 include makefiles/$(VARIANT)
+
+### Included libraries
+
+cat := $(if $(filter $(OS),Windows_NT),type,cat)
+LIBRARIES = $(shell $(cat) $(subst /,\\,$(PATH_PROJECT)/build-include.txt))
 
 #### Source files
 
@@ -39,6 +45,10 @@ OBJECTS += $(patsubst $(PATH_CORE)%,$(PATH_BUILD_CORE)%,$(CORE_SOURCES_S:.S=.s.o
 OBJECTS += $(patsubst $(PATH_VARIANT)%,$(PATH_BUILD_CORE)%,$(VARIANT_SOURCES_C:.c=.c.o))
 OBJECTS += $(patsubst $(PATH_VARIANT)%,$(PATH_BUILD_CORE)%,$(VARIANT_SOURCES_CPP:.cpp=.cpp.o))
 
+
+LIBRARY_OBJ_DIRS += $(patsubst $(PATH_ROOT)libraries%,$(PATH_BUILD_ROOT)%,$(LIBRARIES))
+OBJECTS += $(foreach dir,$(LIBRARY_OBJ_DIRS),$(wildcard $(dir)/*.o))
+
 ifneq ($(wildcard $(PATH_PROJECT)/*.ino),) 
 	ELF = $(PATH_BUILD_CORE)build.elf
 	BIN = $(PATH_BUILD_CORE)build.bin
@@ -55,6 +65,7 @@ INCLUDES += "-I$(PATH_ROOT)system/STM32F1/HAL_Inc"
 INCLUDES += "-I$(PATH_ROOT)system/STM32F1/HAL_Src"
 INCLUDES += "-I$(PATH_ROOT)system/STM32F1/stm32_chip"
 INCLUDES += "-I$(PATH_VARIANT)"
+INCLUDES += $(LIBRARIES:%=-I%)
 
 all: $(OBJECTS) $(BIN)
 	$(info BUILD SUCCESSFUL)
