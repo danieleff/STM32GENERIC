@@ -1,4 +1,5 @@
-PATH_COMPILER = C:\Users\$(USERNAME)\AppData\Local\Arduino15\packages\arduino\tools\arm-none-eabi-gcc\4.8.3-2014q1
+PATH_COMPILER = D:\programs\gcc-arm
+#PATH_COMPILER = C:\Users\$(USERNAME)\AppData\Local\Arduino15\packages\arduino\tools\arm-none-eabi-gcc\4.8.3-2014q1
 
 PATH_ROOT = ../../STM32/
 PATH_PROJECT = $(PATH_ROOT)/libraries/$(PROJECT)
