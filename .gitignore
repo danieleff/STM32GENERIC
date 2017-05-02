@@ -1,0 +1,3 @@
+#Ignore files created by automatic test script
+*.ino.h
+build-include.txt

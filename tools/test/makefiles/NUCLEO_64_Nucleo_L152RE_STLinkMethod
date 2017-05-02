@@ -1,15 +1,15 @@
-name=Nucleo-64 (Select board from submenu)
-vid.0=0x0483
-pid.0=0x5711
-upload.maximum_size=524288
-upload.maximum_data_size=131072
+name=Nucleo-64 boards
 build.core=arduino
 build.board=NUCLEO_64
+build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
+upload.maximum_size=524288
+upload.maximum_data_size=81920
 build.mcu=cortex-m3
 build.series=STM32L1
 build.variant=NUCLEO_L152RE
 build.extra_flags=-DSTM32L152RE
 massstorage_drive=NODE_L152RE
+build.f_cpu=32000000L
 upload.protocol=STLink
 upload.tool=stlink_upload
 build.project_name=$(VARIANT)/$(PROJECT)/out
@@ -25,7 +25,7 @@ runtime.hardware.path=../../STM32
 build.system.path=../../STM32/system
 build.core.path=../../STM32/cores/arduino
 build.variant.path=$(PATH_VARIANT)
-name=STM32 boards by danieleff
+name=STM32GENERIC for STM32 boards
 version=1.0.0
 compiler.extra_includes="-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip"
 compiler.warning_flags=-w
@@ -34,17 +34,17 @@ compiler.warning_flags.default=
 compiler.warning_flags.more=-Wall
 compiler.warning_flags.all=-Wall -Wextra
 compiler.path=$(PATH_COMPILER)/bin/
-compiler.S.cmd       = arm-none-eabi-gcc
-compiler.c.cmd       = arm-none-eabi-gcc
-compiler.cpp.cmd     = arm-none-eabi-g++
-compiler.ar.cmd      = arm-none-eabi-ar
-compiler.c.elf.cmd   = arm-none-eabi-gcc
-compiler.objcopy.cmd = arm-none-eabi-objcopy
-compiler.S.flags=-mcpu=cortex-m3 -mthumb -c -x assembler-with-cpp
-compiler.c.flags=-mcpu=cortex-m3 -mthumb -c -g -MMD -Os -w -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD
-compiler.cpp.flags=-mcpu=cortex-m3 -mthumb -c -Os -w -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD
+compiler.S.cmd=arm-none-eabi-gcc
+compiler.c.cmd=arm-none-eabi-gcc
+compiler.cpp.cmd=arm-none-eabi-g++
+compiler.ar.cmd=arm-none-eabi-ar
+compiler.c.elf.cmd=arm-none-eabi-gcc
+compiler.objcopy.cmd=arm-none-eabi-objcopy
+compiler.S.flags=-mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -x assembler-with-cpp
+compiler.c.flags=-mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -MMD -Os -w -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD
+compiler.cpp.flags=-mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -Os -w -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD
 compiler.ar.flags=rcs
-compiler.c.elf.flags=-DFLASH_SIZE=512K -DRAM_SIZE=131072 -mcpu=cortex-m3 -mthumb -Os -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align
+compiler.c.elf.flags=-mcpu=cortex-m3 -mthumb -Os -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align
 compiler.objcopy.eep.flags=-O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0
 compiler.elf2hex.flags=-O binary
 compiler.elf2hex.cmd=arm-none-eabi-objcopy
@@ -52,6 +52,10 @@ compiler.ldflags=
 compiler.size.cmd=arm-none-eabi-size
 compiler.define=-DARDUINO=
 build.extra_flags=
+build.extra_flags_usb=
+build.extra_flags_serial=
+build.extra_flags_serial_auto=
+build.extra_flags_menu=  -DMENU_SERIAL_AUTO=SerialUART2
 build.ldscript=ldscript.ld
 compiler.c.extra_flags=
 compiler.c.elf.extra_flags=
@@ -61,11 +65,11 @@ compiler.ar.extra_flags=
 compiler.elf2hex.extra_flags=
 build.usb_flags=-DUSBD_VID={build.vid} -DUSBD_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
 build.usb_manufacturer="Unknown"
-recipe.c.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -mcpu=cortex-m3 -mthumb -c -g -MMD -Os -w -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
-recipe.cpp.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-g++" -mcpu=cortex-m3 -mthumb -c -Os -w -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
-recipe.S.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -mcpu=cortex-m3 -mthumb -c -x assembler-with-cpp -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
+recipe.c.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -MMD -Os -w -std=gnu11 -ffunction-sections -fdata-sections -nostdlib --param max-inline-insns-single=500 -Dprintf=iprintf -MMD -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE -DMENU_SERIAL_AUTO=SerialUART2 "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
+recipe.cpp.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-g++" -mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -Os -w -std=gnu++11 -ffunction-sections -fdata-sections -nostdlib -fno-threadsafe-statics --param max-inline-insns-single=500 -fno-rtti -fno-exceptions -Dprintf=iprintf -MMD -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE -DMENU_SERIAL_AUTO=SerialUART2 "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
+recipe.S.o.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -mcpu=cortex-m3 -DF_CPU=32000000L -mthumb -c -g -x assembler-with-cpp -DSTM32L1 -DARDUINO=10802 -DARDUINO_NUCLEO_64 -DARDUINO_ARCH_STM32GENERIC  -DSTM32L152RE "-I../../STM32/cores/arduino/stm32" "-I../../STM32/cores/arduino/usb" "-I../../STM32/system/CMSIS" "-I../../STM32/system/STM32L1/CMSIS_Inc" "-I../../STM32/system/STM32L1/CMSIS_Src" "-I../../STM32/system/STM32L1/HAL_Inc" "-I../../STM32/system/STM32L1/HAL_Src"  "-I../../STM32/system/STM32L1/stm32_chip" $(INCLUDES) "$<" -o "$@"
 recipe.ar.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-ar" rcs  "{archive_file_path}" "$@"
-recipe.c.combine.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -DFLASH_SIZE=512K -DRAM_SIZE=131072 -mcpu=cortex-m3 -mthumb -Os -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align "-T$(PATH_VARIANT)/ldscript.ld" "-Wl,-Map,build/$(VARIANT)/$(PROJECT)/out.map"  -o "build/$(VARIANT)/$(PROJECT)/out.elf" "-Lbuild" -Wl,--start-group $(OBJECTS)  -Wl,--end-group -lm -lgcc --specs=nano.specs
+recipe.c.combine.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-gcc" -mcpu=cortex-m3 -mthumb -Os -Wl,--cref -Wl,--check-sections -Wl,--gc-sections -Wl,--entry=Reset_Handler -Wl,--unresolved-symbols=report-all -Wl,--warn-common -Wl,--warn-section-align "-T$(PATH_VARIANT)/ldscript.ld" "-Wl,-Map,build/$(VARIANT)/$(PROJECT)/out.map"  -o "build/$(VARIANT)/$(PROJECT)/out.elf" "-Lbuild" -Wl,--start-group $(OBJECTS)  -lc -Wl,--end-group -lm -lgcc --specs=nano.specs
 recipe.objcopy.bin.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-objcopy" -O binary  "build/$(VARIANT)/$(PROJECT)/out.elf" "build/$(VARIANT)/$(PROJECT)/out.bin"
 recipe.output.tmp_file=$(VARIANT)/$(PROJECT)/out.bin
 recipe.output.save_file=$(VARIANT)/$(PROJECT)/out.NUCLEO_L152RE.bin
@@ -73,6 +77,8 @@ recipe.size.pattern="$(PATH_COMPILER)/bin/arm-none-eabi-size" -A "build/$(VARIAN
 recipe.size.regex=^(?:\.text|\.data|\.rodata)\s+([0-9]+).*
 recipe.size.regex.data=^(?:\.data|\.bss|\._user_heap_stack)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
+upload.altID=unknown
+upload.usbID=unknown
 tools.nucleoFlasher.path=../../STM32/tools/win/nucleoFlasher
 tools.nucleoFlasher.path.macosx=../../STM32/tools/macosx/nucleoFlasher
 tools.nucleoFlasher.path.linux=../../STM32/tools/linux/nucleoFlasher
@@ -90,7 +96,7 @@ tools.stlink_upload.path.linux=../../STM32/tools/linux
 tools.stlink_upload.path.linux64=../../STM32/tools/linux64
 tools.stlink_upload.upload.params.verbose=-d
 tools.stlink_upload.upload.params.quiet=
-tools.stlink_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "build/$(VARIANT)/$(PROJECT)/out.bin"
+tools.stlink_upload.upload.pattern="{path}/{cmd}" {serial.port.file} unknown unknown "build/$(VARIANT)/$(PROJECT)/out.bin"
 tools.maple_upload.cmd=maple_upload
 tools.maple_upload.cmd.windows=maple_upload.bat
 tools.maple_upload.path={runtime.tools.STM32Tools.path}/tools/win
@@ -99,7 +105,7 @@ tools.maple_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
 tools.maple_upload.path.linux64={runtime.tools.STM32Tools.path}/tools/linux64
 tools.maple_upload.upload.params.verbose=-d
 tools.maple_upload.upload.params.quiet=
-tools.maple_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "build/$(VARIANT)/$(PROJECT)/out.bin"
+tools.maple_upload.upload.pattern="{path}/{cmd}" {serial.port.file} unknown unknown "build/$(VARIANT)/$(PROJECT)/out.bin"
 tools.serial_upload.cmd=serial_upload
 tools.serial_upload.cmd.windows=serial_upload.bat
 tools.serial_upload.cmd.macosx=serial_upload
@@ -109,4 +115,4 @@ tools.serial_upload.path.linux={runtime.tools.STM32Tools.path}/tools/linux
 tools.serial_upload.path.linux64={runtime.tools.STM32Tools.path}/tools/linux64
 tools.serial_upload.upload.params.verbose=-d
 tools.serial_upload.upload.params.quiet=n
-tools.serial_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "build/$(VARIANT)/$(PROJECT)/out.bin"
+tools.serial_upload.upload.pattern="{path}/{cmd}" {serial.port.file} unknown unknown "build/$(VARIANT)/$(PROJECT)/out.bin"
