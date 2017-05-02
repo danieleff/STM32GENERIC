@@ -8,7 +8,7 @@ TODO create boards manager package
 
 ## Installation - Developers
 
-1. Download the latest version from [https://github.com/danieleff/STM32GENERIC]()
+1. Download the latest version from [https://github.com/danieleff/STM32GENERIC](https://github.com/danieleff/STM32GENERIC)
 2. Unzip it into [Arduino]/hardware folder
 3. Install Arduino Zero from the board manager for the arm-none-eabi-gcc compiler
 
