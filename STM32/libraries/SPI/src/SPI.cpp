@@ -11,8 +11,9 @@
 
 
 void SPIClass::begin() {
-	DMA_Stream_TypeDef *_StreamTX;
-	DMA_Stream_TypeDef *_StreamRX;
+
+	_DMA_Instance_Type *_StreamTX;
+	_DMA_Instance_Type *_StreamRX;
 	uint32_t _ChannelTX;
 	uint32_t _ChannelRX;
 
@@ -26,7 +27,9 @@ void SPIClass::begin() {
 	spiHandle.hdmarx = &hdma_spi_rx;
 
 	__HAL_RCC_DMA1_CLK_ENABLE();
+#ifdef __HAL_RCC_DMA2_CLK_ENABLE()
 	__HAL_RCC_DMA2_CLK_ENABLE();
+#endif
 
 
 	#ifdef SPI1
@@ -111,7 +114,7 @@ void SPIClass::begin() {
 
 	hdma_spi_tx.Instance = _StreamTX;
 	hdma_spi_tx.Parent = &spiHandle;
-	hdma_spi_tx.Init.Channel = _ChannelTX;
+	_SPISetDMAChannel(hdma_spi_tx, _ChannelTX);
 	hdma_spi_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
 	hdma_spi_tx.Init.PeriphInc = DMA_PINC_DISABLE;
 	hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
@@ -119,16 +122,20 @@ void SPIClass::begin() {
 	hdma_spi_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
 	hdma_spi_tx.Init.Mode = DMA_NORMAL;
 	hdma_spi_tx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+	_SPISetDMAFIFO(hdma_spi_tx);
+/*
+	hdma_spi_tx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
 	hdma_spi_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     hdma_spi_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     hdma_spi_tx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
     hdma_spi_tx.Init.MemBurst = DMA_MBURST_SINGLE;
     hdma_spi_tx.Init.PeriphBurst = DMA_PBURST_SINGLE;
-
+*/
 
 	hdma_spi_rx.Instance = _StreamRX;
 	hdma_spi_rx.Parent = &spiHandle;
-	hdma_spi_rx.Init.Channel = _ChannelRX;
+	_SPISetDMAChannel(hdma_spi_rx,_ChannelRX);
+	//hdma_spi_rx.Init.Channel = _ChannelRX;
 	hdma_spi_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
 	hdma_spi_rx.Init.PeriphInc = DMA_PINC_DISABLE;
 	hdma_spi_rx.Init.MemInc = DMA_MINC_ENABLE;
@@ -136,12 +143,14 @@ void SPIClass::begin() {
 	hdma_spi_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
 	hdma_spi_rx.Init.Mode = DMA_NORMAL;
 	hdma_spi_rx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+	_SPISetDMAFIFO(hdma_spi_rx);
+	/*
 	hdma_spi_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     hdma_spi_rx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     hdma_spi_rx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
     hdma_spi_rx.Init.MemBurst = DMA_MBURST_SINGLE;
     hdma_spi_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;
-
+	*/
 
 	stm32AfSPIInit(spiHandle.Instance, mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
 
@@ -197,6 +206,8 @@ void SPIClass::beginTransaction(SPISettings settings) {
 
 void SPIClass::end() {
 	//TODO deinit GPIO
+	HAL_DMA_Init(&hdma_spi_tx);
+	HAL_DMA_Init(&hdma_spi_rx);
 }
 
 void SPIClass::endTransaction() {
