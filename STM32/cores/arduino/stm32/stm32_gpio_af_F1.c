@@ -19,7 +19,7 @@ void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *inst
         (*stm32_pwm_disable_callback)(port, pin);
     }
     if (port == NULL) {
-        port = stm32AfDefault(list, size, instance, &pin);
+        port = stm32AfGetDefault(list, size, instance, &pin);
     }
     stm32GpioClock(port);
     
