@@ -38,6 +38,136 @@
 #define SPI_MODE2 0x02
 #define SPI_MODE3 0x03
 
+#ifdef STM32F0
+#endif
+#ifdef STM32F1
+    #define SPI1_StreamTX 1_Channel3
+    #define SPI1_StreamRX 1_Channel2
+    #define SPI1_ChannelTX 0
+    #define SPI1_ChannelRX 0
+    #define SPI2_StreamTX 1_Channel5
+    #define SPI2_StreamRX 1_Channel4
+    #define SPI2_ChannelTX 0
+    #define SPI2_ChannelRX 0
+    #define SPI3_StreamTX 2_Channel2
+    #define SPI3_StreamRX 2_Channel1
+    #define SPI3_ChannelTX 0
+    #define SPI3_ChannelRX 0
+
+	/*
+	 * These settings are not possible for F1, L1, F3 series
+	 * So we define them to nothing. We should move these to a single block
+	 * for all the series that are compatible.
+	 */
+	#define	_SPISetDMAChannel(hdma_handler,chan)
+	#define _SPISetDMAFIFO(hdma_handler)
+	#define _DMA_Instance_Type DMA_Channel_TypeDef
+
+	#define _SPIx_DMA(a) DMA##a
+	#define SPIx_DMA(a) _SPIx_DMA(a)
+	#define _SPIx_DMA_IRQn(a) DMA##a##_IRQn
+	#define SPIx_DMA_IRQn(a) _SPIx_DMA_IRQn(a)
+
+
+#endif
+#ifdef STM32F2
+    #define SPI1_StreamTX 2_Stream3
+    #define SPI1_StreamRX 2_Stream0
+    #define SPI1_ChannelTX DMA_CHANNEL_3
+    #define SPI1_ChannelRX DMA_CHANNEL_3
+    #define SPI2_StreamTX 1_Stream4
+    #define SPI2_StreamRX 1_Stream3
+    #define SPI2_ChannelTX DMA_CHANNEL_0
+    #define SPI2_ChannelRX DMA_CHANNEL_0
+    #define SPI3_StreamTX 1_Stream5
+    #define SPI3_StreamRX 1_Stream0
+    #define SPI3_ChannelTX DMA_CHANNEL_0
+    #define SPI3_ChannelRX DMA_CHANNEL_0
+
+	#define _SPIx_DMA(a) DMA##a
+	#define SPIx_DMA(a) _SPIx_DMA(a)
+	#define _SPIx_DMA_IRQn(a) DMA##a##_IRQn
+	#define SPIx_DMA_IRQn(a) _SPIx_DMA_IRQn(a)
+
+	#define _SPISetDmaIRQ(a) HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamTX), 0, 0); \
+							HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamRX), 0, 0); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamTX)); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamRX));
+#endif
+#ifdef STM32F3
+#endif
+#ifdef STM32F4
+    #define SPI1_StreamTX 2_Stream3
+    #define SPI1_StreamRX 2_Stream0
+    #define SPI1_ChannelTX DMA_CHANNEL_3
+    #define SPI1_ChannelRX DMA_CHANNEL_3
+    #define SPI2_StreamTX 1_Stream4
+    #define SPI2_StreamRX 1_Stream3
+    #define SPI2_ChannelTX DMA_CHANNEL_0
+    #define SPI2_ChannelRX DMA_CHANNEL_0
+    #define SPI3_StreamTX 1_Stream5
+    #define SPI3_StreamRX 1_Stream0
+    #define SPI3_ChannelTX DMA_CHANNEL_0
+    #define SPI3_ChannelRX DMA_CHANNEL_0
+
+	#define _SPIx_DMA(a) DMA##a
+	#define SPIx_DMA(a) _SPIx_DMA(a)
+	#define _SPIx_DMA_IRQn(a) DMA##a##_IRQn
+	#define SPIx_DMA_IRQn(a) _SPIx_DMA_IRQn(a)
+
+
+	/*
+	 * These settings below are only possible for F2, F4, F7 and L4 series
+	 * We should move these to a single block
+	 * for all the series that are compatible.
+	 */
+	#define _DMA_Instance_Type DMA_Stream_TypeDef
+	#define	_SPISetDMAChannel(hdma_handler,chan) hdma_handler.Init.Channel = chan
+
+	#define _SPISetDMAFIFO(hdma_handler)	do { hdma_handler.Init.FIFOMode = DMA_FIFOMODE_DISABLE; \
+								hdma_handler.Init.FIFOMode = DMA_FIFOMODE_ENABLE; \
+								hdma_handler.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL; \
+								hdma_handler.Init.MemBurst = DMA_MBURST_SINGLE; \
+								hdma_handler.Init.PeriphBurst = DMA_PBURST_SINGLE; } while (0)
+
+	#define _SPISetDmaIRQ(a) HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamTX), 0, 0); \
+							HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamRX), 0, 0); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamTX)); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamRX));
+#endif
+#ifdef STM32F7
+    #define SPI1_StreamTX 2_Stream3
+    #define SPI1_StreamRX 2_Stream0
+    #define SPI1_ChannelTX DMA_CHANNEL_3
+    #define SPI1_ChannelRX DMA_CHANNEL_3
+    #define SPI2_StreamTX 1_Stream4
+    #define SPI2_StreamRX 1_Stream3
+    #define SPI2_ChannelTX DMA_CHANNEL_0
+    #define SPI2_ChannelRX DMA_CHANNEL_0
+    #define SPI3_StreamTX 1_Stream5
+    #define SPI3_StreamRX 1_Stream0
+    #define SPI3_ChannelTX DMA_CHANNEL_0
+    #define SPI3_ChannelRX DMA_CHANNEL_0
+
+	#define _SPIx_DMA(a) DMA##a
+	#define SPIx_DMA(a) _SPIx_DMA(a)
+	#define _SPIx_DMA_IRQn(a) DMA##a##_IRQn
+	#define SPIx_DMA_IRQn(a) _SPIx_DMA_IRQn(a)
+
+	#define _SPISetDmaIRQ(a) HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamTX), 0, 0); \
+							HAL_NVIC_SetPriority(SPIx_DMA_IRQn(a##_StreamRX), 0, 0); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamTX)); \
+							HAL_NVIC_EnableIRQ(SPIx_DMA_IRQn(a##_StreamRX));
+#endif
+#ifdef STM32L0
+#endif
+#ifdef STM32L1
+#endif
+#ifdef STM32L4
+#endif
+
+static uint8_t spi_ff_buffer = 0XFF;
+
 class SPISettings {
   public:
     SPISettings(uint32_t clock, uint8_t bitOrder, uint8_t dataMode): clock(clock), bitOrder(bitOrder), dataMode(dataMode) {};
@@ -82,6 +212,9 @@ class SPIClass {
     uint8_t transfer(uint8_t data);
     uint16_t transfer16(uint16_t data);
     void transfer(uint8_t *buf, size_t count);
+	uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);
+	uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = 1);
+
 
   private:
     uint32_t apb_freq = 0;
@@ -89,6 +222,8 @@ class SPIClass {
     SPISettings settings = {};
 
     SPI_HandleTypeDef spiHandle = {};
+    DMA_HandleTypeDef hdma_spi_rx = {};
+    DMA_HandleTypeDef hdma_spi_tx = {};
 
     GPIO_TypeDef *mosiPort = NULL;
     uint32_t mosiPin = 0;

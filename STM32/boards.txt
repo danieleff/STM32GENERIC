@@ -14,6 +14,7 @@ MapleMini_F103CB.name=MapleMini F103CB
 MapleMini_F103CB.upload.protocol=nucleoFlasher
 MapleMini_F103CB.upload.maximum_size=131072
 MapleMini_F103CB.upload.maximum_data_size=20480
+MapleMini_F103CB.upload.tool=maple_upload
 
 MapleMini_F103CB.build.mcu=cortex-m3
 MapleMini_F103CB.build.board=MAPLE_MINI
@@ -82,6 +83,7 @@ BluePill.name=BluePill F103CB
 BluePill.upload.protocol=nucleoFlasher
 BluePill.upload.maximum_size=131072
 BluePill.upload.maximum_data_size=20480
+BluePill.upload.tool=maple_upload
 
 BluePill.build.mcu=cortex-m3
 BluePill.build.board=BLUEPILL
@@ -191,6 +193,7 @@ NUCLEO_64.name=Nucleo-64 boards
 
 NUCLEO_64.build.core=arduino
 NUCLEO_64.build.board=NUCLEO_64
+NUCLEO_64.upload.tool=nucleoFlasher
 
 NUCLEO_64.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
 
