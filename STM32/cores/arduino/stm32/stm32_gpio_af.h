@@ -66,7 +66,7 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin);
 
-#if defined(SDIO) || defined(SDMMC)
+#if defined(SDIO) || defined(SDMMC1)
 
 #ifndef SD_TypeDef
 #define SD_TypeDef SDIO_TypeDef
