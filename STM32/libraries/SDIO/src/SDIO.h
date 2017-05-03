@@ -11,6 +11,9 @@ class SDIOClass {
     uint8_t readBlocks(uint32_t block, uint8_t* dst, size_t blocks);
     uint8_t writeBlocks(uint32_t block, const uint8_t* src, size_t blocks);
 
+    //TODO ERASE NOT TESTED!
+    uint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);
+
     uint32_t getBlockSize();
     uint64_t getCapacity();
     uint8_t getType();

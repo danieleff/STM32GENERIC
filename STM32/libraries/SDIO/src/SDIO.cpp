@@ -29,6 +29,16 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
     return HAL_SD_GetStatus(&handle) == SD_TRANSFER_OK;
 }
 
+uint8_t SDIOClass::eraseBlocks(uint32_t startBlock, uint32_t endBlock) {
+    error = HAL_SD_Erase(&handle, (uint64_t)startBlock * getBlockSize(), (uint64_t)(endBlock + 1) * getBlockSize() - 1);
+
+    if (error != SD_OK) {
+        return false;
+    }
+
+    return HAL_SD_GetStatus(&handle) == SD_TRANSFER_OK;
+}
+
 uint32_t SDIOClass::getBlockSize() {
     return SDCardInfo.CardBlockSize;
 }
