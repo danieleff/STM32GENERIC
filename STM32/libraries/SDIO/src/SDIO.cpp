@@ -39,6 +39,10 @@ uint8_t SDIOClass::eraseBlocks(uint32_t startBlock, uint32_t endBlock) {
     return HAL_SD_GetStatus(&handle) == SD_TRANSFER_OK;
 }
 
+HAL_SD_ErrorTypedef SDIOClass::getError() {
+    return error;
+}
+
 uint32_t SDIOClass::getBlockSize() {
     return SDCardInfo.CardBlockSize;
 }

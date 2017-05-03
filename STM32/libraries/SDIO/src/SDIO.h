@@ -14,6 +14,8 @@ class SDIOClass {
     //TODO ERASE NOT TESTED!
     uint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);
 
+    HAL_SD_ErrorTypedef getError();
+
     uint32_t getBlockSize();
     uint64_t getCapacity();
     uint8_t getType();
