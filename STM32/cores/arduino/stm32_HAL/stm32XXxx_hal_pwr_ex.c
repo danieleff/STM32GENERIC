@@ -16,7 +16,7 @@
     
 #endif
 #ifdef STM32F7
-    #include "stm32F7xx_hal_pwr_ex.c"
+    #include "stm32f7xx_hal_pwr_ex.c"
 #endif
 #ifdef STM32L0
     
