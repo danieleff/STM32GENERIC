@@ -67,7 +67,10 @@ uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSam
     handle.Init.AudioFreq = I2S_AUDIOFREQ_44K;
     handle.Init.CPOL = I2S_CPOL_LOW;
     handle.Init.ClockSource = I2S_CLOCK_PLL;
+
+    #if defined(STM32F3) || defined(STM32F4)
     handle.Init.FullDuplexMode = I2S_FULLDUPLEXMODE_DISABLE;
+    #endif
 
     if (sampleRate >= 96000) {
         handle.Init.AudioFreq = I2S_AUDIOFREQ_96K;
