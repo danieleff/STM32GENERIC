@@ -258,7 +258,7 @@ NUCLEO_64.menu.subboard.Nucleo_L152RE.massstorage_drive=NODE_L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.f_cpu=32000000L
 
 NUCLEO_64.menu.subboard.Nucleo_L476RG=Nucleo-L476RG
-NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_size=1024
+NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_size=1048576
 NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_data_size=131072
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.series=STM32L4
