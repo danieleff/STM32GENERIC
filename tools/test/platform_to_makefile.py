@@ -76,6 +76,8 @@ for (variant, replaces) in variant_uploads.iteritems():
     replaces['build.system.path'] = root + '/system'
     replaces['build.core.path'] = root + '/cores/arduino'
     replaces['build.variant.path'] = '$(PATH_VARIANT)'
+    
+    replaces['build.extra_flags_usb'] = '-DMENU_USB_SERIAL'
 
     with open('makefiles/' + variant, 'w') as file:
         

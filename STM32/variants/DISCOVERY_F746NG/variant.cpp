@@ -2,6 +2,13 @@
 
 #include "stm32_gpio.h"
 
+extern "C" void initVariant() {
+
+    //UART1 is connected to ST-Link V2.1 as Virtual Com port on non-default PA9/PB7 pins
+    SerialUART1.stm32SetTX(PA9);
+    SerialUART1.stm32SetRX(PB7);
+}
+
 const stm32_port_pin_type variant_pin_list[] = {
   { GPIOC, GPIO_PIN_7 },
   { GPIOC, GPIO_PIN_6 },

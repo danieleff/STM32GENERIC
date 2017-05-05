@@ -37,6 +37,11 @@ int main(void)
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
     #endif
 
+    #ifdef STM32F7
+    SCB_EnableICache();
+    SCB_EnableDCache();
+    #endif
+
 	init();
 
 	initVariant();

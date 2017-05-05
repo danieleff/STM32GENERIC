@@ -227,7 +227,7 @@ extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern "C" void USB_LP_CAN1_RX0_IRQHandler(void) {
   HAL_PCD_IRQHandler(&hpcd_USB_FS);
 }
-//F4
+//F4 F7
 extern "C" void OTG_FS_IRQHandler(void) {
   HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
 }
