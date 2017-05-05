@@ -227,6 +227,16 @@ NUCLEO_64.menu.subboard.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.massstorage_drive=NODE_F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.f_cpu=72000000L
 
+NUCLEO_64.menu.subboard.Nucleo_F401RE=Nucleo-F401RE
+NUCLEO_64.menu.subboard.Nucleo_F401RE.upload.maximum_size=524288
+NUCLEO_64.menu.subboard.Nucleo_F401RE.upload.maximum_data_size=98304
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.series=STM32F4
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.variant=NUCLEO_F401RE
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.extra_flags=-DSTM32F401RE
+NUCLEO_64.menu.subboard.Nucleo_F401RE.massstorage_drive=NODE_F401RE
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.f_cpu=100000000L
+
 NUCLEO_64.menu.subboard.Nucleo_F411RE=Nucleo-F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_size=524288
 NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_data_size=131072
