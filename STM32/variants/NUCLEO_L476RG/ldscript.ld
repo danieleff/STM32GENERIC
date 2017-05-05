@@ -2,7 +2,8 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x20000000 + 131072;    /* end of RAM */
+/* _estack = 0x20000000 + 131072;     end of RAM 131072 is wrong see http://www.openstm32.org/forumthread2359 */
+_estack = 0x20017FFF;    /* end of RAM */
 
 /* Specify the memory areas */
 MEMORY
