@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/upload/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,43 +21,55 @@
         
     <url>
      <loc>/menu_options/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/arduino_api/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/spi/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/i2c/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/i2s/</loc>
+     <lastmod>2017-05-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/sdio/</loc>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/uart/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/usb_cdc/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/stm32_hal/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -66,7 +78,7 @@
     
     <url>
      <loc>/libraries/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -75,19 +87,19 @@
         
     <url>
      <loc>/boards/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/add_board/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/test/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -96,7 +108,7 @@
     
     <url>
      <loc>/about/</loc>
-     <lastmod>2017-05-02</lastmod>
+     <lastmod>2017-05-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

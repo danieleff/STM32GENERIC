@@ -90,6 +90,18 @@
                     
                         
 <li >
+    <a href="../i2s/">I2S</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../sdio/">SDIO</a>
+</li>
+
+                    
+                        
+<li >
     <a href="../uart/">Serial UART</a>
 </li>
 
@@ -203,7 +215,7 @@
         
             <li><a href="#analogwriteresolution">analogWriteResolution()</a></li>
         
-            <li><a href="#attachinterrupt">attachInterrupt(...);</a></li>
+            <li><a href="#void-attachinterruptuint8_t-callback-int-mode">void attachInterrupt(uint8_t, callback, int mode);</a></li>
         
             <li><a href="#predefined-pin-constants">Predefined pin constants</a></li>
         
@@ -321,11 +333,14 @@ void loop() {
 }
 </code></pre>
 
-<h4 id="attachinterrupt"><strong><code>attachInterrupt(...);</code></strong></h4>
-<p>TODO not yet implemented</p>
+<h4 id="void-attachinterruptuint8_t-callback-int-mode"><strong><code>void attachInterrupt(uint8_t, callback, int mode);</code></strong></h4>
+<p>Setup callback on the specified pin. Mode can be: 
+<em> CHANGE: When pin changes from LOW to HIGH, or HIGH to LOW, the callback will be called. 
+</em> RISING: When pin changes from LOW to HIGH the callback will be called.
+* FALLING: When pin changes from HIGH to LOW, the callback will be called.</p>
+<p>Same pins from different ports cannot be used. For exaple PA3 and PB3 cannot be used as interrupt simultaneously.</p>
 <h3 id="predefined-pin-constants">Predefined pin constants</h3>
-<p>The following constants are defined in the variant.h file for each variant:
-TODO not all implemented</p>
+<p>The following constants are defined in the variant.h file for each variant:</p>
 <table>
 <thead>
 <tr>

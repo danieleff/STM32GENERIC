@@ -90,6 +90,18 @@
                     
                         
 <li >
+    <a href="../i2s/">I2S</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../sdio/">SDIO</a>
+</li>
+
+                    
+                        
+<li >
     <a href="../uart/">Serial UART</a>
 </li>
 
@@ -193,15 +205,17 @@
         
             <li><a href="#endtransaction">endTransaction();</a></li>
         
-            <li><a href="#transfer">transfer(...);</a></li>
+            <li><a href="#uint8_t-transferuint8_t-data">uint8_t transfer(uint8_t data);</a></li>
         
-            <li><a href="#transfer16">transfer16(...);</a></li>
+            <li><a href="#uint16_t-transfer16uint16_t-data">uint16_t transfer16(uint16_t data);</a></li>
         
-            <li><a href="#transfer_1">transfer(...);</a></li>
+            <li><a href="#transferuint8_t-buf-size_t-count">transfer(uint8_t *buf, size_t count);</a></li>
         
             <li><a href="#usinginterrupt">usingInterrupt();</a></li>
         
-            <li><a href="#transfer_2">transfer(...);</a></li>
+            <li><a href="#uint8_t-dmasenduint8_t-transmitbuf-uint16_t-length-bool-minc-true">uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);</a></li>
+        
+            <li><a href="#uint8_t-dmatransferuint8_t-transmitbuf-uint8_t-receivebuf-uint16_t-length">uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);</a></li>
         
             <li><a href="#stm32setmosiuint8_t-pin">stm32SetMOSI(uint8_t pin);</a></li>
         
@@ -276,16 +290,23 @@ void setup() {
 <p>TODO disable interrupt in pin if <code>usingInterrupt</code> was used</p>
 <h4 id="endtransaction"><strong><code>endTransaction();</code></strong></h4>
 <p>TODO enable interrupt in pin if <code>usingInterrupt</code> was used</p>
-<h4 id="transfer"><strong><code>transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="transfer16"><strong><code>transfer16(...);</code></strong></h4>
-<p>TODO write doc</p>
-<h4 id="transfer_1"><strong><code>transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
+<h4 id="uint8_t-transferuint8_t-data"><strong><code>uint8_t transfer(uint8_t data);</code></strong></h4>
+<p>Send a 8 bits on SPI, and return the received 8 bit data.</p>
+<h4 id="uint16_t-transfer16uint16_t-data"><strong><code>uint16_t transfer16(uint16_t data);</code></strong></h4>
+<p>Send a 16 bits on SPI, and return the received 16 bit data.</p>
+<h4 id="transferuint8_t-buf-size_t-count"><strong><code>transfer(uint8_t *buf, size_t count);</code></strong></h4>
+<p>Send the data in the buffer. The received data is stored in the same buffer.</p>
 <h4 id="usinginterrupt"><strong><code>usingInterrupt();</code></strong></h4>
 <p>TODO not yet implemented</p>
-<h4 id="transfer_2"><strong><code>transfer(...);</code></strong></h4>
-<p>TODO write doc</p>
+<h4 id="uint8_t-dmasenduint8_t-transmitbuf-uint16_t-length-bool-minc-true"><strong><code>uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);</code></strong></h4>
+<p>Send data using DMA in <strong>blocking mode</strong>.</p>
+<ul>
+<li>minc: false - only send the first byte of the <code>transmitBuf</code>, <code>length</code> times</li>
+<li>minc: true - send <code>length</code> bytes from the <code>transmitBuf</code></li>
+</ul>
+<h4 id="uint8_t-dmatransferuint8_t-transmitbuf-uint8_t-receivebuf-uint16_t-length"><strong><code>uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);</code></strong></h4>
+<p>Send and receive data using DMA in <strong>blocking mode</strong>.</p>
+<p>If <code>transmitBuf</code> is NULL, <code>0xFF</code> is transmitted instead.</p>
 <h4 id="stm32setmosiuint8_t-pin"><strong><code>stm32SetMOSI(uint8_t pin);</code></strong></h4>
 <p>Set the MOSI pin used by this SPI.</p>
 <p><strong>This method must be called before begin()!</strong></p>

@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Testing a board - STM32GENERIC</title>
+        <title>SDIO - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -95,8 +95,8 @@
 
                     
                         
-<li >
-    <a href="../sdio/">SDIO</a>
+<li class="active">
+    <a href="./">SDIO</a>
 </li>
 
                     
@@ -129,7 +129,7 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -146,8 +146,8 @@
 
                     
                         
-<li class="active">
-    <a href="./">Testing a board</a>
+<li >
+    <a href="../test/">Testing a board</a>
 </li>
 
                     
@@ -171,12 +171,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../add_board/">
+                        <a rel="next" href="../i2s/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../about/">
+                        <a rel="prev" href="../uart/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -191,9 +191,31 @@
     <ul class="nav bs-sidenav">
     
     
-        <li class="main active"><a href="#self-tesing-boards">Self tesing boards</a></li>
+        <li class="main active"><a href="#sdio-sdmmc">SDIO / SDMMC</a></li>
         
-            <li><a href="#generic-stm32-arduino-api-test">Generic STM32 Arduino API test</a></li>
+            <li><a href="#begin">begin();</a></li>
+        
+            <li><a href="#uint8_t-end">uint8_t end();</a></li>
+        
+            <li><a href="#uint32_t-getblocksize">uint32_t getBlockSize();</a></li>
+        
+            <li><a href="#uint8_t-readblocksuint32_t-block-uint8_t-dst-size_t-blocks">uint8_t readBlocks(uint32_t block, uint8_t* dst, size_t blocks);</a></li>
+        
+            <li><a href="#uint8_t-writeblocksuint32_t-block-const-uint8_t-src-size_t-blocks">uint8_t writeBlocks(uint32_t block, const uint8_t* src, size_t blocks);</a></li>
+        
+            <li><a href="#uint8_t-eraseblocksuint32_t-startblock-uint32_t-endblock">uint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);</a></li>
+        
+            <li><a href="#hal_sd_errortypedef-geterror">HAL_SD_ErrorTypedef getError();</a></li>
+        
+            <li><a href="#uint64_t-getcapacity">uint64_t getCapacity();</a></li>
+        
+            <li><a href="#uint8_t-gettype">uint8_t getType();</a></li>
+        
+            <li><a href="#uint16_t-getrca">uint16_t getRCA();</a></li>
+        
+            <li><a href="#hal_sd_cidtypedef-getcid">HAL_SD_CIDTypedef getCID();</a></li>
+        
+            <li><a href="#hal_sd_csdtypedef-getcsd">HAL_SD_CSDTypedef getCSD();</a></li>
         
     
     
@@ -201,21 +223,39 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="self-tesing-boards">Self tesing boards</h1>
-<p>To automatically check if the board works, there are tests in the library.
-These work by connecting pins to </p>
-<h2 id="generic-stm32-arduino-api-test">Generic STM32 Arduino API test</h2>
-<p>This test should work on almost all STM32 boards. </p>
-<ol>
-<li>From the arduino menu, select File/Examples/Examples for XXX/SelfTest</li>
-<li>Connect PA0 to PA1 to test digital/analog/read/write/interrupt</li>
-<li>Connect SPI MOSI to SPI MISO to test SPI</li>
-<li>Select a free UART (not used for Serial) on the board, connect the RX to TX, set the SerialUartToTest macro in the sketch</li>
-<li>Run the sketch</li>
-</ol>
-<p>The result should be short blink on the board LED.
-If there was a failure, it is shown as a long LED </p>
-<p>The results are also </p></div>
+<h2 id="sdio-sdmmc">SDIO / SDMMC</h2>
+<p>To use the hardware SDIO, include it in your code:</p>
+<pre><code class="c++">#include &quot;SDIO.h&quot;
+
+SDIOClass sdio;
+</code></pre>
+
+<h4 id="begin"><strong><code>begin();</code></strong></h4>
+<p>Connects to the SDIO card, using 4-bit mode.</p>
+<p>Returns true on success, false on failure.
+On failure, use <code>getError()</code>.</p>
+<h4 id="uint8_t-end"><strong><code>uint8_t end();</code></strong></h4>
+<p>Disconnects from the SDIO card.</p>
+<h4 id="uint32_t-getblocksize"><strong><code>uint32_t getBlockSize();</code></strong></h4>
+<p>Returns the block size.</p>
+<h4 id="uint8_t-readblocksuint32_t-block-uint8_t-dst-size_t-blocks"><strong><code>uint8_t readBlocks(uint32_t block, uint8_t* dst, size_t blocks);</code></strong></h4>
+<p>Read the given number of blocks into dst buffer in blocking mode.</p>
+<h4 id="uint8_t-writeblocksuint32_t-block-const-uint8_t-src-size_t-blocks"><strong><code>uint8_t writeBlocks(uint32_t block, const uint8_t* src, size_t blocks);</code></strong></h4>
+<p>Writes the given number of blocks from the buffer in blocking mode.</p>
+<h4 id="uint8_t-eraseblocksuint32_t-startblock-uint32_t-endblock"><strong><code>uint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);</code></strong></h4>
+<p>Erases the blocks from start block to end block.</p>
+<h4 id="hal_sd_errortypedef-geterror"><strong><code>HAL_SD_ErrorTypedef getError();</code></strong></h4>
+<p>Returns the last error type.</p>
+<h4 id="uint64_t-getcapacity"><strong><code>uint64_t getCapacity();</code></strong></h4>
+<p>Returns the SD Card capacity.</p>
+<h4 id="uint8_t-gettype"><strong><code>uint8_t getType();</code></strong></h4>
+<p>Returns the type of the SD Card </p>
+<h4 id="uint16_t-getrca"><strong><code>uint16_t getRCA();</code></strong></h4>
+<p>Returns the RCA register.</p>
+<h4 id="hal_sd_cidtypedef-getcid"><strong><code>HAL_SD_CIDTypedef getCID();</code></strong></h4>
+<p>Returns the CID register.</p>
+<h4 id="hal_sd_csdtypedef-getcsd"><strong><code>HAL_SD_CSDTypedef getCSD();</code></strong></h4>
+<p>Returns the CSD register.</p></div>
         </div>
 
         <footer class="col-md-12">

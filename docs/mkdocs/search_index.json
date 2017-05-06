@@ -72,7 +72,7 @@
         }, 
         {
             "location": "/arduino_api/", 
-            "text": "Overview\n\n\n\n\nSTM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.\n\n\nNon microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.\n\n\nAll non-standard functions are prefixed with \nstm32XXXX()\n\n\n\n\nuint32_t millis();\n\n\nReturns the milliseconds since the microcontroller started. Overflows in 50 days.\n\n\nuint32_t micros();\n\n\nReturns the microseconds since the microcontroller started. Overflows in 70 minutes.\n\n\ndelay(uint32_t millis);\n\n\nDelays the execution by the given milliseconds.\n\n\ndelayMicroseconds(uint32_t micros);\n\n\nDelays the execution by the given microseconds.\n\n\n\n\nExample: Print the milliseconds on \nSerial\n, every second:\n\n\n\n\nvoid setup() {\n  Serial.begin(9600);\n}\nvoid loop() {\n  Serial.println(millis());\n  delay(1000);\n}\n\n\n\n\n\n\nUses STM32 SysTick, set to interrupt 1ms intervals.\n\n\n\n\nNaming the pins in code:\n\n\n\n\nSTM32 chip pins have names: \nPA0\n, \nPA1\n...\n\n\nOn some boards (Nucleo, Maple), there are numbers / alternative names next to the pin: \n1\n, \nRX\n, \nA0\n.\n\n\nPredefined constants\n for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.\n\n\n\n\nGenerally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);\n\n\npinMode(uint8_t pin, uint8_t mode);\n\n\nSets the pin for digital reading / writing\n\n\n\n\n\n\n\n\nMode\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nOUTPUT\n\n\n0V - 3.3V\n\n\n\n\n\n\nINPUT\n\n\nThe pin does not have a pull down or pull up resistor\n\n\n\n\n\n\nINPUT_PULLUP\n\n\nWeak pull up resistor to default to HIGH if the pin is not connected to anything\n\n\n\n\n\n\nINPUT_PULLDOWN\n\n\nWeak pull down resistor to default to LOW if the pin is not connected to anything\n\n\n\n\n\n\n\n\npinMode() is needed for digitalRead() and digitalWrite() functions.\n\n\nThe system automatically sets the pinMode when using a peripheral library like analogRead(), analogWrite(), \nSPI\n or \nI2C\n, so you don't have to.\n\n\ndigitalRead(uint8_t pin);\n\n\nRead the voltage level on the specified pin. Returns LOW(0) if it is 0V, HIGH(1) if it is 3.3V\n\n\nAll pins can be used as digital input.\n\n\nNot all pins are 5V tolerant. Please check the chip reference manual \nPinouts and pin description\n section.\n\n\ndigitalWrite(uint8_t pin, uint8_t value);\n\n\nIf value if LOW(0), sets the pin to 0V. If value is HIGH(1), 3.3V.\n\nAll pins can be used as digital output.\n\n\n\n\nExample: Blink the \nLED\n on the board:\n\n\n\n\nvoid setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n  delay(1000);\n}\n\n\n\n\nint analogRead(uint8_t pin);\n\n\nRead the voltage level on the pin, and map the 0..3.3V range to 0..1023 range by default.\n\n\nNot all pins can be used as analog input!\n Please check the \nBoards page\n.\n\n\nanalogReadResolution()\n\n\nTODO not yet implemented\n\n\nanalogWrite(uint8_t pin, int value)\n\n\nSet PWM to the specified pin.\n\n\nAll pins can be used as analog/PWM output.\n\n\n\n\nUses the TIM2 clock interrupt with software PWM implementation to allow PWM on all pins.\n\n\n\n\nanalogWriteResolution()\n\n\nTODO not yet implemented\n\n\n\n\nExample: Dim the LED based on the voltage value on PA0\n\n\n\n\nvoid loop() {\n    analogWrite(LED_BUILTIN, analogRead(PA0));\n    delay(10);\n}\n\n\n\n\nattachInterrupt(...);\n\n\nTODO not yet implemented\n\n\nPredefined pin constants\n\n\nThe following constants are defined in the variant.h file for each variant:\nTODO not all implemented\n\n\n\n\n\n\n\n\nConstant\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nLED_BUILTIN\n\n\nThe primary LED on board, if there is any\n\n\n\n\n\n\nSTM32_LED_BUILTIN_ACTIVE_LOW\n\n\nIf set, the onboard LED lights up when output is set to LOW\n\n\n\n\n\n\nMOSI\n\n\nMOSI pin of the first \nSPI\n\n\n\n\n\n\nMISO\n\n\nMISO pin of the first \nSPI\n\n\n\n\n\n\nSCK\n\n\nSCK  pin of the first \nSPI\n\n\n\n\n\n\nSDA\n\n\nSDA pin of the first \nI2C\n\n\n\n\n\n\nSCL\n\n\nSCL pin of the first \nI2C", 
+            "text": "Overview\n\n\n\n\nSTM32GENERIC uses standard C and C++, so control sturctures (if, for), data types(int, long), syntax, etc... work as expected.\n\n\nNon microcontroller-specific Arduino utility functions such as isLowerCase(), bitRead() etc... also work.\n\n\nAll non-standard functions are prefixed with \nstm32XXXX()\n\n\n\n\nuint32_t millis();\n\n\nReturns the milliseconds since the microcontroller started. Overflows in 50 days.\n\n\nuint32_t micros();\n\n\nReturns the microseconds since the microcontroller started. Overflows in 70 minutes.\n\n\ndelay(uint32_t millis);\n\n\nDelays the execution by the given milliseconds.\n\n\ndelayMicroseconds(uint32_t micros);\n\n\nDelays the execution by the given microseconds.\n\n\n\n\nExample: Print the milliseconds on \nSerial\n, every second:\n\n\n\n\nvoid setup() {\n  Serial.begin(9600);\n}\nvoid loop() {\n  Serial.println(millis());\n  delay(1000);\n}\n\n\n\n\n\n\nUses STM32 SysTick, set to interrupt 1ms intervals.\n\n\n\n\nNaming the pins in code:\n\n\n\n\nSTM32 chip pins have names: \nPA0\n, \nPA1\n...\n\n\nOn some boards (Nucleo, Maple), there are numbers / alternative names next to the pin: \n1\n, \nRX\n, \nA0\n.\n\n\nPredefined constants\n for primary LED, SPI, Serial, I2C are defined in the variant file for the specific board.\n\n\n\n\nGenerally you should stick to naming the pin the same as they appear on the board to reduce confusion. If on the board you see ABC, use digitalWrite(ABC, HIGH);\n\n\npinMode(uint8_t pin, uint8_t mode);\n\n\nSets the pin for digital reading / writing\n\n\n\n\n\n\n\n\nMode\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nOUTPUT\n\n\n0V - 3.3V\n\n\n\n\n\n\nINPUT\n\n\nThe pin does not have a pull down or pull up resistor\n\n\n\n\n\n\nINPUT_PULLUP\n\n\nWeak pull up resistor to default to HIGH if the pin is not connected to anything\n\n\n\n\n\n\nINPUT_PULLDOWN\n\n\nWeak pull down resistor to default to LOW if the pin is not connected to anything\n\n\n\n\n\n\n\n\npinMode() is needed for digitalRead() and digitalWrite() functions.\n\n\nThe system automatically sets the pinMode when using a peripheral library like analogRead(), analogWrite(), \nSPI\n or \nI2C\n, so you don't have to.\n\n\ndigitalRead(uint8_t pin);\n\n\nRead the voltage level on the specified pin. Returns LOW(0) if it is 0V, HIGH(1) if it is 3.3V\n\n\nAll pins can be used as digital input.\n\n\nNot all pins are 5V tolerant. Please check the chip reference manual \nPinouts and pin description\n section.\n\n\ndigitalWrite(uint8_t pin, uint8_t value);\n\n\nIf value if LOW(0), sets the pin to 0V. If value is HIGH(1), 3.3V.\n\nAll pins can be used as digital output.\n\n\n\n\nExample: Blink the \nLED\n on the board:\n\n\n\n\nvoid setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n  delay(1000);\n}\n\n\n\n\nint analogRead(uint8_t pin);\n\n\nRead the voltage level on the pin, and map the 0..3.3V range to 0..1023 range by default.\n\n\nNot all pins can be used as analog input!\n Please check the \nBoards page\n.\n\n\nanalogReadResolution()\n\n\nTODO not yet implemented\n\n\nanalogWrite(uint8_t pin, int value)\n\n\nSet PWM to the specified pin.\n\n\nAll pins can be used as analog/PWM output.\n\n\n\n\nUses the TIM2 clock interrupt with software PWM implementation to allow PWM on all pins.\n\n\n\n\nanalogWriteResolution()\n\n\nTODO not yet implemented\n\n\n\n\nExample: Dim the LED based on the voltage value on PA0\n\n\n\n\nvoid loop() {\n    analogWrite(LED_BUILTIN, analogRead(PA0));\n    delay(10);\n}\n\n\n\n\nvoid attachInterrupt(uint8_t, callback, int mode);\n\n\nSetup callback on the specified pin. Mode can be: \n\n CHANGE: When pin changes from LOW to HIGH, or HIGH to LOW, the callback will be called. \n\n RISING: When pin changes from LOW to HIGH the callback will be called.\n* FALLING: When pin changes from HIGH to LOW, the callback will be called.\n\n\nSame pins from different ports cannot be used. For exaple PA3 and PB3 cannot be used as interrupt simultaneously.\n\n\nPredefined pin constants\n\n\nThe following constants are defined in the variant.h file for each variant:\n\n\n\n\n\n\n\n\nConstant\n\n\nMeaning\n\n\n\n\n\n\n\n\n\n\nLED_BUILTIN\n\n\nThe primary LED on board, if there is any\n\n\n\n\n\n\nSTM32_LED_BUILTIN_ACTIVE_LOW\n\n\nIf set, the onboard LED lights up when output is set to LOW\n\n\n\n\n\n\nMOSI\n\n\nMOSI pin of the first \nSPI\n\n\n\n\n\n\nMISO\n\n\nMISO pin of the first \nSPI\n\n\n\n\n\n\nSCK\n\n\nSCK  pin of the first \nSPI\n\n\n\n\n\n\nSDA\n\n\nSDA pin of the first \nI2C\n\n\n\n\n\n\nSCL\n\n\nSCL pin of the first \nI2C", 
             "title": "Arduino API"
         }, 
         {
@@ -136,18 +136,18 @@
             "title": "analogWriteResolution()"
         }, 
         {
-            "location": "/arduino_api/#attachinterrupt", 
-            "text": "TODO not yet implemented", 
-            "title": "attachInterrupt(...);"
+            "location": "/arduino_api/#void-attachinterruptuint8_t-callback-int-mode", 
+            "text": "Setup callback on the specified pin. Mode can be:   CHANGE: When pin changes from LOW to HIGH, or HIGH to LOW, the callback will be called.   RISING: When pin changes from LOW to HIGH the callback will be called.\n* FALLING: When pin changes from HIGH to LOW, the callback will be called.  Same pins from different ports cannot be used. For exaple PA3 and PB3 cannot be used as interrupt simultaneously.", 
+            "title": "void attachInterrupt(uint8_t, callback, int mode);"
         }, 
         {
             "location": "/arduino_api/#predefined-pin-constants", 
-            "text": "The following constants are defined in the variant.h file for each variant:\nTODO not all implemented     Constant  Meaning      LED_BUILTIN  The primary LED on board, if there is any    STM32_LED_BUILTIN_ACTIVE_LOW  If set, the onboard LED lights up when output is set to LOW    MOSI  MOSI pin of the first  SPI    MISO  MISO pin of the first  SPI    SCK  SCK  pin of the first  SPI    SDA  SDA pin of the first  I2C    SCL  SCL pin of the first  I2C", 
+            "text": "The following constants are defined in the variant.h file for each variant:     Constant  Meaning      LED_BUILTIN  The primary LED on board, if there is any    STM32_LED_BUILTIN_ACTIVE_LOW  If set, the onboard LED lights up when output is set to LOW    MOSI  MOSI pin of the first  SPI    MISO  MISO pin of the first  SPI    SCK  SCK  pin of the first  SPI    SDA  SDA pin of the first  I2C    SCL  SCL pin of the first  I2C", 
             "title": "Predefined pin constants"
         }, 
         {
             "location": "/spi/", 
-            "text": "SPI\n\n\nTo use the hardware SPI, include it in your code:\n\n\n#include \nSPI.h\n\n\n\n\n\nThe first SPI object is explicitly created, and is connected to the SPI1 instance.\n\n\nPlease check your board documentation to see which pins is SPI connected to by default.\n\n\nTo use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\nPlease check the documentation of the chip to see which pins can be used.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nbegin()\n\n\nEnables SPI on the pins\n\n\nend()\n\n\nDisables SPI on the pins\n\n\nbeginTransaction(SPISettings settings);\n\n\nInitializes SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nendTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\ntransfer16(...);\n\n\nTODO write doc\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nusingInterrupt();\n\n\nTODO not yet implemented\n\n\ntransfer(...);\n\n\nTODO write doc\n\n\nstm32SetMOSI(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMISO(uint8_t pin);\n\n\nSet the alternative MISO pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCK(uint8_t pin);\n\n\nSet the alternative SCK pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(SPI_TypeDef *instance);\n\n\nSet the alternative SPI instance (SPI1/SPI2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nSPI\n in it, but you want to use SPI2:\n\n\n\n\n#include \nSPI.h\n\n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
+            "text": "SPI\n\n\nTo use the hardware SPI, include it in your code:\n\n\n#include \nSPI.h\n\n\n\n\n\nThe first SPI object is explicitly created, and is connected to the SPI1 instance.\n\n\nPlease check your board documentation to see which pins is SPI connected to by default.\n\n\nTo use additional SPI, use the constructors to create your object, or the stm32SetInstance() method.\n\n\nSPIClass(SPI_TypeDef *instance)\n\n\nCreate a SPI object that is connected to the instance, on the default mosi/miso/sck. \nTo avoid confusion, it is better to use the constructor below with implicit pins.\n\n\nSPIClass(SPI_TypeDef *instance, uint8_t mosi, uint8_t miso, uint8_t sck)\n\n\nCreate a SPI object that is connected to the instance, on the specified mosi/miso/sck pins.\n\n\nPlease check the documentation of the chip to see which pins can be used.\n\n\n\n\nExample: set up SPI2\n\n\n\n\nSPIClass SPI_2(SPI2, mosi, iso, sck);\nvoid setup() {\n    SPI_2.begin();\n}\n\n\n\n\n\nbegin()\n\n\nEnables SPI on the pins\n\n\nend()\n\n\nDisables SPI on the pins\n\n\nbeginTransaction(SPISettings settings);\n\n\nInitializes SPI with the provided \nSPISettings mySetting(speedMaximum, dataOrder, dataMode)\n parameters.\n\n\n\n\n\n\n\n\nParameter\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\nspeedMaximum\n\n\nThe maximum speed requested\n\n\n\n\n\n\ndataOrder\n\n\nMSBFIRST\n, \nLSBFIRST\n\n\n\n\n\n\ndataMode\n\n\nSPI_MODE0\n, \nSPI_MODE1\n, \nSPI_MODE2\n, or \nSPI_MODE3\n\n\n\n\n\n\n\n\nExample:\n\n\nSPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));\n\n\n\n\nTODO disable interrupt in pin if \nusingInterrupt\n was used\n\n\nendTransaction();\n\n\nTODO enable interrupt in pin if \nusingInterrupt\n was used\n\n\nuint8_t transfer(uint8_t data);\n\n\nSend a 8 bits on SPI, and return the received 8 bit data.\n\n\nuint16_t transfer16(uint16_t data);\n\n\nSend a 16 bits on SPI, and return the received 16 bit data.\n\n\ntransfer(uint8_t *buf, size_t count);\n\n\nSend the data in the buffer. The received data is stored in the same buffer.\n\n\nusingInterrupt();\n\n\nTODO not yet implemented\n\n\nuint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);\n\n\nSend data using DMA in \nblocking mode\n.\n\n\n\n\nminc: false - only send the first byte of the \ntransmitBuf\n, \nlength\n times\n\n\nminc: true - send \nlength\n bytes from the \ntransmitBuf\n\n\n\n\nuint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);\n\n\nSend and receive data using DMA in \nblocking mode\n.\n\n\nIf \ntransmitBuf\n is NULL, \n0xFF\n is transmitted instead.\n\n\nstm32SetMOSI(uint8_t pin);\n\n\nSet the MOSI pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMISO(uint8_t pin);\n\n\nSet the alternative MISO pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetSCK(uint8_t pin);\n\n\nSet the alternative SCK pin used by this SPI.\n\n\nThis method must be called before begin()!\n\n\nstm32SetInstance(SPI_TypeDef *instance);\n\n\nSet the alternative SPI instance (SPI1/SPI2/...) used by this object.\n\n\nThis method must be called before begin()!\n\n\n\n\nExample: If you want to use a library that has hardcoded \nSPI\n in it, but you want to use SPI2:\n\n\n\n\n#include \nSPI.h\n\n\nvoid setup() {\n    SPI.stm32SetInstance(SPI2);\n    SPI.stm32SetMOSI(mosi);\n    SPI.stm32SetMISO(miso);\n    SPI.stm32SetSCK(sck);\n    ...\n    library.begin();\n}", 
             "title": "SPI"
         }, 
         {
@@ -186,19 +186,19 @@
             "title": "endTransaction();"
         }, 
         {
-            "location": "/spi/#transfer", 
-            "text": "TODO write doc", 
-            "title": "transfer(...);"
+            "location": "/spi/#uint8_t-transferuint8_t-data", 
+            "text": "Send a 8 bits on SPI, and return the received 8 bit data.", 
+            "title": "uint8_t transfer(uint8_t data);"
         }, 
         {
-            "location": "/spi/#transfer16", 
-            "text": "TODO write doc", 
-            "title": "transfer16(...);"
+            "location": "/spi/#uint16_t-transfer16uint16_t-data", 
+            "text": "Send a 16 bits on SPI, and return the received 16 bit data.", 
+            "title": "uint16_t transfer16(uint16_t data);"
         }, 
         {
-            "location": "/spi/#transfer_1", 
-            "text": "TODO write doc", 
-            "title": "transfer(...);"
+            "location": "/spi/#transferuint8_t-buf-size_t-count", 
+            "text": "Send the data in the buffer. The received data is stored in the same buffer.", 
+            "title": "transfer(uint8_t *buf, size_t count);"
         }, 
         {
             "location": "/spi/#usinginterrupt", 
@@ -206,9 +206,14 @@
             "title": "usingInterrupt();"
         }, 
         {
-            "location": "/spi/#transfer_2", 
-            "text": "TODO write doc", 
-            "title": "transfer(...);"
+            "location": "/spi/#uint8_t-dmasenduint8_t-transmitbuf-uint16_t-length-bool-minc-true", 
+            "text": "Send data using DMA in  blocking mode .   minc: false - only send the first byte of the  transmitBuf ,  length  times  minc: true - send  length  bytes from the  transmitBuf", 
+            "title": "uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);"
+        }, 
+        {
+            "location": "/spi/#uint8_t-dmatransferuint8_t-transmitbuf-uint8_t-receivebuf-uint16_t-length", 
+            "text": "Send and receive data using DMA in  blocking mode .  If  transmitBuf  is NULL,  0xFF  is transmitted instead.", 
+            "title": "uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);"
         }, 
         {
             "location": "/spi/#stm32setmosiuint8_t-pin", 
@@ -309,6 +314,151 @@
             "location": "/i2c/#stm32setinstancei2c_typedef-instance", 
             "text": "Set the alternative I2C instance (I2C1/I2C2/...) used by this object.  This method must be called before begin()!   Example: If you want to use a library that has hardcoded  I2C  in it, but you want to use I2C2:   #include  Wire.h \n\nvoid setup() {\n    Wire.stm32SetInstance(I2C2);\n    Wire.stm32SetSDA(sda);\n    Wire.stm32SetSCL(scl);\n    ...\n    library.begin();\n}", 
             "title": "stm32SetInstance(I2C_TypeDef *instance);"
+        }, 
+        {
+            "location": "/i2s/", 
+            "text": "I2S\n\n\nNot to be confused with \nI2C\n, is a protocol for connecting to audio devices.\n\n\nThis library is in beta, and the API / implementation is subject to change!\n\n\nTo use this library, include it in your code:\n\n\n#include \nI2S.h\n\n\nI2SClass i2s(...);\n\n\n\n\n\nI2SClass(SPI_TypeDef *instance);\n\n\nConstruct I2S that will be connected to the specified I2S instance on chip.\n\n\nThe board default pins will be used for sd/ws/ck. mck will not be used.\n\n\nI2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck);\n\n\nConstruct I2S that will be connected to the specified I2S instance on chip.\n\n\nThe specified pins will be used for sd/ws/ck. mck will not be used.\n\n\nI2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck, uint8_t mck);\n\n\nConstruct I2S that will be connected to the specified I2S instance on chip.\n\n\nThe specified pins will be used for sd/ws/ck/mck.\n\n\nuint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);\n\n\nConfigure the pins, and the parameters for the connection.\n\n\n\n\nmode: one of I2S_PHILIPS_MODE,I2S_RIGHT_JUSTIFIED_MODE, I2S_LEFT_JUSTIFIED_MODE\n\n\nsampleRate: between 8000 and 96000\n\n\nbitsPerSample: 16, 24 or 32\n\n\n\n\nwrite(uint16_t data);\n\n\nSend 16 bit data. \nCurrently in blocking mode\n\n\nwrite32(uint32_t data);\n\n\nSend 32 bit data. \nCurrently in blocking mode\n\n\nwrite(uint16_t *data, uint16_t size);\n\n\nSend 16 bit data. \nCurrently in blocking mode\n\n\nwrite(uint32_t *data, uint16_t size);\n\n\nSend 32 bit data. \nCurrently in blocking mode\n\n\nstm32SetSD(uint8_t pin);\n\n\nSet the alternative SD pin used by this I2S.\n\n\nThis method must be called before begin()!\n\n\nstm32SetWD(uint8_t pin);\n\n\nSet the alternative WD pin used by this I2S.\n\n\nThis method must be called before begin()!\n\n\nstm32SetCK(uint8_t pin);\n\n\nSet the alternative CK pin used by this I2S.\n\n\nThis method must be called before begin()!\n\n\nstm32SetMCK(uint8_t pin);\n\n\nSet the alternative MCK pin used by this I2S.\n\n\nThis method must be called before begin()!", 
+            "title": "I2S"
+        }, 
+        {
+            "location": "/i2s/#i2s", 
+            "text": "Not to be confused with  I2C , is a protocol for connecting to audio devices.", 
+            "title": "I2S"
+        }, 
+        {
+            "location": "/i2s/#this-library-is-in-beta-and-the-api-implementation-is-subject-to-change", 
+            "text": "To use this library, include it in your code:  #include  I2S.h \n\nI2SClass i2s(...);", 
+            "title": "This library is in beta, and the API / implementation is subject to change!"
+        }, 
+        {
+            "location": "/i2s/#i2sclassspi_typedef-instance", 
+            "text": "Construct I2S that will be connected to the specified I2S instance on chip.  The board default pins will be used for sd/ws/ck. mck will not be used.", 
+            "title": "I2SClass(SPI_TypeDef *instance);"
+        }, 
+        {
+            "location": "/i2s/#i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck", 
+            "text": "Construct I2S that will be connected to the specified I2S instance on chip.  The specified pins will be used for sd/ws/ck. mck will not be used.", 
+            "title": "I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck);"
+        }, 
+        {
+            "location": "/i2s/#i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck-uint8_t-mck", 
+            "text": "Construct I2S that will be connected to the specified I2S instance on chip.  The specified pins will be used for sd/ws/ck/mck.", 
+            "title": "I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck, uint8_t mck);"
+        }, 
+        {
+            "location": "/i2s/#uint8_t-i2sclassbegini2s_mode_t-mode-uint32_t-samplerate-uint8_t-bitspersample", 
+            "text": "Configure the pins, and the parameters for the connection.   mode: one of I2S_PHILIPS_MODE,I2S_RIGHT_JUSTIFIED_MODE, I2S_LEFT_JUSTIFIED_MODE  sampleRate: between 8000 and 96000  bitsPerSample: 16, 24 or 32", 
+            "title": "uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);"
+        }, 
+        {
+            "location": "/i2s/#writeuint16_t-data", 
+            "text": "Send 16 bit data.  Currently in blocking mode", 
+            "title": "write(uint16_t data);"
+        }, 
+        {
+            "location": "/i2s/#write32uint32_t-data", 
+            "text": "Send 32 bit data.  Currently in blocking mode", 
+            "title": "write32(uint32_t data);"
+        }, 
+        {
+            "location": "/i2s/#writeuint16_t-data-uint16_t-size", 
+            "text": "Send 16 bit data.  Currently in blocking mode", 
+            "title": "write(uint16_t *data, uint16_t size);"
+        }, 
+        {
+            "location": "/i2s/#writeuint32_t-data-uint16_t-size", 
+            "text": "Send 32 bit data.  Currently in blocking mode", 
+            "title": "write(uint32_t *data, uint16_t size);"
+        }, 
+        {
+            "location": "/i2s/#stm32setsduint8_t-pin", 
+            "text": "Set the alternative SD pin used by this I2S.  This method must be called before begin()!", 
+            "title": "stm32SetSD(uint8_t pin);"
+        }, 
+        {
+            "location": "/i2s/#stm32setwduint8_t-pin", 
+            "text": "Set the alternative WD pin used by this I2S.  This method must be called before begin()!", 
+            "title": "stm32SetWD(uint8_t pin);"
+        }, 
+        {
+            "location": "/i2s/#stm32setckuint8_t-pin", 
+            "text": "Set the alternative CK pin used by this I2S.  This method must be called before begin()!", 
+            "title": "stm32SetCK(uint8_t pin);"
+        }, 
+        {
+            "location": "/i2s/#stm32setmckuint8_t-pin", 
+            "text": "Set the alternative MCK pin used by this I2S.  This method must be called before begin()!", 
+            "title": "stm32SetMCK(uint8_t pin);"
+        }, 
+        {
+            "location": "/sdio/", 
+            "text": "SDIO / SDMMC\n\n\nTo use the hardware SDIO, include it in your code:\n\n\n#include \nSDIO.h\n\n\nSDIOClass sdio;\n\n\n\n\nbegin();\n\n\nConnects to the SDIO card, using 4-bit mode.\n\n\nReturns true on success, false on failure.\nOn failure, use \ngetError()\n.\n\n\nuint8_t end();\n\n\nDisconnects from the SDIO card.\n\n\nuint32_t getBlockSize();\n\n\nReturns the block size.\n\n\nuint8_t readBlocks(uint32_t block, uint8_t* dst, size_t blocks);\n\n\nRead the given number of blocks into dst buffer in blocking mode.\n\n\nuint8_t writeBlocks(uint32_t block, const uint8_t* src, size_t blocks);\n\n\nWrites the given number of blocks from the buffer in blocking mode.\n\n\nuint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);\n\n\nErases the blocks from start block to end block.\n\n\nHAL_SD_ErrorTypedef getError();\n\n\nReturns the last error type.\n\n\nuint64_t getCapacity();\n\n\nReturns the SD Card capacity.\n\n\nuint8_t getType();\n\n\nReturns the type of the SD Card \n\n\nuint16_t getRCA();\n\n\nReturns the RCA register.\n\n\nHAL_SD_CIDTypedef getCID();\n\n\nReturns the CID register.\n\n\nHAL_SD_CSDTypedef getCSD();\n\n\nReturns the CSD register.", 
+            "title": "SDIO"
+        }, 
+        {
+            "location": "/sdio/#sdio-sdmmc", 
+            "text": "To use the hardware SDIO, include it in your code:  #include  SDIO.h \n\nSDIOClass sdio;", 
+            "title": "SDIO / SDMMC"
+        }, 
+        {
+            "location": "/sdio/#begin", 
+            "text": "Connects to the SDIO card, using 4-bit mode.  Returns true on success, false on failure.\nOn failure, use  getError() .", 
+            "title": "begin();"
+        }, 
+        {
+            "location": "/sdio/#uint8_t-end", 
+            "text": "Disconnects from the SDIO card.", 
+            "title": "uint8_t end();"
+        }, 
+        {
+            "location": "/sdio/#uint32_t-getblocksize", 
+            "text": "Returns the block size.", 
+            "title": "uint32_t getBlockSize();"
+        }, 
+        {
+            "location": "/sdio/#uint8_t-readblocksuint32_t-block-uint8_t-dst-size_t-blocks", 
+            "text": "Read the given number of blocks into dst buffer in blocking mode.", 
+            "title": "uint8_t readBlocks(uint32_t block, uint8_t* dst, size_t blocks);"
+        }, 
+        {
+            "location": "/sdio/#uint8_t-writeblocksuint32_t-block-const-uint8_t-src-size_t-blocks", 
+            "text": "Writes the given number of blocks from the buffer in blocking mode.", 
+            "title": "uint8_t writeBlocks(uint32_t block, const uint8_t* src, size_t blocks);"
+        }, 
+        {
+            "location": "/sdio/#uint8_t-eraseblocksuint32_t-startblock-uint32_t-endblock", 
+            "text": "Erases the blocks from start block to end block.", 
+            "title": "uint8_t eraseBlocks(uint32_t startBlock, uint32_t endBlock);"
+        }, 
+        {
+            "location": "/sdio/#hal_sd_errortypedef-geterror", 
+            "text": "Returns the last error type.", 
+            "title": "HAL_SD_ErrorTypedef getError();"
+        }, 
+        {
+            "location": "/sdio/#uint64_t-getcapacity", 
+            "text": "Returns the SD Card capacity.", 
+            "title": "uint64_t getCapacity();"
+        }, 
+        {
+            "location": "/sdio/#uint8_t-gettype", 
+            "text": "Returns the type of the SD Card", 
+            "title": "uint8_t getType();"
+        }, 
+        {
+            "location": "/sdio/#uint16_t-getrca", 
+            "text": "Returns the RCA register.", 
+            "title": "uint16_t getRCA();"
+        }, 
+        {
+            "location": "/sdio/#hal_sd_cidtypedef-getcid", 
+            "text": "Returns the CID register.", 
+            "title": "HAL_SD_CIDTypedef getCID();"
+        }, 
+        {
+            "location": "/sdio/#hal_sd_csdtypedef-getcsd", 
+            "text": "Returns the CSD register.", 
+            "title": "HAL_SD_CSDTypedef getCSD();"
         }, 
         {
             "location": "/uart/", 

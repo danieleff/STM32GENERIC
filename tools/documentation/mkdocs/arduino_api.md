@@ -113,14 +113,18 @@ void loop() {
 }
 ```
 
-#### **`attachInterrupt(...);`**
+#### **`void attachInterrupt(uint8_t, callback, int mode);`**
 
-TODO not yet implemented
+Setup callback on the specified pin. Mode can be: 
+* CHANGE: When pin changes from LOW to HIGH, or HIGH to LOW, the callback will be called. 
+* RISING: When pin changes from LOW to HIGH the callback will be called.
+* FALLING: When pin changes from HIGH to LOW, the callback will be called.
+
+Same pins from different ports cannot be used. For exaple PA3 and PB3 cannot be used as interrupt simultaneously.
 
 ### Predefined pin constants
 
 The following constants are defined in the variant.h file for each variant:
-TODO not all implemented
 
 Constant          | Meaning
 ------------------|-----------

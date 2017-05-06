@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Testing a board - STM32GENERIC</title>
+        <title>I2S - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/highlight.css">
@@ -60,7 +60,7 @@
             
             
             
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -89,8 +89,8 @@
 
                     
                         
-<li >
-    <a href="../i2s/">I2S</a>
+<li class="active">
+    <a href="./">I2S</a>
 </li>
 
                     
@@ -129,7 +129,7 @@
             
             
             
-                <li class="dropdown active">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     
@@ -146,8 +146,8 @@
 
                     
                         
-<li class="active">
-    <a href="./">Testing a board</a>
+<li >
+    <a href="../test/">Testing a board</a>
 </li>
 
                     
@@ -171,12 +171,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../add_board/">
+                        <a rel="next" href="../i2c/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../about/">
+                        <a rel="prev" href="../sdio/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -191,9 +191,34 @@
     <ul class="nav bs-sidenav">
     
     
-        <li class="main active"><a href="#self-tesing-boards">Self tesing boards</a></li>
+        <li class="main active"><a href="#i2s">I2S</a></li>
         
-            <li><a href="#generic-stm32-arduino-api-test">Generic STM32 Arduino API test</a></li>
+    
+        <li class="main "><a href="#this-library-is-in-beta-and-the-api-implementation-is-subject-to-change">This library is in beta, and the API / implementation is subject to change!</a></li>
+        
+            <li><a href="#i2sclassspi_typedef-instance">I2SClass(SPI_TypeDef *instance);</a></li>
+        
+            <li><a href="#i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck">I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck);</a></li>
+        
+            <li><a href="#i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck-uint8_t-mck">I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck, uint8_t mck);</a></li>
+        
+            <li><a href="#uint8_t-i2sclassbegini2s_mode_t-mode-uint32_t-samplerate-uint8_t-bitspersample">uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);</a></li>
+        
+            <li><a href="#writeuint16_t-data">write(uint16_t data);</a></li>
+        
+            <li><a href="#write32uint32_t-data">write32(uint32_t data);</a></li>
+        
+            <li><a href="#writeuint16_t-data-uint16_t-size">write(uint16_t *data, uint16_t size);</a></li>
+        
+            <li><a href="#writeuint32_t-data-uint16_t-size">write(uint32_t *data, uint16_t size);</a></li>
+        
+            <li><a href="#stm32setsduint8_t-pin">stm32SetSD(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setwduint8_t-pin">stm32SetWD(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setckuint8_t-pin">stm32SetCK(uint8_t pin);</a></li>
+        
+            <li><a href="#stm32setmckuint8_t-pin">stm32SetMCK(uint8_t pin);</a></li>
         
     
     
@@ -201,21 +226,52 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="self-tesing-boards">Self tesing boards</h1>
-<p>To automatically check if the board works, there are tests in the library.
-These work by connecting pins to </p>
-<h2 id="generic-stm32-arduino-api-test">Generic STM32 Arduino API test</h2>
-<p>This test should work on almost all STM32 boards. </p>
-<ol>
-<li>From the arduino menu, select File/Examples/Examples for XXX/SelfTest</li>
-<li>Connect PA0 to PA1 to test digital/analog/read/write/interrupt</li>
-<li>Connect SPI MOSI to SPI MISO to test SPI</li>
-<li>Select a free UART (not used for Serial) on the board, connect the RX to TX, set the SerialUartToTest macro in the sketch</li>
-<li>Run the sketch</li>
-</ol>
-<p>The result should be short blink on the board LED.
-If there was a failure, it is shown as a long LED </p>
-<p>The results are also </p></div>
+<h2 id="i2s">I2S</h2>
+<p>Not to be confused with <a href="../i2c/">I2C</a>, is a protocol for connecting to audio devices.</p>
+<h2 id="this-library-is-in-beta-and-the-api-implementation-is-subject-to-change"><strong>This library is in beta, and the API / implementation is subject to change!</strong></h2>
+<p>To use this library, include it in your code:</p>
+<pre><code class="c++">#include &quot;I2S.h&quot;
+
+I2SClass i2s(...);
+
+</code></pre>
+
+<h4 id="i2sclassspi_typedef-instance"><strong><code>I2SClass(SPI_TypeDef *instance);</code></strong></h4>
+<p>Construct I2S that will be connected to the specified I2S instance on chip.</p>
+<p>The board default pins will be used for sd/ws/ck. mck will not be used.</p>
+<h4 id="i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck"><strong><code>I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck);</code></strong></h4>
+<p>Construct I2S that will be connected to the specified I2S instance on chip.</p>
+<p>The specified pins will be used for sd/ws/ck. mck will not be used.</p>
+<h4 id="i2sclassspi_typedef-instance-uint8_t-sd-uint8_t-ws-uint8_t-ck-uint8_t-mck"><strong><code>I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck, uint8_t mck);</code></strong></h4>
+<p>Construct I2S that will be connected to the specified I2S instance on chip.</p>
+<p>The specified pins will be used for sd/ws/ck/mck.</p>
+<h4 id="uint8_t-i2sclassbegini2s_mode_t-mode-uint32_t-samplerate-uint8_t-bitspersample"><strong><code>uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);</code></strong></h4>
+<p>Configure the pins, and the parameters for the connection.</p>
+<ul>
+<li>mode: one of I2S_PHILIPS_MODE,I2S_RIGHT_JUSTIFIED_MODE, I2S_LEFT_JUSTIFIED_MODE</li>
+<li>sampleRate: between 8000 and 96000</li>
+<li>bitsPerSample: 16, 24 or 32</li>
+</ul>
+<h4 id="writeuint16_t-data"><strong><code>write(uint16_t data);</code></strong></h4>
+<p>Send 16 bit data. <strong>Currently in blocking mode</strong></p>
+<h4 id="write32uint32_t-data"><strong><code>write32(uint32_t data);</code></strong></h4>
+<p>Send 32 bit data. <strong>Currently in blocking mode</strong></p>
+<h4 id="writeuint16_t-data-uint16_t-size"><strong><code>write(uint16_t *data, uint16_t size);</code></strong></h4>
+<p>Send 16 bit data. <strong>Currently in blocking mode</strong></p>
+<h4 id="writeuint32_t-data-uint16_t-size"><strong><code>write(uint32_t *data, uint16_t size);</code></strong></h4>
+<p>Send 32 bit data. <strong>Currently in blocking mode</strong></p>
+<h4 id="stm32setsduint8_t-pin"><strong><code>stm32SetSD(uint8_t pin);</code></strong></h4>
+<p>Set the alternative SD pin used by this I2S.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setwduint8_t-pin"><strong><code>stm32SetWD(uint8_t pin);</code></strong></h4>
+<p>Set the alternative WD pin used by this I2S.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setckuint8_t-pin"><strong><code>stm32SetCK(uint8_t pin);</code></strong></h4>
+<p>Set the alternative CK pin used by this I2S.</p>
+<p><strong>This method must be called before begin()!</strong></p>
+<h4 id="stm32setmckuint8_t-pin"><strong><code>stm32SetMCK(uint8_t pin);</code></strong></h4>
+<p>Set the alternative MCK pin used by this I2S.</p>
+<p><strong>This method must be called before begin()!</strong></p></div>
         </div>
 
         <footer class="col-md-12">

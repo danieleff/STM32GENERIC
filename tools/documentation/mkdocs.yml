@@ -8,6 +8,8 @@ pages:
     - Arduino API: arduino_api.md
     - SPI: spi.md
     - I2C: i2c.md
+    - I2S: i2s.md
+    - SDIO: sdio.md
     - Serial UART: uart.md
     - Serial USB: usb_cdc.md
     - STM32 HAL: stm32_hal.md

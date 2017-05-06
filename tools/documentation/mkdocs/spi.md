@@ -62,25 +62,34 @@ TODO disable interrupt in pin if `usingInterrupt` was used
 
 TODO enable interrupt in pin if `usingInterrupt` was used
 
-#### **`transfer(...);`**
+#### **`uint8_t transfer(uint8_t data);`**
 
-TODO write doc
+Send a 8 bits on SPI, and return the received 8 bit data.
 
-#### **`transfer16(...);`**
+#### **`uint16_t transfer16(uint16_t data);`**
 
-TODO write doc
+Send a 16 bits on SPI, and return the received 16 bit data.
 
-#### **`transfer(...);`**
+#### **`transfer(uint8_t *buf, size_t count);`**
 
-TODO write doc
+Send the data in the buffer. The received data is stored in the same buffer.
 
 #### **`usingInterrupt();`**
 
 TODO not yet implemented
 
-#### **`transfer(...);`**
+#### **`uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);`**
 
-TODO write doc
+Send data using DMA in **blocking mode**.
+
+* minc: false - only send the first byte of the `transmitBuf`, `length` times
+* minc: true - send `length` bytes from the `transmitBuf`
+
+#### **`uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);`**
+
+Send and receive data using DMA in **blocking mode**.
+
+If `transmitBuf` is NULL, `0xFF` is transmitted instead.
 
 #### **`stm32SetMOSI(uint8_t pin);`**
 
