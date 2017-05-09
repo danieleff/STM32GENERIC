@@ -73,6 +73,12 @@ typedef struct __attribute__((__packed__)) {
 #define USBD_CDC_CONFIGURATION_STRING_FS u"CDC Config"
 #define USBD_CDC_INTERFACE_STRING_FS     u"CDC Interface"
 
+#define USBD_MSC_PID_FS                  22314
+#define USBD_MSC_PRODUCT_STRING_FS       u"STM32 Mass Storage"
+#define USBD_MSC_SERIALNUMBER_STRING_FS  u"00000000001A"
+#define USBD_MSC_CONFIGURATION_STRING_FS u"MSC Config"
+#define USBD_MSC_INTERFACE_STRING_FS     u"MSC Interface"
+
 static const usb_descriptor_string USB_MANUFACTURER_STRING_DESCRIPTOR = {
     .bLength = sizeof(USBD_MANUFACTURER_STRING),
     .bDescriptorType = USB_DESC_TYPE_STRING,
@@ -103,6 +109,32 @@ static const usb_descriptor_string USB_CDC_INTERFACE_STRING_DESCRIPTOR = {
     .bString = USBD_CDC_INTERFACE_STRING_FS
 };
 
+
+
+static const usb_descriptor_string USB_MSC_PRODUCT_STRING_DESCRIPTOR = {
+    .bLength = sizeof(USBD_MSC_PRODUCT_STRING_FS),
+    .bDescriptorType = USB_DESC_TYPE_STRING,
+    .bString = USBD_MSC_PRODUCT_STRING_FS
+};
+
+static const usb_descriptor_string USB_MSC_SERIALNUMBER_STRING_DESCRIPTOR = {
+    .bLength = sizeof(USBD_MSC_SERIALNUMBER_STRING_FS),
+    .bDescriptorType = USB_DESC_TYPE_STRING,
+    .bString = USBD_MSC_SERIALNUMBER_STRING_FS
+};
+
+static const usb_descriptor_string USB_MSC_CONFIGURATION_STRING_DESCRIPTOR = {
+    .bLength = sizeof(USBD_MSC_CONFIGURATION_STRING_FS),
+    .bDescriptorType = USB_DESC_TYPE_STRING,
+    .bString = USBD_MSC_CONFIGURATION_STRING_FS
+};
+
+static const usb_descriptor_string USB_MSC_INTERFACE_STRING_DESCRIPTOR = {
+    .bLength = sizeof(USBD_MSC_INTERFACE_STRING_FS),
+    .bDescriptorType = USB_DESC_TYPE_STRING,
+    .bString = USBD_MSC_INTERFACE_STRING_FS
+};
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0*/
@@ -128,7 +160,7 @@ uint8_t *     USBD_FS_USRStringDesc (USBD_SpeedTypeDef speed, uint8_t idx , uint
   #pragma data_alignment=4   
 #endif
 /* USB Standard Device Descriptor */
-__ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
+__ALIGN_BEGIN uint8_t USBD_CDC_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
   {
     0x12,                       /*bLength */
     USB_DESC_TYPE_DEVICE,       /*bDescriptorType*/
@@ -154,6 +186,37 @@ __ALIGN_BEGIN uint8_t USBD_FS_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */
   #pragma data_alignment=4   
 #endif
+
+
+
+__ALIGN_BEGIN uint8_t USBD_MSC_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
+  {
+    0x12,                       /*bLength */
+    USB_DESC_TYPE_DEVICE,       /*bDescriptorType*/
+#if (USBD_LPM_ENABLED == 1)
+    0x01,                       /*bcdUSB */ /* changed to USB version 2.01
+                                               in order to support LPM L1 suspend
+                                               resume test of USBCV3.0*/
+#else
+    0x00,                       /* bcdUSB */
+#endif
+    0x02,
+    0x00,                       /*bDeviceClass*/
+    0x00,                       /*bDeviceSubClass*/
+    0x00,                       /*bDeviceProtocol*/
+    USB_MAX_EP0_SIZE,          /*bMaxPacketSize*/
+    LOBYTE(USBD_VID),           /*idVendor*/
+    HIBYTE(USBD_VID),           /*idVendor*/
+    LOBYTE(USBD_MSC_PID_FS),           /*idVendor*/
+    HIBYTE(USBD_MSC_PID_FS),           /*idVendor*/
+    0x00,                       /*bcdDevice rel. 2.00*/
+    0x02,
+    USBD_IDX_MFC_STR,           /*Index of manufacturer  string*/
+    USBD_IDX_PRODUCT_STR,       /*Index of product string*/
+    USBD_IDX_SERIAL_STR,        /*Index of serial number string*/
+    USBD_MAX_NUM_CONFIGURATION  /*bNumConfigurations*/
+  } ;
+
 
 /* USB Standard Device Descriptor */
 __ALIGN_BEGIN uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] __ALIGN_END =
@@ -192,8 +255,15 @@ __ALIGN_BEGIN uint8_t USBD_StrDesc[USBD_MAX_STR_DESC_SIZ] __ALIGN_END;
 */
 uint8_t *  USBD_CDC_DeviceDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  *length = sizeof(USBD_FS_DeviceDesc);
-  return USBD_FS_DeviceDesc;
+  *length = sizeof(USBD_CDC_DeviceDesc);
+  return USBD_CDC_DeviceDesc;
+}
+
+
+uint8_t *  USBD_MSC_DeviceDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
+{
+  *length = sizeof(USBD_MSC_DeviceDesc);
+  return USBD_MSC_DeviceDesc;
 }
 
 /**
@@ -273,6 +343,33 @@ uint8_t *  USBD_CDC_InterfaceStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *
   *length = USB_CDC_INTERFACE_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_CDC_INTERFACE_STRING_DESCRIPTOR;
 }
+
+
+uint8_t *  USBD_MSC_ProductStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
+{
+  *length = USB_MSC_PRODUCT_STRING_DESCRIPTOR.bLength;
+  return (uint8_t*)&USB_MSC_PRODUCT_STRING_DESCRIPTOR;
+}
+
+uint8_t *  USBD_MSC_SerialStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
+{
+  *length = USB_MSC_SERIALNUMBER_STRING_DESCRIPTOR.bLength;
+  return (uint8_t*)&USB_MSC_SERIALNUMBER_STRING_DESCRIPTOR;
+}
+
+uint8_t *  USBD_MSC_ConfigStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
+{
+  *length = USB_MSC_CONFIGURATION_STRING_DESCRIPTOR.bLength;
+  return (uint8_t*)&USB_MSC_CONFIGURATION_STRING_DESCRIPTOR;
+}
+
+
+uint8_t *  USBD_MSC_InterfaceStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
+{
+  *length = USB_MSC_INTERFACE_STRING_DESCRIPTOR.bLength;
+  return (uint8_t*)&USB_MSC_INTERFACE_STRING_DESCRIPTOR;
+}
+
 /**
   * @}
   */ 
@@ -294,6 +391,17 @@ USBD_DescriptorsTypeDef CDC_Desc =
   USBD_CDC_SerialStrDescriptor,
   USBD_CDC_ConfigStrDescriptor,
   USBD_CDC_InterfaceStrDescriptor,
+};
+
+USBD_DescriptorsTypeDef MSC_Desc =
+{
+  USBD_MSC_DeviceDescriptor,
+  USBD_LangIDStrDescriptor,
+  USBD_ManufacturerStrDescriptor,
+  USBD_MSC_ProductStrDescriptor,
+  USBD_MSC_SerialStrDescriptor,
+  USBD_MSC_ConfigStrDescriptor,
+  USBD_MSC_InterfaceStrDescriptor,
 };
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
