@@ -29,6 +29,10 @@
 #include <SerialUSB.h>
 #include "variant.h"
 
+#include "USBDevice.h"
+
+USBD_HandleTypeDef hUsbDeviceFS;
+
 // Constructors ////////////////////////////////////////////////////////////////
 SerialUSBClass::SerialUSBClass(){
   // Make sure Rx ring buffer is initialized back to empty.
@@ -36,31 +40,8 @@ SerialUSBClass::SerialUSBClass(){
   //tx_buffer.iHead = tx_buffer.iTail = 0;
 }
 
-void SerialUSBClass::init(void){
-/* Re-enumerate the USB */
-  volatile unsigned int i;
-
-#ifdef USB_DISC_PIN
-  pinMode(USB_DISC_PIN, OUTPUT);
-  digitalWrite(USB_DISC_PIN, HIGH);
-	for(i=0;i<512;i++);
-  digitalWrite(USB_DISC_PIN, LOW);
-#else
-  //pinMode(USBDP_PIN, OUTPUT);
-  //digitalWrite(USBDP_PIN, LOW);
-	//for(i=0;i<512;i++);
-  //digitalWrite(USBDP_PIN, HIGH);
-
-  
-  pinMode(PA12, OUTPUT);
-  digitalWrite(PA12, LOW);
-  //HAL_Delay(1000);
-  for(i=0;i<512;i++){};
-  digitalWrite(PA12, HIGH);
-  //HAL_Delay(1000);
-  for(i=0;i<512;i++){};
-#endif
-  MX_USB_DEVICE_Init();
+void SerialUSBClass::init(void) {
+  USBDeviceFS.beginCDC();
 }
 
 
