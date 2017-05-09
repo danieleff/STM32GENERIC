@@ -179,7 +179,9 @@ SerialUSBClass::operator bool()
 		return false;
 
 	bool result = false;
-
+	if(hUsbDeviceFS.dev_state == USBD_STATE_CONFIGURED){
+      result = true;
+	}
 /* 	if (_usbLineInfo.lineState > 0)
 	{
 		result = true;
