@@ -218,7 +218,7 @@ uint8_t *  USBD_LangIDStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 */
 uint8_t *  USBD_CDC_ProductStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  length = USB_CDC_PRODUCT_STRING_DESCRIPTOR.bLength;
+  *length = USB_CDC_PRODUCT_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_CDC_PRODUCT_STRING_DESCRIPTOR;
 }
 
@@ -231,7 +231,7 @@ uint8_t *  USBD_CDC_ProductStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *le
 */
 uint8_t *  USBD_ManufacturerStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  length = USB_MANUFACTURER_STRING_DESCRIPTOR.bLength;
+  *length = USB_MANUFACTURER_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_MANUFACTURER_STRING_DESCRIPTOR;
 }
 
@@ -244,7 +244,7 @@ uint8_t *  USBD_ManufacturerStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *l
 */
 uint8_t *  USBD_CDC_SerialStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  length = USB_CDC_SERIALNUMBER_STRING_DESCRIPTOR.bLength;
+  *length = USB_CDC_SERIALNUMBER_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_CDC_SERIALNUMBER_STRING_DESCRIPTOR;
 }
 
@@ -257,7 +257,7 @@ uint8_t *  USBD_CDC_SerialStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *len
 */
 uint8_t *  USBD_CDC_ConfigStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  length = USB_CDC_CONFIGURATION_STRING_DESCRIPTOR.bLength;
+  *length = USB_CDC_CONFIGURATION_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_CDC_CONFIGURATION_STRING_DESCRIPTOR;
 }
 
@@ -270,7 +270,7 @@ uint8_t *  USBD_CDC_ConfigStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *len
 */
 uint8_t *  USBD_CDC_InterfaceStrDescriptor( USBD_SpeedTypeDef speed , uint16_t *length)
 {
-  length = USB_CDC_INTERFACE_STRING_DESCRIPTOR.bLength;
+  *length = USB_CDC_INTERFACE_STRING_DESCRIPTOR.bLength;
   return (uint8_t*)&USB_CDC_INTERFACE_STRING_DESCRIPTOR;
 }
 /**
