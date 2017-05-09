@@ -107,6 +107,10 @@ uint8_t  *USBD_MSC_GetOtherSpeedCfgDesc (uint16_t *length);
 uint8_t  *USBD_MSC_GetDeviceQualifierDescriptor (uint16_t *length);
 
 
+static uint32_t staticMemory[(sizeof(USBD_MSC_BOT_HandleTypeDef)/4)+1];
+
+static uint8_t staticMemoryUsed = 0;
+
 /**
   * @}
   */ 
@@ -328,8 +332,15 @@ uint8_t  USBD_MSC_Init (USBD_HandleTypeDef *pdev,
                    USBD_EP_TYPE_BULK,
                    MSC_MAX_FS_PACKET);  
   }
-  pdev->pClassData = USBD_malloc(sizeof (USBD_MSC_BOT_HandleTypeDef));
   
+  if (staticMemoryUsed == 0) {
+    pdev->pClassData = &staticMemory;
+    staticMemoryUsed = 1;
+  } else {
+    // On the rare ocasion when you want to use CDC on both FS and HS USB
+    pdev->pClassData = malloc(sizeof(USBD_MSC_BOT_HandleTypeDef));
+  }
+
   if(pdev->pClassData == NULL)
   {
     ret = 1; 
@@ -369,7 +380,11 @@ uint8_t  USBD_MSC_DeInit (USBD_HandleTypeDef *pdev,
   /* Free MSC Class Resources */
   if(pdev->pClassData != NULL)
   {
-    USBD_free(pdev->pClassData);
+    if (pdev->pClassData != &staticMemory) {
+      free(pdev->pClassData);
+    } else {
+      staticMemoryUsed = 0;
+    }
     pdev->pClassData  = NULL; 
   }
   return 0;
