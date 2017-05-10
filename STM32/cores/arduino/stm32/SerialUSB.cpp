@@ -41,7 +41,8 @@ SerialUSBClass::SerialUSBClass(){
 }
 
 void SerialUSBClass::init(void) {
-  USBDeviceFS.beginCDC();
+  //
+  //USBDeviceFS.beginCDC();
 }
 
 

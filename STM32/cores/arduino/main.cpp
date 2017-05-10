@@ -18,6 +18,7 @@
 */
 
 #include <Arduino.h>
+#include "USBDevice.h"
 
 // Declared weak in Arduino.h to allow user redefinitions.
 int atexit(void (* /*func*/ )()) { return 0; }
@@ -46,9 +47,7 @@ int main(void)
 
 	initVariant();
 
-#if defined(USBCON)
-	USBDevice.attach();
-#endif
+	USBDeviceFS.beginMenuSelection();
 	
 	setup();
     
