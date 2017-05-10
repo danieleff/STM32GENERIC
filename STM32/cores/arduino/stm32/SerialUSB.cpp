@@ -24,14 +24,10 @@
  *
  ****************************************************************************/
 
-#ifdef MENU_USB_SERIAL
-
 #include <SerialUSB.h>
 #include "variant.h"
 
 #include "USBDevice.h"
-
-USBD_HandleTypeDef hUsbDeviceFS;
 
 // Constructors ////////////////////////////////////////////////////////////////
 SerialUSBClass::SerialUSBClass(){
@@ -203,27 +199,6 @@ bool SerialUSBClass::rts() {
   return 0;
 }
 
-
-extern PCD_HandleTypeDef hpcd_USB_FS;
-extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
-//F1
-extern "C" void USB_LP_CAN1_RX0_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-}
-//F4 F7
-extern "C" void OTG_FS_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
-}
-//L0
-extern "C" void USB_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-}
-
-extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){ 
-  SerialUSB.CDC_RxHandler(data, len); 
-}
-
+#ifdef MENU_USB_SERIAL
 SerialUSBClass SerialUSB;
-
 #endif
