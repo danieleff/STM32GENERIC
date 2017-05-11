@@ -10,6 +10,17 @@
 
 SD_HandleTypeDef hsd;
 HAL_SD_CardInfoTypedef SDCardInfo;
+static uint8_t m_errorCode = SD_CARD_ERROR_INIT_NOT_CALLED;
+static uint32_t m_errorLine = 0;
+
+//=============================================================================
+// Error function and macro.
+#define sdError(code) setSdErrorCode(code, __LINE__)
+inline bool setSdErrorCode(uint8_t code, uint32_t line) {
+  m_errorCode = code;
+  m_errorLine = line;
+  return false;  // setSdErrorCode
+}
 
 uint8_t SDIOClass::begin() {
     GPIO_InitTypeDef GPIO_InitStruct;
@@ -38,7 +49,7 @@ uint8_t SDIOClass::begin() {
     if (error != SD_OK) {
         return false;
     }
-
+    m_errorCode = SD_CARD_ERROR_NONE;
     return true;
 }
 
@@ -61,4 +72,41 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
     }
 
     return HAL_SD_GetStatus(&hsd) == SD_TRANSFER_OK;
+}
+
+bool SDIOClass::erase(uint32_t firstBlock, uint32_t lastBlock) {
+    error = HAL_SD_Erase(&hsd, (uint64_t)firstBlock, (uint64_t)lastBlock);
+
+    if (error != SD_OK) {
+        return false;
+    }
+
+    return HAL_SD_GetStatus(&hsd) == SD_TRANSFER_OK;
+}
+
+bool SDIOClass::readCID(void* cid) {
+  memcpy(cid, &SDCardInfo.SD_cid, 16);
+  return true;
+}
+
+bool SDIOClass::readCSD(void* csd) {
+  memcpy(csd, &SDCardInfo.SD_csd, 16);
+  return true;
+}
+
+uint32_t SDIOClass::cardSize() {
+return	(SDCardInfo.CardCapacity / SDCardInfo.CardBlockSize);
+
+}
+
+uint8_t SDIOClass::errorCode() {
+  return m_errorCode;
+}
+
+uint32_t SDIOClass::errorData() {
+  return 0;
+}
+
+uint32_t SDIOClass::errorLine() {
+  return m_errorLine;
 }
