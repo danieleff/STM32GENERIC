@@ -30,8 +30,9 @@ void USBDeviceClass::reenumerate() {
       pinMode(PA12, OUTPUT);
       digitalWrite(PA12, LOW);
       //HAL_Delay(1000);
-      for(i=0;i<512;i++){};
-      digitalWrite(PA12, HIGH);
+      for(i=0;i<1512;i++){};
+      pinMode(PA12, INPUT);
+      //digitalWrite(PA12, HIGH);
       //HAL_Delay(1000);
       for(i=0;i<512;i++){};
     #endif
