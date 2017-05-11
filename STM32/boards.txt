@@ -130,6 +130,61 @@ BluePill.menu.serial.SerialUART1=SerialUART1
 BluePill.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
 ################################################################################
+# Generic F103RF board
+
+Generic103RF.name=Generic F103RF
+
+Generic103RF.upload.protocol=nucleoFlasher
+Generic103RF.upload.maximum_size=131072
+Generic103RF.upload.maximum_data_size=20480
+
+Generic103RF.build.mcu=cortex-m3
+Generic103RF.build.board=GENERIC_103RF
+Generic103RF.build.core=arduino
+Generic103RF.build.variant=GENERIC_103RF
+Generic103RF.build.series=STM32F1
+Generic103RF.build.extra_flags=-DSTM32F103RF
+Generic103RF.build.f_cpu=72000000L
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+Generic103RF.menu.upload_method.DFUUploadMethod=USB DFU - STM32duino bootloader (0x2000)
+Generic103RF.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+Generic103RF.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+Generic103RF.menu.upload_method.DFUUploadMethod.build.extra_flags=-DSTM32F103RF -DVECT_TAB_OFFSET=0x2000
+Generic103RF.menu.upload_method.DFUUploadMethod.build.ldscript=ldscript_bootloader_2000.ld
+Generic103RF.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+Generic103RF.menu.upload_method.DFUUploadMethod.upload.altID=2
+Generic103RF.menu.upload_method.DFUUploadMethod.flash.maximum_size=122880
+Generic103RF.menu.upload_method.DFUUploadMethod.maximum_data_size=122880
+Generic103RF.menu.upload_method.DFUUploadMethod.ram.maximum_size=20480
+Generic103RF.menu.upload_method.DFUUploadMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+
+Generic103RF.menu.upload_method.STLinkMethod=STLink 
+Generic103RF.menu.upload_method.STLinkMethod.upload.protocol=STLink
+Generic103RF.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+Generic103RF.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+
+Generic103RF.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+Generic103RF.menu.upload_method.serialMethod.upload.protocol=maple_serial
+Generic103RF.menu.upload_method.serialMethod.upload.tool=serial_upload
+Generic103RF.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+Generic103RF.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+Generic103RF.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+Generic103RF.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+
+Generic103RF.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
+Generic103RF.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+Generic103RF.menu.usb.Disabled=Disabled, no USB
+
+Generic103RF.menu.serial.Automatic=Automatically selected based on upload method
+Generic103RF.menu.serial.SerialUSB=SerialUSB
+Generic103RF.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+Generic103RF.menu.serial.SerialUART1=SerialUART1
+Generic103RF.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+
+################################################################################
 # BLACK_F407XX board
 
 BLACK_F407XX.name=BLACK F407VE/ZE/ZG boards
