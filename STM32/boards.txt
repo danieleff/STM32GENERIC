@@ -66,7 +66,7 @@ MapleMini_F103CB.menu.upload_method.BMPMethod.upload.tool=bmp_upload
 
 MapleMini_F103CB.menu.usb.SerialUSB=Serial [Virtual COM port, 24(PA11)/23(PA12) pins]
 MapleMini_F103CB.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-MapleMini_F103CB.menu.usb.SerialMSC=Mass storage
+MapleMini_F103CB.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 MapleMini_F103CB.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 MapleMini_F103CB.menu.usb.Disabled=Disabled, no USB
 
@@ -125,7 +125,7 @@ BluePill.menu.upload_method.BMPMethod.upload.tool=bmp_upload
 
 BluePill.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 BluePill.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-BluePill.menu.usb.SerialMSC=Mass storage
+BluePill.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 BluePill.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 BluePill.menu.usb.Disabled=Disabled, no USB
 
@@ -164,7 +164,7 @@ BLACK_F407XX.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMEN
 
 BLACK_F407XX.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 BLACK_F407XX.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-BLACK_F407XX.menu.usb.SerialMSC=Mass storage
+BLACK_F407XX.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 BLACK_F407XX.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 BLACK_F407XX.menu.usb.Disabled=Disabled, no USB
 
@@ -323,7 +323,7 @@ DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_L053C8.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 DISCOVERY_L053C8.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-DISCOVERY_L053C8.menu.usb.SerialMSC=Mass storage
+DISCOVERY_L053C8.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 DISCOVERY_L053C8.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 DISCOVERY_L053C8.menu.usb.Disabled=Disabled, no USB
 
@@ -355,7 +355,7 @@ DISCOVERY_F407VG.upload.tool=stlink_upload
 
 DISCOVERY_F407VG.menu.usb.SerialUSB=Serial [Virtual COM port]
 DISCOVERY_F407VG.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-DISCOVERY_F407VG.menu.usb.SerialMSC=Mass storage
+DISCOVERY_F407VG.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 DISCOVERY_F407VG.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 DISCOVERY_F407VG.menu.usb.Disabled=Disabled, no USB
 
@@ -389,7 +389,7 @@ DISCOVERY_F429ZI.upload.tool=stlink_upload
 
 DISCOVERY_F429ZI.menu.usb.SerialUSB=Serial [Virtual COM port]
 DISCOVERY_F429ZI.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-DISCOVERY_F429ZI.menu.usb.SerialMSC=Mass storage
+DISCOVERY_F429ZI.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 DISCOVERY_F429ZI.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 DISCOVERY_F429ZI.menu.usb.Disabled=Disabled, no USB
 
@@ -429,7 +429,7 @@ DISCOVERY_F746NG.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_F746NG.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 DISCOVERY_F746NG.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-DISCOVERY_F746NG.menu.usb.SerialMSC=Mass storage
+DISCOVERY_F746NG.menu.usb.SerialMSC=Mass storage [testing, see documentation]
 DISCOVERY_F746NG.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
 DISCOVERY_F746NG.menu.usb.Disabled=Disabled, no USB
 
