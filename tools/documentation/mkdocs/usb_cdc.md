@@ -1,4 +1,4 @@
-## Serial UART
+## USB: Serial
 
 There are two implementations of Serial communication: UART and USB. 
 

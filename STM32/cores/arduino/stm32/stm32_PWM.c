@@ -33,11 +33,21 @@ void analogWrite(uint8_t pin, int value) {
 
         stm32_pwm_disable_callback = &stm32_pwm_disable;
 
-        __HAL_RCC_TIM2_CLK_ENABLE();
-        HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
-        HAL_NVIC_EnableIRQ(TIM2_IRQn);
 
-        handle->Instance = TIM2;
+        #ifdef TIM2 //99% of chips have TIM2
+            __HAL_RCC_TIM2_CLK_ENABLE();
+            HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+            HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+            handle->Instance = TIM2;
+        #else
+            __HAL_RCC_TIM3_CLK_ENABLE();
+            HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+            HAL_NVIC_EnableIRQ(TIM3_IRQn);
+
+            handle->Instance = TIM3;
+        #endif
+
         handle->Init.Prescaler = 999;
         handle->Init.CounterMode = TIM_COUNTERMODE_UP;
         period = 256;
@@ -113,9 +123,15 @@ void pwm_callback() {
     __HAL_TIM_SET_AUTORELOAD(handle, period);
 }
 
+#ifdef TIM2
 extern void TIM2_IRQHandler(void) {
     HAL_TIM_IRQHandler(handle);
 }
+#else
+extern void TIM2_IRQHandler(void) {
+    HAL_TIM_IRQHandler(handle);
+}
+#endif
 
 
 extern void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {

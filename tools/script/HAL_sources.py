@@ -15,24 +15,33 @@ for series in serieses:
     #print generic
     
     all.extend(generic)
+
+source = ""
+source_ex = ""
     
-for x in sorted(set(all)):
-    if 'system' in x or 'template' in x:
-        continue
+for series in serieses:
+
+    source += '#ifdef STM32' + series.upper() + '\n'
+    source_ex += '#ifdef STM32' + series.upper() + '\n'
     
-    source = '#include "stm32_build_defines.h"\n'
-    source += '\n'
-    for series in serieses:
-        source += '#ifdef STM32' + series.upper() + '\n'
-        if os.path.isfile('../../STM32/system/STM32' + series.upper() + '/HAL_Src/' + x.replace('XX', series)):
-            source += '    #include "' + x.replace('XX', series) + '"\n'
-        else:
-            source += '    \n'
+    for x in sorted(set(all)):
+        if 'system' in x or 'template' in x:
+            continue
         
-        source += '#endif\n'
-    print source
+        if os.path.isfile('../../STM32/system/STM32' + series.upper() + '/HAL_Src/' + x.replace('XX', series)):
+            if 'ex.c' in x:
+                source_ex += '    #include "' + x.replace('XX', series) + '"\n'
+            else:
+                source += '    #include "' + x.replace('XX', series) + '"\n'
+            
+    source += '#endif\n'
+    source_ex += '#endif\n'
+    
+with open('stm32XXxx_hal.c', 'w') as file_hal:
+    file_hal.write('#include "stm32_build_defines.h"\n\n')
+    file_hal.write(source)
 
-    with open(x, 'w') as file:
-        file.write(source)
-
+with open('stm32XXxx_hal_ex.c', 'w') as file_hal_ex:
+    file_hal_ex.write('#include "stm32_build_defines.h"\n\n')
+    file_hal_ex.write(source_ex)
     

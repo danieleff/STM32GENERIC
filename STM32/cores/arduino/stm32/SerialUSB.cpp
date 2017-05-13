@@ -24,10 +24,10 @@
  *
  ****************************************************************************/
 
-#ifdef MENU_USB_SERIAL
-
 #include <SerialUSB.h>
 #include "variant.h"
+
+#include "USBDevice.h"
 
 // Constructors ////////////////////////////////////////////////////////////////
 SerialUSBClass::SerialUSBClass(){
@@ -36,31 +36,9 @@ SerialUSBClass::SerialUSBClass(){
   //tx_buffer.iHead = tx_buffer.iTail = 0;
 }
 
-void SerialUSBClass::init(void){
-/* Re-enumerate the USB */
-  volatile unsigned int i;
-
-#ifdef USB_DISC_PIN
-  pinMode(USB_DISC_PIN, OUTPUT);
-  digitalWrite(USB_DISC_PIN, HIGH);
-	for(i=0;i<512;i++);
-  digitalWrite(USB_DISC_PIN, LOW);
-#else
-  //pinMode(USBDP_PIN, OUTPUT);
-  //digitalWrite(USBDP_PIN, LOW);
-	//for(i=0;i<512;i++);
-  //digitalWrite(USBDP_PIN, HIGH);
-
-  
-  pinMode(PA12, OUTPUT);
-  digitalWrite(PA12, LOW);
-  //HAL_Delay(1000);
-  for(i=0;i<512;i++){};
-  digitalWrite(PA12, HIGH);
-  //HAL_Delay(1000);
-  for(i=0;i<512;i++){};
-#endif
-  MX_USB_DEVICE_Init();
+void SerialUSBClass::init(void) {
+  //
+  //USBDeviceFS.beginCDC();
 }
 
 
@@ -221,27 +199,6 @@ bool SerialUSBClass::rts() {
   return 0;
 }
 
-
-extern PCD_HandleTypeDef hpcd_USB_FS;
-extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
-
-//F1
-extern "C" void USB_LP_CAN1_RX0_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-}
-//F4 F7
-extern "C" void OTG_FS_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_OTG_FS);
-}
-//L0
-extern "C" void USB_IRQHandler(void) {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
-}
-
-extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){ 
-  SerialUSB.CDC_RxHandler(data, len); 
-}
-
+#ifdef MENU_USB_SERIAL
 SerialUSBClass SerialUSB;
-
 #endif

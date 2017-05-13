@@ -10,8 +10,9 @@ pages:
     - I2C: i2c.md
     - I2S: i2s.md
     - SDIO: sdio.md
-    - Serial UART: uart.md
-    - Serial USB: usb_cdc.md
+    - UART Serial: uart.md
+    - USB Serial: usb_cdc.md
+    - USB Mass Storage: usb_msc.md
     - STM32 HAL: stm32_hal.md
 - Libraries: libraries.md
 - STM32 Boards:

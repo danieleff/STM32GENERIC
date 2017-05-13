@@ -106,6 +106,28 @@ size_t Print::print(unsigned long n, int base)
   else return printNumber(n, base);
 }
 
+size_t Print::print(long long n, int base)
+{
+  if (base == 0) {
+    return write(n);
+  } else if (base == 10) {
+    if (n < 0) {
+      int t = print('-');
+      n = -n;
+      return printNumber(n, 10) + t;
+    }
+    return printNumber(n, 10);
+  } else {
+    return printNumber(n, base);
+  }
+}
+
+size_t Print::print(unsigned long long n, int base)
+{
+  if (base == 0) return write(n);
+  else return printNumber(n, base);
+}
+
 size_t Print::print(double n, int digits)
 {
   return printFloat(n, digits);
@@ -184,6 +206,20 @@ size_t Print::println(unsigned long num, int base)
   return n;
 }
 
+size_t Print::println(long long num, int base)
+{
+  size_t n = print(num, base);
+  n += println();
+  return n;
+}
+
+size_t Print::println(unsigned long long num, int base)
+{
+  size_t n = print(num, base);
+  n += println();
+  return n;
+}
+
 size_t Print::println(double num, int digits)
 {
   size_t n = print(num, digits);
@@ -200,9 +236,9 @@ size_t Print::println(const Printable& x)
 
 // Private Methods /////////////////////////////////////////////////////////////
 
-size_t Print::printNumber(unsigned long n, uint8_t base)
+size_t Print::printNumber(unsigned long long n, uint8_t base)
 {
-  char buf[8 * sizeof(long) + 1]; // Assumes 8-bit chars plus zero byte.
+  char buf[8 * sizeof(long long) + 1]; // Assumes 8-bit chars plus zero byte.
   char *str = &buf[sizeof(buf) - 1];
 
   *str = '\0';

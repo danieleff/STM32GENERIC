@@ -463,7 +463,7 @@
         {
             "location": "/uart/", 
             "text": "Serial UART\n\n\nThere are two implementations of Serial communication: UART and USB. \n\n\nThis page describes the UART based.\n\n\nPlease check the \nMenu option\n to see which one is selected.\n\n\nSerialUART1\nis bound to UART1, \nSerialUART2\n to UART2 etc...\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.\n\n\nSerialUARTx.stm32SetRX(uint8_t pin)\n\n\nSet the RX signal to the specified pin. Please check the chip documentation for which pin can be used for RX.\nThis must be called before begin()!\n\n\nSerialUARTx.stm32SetTx(uint8_t pin)\n\n\nSet the TX signal to the specified pin. Please check the chip documentation for which pin can be used for TX.\nThis must be called before begin()!\n\n\n\n\nExample: The following code will echo the received bytes on UART2\n\n\n\n\nvoid setup() {\n    SerialUART2.stm32SetRX(Pcd);\n    SerialUART2.stm32SetTX(Pab);\n    SerualUART2.begin(115200);\n}\nvoid loop() {\n    int data = SerialUART2.read();\n    if (data != -1) {\n        SerialUART2.write(data);\n    }\n}", 
-            "title": "Serial UART"
+            "title": "UART Serial"
         }, 
         {
             "location": "/uart/#serial-uart", 
@@ -482,13 +482,28 @@
         }, 
         {
             "location": "/usb_cdc/", 
-            "text": "Serial UART\n\n\nThere are two implementations of Serial communication: UART and USB. \n\n\nThis page describes the USB based.\n\n\nPlease check the \nMenu option\n to see which one is selected as \nSerial\n.\n\n\nIf the \nUSB menu\n is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.\n\n\nTODO explain windows 7 driver\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.", 
-            "title": "Serial USB"
+            "text": "USB: Serial\n\n\nThere are two implementations of Serial communication: UART and USB. \n\n\nThis page describes the USB based.\n\n\nPlease check the \nMenu option\n to see which one is selected as \nSerial\n.\n\n\nIf the \nUSB menu\n is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.\n\n\nTODO explain windows 7 driver\n\n\nPlease refer to the \nofficial documentation\n for\nthe description of Serial functions.", 
+            "title": "USB Serial"
         }, 
         {
-            "location": "/usb_cdc/#serial-uart", 
+            "location": "/usb_cdc/#usb-serial", 
             "text": "There are two implementations of Serial communication: UART and USB.   This page describes the USB based.  Please check the  Menu option  to see which one is selected as  Serial .  If the  USB menu  is set to include Serial, SerialUSB is set as a virtual COM port, and can be used just like a regular UART based.  TODO explain windows 7 driver  Please refer to the  official documentation  for\nthe description of Serial functions.", 
-            "title": "Serial UART"
+            "title": "USB: Serial"
+        }, 
+        {
+            "location": "/usb_msc/", 
+            "text": "USB: Mass Storage\n\n\nThis library is in beta, and the API / implementation is for testing only!\n\n\nUntil there is an official API, you can test mass storage with the following code:\n\n\n#include \nmsc/usbd_msc.h\n\n\nconst uint8_t MSC_Inquirydata[] = {\n  /* LUN 0 */\n  0x00,\n  0x80,\n  0x02,\n  0x02,\n  (STANDARD_INQUIRY_DATA_LEN - 5),\n  0x00,\n  0x00,\n  0x00,\n  'S', 'T', 'M', ' ', ' ', ' ', ' ', ' ', /* Manufacturer : 8 bytes */\n  'P', 'r', 'o', 'd', 'u', 'c', 't', ' ', /* Product      : 16 Bytes */\n  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',\n  '0', '.', '0' ,'1',                     /* Version      : 4 Bytes */\n};\n\nconst uint16_t blockSize = 512;\nconst uint32_t blockCount = 100;\n\nuint8_t ramdisk[blockSize * blockCount] = {0};\n\nnamespace Testing {\n\n// See UM1734, 6.2.4\n// See usbd_msc.h\nUSBD_StorageTypeDef USBD_DISK_fops = {\n    //Init\n    [](uint8_t lun) -\n int8_t {\n        return USBD_OK;\n    },\n\n    //GetCapacity\n    [](uint8_t lun, uint32_t *block_num, uint16_t *block_size) -\n int8_t {\n        *block_num  = blockCount;\n        *block_size = blockSize;\n        return USBD_OK;\n    },\n\n    //IsReady\n    [](uint8_t lun) -\n int8_t {\n        return USBD_OK;\n    },\n\n    //IsWriteProtected\n    [](uint8_t lun) -\n int8_t {\n        return USBD_OK;\n    },\n\n    //Read\n    [](uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len) -\n int8_t {\n        memcpy(buf, ramdisk + blk_addr * blockSize, blk_len * blockSize);\n        return USBD_OK;\n    },\n\n    //Write\n    [](uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len) -\n int8_t {\n        digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n        memcpy(ramdisk + blk_addr * blockSize, buf, blk_len * blockSize);\n        return USBD_OK;\n    },\n\n    //GetMaxLun\n    []() -\n int8_t {return 0;},\n\n    (int8_t *)MSC_Inquirydata\n\n};\n\n}\n\nvoid setup() {\n    pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n\n}", 
+            "title": "USB Mass Storage"
+        }, 
+        {
+            "location": "/usb_msc/#usb-mass-storage", 
+            "text": "", 
+            "title": "USB: Mass Storage"
+        }, 
+        {
+            "location": "/usb_msc/#this-library-is-in-beta-and-the-api-implementation-is-for-testing-only", 
+            "text": "Until there is an official API, you can test mass storage with the following code:  #include  msc/usbd_msc.h \n\nconst uint8_t MSC_Inquirydata[] = {\n  /* LUN 0 */\n  0x00,\n  0x80,\n  0x02,\n  0x02,\n  (STANDARD_INQUIRY_DATA_LEN - 5),\n  0x00,\n  0x00,\n  0x00,\n  'S', 'T', 'M', ' ', ' ', ' ', ' ', ' ', /* Manufacturer : 8 bytes */\n  'P', 'r', 'o', 'd', 'u', 'c', 't', ' ', /* Product      : 16 Bytes */\n  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',\n  '0', '.', '0' ,'1',                     /* Version      : 4 Bytes */\n};\n\nconst uint16_t blockSize = 512;\nconst uint32_t blockCount = 100;\n\nuint8_t ramdisk[blockSize * blockCount] = {0};\n\nnamespace Testing {\n\n// See UM1734, 6.2.4\n// See usbd_msc.h\nUSBD_StorageTypeDef USBD_DISK_fops = {\n    //Init\n    [](uint8_t lun) -  int8_t {\n        return USBD_OK;\n    },\n\n    //GetCapacity\n    [](uint8_t lun, uint32_t *block_num, uint16_t *block_size) -  int8_t {\n        *block_num  = blockCount;\n        *block_size = blockSize;\n        return USBD_OK;\n    },\n\n    //IsReady\n    [](uint8_t lun) -  int8_t {\n        return USBD_OK;\n    },\n\n    //IsWriteProtected\n    [](uint8_t lun) -  int8_t {\n        return USBD_OK;\n    },\n\n    //Read\n    [](uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len) -  int8_t {\n        memcpy(buf, ramdisk + blk_addr * blockSize, blk_len * blockSize);\n        return USBD_OK;\n    },\n\n    //Write\n    [](uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len) -  int8_t {\n        digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));\n        memcpy(ramdisk + blk_addr * blockSize, buf, blk_len * blockSize);\n        return USBD_OK;\n    },\n\n    //GetMaxLun\n    []() -  int8_t {return 0;},\n\n    (int8_t *)MSC_Inquirydata\n\n};\n\n}\n\nvoid setup() {\n    pinMode(LED_BUILTIN, OUTPUT);\n}\n\nvoid loop() {\n\n}", 
+            "title": "This library is in beta, and the API / implementation is for testing only!"
         }, 
         {
             "location": "/stm32_hal/", 

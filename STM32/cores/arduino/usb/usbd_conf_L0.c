@@ -38,7 +38,6 @@
 
 #include "usbd_def.h"
 #include "usbd_core.h"
-#include "usbd_cdc.h"
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -475,26 +474,6 @@ void  USBD_LL_Delay (uint32_t Delay)
   HAL_Delay(Delay);  
 }
 
-/**
-  * @brief  static single allocation.
-  * @param  size: size of allocated memory
-  * @retval None
-  */
-void *USBD_static_malloc(uint32_t size)
-{
-  static uint32_t mem[(sizeof(USBD_CDC_HandleTypeDef)/4)+1];/* On 32-bit boundary */
-  return mem;
-}
-
-/**
-  * @brief  Dummy memory free
-  * @param  *p pointer to allocated  memory address
-  * @retval None
-  */
-void USBD_static_free(void *p)
-{
-
-}
 
 /* USER CODE BEGIN 5 */
 /**
