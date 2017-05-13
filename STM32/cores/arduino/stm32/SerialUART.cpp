@@ -144,6 +144,7 @@ int SerialUART::peek() {
 
 void SerialUART::flush() {
     
+    while(txEnd % BUFFER_SIZE != txStart % BUFFER_SIZE);
 }
 
 int SerialUART::read() {
