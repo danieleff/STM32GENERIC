@@ -8,8 +8,8 @@
 */
 
 /*
-#define LED0_BUILTIN PA6 // same as LED_BUILTIN
-#define LED1_BUILTIN PA7
+  #define LED0_BUILTIN PA6 // same as LED_BUILTIN, active low
+  #define LED1_BUILTIN PA7 // active low
 */
 
 void setup()

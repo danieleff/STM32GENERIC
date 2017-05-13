@@ -1,9 +1,11 @@
 /*
   show user button state with LEDs
-  STM32F4 Discovery has one user button
+  
+  Black407VE has 3 user buttons and 2 LEDs
 
-  Black407VE ( STM32F407VE )
-  http://wiki.stm32duino.com/images/5/5c/STM32_F4VE_SCHEMATIC.PDF
+  hardware:
+    Black407VE ( STM32F407VE )
+    http://wiki.stm32duino.com/images/5/5c/STM32_F4VE_SCHEMATIC.PDF
 
   May 2017, ChrisMicro
 */
