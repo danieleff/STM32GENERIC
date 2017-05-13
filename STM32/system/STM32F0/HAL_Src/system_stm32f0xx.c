@@ -155,7 +155,11 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
 /** @addtogroup STM32F0xx_System_Private_Functions
   * @{
   */
-
+  
+//Override in variant to run beforer constructors
+__attribute__((weak)) void preinitVariant(void) {
+    
+}
 /**
   * @brief  Setup the microcontroller system.
   *         Initialize the default HSI clock source, vector table location and the PLL configuration is reset.
@@ -220,7 +224,8 @@ void SystemInit(void)
 
   /* Disable all interrupts */
   RCC->CIR = 0x00000000U;
-
+  
+  preinitVariant();
 }
 
 /**
