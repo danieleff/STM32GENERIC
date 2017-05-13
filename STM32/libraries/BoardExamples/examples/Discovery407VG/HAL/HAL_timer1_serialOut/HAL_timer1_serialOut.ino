@@ -9,7 +9,7 @@
  http://www.stm32duino.com/viewtopic.php?f=42&t=1966&start=90#p27155
 
 */
-#include "STM32_HAL.h"
+//#include "STM32_HAL.h" not needed, auto included
 uint32_t prev = 0;
 int seconds = 0;
 
