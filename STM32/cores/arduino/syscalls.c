@@ -80,11 +80,11 @@ extern caddr_t _sbrk ( int incr )
   }
   prev_heap = heap_brk;
 
-  heap_brk += incr ;
-
-  if (heap_end != NULL && heap_brk > heap_end) {
+  if (heap_end != NULL && (heap_brk + incr) > heap_end) {
       return (caddr_t)-1;
   }
+  
+  heap_brk += incr ;
 
   return prev_heap ;
 }
