@@ -22,6 +22,8 @@
 
 #include "Arduino.h"
 
+#if defined(USB_BASE) || defined(USB_OTG_DEVICE_BASE)
+
 #include "USBDevice.h"
 #include "usbd_core.h"
 #include "usbd_desc.h"
@@ -123,3 +125,5 @@ extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){
 USBD_HandleTypeDef hUsbDeviceFS;
 
 USBDeviceClass USBDeviceFS;
+
+#endif
