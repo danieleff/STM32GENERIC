@@ -1,30 +1,46 @@
-// Install library: SPIFlash by Prajwal Bhattaram (Marzogh)
-// Upload sketch
-// Open USB serial monitor
+/*
+  Test and print statistics of the onboard SPI-flash memmory
+
+  board:
+    BLACK407VE
+
+  how to:
+  1. Install library: SPIFlash by Prajwal Bhattaram (Marzogh)
+    https://github.com/Marzogh/SPIFlash
+
+  2. Upload sketch
+  3. Open USB serial monitor
+
+  Issues: Start the serial monitor in less than 5 seconds after downloading
+          The USB-serial may hang due to the amount of data printed.
+
+*/
 
 #include<SPIFlash.h>
 
 SPIFlash flash(PB0);
 
-void setup() {
+void setup()
+{
   SPI.stm32SetMOSI(PB5);
   SPI.stm32SetMISO(PB4);
   SPI.stm32SetSCK(PB3);
-  
+
   Serial.begin(115200);
-  
+  delay(5000);
+  Serial.println("starting to test external FLASH");
+
   flash.begin();
 
   randomSeed(65535537);
-  
 }
 
 void loop() {
-  for(int i=4; i>0; i--) {
+  for (int i = 4; i > 0; i--) {
     Serial.print(".");
     delay(1000);
   }
-  
+
   getID();
   diagnose();
   Serial.println("END");
