@@ -118,10 +118,6 @@ extern "C" void USB_IRQHandler(void) {
   HAL_PCD_IRQHandler(&hpcd_USB_FS);
 }
 
-extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){
-  SerialUSB.CDC_RxHandler(data, len);
-}
-
 USBD_HandleTypeDef hUsbDeviceFS;
 
 USBDeviceClass USBDeviceFS;
