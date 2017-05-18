@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_uart.h
   * @author  MCD Application Team
-  * @version V1.5.2
-  * @date    12-September-2016
+  * @version V1.7.0
+  * @date    17-February-2017
   * @brief   Header file of UART HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -641,28 +641,16 @@ typedef struct
   *           - ZZZZZ  : Flag position in the ISR register(5bits)
   * @{
   */
-#define UART_IT_PE                          ((uint32_t)0x0028)                  /*!< UART parity error interruption                 */
-#define UART_IT_TXE                         ((uint32_t)0x0727)                  /*!< UART transmit data register empty interruption */
-#define UART_IT_TC                          ((uint32_t)0x0626)                  /*!< UART transmission complete interruption        */
-#define UART_IT_RXNE                        ((uint32_t)0x0525)                  /*!< UART read data register not empty interruption */
-#define UART_IT_IDLE                        ((uint32_t)0x0424)                  /*!< UART idle interruption                         */
-#define UART_IT_LBD                         ((uint32_t)0x0846)                  /*!< UART LIN break detection interruption          */
-#define UART_IT_CTS                         ((uint32_t)0x096A)                  /*!< UART CTS interruption                          */
-#define UART_IT_CM                          ((uint32_t)0x112E)                  /*!< UART character match interruption              */
-#define UART_IT_WUF                         ((uint32_t)0x1476)                  /*!< UART wake-up from stop mode interruption       */
-
-/**       Elements values convention: 000000000XXYYYYYb
-  *           - YYYYY  : Interrupt source position in the XX register (5bits)
-  *           - XX  : Interrupt source register (2bits)
-  *                 - 01: CR1 register
-  *                 - 10: CR2 register
-  *                 - 11: CR3 register
-  */
+#define UART_IT_PE                          ((uint32_t)0x0028)                  /*!< UART parity error interruption                 */    
+#define UART_IT_TXE                         ((uint32_t)0x0727)                  /*!< UART transmit data register empty interruption */    
+#define UART_IT_TC                          ((uint32_t)0x0626)                  /*!< UART transmission complete interruption        */    
+#define UART_IT_RXNE                        ((uint32_t)0x0525)                  /*!< UART read data register not empty interruption */    
+#define UART_IT_IDLE                        ((uint32_t)0x0424)                  /*!< UART idle interruption                         */                                                               
+#define UART_IT_LBD                         ((uint32_t)0x0846)                  /*!< UART LIN break detection interruption          */                
+#define UART_IT_CTS                         ((uint32_t)0x096A)                  /*!< UART CTS interruption                          */                
+#define UART_IT_CM                          ((uint32_t)0x112E)                  /*!< UART character match interruption              */                
+#define UART_IT_WUF                         ((uint32_t)0x1476)                  /*!< UART wake-up from stop mode interruption       */                
 #define UART_IT_ERR                         ((uint32_t)0x0060)                  /*!< UART error interruption         */   
-
-/**       Elements values convention: 0000ZZZZ00000000b
-  *           - ZZZZ  : Flag position in the ISR register(4bits)
-  */
 #define UART_IT_ORE                         ((uint32_t)0x0300)                  /*!< UART overrun error interruption */ 
 #define UART_IT_NE                          ((uint32_t)0x0200)                  /*!< UART noise error interruption   */ 
 #define UART_IT_FE                          ((uint32_t)0x0100)                  /*!< UART frame error interruption   */ 
