@@ -161,6 +161,10 @@ const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
   * @{
   */
 
+//Override in variant to run beforer constructors
+__attribute__((weak)) void preinitVariant(void) {
+    
+}
 /**
   * @brief  Setup the microcontroller system
   *         Initialize the FPU setting, vector table location and the PLL configuration is reset.
@@ -204,6 +208,7 @@ void SystemInit(void)
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
 #endif
+  preinitVariant();
 }
 
 /**

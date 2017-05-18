@@ -166,6 +166,10 @@ const uint8_t APBPrescTable[8] =  {0, 0, 0, 0, 1, 2, 3, 4};
   * @{
   */
 
+//Override in variant to run beforer constructors
+__attribute__((weak)) void preinitVariant(void) {
+    
+}
 /**
   * @brief  Setup the microcontroller system
   *         Initialize the Embedded Flash Interface, the PLL and update the 
@@ -226,7 +230,8 @@ void SystemInit (void)
   SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. */
-#endif 
+#endif
+  preinitVariant();
 }
 
 /**

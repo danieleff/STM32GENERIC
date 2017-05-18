@@ -47,7 +47,9 @@ int main(void)
 
 	initVariant();
 
+    #if defined(USB_BASE) || defined(USB_OTG_DEVICE_BASE)
 	USBDeviceFS.beginMenuSelection();
+    #endif
 	
 	setup();
     

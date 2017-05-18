@@ -62,20 +62,31 @@ extern void _exit( int status ) ;
 extern void _kill( int pid, int sig ) ;
 extern int _getpid ( void ) ;
 
+static unsigned char *heap_brk = NULL;
+static unsigned char *heap_end = NULL;
+
+void setHeap(char *start, char *end) {
+    heap_brk = start;
+    heap_end = end;
+}
+
 extern caddr_t _sbrk ( int incr )
 {
-  static unsigned char *heap = NULL ;
-  unsigned char *prev_heap ;
+   caddr_t *prev_heap ;
 
-  if ( heap == NULL )
+  if ( heap_brk == NULL )
   {
-    heap = (unsigned char *)&_end ;
+      heap_brk = (unsigned char *)&_end ;
   }
-  prev_heap = heap;
+  prev_heap = heap_brk;
 
-  heap += incr ;
+  if (heap_end != NULL && (heap_brk + incr) > heap_end) {
+      return (caddr_t)-1;
+  }
+  
+  heap_brk += incr ;
 
-  return (caddr_t) prev_heap ;
+  return prev_heap ;
 }
 
 extern int link( UNUSED(char *cOld), UNUSED(char *cNew) )
