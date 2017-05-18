@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f7xx_hal_spdifrx.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    01-July-2016
+  * @version V1.2.2
+  * @date    14-April-2017
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the SPDIFRX audio interface:
   *           + Initialization and Configuration
@@ -94,7 +94,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -133,6 +133,7 @@
 */
 
 #ifdef HAL_SPDIFRX_MODULE_ENABLED
+#if defined (SPDIFRX)
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -1244,7 +1245,7 @@ static HAL_StatusTypeDef SPDIFRX_WaitOnFlagUntilTimeout(SPDIFRX_HandleTypeDef *h
 /**
 * @}
 */
-
+#endif /* SPDIFRX */
 #endif /* HAL_SPDIFRX_MODULE_ENABLED */
 /**
   * @}
