@@ -80,7 +80,7 @@ void analogWrite(uint8_t pin, int value) {
         HAL_TIM_Base_Start_IT(handle);
     }
 
-    for(int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
+    for(unsigned int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
         if (pwm_config[i].port == NULL ||
                 (pwm_config[i].port == variant_pin_list[pin].port
                 && pwm_config[i].pin_mask == variant_pin_list[pin].pin_mask)) {
@@ -99,14 +99,14 @@ void analogWrite(uint8_t pin, int value) {
 }
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin_mask) {
-    for(int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
+    for(unsigned int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
         if (pwm_config[i].port == NULL) {
             return;
         }
 
         if (pwm_config[i].port == port && pwm_config[i].pin_mask == pin_mask) {
 
-            for(int j = i + 1; j < sizeof(pwm_config) / sizeof(pwm_config[0]); j++) {
+            for(unsigned int j = i + 1; j < sizeof(pwm_config) / sizeof(pwm_config[0]); j++) {
                 if (pwm_config[j].port == NULL) {
                     pwm_config[i].port = pwm_config[j - 1].port;
                     pwm_config[i].pin_mask = pwm_config[j - 1].pin_mask;
@@ -125,7 +125,7 @@ void pwm_callback() {
     counter += period;
     period = 256;
 
-    for(int i=0; i<sizeof(pwm_config); i++) {
+    for(unsigned int i=0; i<sizeof(pwm_config); i++) {
         if (pwm_config[i].port != NULL) {
             if (pwm_config[i].duty_cycle > counter % pwm_config[i].frequency) {
                 pwm_config[i].port->BSRR = pwm_config[i].pin_mask;
