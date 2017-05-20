@@ -29,8 +29,6 @@ class USBDeviceClass {
   public:
     void reenumerate();
 
-    bool beginMenuSelection();
-
     bool beginCDC();
 
     bool beginMSC();
