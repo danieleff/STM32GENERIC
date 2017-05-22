@@ -63,6 +63,7 @@ void SerialUSBClass::end(void){
 int SerialUSBClass::availableForWrite(void){
   //return (CDC_SERIAL_BUFFER_SIZE - available());
   //return (uint32_t)(CDC_SERIAL_BUFFER_SIZE + tx_buffer.iHead - tx_buffer.iTail) % CDC_SERIAL_BUFFER_SIZE;
+  return 0;
 }
 
 
