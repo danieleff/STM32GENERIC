@@ -6,7 +6,7 @@
 
 extern "C" void preinitVariant() {
     //Set heap to external SDRAM
-    setHeap((char*)0xC0000000, (char*)(0xC0000000 + 8 * 1024 * 1024));
+    setHeap((unsigned char*)0xC0000000, (unsigned char*)(0xC0000000 + 8 * 1024 * 1024));
 }
 
 extern "C" void initVariant() {

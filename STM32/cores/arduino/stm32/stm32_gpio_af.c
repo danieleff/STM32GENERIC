@@ -24,7 +24,7 @@
 
 #include CHIP_PERIPHERAL_INCLUDE
 
-GPIO_TypeDef *stm32AfGetDefault(stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin) {
+GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance) {
             *pin = list[i].pin;

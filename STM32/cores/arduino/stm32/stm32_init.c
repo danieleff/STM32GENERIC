@@ -22,6 +22,8 @@
 
 #include "stm32_def.h"
 
+extern void SystemClock_Config(void);
+
 void init() {
   HAL_Init();
   

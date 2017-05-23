@@ -50,7 +50,7 @@ void attachInterrupt(uint8_t pin, stm32_exti_callback_func callback, int mode) {
     uint8_t irq = __builtin_ffs(port_pin.pin_mask) - 1;
     callbacks[irq] = callback;
 
-    stm32GpioClock(port_pin.port);
+    stm32GpioClockEnable(port_pin.port);
 
     GPIO_InitTypeDef GPIO_InitStruct;
 

@@ -84,6 +84,8 @@ bool USBDeviceClass::beginCDC() {
     USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
 
     USBD_Start(&hUsbDeviceFS);
+
+    return true;
 }
 
 namespace Testing {
@@ -100,6 +102,8 @@ bool USBDeviceClass::beginMSC() {
     USBD_MSC_RegisterStorage(&hUsbDeviceFS, &Testing::USBD_DISK_fops);
 
     USBD_Start(&hUsbDeviceFS);
+
+    return true;
 }
 
 extern PCD_HandleTypeDef hpcd_USB_FS;

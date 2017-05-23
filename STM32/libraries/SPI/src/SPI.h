@@ -166,8 +166,6 @@
 #ifdef STM32L4
 #endif
 
-static uint8_t spi_ff_buffer = 0XFF;
-
 class SPISettings {
   public:
     SPISettings(uint32_t clock, uint8_t bitOrder, uint8_t dataMode): clock(clock), bitOrder(bitOrder), dataMode(dataMode) {};

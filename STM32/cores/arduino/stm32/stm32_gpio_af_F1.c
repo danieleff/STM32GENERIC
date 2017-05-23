@@ -24,6 +24,8 @@
 
 #include "stm32_gpio_af.h"
 
+extern void stm32GpioClock(GPIO_TypeDef *port);
+
 stm32_af_callback stm32AfGet(const stm32_af_pin_list_type list[], int size, const void *instance, const GPIO_TypeDef *port, const uint32_t pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance

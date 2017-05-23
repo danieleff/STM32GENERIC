@@ -27,6 +27,8 @@ TIM_HandleTypeDef *handle;
 static uint32_t counter;
 static uint32_t period;
 
+extern void pinMode(uint8_t, uint8_t);
+
 #define min(a,b) ((a)<(b)?(a):(b))
 
 stm32_pwm_disable_callback_func stm32_pwm_disable_callback = NULL;
