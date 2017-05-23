@@ -29,7 +29,7 @@ void SPIClass::begin() {
 	spiHandle.hdmarx = &hdma_spi_rx;
 
 	__HAL_RCC_DMA1_CLK_ENABLE();
-#ifdef __HAL_RCC_DMA2_CLK_ENABLE()
+#ifdef __HAL_RCC_DMA2_CLK_ENABLE
 	__HAL_RCC_DMA2_CLK_ENABLE();
 #endif
 
