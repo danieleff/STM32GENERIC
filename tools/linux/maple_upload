@@ -38,3 +38,5 @@ if [ ! -x "${DFU_UTIL}" ]; then
 fi
 
 "${DFU_UTIL}" -d ${usbID} -a ${altID} -D ${binfile} ${dfuse_addr} -R
+
+"${DIR}/wait_for_serial" ${dummy_port_fullpath}

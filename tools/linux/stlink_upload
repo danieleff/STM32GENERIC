@@ -4,6 +4,9 @@ if [ `uname -m` ==  "x86_64" ]; then
 else
   $(dirname $0)/stlink/st-flash write "$4" 0x8000000
 fi
+
+"$(dirname $0)/wait_for_serial" /dev/$1
+
 exit 0
 
 ## Remove the lines 2 and 3 (above) if you want this script to wait until the Serial device has been enumerated and loaded before the script exits
