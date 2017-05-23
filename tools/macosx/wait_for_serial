@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo -n Waiting for $1 serial...
+
+COUNTER=0
+while [ ! -c $1 ] && ((COUNTER++ < 40)); do
+    sleep 0.1
+done
+
+echo Done
