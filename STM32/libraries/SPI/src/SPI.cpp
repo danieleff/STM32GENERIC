@@ -2,6 +2,8 @@
 
 #include "variant.h"
 
+static uint8_t spi_ff_buffer = 0XFF;
+
 #if defined(MOSI) || defined(MISO) || defined(SCK)
 	SPIClass SPI(SPI1, MOSI, MISO, SCK);
 #else
