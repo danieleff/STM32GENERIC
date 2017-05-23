@@ -35,7 +35,7 @@ GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, c
 }
 
 uint32_t stm32GetClockFrequency(void *instance) {
-	for(int i=0; i<sizeof(chip_clock_freq_list) / sizeof(chip_clock_freq_list[0]); i++) {
+	for(size_t i=0; i<sizeof(chip_clock_freq_list) / sizeof(chip_clock_freq_list[0]); i++) {
 		if (chip_clock_freq_list[i].instance == instance) {
 			return (chip_clock_freq_list[i].clock_freq_func)();
 		}
@@ -44,7 +44,7 @@ uint32_t stm32GetClockFrequency(void *instance) {
 }
 
 uint8_t stm32ADC1GetChannel(GPIO_TypeDef *port, uint32_t pin_mask) {
-    for(int i=0; i<sizeof(chip_adc1_channel) / sizeof(chip_adc1_channel[0]); i++) {
+    for(size_t i=0; i<sizeof(chip_adc1_channel) / sizeof(chip_adc1_channel[0]); i++) {
         if (chip_adc1_channel[i].port == port && chip_adc1_channel[i].pin_mask == pin_mask) {
             return chip_adc1_channel[i].channel;
         }

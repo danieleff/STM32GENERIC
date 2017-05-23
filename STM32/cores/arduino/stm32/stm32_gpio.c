@@ -24,7 +24,7 @@
 
 #include "variant.h"
 
-void stm32GpioClock(GPIO_TypeDef *port) {
+void stm32GpioClockEnable(GPIO_TypeDef *port) {
     
     #ifdef GPIOA
     if (port == GPIOA) __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -68,7 +68,7 @@ void pinMode(uint8_t pin, uint8_t mode) {
         (*stm32_pwm_disable_callback)(port_pin.port, port_pin.pin_mask);
     }
 
-    stm32GpioClock(port_pin.port);
+    stm32GpioClockEnable(port_pin.port);
     
     GPIO_InitTypeDef init;
     

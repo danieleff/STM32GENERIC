@@ -62,18 +62,6 @@ void USBDeviceClass::reenumerate() {
     #endif
 }
 
-bool USBDeviceClass::beginMenuSelection() {
-
-#ifdef MENU_USB_SERIAL
-    return beginCDC();
-#elif MENU_USB_MASS_STORAGE
-    return  beginMSC();
-#else
-    return false;
-#endif
-
-}
-
 bool USBDeviceClass::beginCDC() {
     reenumerate();
 
