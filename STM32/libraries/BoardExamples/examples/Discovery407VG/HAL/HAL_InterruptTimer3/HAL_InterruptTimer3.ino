@@ -21,14 +21,12 @@ static TIM_HandleTypeDef s_TimerInstance =
 extern "C" void TIM3_IRQHandler(void) 
 {
   HAL_TIM_IRQHandler(&s_TimerInstance);
-  digitalWrite(LED_RED, !digitalRead(LED_RED) );
+  digitalWrite( LED_BUILTIN, !digitalRead(LED_BUILTIN) );
 }
 
 void setup() 
 {
-  Serial.begin(115200); // Serial is whatever you select in the "Serial communication" menu option
   pinMode(LED_BUILTIN,OUTPUT);
-  pinMode(LED_RED,OUTPUT);
 
   HAL_NVIC_SetPriority( TIM3_IRQn, 0, 0 );
   HAL_NVIC_EnableIRQ  ( TIM3_IRQn );
@@ -45,19 +43,7 @@ void setup()
   HAL_TIM_Base_Start_IT ( &s_TimerInstance );
 }
 
-uint32_t prev = 0;
-
 void loop() 
 {
-  if (__HAL_TIM_GET_COUNTER(&s_TimerInstance) == 0) 
-  {
-    uint32_t now = micros();
-    Serial.print  ( "diff=" ); Serial.println( now - prev );
-    Serial.println( now );
-    prev = micros();
 
-    digitalWrite( LED_BUILTIN, !digitalRead(LED_BUILTIN) );
-  }
 }
-
-
