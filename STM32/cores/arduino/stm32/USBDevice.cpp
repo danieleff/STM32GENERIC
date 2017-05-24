@@ -76,10 +76,6 @@ bool USBDeviceClass::beginCDC() {
     return true;
 }
 
-namespace Testing {
-extern USBD_StorageTypeDef USBD_DISK_fops;
-}
-
 bool USBDeviceClass::beginMSC() {
     reenumerate();
 
@@ -87,7 +83,7 @@ bool USBDeviceClass::beginMSC() {
 
     USBD_RegisterClass(&hUsbDeviceFS, &USBD_MSC);
 
-    USBD_MSC_RegisterStorage(&hUsbDeviceFS, &Testing::USBD_DISK_fops);
+    USBD_MSC_RegisterStorage(&hUsbDeviceFS, &USBD_DISK_fops);
 
     USBD_Start(&hUsbDeviceFS);
 
