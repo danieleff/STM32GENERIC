@@ -44,11 +44,7 @@ uint32_t stm32GetClockFrequency(void *instance) {
 }
 
 uint8_t stm32ADC1GetChannel(GPIO_TypeDef *port, uint32_t pin_mask) {
-<<<<<<< HEAD
-    for(unsigned int i=0; i<sizeof(chip_adc1_channel) / sizeof(chip_adc1_channel[0]); i++) {
-=======
     for(size_t i=0; i<sizeof(chip_adc1_channel) / sizeof(chip_adc1_channel[0]); i++) {
->>>>>>> refs/remotes/danieleff/master
         if (chip_adc1_channel[i].port == port && chip_adc1_channel[i].pin_mask == pin_mask) {
             return chip_adc1_channel[i].channel;
         }

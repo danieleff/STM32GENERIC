@@ -82,11 +82,7 @@ void analogWrite(uint8_t pin, int value) {
         HAL_TIM_Base_Start_IT(handle);
     }
 
-<<<<<<< HEAD
-    for(unsigned int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
-=======
     for(size_t i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
->>>>>>> refs/remotes/danieleff/master
         if (pwm_config[i].port == NULL ||
                 (pwm_config[i].port == variant_pin_list[pin].port
                 && pwm_config[i].pin_mask == variant_pin_list[pin].pin_mask)) {
@@ -105,22 +101,14 @@ void analogWrite(uint8_t pin, int value) {
 }
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin_mask) {
-<<<<<<< HEAD
-    for(unsigned int i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
-=======
     for(size_t i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
->>>>>>> refs/remotes/danieleff/master
         if (pwm_config[i].port == NULL) {
             return;
         }
 
         if (pwm_config[i].port == port && pwm_config[i].pin_mask == pin_mask) {
 
-<<<<<<< HEAD
-            for(unsigned int j = i + 1; j < sizeof(pwm_config) / sizeof(pwm_config[0]); j++) {
-=======
             for(size_t j = i + 1; j < sizeof(pwm_config) / sizeof(pwm_config[0]); j++) {
->>>>>>> refs/remotes/danieleff/master
                 if (pwm_config[j].port == NULL) {
                     pwm_config[i].port = pwm_config[j - 1].port;
                     pwm_config[i].pin_mask = pwm_config[j - 1].pin_mask;
@@ -139,11 +127,7 @@ void pwm_callback() {
     counter += period;
     period = 256;
 
-<<<<<<< HEAD
-    for(unsigned int i=0; i<sizeof(pwm_config); i++) {
-=======
     for(size_t i=0; i<sizeof(pwm_config); i++) {
->>>>>>> refs/remotes/danieleff/master
         if (pwm_config[i].port != NULL) {
             if (pwm_config[i].duty_cycle > counter % pwm_config[i].frequency) {
                 pwm_config[i].port->BSRR = pwm_config[i].pin_mask;
