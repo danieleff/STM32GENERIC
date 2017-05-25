@@ -62,18 +62,6 @@ void USBDeviceClass::reenumerate() {
     #endif
 }
 
-bool USBDeviceClass::beginMenuSelection() {
-
-#ifdef MENU_USB_SERIAL
-    return beginCDC();
-#elif MENU_USB_MASS_STORAGE
-    return  beginMSC();
-#else
-    return false;
-#endif
-
-}
-
 bool USBDeviceClass::beginCDC() {
     reenumerate();
 
@@ -84,10 +72,8 @@ bool USBDeviceClass::beginCDC() {
     USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
 
     USBD_Start(&hUsbDeviceFS);
-}
 
-namespace Testing {
-extern USBD_StorageTypeDef USBD_DISK_fops;
+    return true;
 }
 
 bool USBDeviceClass::beginMSC() {
@@ -97,9 +83,11 @@ bool USBDeviceClass::beginMSC() {
 
     USBD_RegisterClass(&hUsbDeviceFS, &USBD_MSC);
 
-    USBD_MSC_RegisterStorage(&hUsbDeviceFS, &Testing::USBD_DISK_fops);
+    USBD_MSC_RegisterStorage(&hUsbDeviceFS, &USBD_DISK_fops);
 
     USBD_Start(&hUsbDeviceFS);
+
+    return true;
 }
 
 extern PCD_HandleTypeDef hpcd_USB_FS;

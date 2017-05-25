@@ -2,6 +2,8 @@
 
 #include "variant.h"
 
+static uint8_t spi_ff_buffer = 0XFF;
+
 #if defined(MOSI) || defined(MISO) || defined(SCK)
 	SPIClass SPI(SPI1, MOSI, MISO, SCK);
 #else
@@ -27,7 +29,7 @@ void SPIClass::begin() {
 	spiHandle.hdmarx = &hdma_spi_rx;
 
 	__HAL_RCC_DMA1_CLK_ENABLE();
-#ifdef __HAL_RCC_DMA2_CLK_ENABLE()
+#ifdef __HAL_RCC_DMA2_CLK_ENABLE
 	__HAL_RCC_DMA2_CLK_ENABLE();
 #endif
 

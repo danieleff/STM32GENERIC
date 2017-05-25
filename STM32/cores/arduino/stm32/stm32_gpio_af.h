@@ -140,7 +140,7 @@ void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *inst
 /**
  * Internal: get the default pin for the given peripheral
  */
-GPIO_TypeDef *stm32AfGetDefault(stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin);
+GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin);
 
 
 #ifdef __cplusplus

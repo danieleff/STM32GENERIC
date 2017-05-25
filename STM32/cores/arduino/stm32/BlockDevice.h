@@ -20,26 +20,16 @@
   SOFTWARE.
 */
 
-#ifndef _SERIAL_USBDEVICE_H_INCLUDED
-#define _SERIAL_USBDEVICE_H_INCLUDED
+#ifndef BLOCKDEVICE_H
+#define BLOCKDEVICE_H
 
-#include "Arduino.h"
-
-#include "msc/usbd_msc.h"
-
-extern USBD_StorageTypeDef USBD_DISK_fops;
-
-class USBDeviceClass {
+class BlockDevice {
   public:
-    void reenumerate();
-
-    bool beginCDC();
-
-    bool beginMSC();
-
+    virtual bool begin() = 0;
+    virtual bool end() = 0;
+    virtual uint32_t getBlockCount() = 0;
+    virtual bool readBlocks(uint32_t block, uint8_t* dst, size_t blocks) = 0;
+    virtual bool writeBlocks(uint32_t block, uint8_t* dst, size_t blocks) = 0;
 };
-
-extern USBDeviceClass USBDeviceFS;
-
 
 #endif

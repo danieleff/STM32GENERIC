@@ -38,7 +38,7 @@
 extern "C" {
 #endif
 
-extern void setHeap(char *start, char *end);
+extern void setHeap(unsigned char *start, unsigned char *end);
 
 extern caddr_t _sbrk( int incr ) ;
 
