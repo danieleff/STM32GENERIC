@@ -20,7 +20,9 @@ inline bool setSdErrorCode(uint8_t code, uint32_t line) {
 
 uint8_t SDIOClass::begin() {
     //GPIO_InitTypeDef GPIO_InitStruct;
-
+    if (hsd.State == HAL_SD_STATE_READY){
+        return true;
+    }
     __HAL_RCC_SDIO_CLK_ENABLE();
 
     stm32AfSDIO4BitInit(SDIO, NULL, 0, NULL, 0,
@@ -77,10 +79,13 @@ uint8_t SDIOClass::begin() {
     /*
      * Up to here
      */
-    _useDMA = false;
+    _useDMA = true;
 
     m_errorCode = SD_CARD_ERROR_NONE;
     return true;
+}
+uint8_t SDIOClass::end() {
+    return (HAL_SD_DeInit(&hsd) == HAL_OK);
 }
 
 uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
@@ -94,7 +99,8 @@ uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
             return false;
         }
 
-        return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
+//common with dma, so it's down at the end
+        //return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
     }
     else {
         hdma_sdio.Init.Direction = DMA_PERIPH_TO_MEMORY;
@@ -108,7 +114,7 @@ uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
         // We need to block here, until we implement a callback feature
         uint32_t tickstart = HAL_GetTick();
         while (hsd.State == HAL_SD_STATE_BUSY){
-            if((HAL_GetTick() - tickstart) >=  sd_timeout)
+            if((HAL_GetTick() - tickstart) >=  sdRdTimeout * nb)
             {
                 /* Abort transfer and send return error */
                 HAL_SD_Abort(&hsd);
@@ -118,9 +124,12 @@ uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
         if (hsd.State != HAL_SD_STATE_READY ) {
             return false;
         }
-
-        return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
+        if (__HAL_SD_GET_FLAG(&hsd,SDIO_FLAG_DCRCFAIL)) {
+           //return false;
+            while (1); //stay here
+        }
     }
+    return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
 }
 
 uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
@@ -133,7 +142,8 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
         if (state != HAL_OK) {
             return false;
         }
-        return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
+//common with dma, so it's down at the end
+        //return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
     }
     else {
         hdma_sdio.Init.Direction = DMA_MEMORY_TO_PERIPH;
@@ -147,13 +157,13 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
         /*
          *  We need to block here, until we implement a callback feature
          *  TODO: better check if the card is still in programming mode.
-         *  Also confirm the timeout to wait from the specs, currently sd_timeout=100
+         *  Also confirm the timeout to wait from the specs, currently sd_timeout
          *  It may need to be multiplied by a factor depending on number of blocks.
          *  Finally, perhaps rename sd_timeout to something else
          */
         uint32_t tickstart = HAL_GetTick();
         while (hsd.State == HAL_SD_STATE_BUSY){
-            if((HAL_GetTick() - tickstart) >=  sd_timeout)
+            if((HAL_GetTick() - tickstart) >=  sdWrTimeout * nb+1)
             {
                 /* Abort transfer and send return error */
                 HAL_SD_Abort(&hsd);
@@ -163,9 +173,13 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
         if (hsd.State != HAL_SD_STATE_READY) {
             return false;
         }
+    }
+    if (__HAL_SD_GET_FLAG(&hsd,SDIO_FLAG_DCRCFAIL)) {
+       //return false;
+        while (1); //stay here
+    }
         while (HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_PROGRAMMING);
         return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
-    }
 }
 
 bool SDIOClass::erase(uint32_t firstBlock, uint32_t lastBlock) {

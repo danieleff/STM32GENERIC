@@ -7,7 +7,7 @@
 #define sdRdTimeout 100
 #define sdWrTimeout 500
 #define sdErTimeout 250
-#define sd_timeout 2000 // timeout in ms in the new HAL API
+#define sd_timeout 250 // timeout in ms in the new HAL API
 
 /*
  * Auxiliary macros to derive several names from the same values
