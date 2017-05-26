@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_smbus.h
   * @author  MCD Application Team
-  * @version V1.5.2
-  * @date    12-September-2016
+  * @version V1.7.0
+  * @date    17-February-2017
   * @brief   Header file of SMBUS HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -292,12 +292,24 @@ typedef struct
   * @{
   */
 
+/* List of XferOptions in usage of :
+ * 1- Restart condition when direction change
+ * 2- No Restart condition in other use cases
+ */
 #define  SMBUS_FIRST_FRAME                      SMBUS_SOFTEND_MODE
 #define  SMBUS_NEXT_FRAME                       ((uint32_t)(SMBUS_RELOAD_MODE | SMBUS_SOFTEND_MODE))
 #define  SMBUS_FIRST_AND_LAST_FRAME_NO_PEC      SMBUS_AUTOEND_MODE 
 #define  SMBUS_LAST_FRAME_NO_PEC                SMBUS_AUTOEND_MODE
 #define  SMBUS_FIRST_AND_LAST_FRAME_WITH_PEC    ((uint32_t)(SMBUS_AUTOEND_MODE | SMBUS_SENDPEC_MODE))
 #define  SMBUS_LAST_FRAME_WITH_PEC              ((uint32_t)(SMBUS_AUTOEND_MODE | SMBUS_SENDPEC_MODE))
+
+/* List of XferOptions in usage of :
+ * 1- Restart condition in all use cases (direction change or not)
+ */
+#define  SMBUS_OTHER_FRAME_NO_PEC               (0x000000AAU)
+#define  SMBUS_OTHER_FRAME_WITH_PEC             (0x0000AA00U)
+#define  SMBUS_OTHER_AND_LAST_FRAME_NO_PEC      (0x00AA0000U)
+#define  SMBUS_OTHER_AND_LAST_FRAME_WITH_PEC    (0xAA000000U)
 /**
   * @}
   */
@@ -490,6 +502,8 @@ typedef struct
 #define IS_SMBUS_ANALOG_FILTER(FILTER)                  (((FILTER) == SMBUS_ANALOGFILTER_ENABLE) || \
                                                           ((FILTER) == SMBUS_ANALOGFILTER_DISABLE))
 
+#define IS_SMBUS_DIGITAL_FILTER(FILTER)                 ((FILTER) <= 0x0000000FU)
+
 #define IS_SMBUS_ADDRESSING_MODE(MODE)                  (((MODE) == SMBUS_ADDRESSINGMODE_7BIT)  || \
                                                           ((MODE) == SMBUS_ADDRESSINGMODE_10BIT))
 
@@ -521,6 +535,7 @@ typedef struct
 #define IS_SMBUS_TRANSFER_MODE(MODE)                    (((MODE) == SMBUS_RELOAD_MODE)                           || \
                                                           ((MODE) == SMBUS_AUTOEND_MODE)                         || \
                                                           ((MODE) == SMBUS_SOFTEND_MODE)                         || \
+                                                          ((MODE) == SMBUS_SENDPEC_MODE)                         || \
                                                           ((MODE) == (SMBUS_RELOAD_MODE | SMBUS_SENDPEC_MODE))   || \
                                                           ((MODE) == (SMBUS_AUTOEND_MODE | SMBUS_SENDPEC_MODE))  || \
                                                           ((MODE) == (SMBUS_AUTOEND_MODE | SMBUS_RELOAD_MODE))   || \
@@ -538,7 +553,13 @@ typedef struct
                                                           ((REQUEST) == SMBUS_FIRST_AND_LAST_FRAME_NO_PEC)       || \
                                                           ((REQUEST) == SMBUS_LAST_FRAME_NO_PEC)                 || \
                                                           ((REQUEST) == SMBUS_FIRST_AND_LAST_FRAME_WITH_PEC)     || \
-                                                          ((REQUEST) == SMBUS_LAST_FRAME_WITH_PEC))
+                                                          ((REQUEST) == SMBUS_LAST_FRAME_WITH_PEC)               || \
+                                                          IS_SMBUS_TRANSFER_OTHER_OPTIONS_REQUEST(REQUEST))
+
+#define IS_SMBUS_TRANSFER_OTHER_OPTIONS_REQUEST(REQUEST) (((REQUEST) == SMBUS_OTHER_FRAME_NO_PEC)                || \
+                                                          ((REQUEST) == SMBUS_OTHER_AND_LAST_FRAME_NO_PEC)       || \
+                                                          ((REQUEST) == SMBUS_OTHER_FRAME_WITH_PEC)              || \
+                                                          ((REQUEST) == SMBUS_OTHER_AND_LAST_FRAME_WITH_PEC))
 
 #define SMBUS_RESET_CR1(__HANDLE__)                       ((__HANDLE__)->Instance->CR1 &= (uint32_t)~((uint32_t)(I2C_CR1_SMBHEN | I2C_CR1_SMBDEN | I2C_CR1_PECEN)))
 #define SMBUS_RESET_CR2(__HANDLE__)                       ((__HANDLE__)->Instance->CR2 &= (uint32_t)~((uint32_t)(I2C_CR2_SADD | I2C_CR2_HEAD10R | I2C_CR2_NBYTES | I2C_CR2_RELOAD | I2C_CR2_RD_WRN)))
@@ -576,6 +597,8 @@ HAL_StatusTypeDef HAL_SMBUS_Init(SMBUS_HandleTypeDef *hsmbus);
 HAL_StatusTypeDef HAL_SMBUS_DeInit (SMBUS_HandleTypeDef *hsmbus);
 void HAL_SMBUS_MspInit(SMBUS_HandleTypeDef *hsmbus);
 void HAL_SMBUS_MspDeInit(SMBUS_HandleTypeDef *hsmbus);
+HAL_StatusTypeDef HAL_SMBUS_ConfigAnalogFilter(SMBUS_HandleTypeDef *hsmbus, uint32_t AnalogFilter); 
+HAL_StatusTypeDef HAL_SMBUS_ConfigDigitalFilter(SMBUS_HandleTypeDef *hsmbus, uint32_t DigitalFilter);
 
 /**
   * @}

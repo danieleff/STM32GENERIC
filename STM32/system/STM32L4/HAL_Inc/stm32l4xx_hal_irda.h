@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32l4xx_hal_irda.h
   * @author  MCD Application Team
-  * @version V1.5.2
-  * @date    12-September-2016
+  * @version V1.7.0
+  * @date    17-February-2017
   * @brief   Header file of IRDA HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -189,7 +189,7 @@ typedef struct
 
   uint16_t                 TxXferSize;       /*!< IRDA Tx Transfer size              */
 
-  __IO uint16_t            TxXferCount;      /*!< IRDA Tx Transfer Counter           */
+  __IO uint16_t            TxXferCount;      /* !<IRDA Tx Transfer Counter           */
 
   uint8_t                  *pRxBuffPtr;      /*!< Pointer to IRDA Rx transfer Buffer */
 
@@ -337,15 +337,15 @@ typedef enum
   *           - 0xXXXX  : Flag mask in the ISR register
   * @{
   */
-#define IRDA_FLAG_REACK                     ((uint32_t)0x00400000)    /*!< IRDA Receive enable acknowledge flag  */
-#define IRDA_FLAG_TEACK                     ((uint32_t)0x00200000)    /*!< IRDA Transmit enable acknowledge flag */
-#define IRDA_FLAG_BUSY                      ((uint32_t)0x00010000)    /*!< IRDA Busy flag                        */
+#define IRDA_FLAG_REACK                     ((uint32_t)0x00400000)    /*!< IRDA Receive enable acknowledge flag  */ 
+#define IRDA_FLAG_TEACK                     ((uint32_t)0x00200000)    /*!< IRDA Transmit enable acknowledge flag */ 
+#define IRDA_FLAG_BUSY                      ((uint32_t)0x00010000)    /*!< IRDA Busy flag                        */  
 #define IRDA_FLAG_ABRF                      ((uint32_t)0x00008000)    /*!< IRDA Auto baud rate flag              */
-#define IRDA_FLAG_ABRE                      ((uint32_t)0x00004000)    /*!< IRDA Auto baud rate error             */
+#define IRDA_FLAG_ABRE                      ((uint32_t)0x00004000)    /*!< IRDA Auto baud rate error             */  
 #define IRDA_FLAG_TXE                       ((uint32_t)0x00000080)    /*!< IRDA Transmit data register empty     */
-#define IRDA_FLAG_TC                        ((uint32_t)0x00000040)    /*!< IRDA Transmission complete            */
+#define IRDA_FLAG_TC                        ((uint32_t)0x00000040)    /*!< IRDA Transmission complete            */  
 #define IRDA_FLAG_RXNE                      ((uint32_t)0x00000020)    /*!< IRDA Read data register not empty     */
-#define IRDA_FLAG_ORE                       ((uint32_t)0x00000008)    /*!< IRDA Overrun error                    */
+#define IRDA_FLAG_ORE                       ((uint32_t)0x00000008)    /*!< IRDA Overrun error                    */  
 #define IRDA_FLAG_NE                        ((uint32_t)0x00000004)    /*!< IRDA Noise error                      */
 #define IRDA_FLAG_FE                        ((uint32_t)0x00000002)    /*!< IRDA Framing error                    */
 #define IRDA_FLAG_PE                        ((uint32_t)0x00000001)    /*!< IRDA Parity error                     */
@@ -368,19 +368,7 @@ typedef enum
 #define IRDA_IT_TC                          ((uint16_t)0x0626)     /*!< IRDA Transmission complete interruption        */
 #define IRDA_IT_RXNE                        ((uint16_t)0x0525)     /*!< IRDA Read data register not empty interruption */
 #define IRDA_IT_IDLE                        ((uint16_t)0x0424)     /*!< IRDA Idle interruption                         */
-
-/**       Elements values convention: 000000000XXYYYYYb
-  *           - YYYYY  : Interrupt source position in the XX register (5bits)
-  *           - XX  : Interrupt source register (2bits)
-  *                 - 01: CR1 register
-  *                 - 10: CR2 register
-  *                 - 11: CR3 register
-  */
 #define IRDA_IT_ERR                         ((uint16_t)0x0060)       /*!< IRDA Error interruption        */
-
-/**       Elements values convention: 0000ZZZZ00000000b
-  *           - ZZZZ  : Flag position in the ISR register(4bits)
-  */
 #define IRDA_IT_ORE                         ((uint16_t)0x0300)      /*!< IRDA Overrun error interruption */
 #define IRDA_IT_NE                          ((uint16_t)0x0200)      /*!< IRDA Noise error interruption   */
 #define IRDA_IT_FE                          ((uint16_t)0x0100)      /*!< IRDA Frame error interruption   */
@@ -599,13 +587,13 @@ typedef enum
 /** @brief  Enable the IRDA one bit sample method.
   * @param  __HANDLE__: specifies the IRDA Handle.  
   * @retval None
-  */
+  */     
 #define __HAL_IRDA_ONE_BIT_SAMPLE_ENABLE(__HANDLE__) ((__HANDLE__)->Instance->CR3|= USART_CR3_ONEBIT)
 
 /** @brief  Disable the IRDA one bit sample method.
   * @param  __HANDLE__: specifies the IRDA Handle.  
   * @retval None
-  */
+  */      
 #define __HAL_IRDA_ONE_BIT_SAMPLE_DISABLE(__HANDLE__) ((__HANDLE__)->Instance->CR3 &= (uint32_t)~((uint32_t)USART_CR3_ONEBIT))
 
 /** @brief  Enable UART/USART associated to IRDA Handle.

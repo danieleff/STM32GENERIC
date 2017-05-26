@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f7xx.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    30-December-2016 
+  * @version V1.2.0
+  * @date    30-December-2016
   * @brief   CMSIS Cortex-M7 Device Peripheral Access Layer System Source File.
   *
   *   This file provides two functions and one global variable to be called from 
@@ -24,7 +24,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -152,7 +152,6 @@
 __attribute__((weak)) void preinitVariant(void) {
     
 }
-  
 /**
   * @brief  Setup the microcontroller system
   *         Initialize the Embedded Flash Interface, the PLL and update the 
@@ -191,11 +190,10 @@ void SystemInit(void)
 
   /* Configure the Vector Table location add offset address ------------------*/
 #ifdef VECT_TAB_SRAM
-  SCB->VTOR = SRAM1_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
+  SCB->VTOR = RAMDTCM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
 #else
   SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
 #endif
-
   preinitVariant();
 }
 
@@ -220,11 +218,11 @@ void SystemInit(void)
   *           - If SYSCLK source is PLL, SystemCoreClock will contain the HSE_VALUE(**) 
   *             or HSI_VALUE(*) multiplied/divided by the PLL factors.
   *         
-  *         (*) HSI_VALUE is a constant defined in stm32f7xx.h file (default value
+  *         (*) HSI_VALUE is a constant defined in stm32f7xx_hal_conf.h file (default value
   *             16 MHz) but the real value may vary depending on the variations
   *             in voltage and temperature.   
   *    
-  *         (**) HSE_VALUE is a constant defined in stm32f7xx.h file (default value
+  *         (**) HSE_VALUE is a constant defined in stm32f7xx_hal_conf.h file (default value
   *              25 MHz), user has to ensure that HSE_VALUE is same as the real
   *              frequency of the crystal used. Otherwise, this function may
   *              have wrong result.
@@ -425,7 +423,6 @@ void SystemInit_ExtMemCtl(void)
   FMC_Bank5_6->SDCR[0] = (tmpreg & 0xFFFFFDFF);
 }
 #endif /* DATA_IN_ExtSDRAM */
-
 /**
   * @}
   */
