@@ -210,7 +210,7 @@ NUCLEO_64.menu.subboard.Nucleo_F030R8.build.mcu=cortex-m0
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.series=STM32F0
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.variant=NUCLEO_F030R8
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.extra_flags=-DSTM32F030R8
-NUCLEO_64.menu.subboard.Nucleo_F030R8.massstorage_drive=NODE_F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.massstorage_drive=NUCLEO
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.f_cpu=48000000L
 
 NUCLEO_64.menu.subboard.Nucleo_F103RB=Nucleo-F103RB
