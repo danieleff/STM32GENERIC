@@ -4,10 +4,12 @@
 #include "stdint.h"
 #include "BlockDriver.h"
 #include "stm32_def.h"
-#define sdRdTimeout 100
-#define sdWrTimeout 500
+#define sdRdTimeout 200
+#define sdWrTimeout 5000
+#define sdBsyTimeout 500
 #define sdErTimeout 250
 #define sd_timeout 250 // timeout in ms in the new HAL API
+#define SDCARD_STATUS_READY_BIT (1UL << 8)
 
 /*
  * Auxiliary macros to derive several names from the same values
@@ -62,6 +64,12 @@
 
 
 #endif
+
+/*
+ * Aux function. Doesn't exist in HAL. Allows to pre-erase blocks when the count of blocks to write is known.
+ * ACMD23
+ */
+uint32_t SDMMC_CmdSetWrtBlkEraseCount(SDIO_TypeDef *SDIOx, uint32_t Count);
 
 class SDIOClass {
     HAL_StatusTypeDef state;
@@ -123,6 +131,7 @@ class SDIOClass {
     void _sdioCallback() {HAL_SD_IRQHandler(&hsd);}
 
   private:
+    uint32_t cardStatus();
     SD_HandleTypeDef hsd;
     DMA_HandleTypeDef hdma_sdio;
     HAL_SD_CardInfoTypeDef SDCardInfo;

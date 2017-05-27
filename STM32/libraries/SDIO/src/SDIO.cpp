@@ -31,9 +31,67 @@ inline bool setSdErrorCode(uint8_t code, uint32_t line) {
   return false;  // setSdErrorCode
 }
 
+uint32_t SDMMC_CmdSetWrtBlkEraseCount(SDIO_TypeDef *SDIOx, uint32_t Count){
+    SDIO_CmdInitTypeDef  sdmmc_cmdinit;
+    uint32_t errorstate = SDMMC_ERROR_NONE;
+
+    //First send command 55, then ACMD.
+
+    /* Pre-erase Count blocks once Write is received */
+    sdmmc_cmdinit.Argument         = (uint32_t)Count;
+    sdmmc_cmdinit.CmdIndex         = 23;
+    sdmmc_cmdinit.Response         = SDIO_RESPONSE_SHORT;
+    sdmmc_cmdinit.WaitForInterrupt = SDIO_WAIT_NO;
+    sdmmc_cmdinit.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(SDIOx, &sdmmc_cmdinit);
+
+    /* Check for error conditions */
+    //errorstate = SDMMC_GetCmdResp1(SDIOx, SDMMC_CMD_READ_MULT_BLOCK, SDIO_CMDTIMEOUT);
+    errorstate = SDIO_GetResponse(SDIOx, SDIO_RESP1);
+    if((errorstate & SDMMC_OCR_ERRORBITS) == SDMMC_ALLZERO){
+        return HAL_OK;
+    }
+    return errorstate;
+}
+
+uint32_t SDMMC_CmdSwitchFunction(SDIO_TypeDef *SDIOx, uint32_t arg){
+    /*
+     * Todo: Finish this function, not finished yet, needs to read 64bytes and drop them.
+     */
+    SDIO_CmdInitTypeDef  sdmmc_cmdinit;
+    uint32_t errorstate = SDMMC_ERROR_NONE;
+
+    //First send command 55, then ACMD.
+
+    /* Pre-erase Count blocks once Write is received */
+    sdmmc_cmdinit.Argument         = (uint32_t)arg;
+    sdmmc_cmdinit.CmdIndex         = 6;
+    sdmmc_cmdinit.Response         = SDIO_RESPONSE_SHORT;
+    sdmmc_cmdinit.WaitForInterrupt = SDIO_WAIT_NO;
+    sdmmc_cmdinit.CPSM             = SDIO_CPSM_ENABLE;
+    SDIO_SendCommand(SDIOx, &sdmmc_cmdinit);
+
+    /* Check for error conditions */
+    //errorstate = SDMMC_GetCmdResp1(SDIOx, SDMMC_CMD_READ_MULT_BLOCK, SDIO_CMDTIMEOUT);
+    errorstate = SDIO_GetResponse(SDIOx, SDIO_RESP1);
+    if((errorstate & SDMMC_OCR_ERRORBITS) == SDMMC_ALLZERO){
+        return HAL_OK;
+    }
+    return errorstate;
+}
+
+uint32_t SDIOClass::cardStatus(){
+    HAL_SD_GetCardState(&hsd);
+    return SDIO_GetResponse(hsd.Instance, SDIO_RESP1);
+}
+
+
 uint8_t SDIOClass::begin() {
     //GPIO_InitTypeDef GPIO_InitStruct;
     if (hsd.State == HAL_SD_STATE_READY){
+        /*
+         * TODO: Check card state, may not be in transfer mode.
+         */
         return true;
     }
     __HAL_RCC_SDIO_CLK_ENABLE();
@@ -56,14 +114,14 @@ uint8_t SDIOClass::begin() {
     }
     HAL_SD_GetCardStatus(&hsd, &CardStatus);
 
-        state = HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B);
-        if (state != HAL_OK) {
-            DBGPRNT;
-            return false;
-        }
+    state = HAL_SD_ConfigWideBusOperation(&hsd, SDIO_BUS_WIDE_4B);
+    if (state != HAL_OK) {
+        DBGPRNT;
+        return false;
+    }
 
     /*
-     * TODO: We can move this section to useDMA
+     * TODO: We can move this section to useDMA, that way none of this code is included if not using DMA
      * We would need another section clearing the settings if not using DMA.
      */
     _sdio_this = (void*) this;
@@ -98,7 +156,11 @@ uint8_t SDIOClass::begin() {
     m_errorCode = SD_CARD_ERROR_NONE;
     return true;
 }
+/* TODO: This part needs more work, should set the card to idle state
+ *
+ */
 uint8_t SDIOClass::end() {
+    SDMMC_CmdGoIdleState(hsd.Instance);
     return (HAL_SD_DeInit(&hsd) == HAL_OK);
 }
 
@@ -114,7 +176,7 @@ uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
             return false;
         }
 
-//common with dma, so it's down at the end
+        //common with dma, so it's down at the end
         //return HAL_SD_GetCardState(&hsd) == HAL_SD_CARD_TRANSFER;
     }
     else {
@@ -159,6 +221,25 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
     if (((uint32_t)src & 0x3) !=0){
         while (1); //Hang here, src was not aligned to word, this is a problem
     }
+    uint32_t tickstart = HAL_GetTick();
+    while (!(cardStatus() & SDCARD_STATUS_READY_BIT)) {
+        SDMMC_CmdStopTransfer(hsd.Instance);
+        if ((HAL_GetTick() - tickstart) > sdBsyTimeout) {
+            DBGPRNT;
+            return false;
+        }
+        yield();
+    }
+    /*
+    if (nb > 1){
+        if(SDMMC_CmdAppCommand(hsd.Instance, (uint32_t)(hsd.SdCard.RelCardAdd << 16U)) != SDMMC_ERROR_NONE)
+        {
+            return false;
+        }
+        SDMMC_CmdSetWrtBlkEraseCount(hsd.Instance,nb);
+    }
+    */
+
     if (!_useDMA){
         state = HAL_SD_WriteBlocks(&hsd,(uint8_t*) src, block, (uint32_t) nb, sd_timeout);
 
@@ -186,15 +267,15 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
          *  It may need to be multiplied by a factor depending on number of blocks.
          *  Finally, perhaps rename sd_timeout to something else
          */
-        uint32_t tickstart = HAL_GetTick();
+        tickstart = HAL_GetTick();
         while (hsd.State == HAL_SD_STATE_BUSY){
-            if((HAL_GetTick() - tickstart) >=  sdWrTimeout * nb+1)
+            if((HAL_GetTick() - tickstart) >=  sdWrTimeout * (nb+1))
             {
                 /* Abort transfer and send return error */
                 HAL_SD_Abort(&hsd);
                 DBGPRNT;
                 Serial.print ("Timeout on write, over ");
-                Serial.print (sdRdTimeout * nb+1);
+                Serial.print (sdWrTimeout * (nb+1));
                 Serial.println ("ms");
                 return false;
             }
