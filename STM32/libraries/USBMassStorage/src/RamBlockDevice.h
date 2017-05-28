@@ -24,9 +24,6 @@ public:
   void setReadListener(listener);
   void setWriteListener(listener);
 
-
-  void formatFat12();
-
   uint32_t blockCount;
   uint8_t *buffer;
   private:

@@ -23,6 +23,9 @@
 #ifndef BLOCKDEVICE_H
 #define BLOCKDEVICE_H
 
+#include "stdint.h"
+#include "stddef.h"
+
 class BlockDevice {
   public:
     virtual bool begin() = 0;

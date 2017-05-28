@@ -20,6 +20,8 @@
   SOFTWARE.
 */
 
+#include "MassStorage.h"
+
 #include "RamBlockDevice.h"
 
 RamBlockDevice::RamBlockDevice() {
@@ -32,7 +34,7 @@ RamBlockDevice::RamBlockDevice(uint32_t blockCount, bool doFormat) {
     this->buffer = (uint8_t *)calloc(blockCount * 512, 1);
 
     if (doFormat) {
-        this->formatFat12();
+        formatFat12(buffer, blockCount);
     }
 }
 
@@ -68,49 +70,6 @@ bool RamBlockDevice::writeBlocks(uint32_t block, uint8_t* src, size_t blocks) {
   return true;
 };
 
-const unsigned char fat12BootSector[] = {
-    0xEB, 0x3C, 0x90, //jump to boot program
-    'S', 'T', 'M', '3', '2', 'F', 'A', 'T', //manufacturer description
-    0x00, 0x02, // 512 bytes per block
-    0x01, // blocks per allocation unit
-    0x01, 0x00, // 1 reserved block for boot block
-    0x01, // number of FAT
-    0x10, 0x00, // max number of root dir entries
-    0x42, 0x00, // number of blocks in the entire disk
-    0xF8, // media descriptor
-
-    0x01, 0x00, // blocks for FAT
-    0x00, 0x00, // for boot program
-    0x00, 0x00, // for boot program
-    0x00, 0x00, 0x00, 0x00, // hidden blocks
-    0x00, 0x00, 0x00, 0x00, // total number of blocks
-    0x00, 0x00, // for boot program
-    0x00, //for boot program
-    0x38, 0xD3, 0xC7, 0x53, // Disk ID
-    'S', 'T', 'M', '3', '2', ' ', 'D', 'r', 'i', 'v', 'e', // partition volume label
-    'F', 'A', 'T', '1', '2', ' ', ' ', ' ', // file system type
-};
-
-void RamBlockDevice::formatFat12() {
-    memcpy(buffer, fat12BootSector, sizeof(fat12BootSector));
-
-    buffer[19] = blockCount & 0xFF;
-    buffer[20] = blockCount >> 8;
-
-    buffer[510] = 0x55;
-    buffer[511] = 0xAA;
-
-
-    buffer[1024 + 0] = 'S';
-    buffer[1024 + 1] = 'T';
-    buffer[1024 + 2] = 'M';
-    buffer[1024 + 3] = '3';
-    buffer[1024 + 4] = '2';
-    for(int i = 5; i < 11; i++) {
-        buffer[1024 + i] = ' ';
-    }
-    buffer[1024 + 11] = 0x8; // Volume label dir entry
-}
 
 void RamBlockDevice::setReadListener(listener l) {
     readListener = l;

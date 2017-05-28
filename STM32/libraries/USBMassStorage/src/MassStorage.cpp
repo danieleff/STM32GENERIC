@@ -22,8 +22,6 @@
 
 #include "USBDevice.h"
 
-#include "BlockDevice.h"
-
 #include "msc/usbd_msc.h"
 
 #include "MassStorage.h"
@@ -89,3 +87,49 @@ USBD_StorageTypeDef USBD_DISK_fops = {
     (int8_t *)MSC_Inquirydata
 
 };
+
+
+
+const unsigned char fat12BootSector[] = {
+    0xEB, 0x3C, 0x90, //jump to boot program
+    'S', 'T', 'M', '3', '2', 'F', 'A', 'T', //manufacturer description
+    0x00, 0x02, // 512 bytes per block
+    0x01, // blocks per allocation unit
+    0x01, 0x00, // 1 reserved block for boot block
+    0x01, // number of FAT
+    0x10, 0x00, // max number of root dir entries
+    0x42, 0x00, // number of blocks in the entire disk
+    0xF8, // media descriptor
+
+    0x01, 0x00, // blocks for FAT
+    0x00, 0x00, // for boot program
+    0x00, 0x00, // for boot program
+    0x00, 0x00, 0x00, 0x00, // hidden blocks
+    0x00, 0x00, 0x00, 0x00, // total number of blocks
+    0x00, 0x00, // for boot program
+    0x00, //for boot program
+    0x38, 0xD3, 0xC7, 0x53, // Disk ID
+    'S', 'T', 'M', '3', '2', ' ', 'D', 'r', 'i', 'v', 'e', // partition volume label
+    'F', 'A', 'T', '1', '2', ' ', ' ', ' ', // file system type
+};
+
+void formatFat12(uint8_t *buffer, uint32_t blockCount) {
+    memcpy(buffer, fat12BootSector, sizeof(fat12BootSector));
+
+    buffer[19] = blockCount & 0xFF;
+    buffer[20] = blockCount >> 8;
+
+    buffer[510] = 0x55;
+    buffer[511] = 0xAA;
+
+
+    buffer[1024 + 0] = 'S';
+    buffer[1024 + 1] = 'T';
+    buffer[1024 + 2] = 'M';
+    buffer[1024 + 3] = '3';
+    buffer[1024 + 4] = '2';
+    for(int i = 5; i < 11; i++) {
+        buffer[1024 + i] = ' ';
+    }
+    buffer[1024 + 11] = 0x8; // Volume label dir entry
+}
