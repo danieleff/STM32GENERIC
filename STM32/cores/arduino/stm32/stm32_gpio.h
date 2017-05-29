@@ -91,6 +91,65 @@ inline int digitalRead(uint8_t pin) {
     
 }
 
+
+///////////////////////////////
+// The following functions are meant to be used with compile time constant parameters
+
+#define PIN(a, b) { GPIO##a , GPIO_PIN_##b }
+
+static const stm32_port_pin_type variant_pin_list_static[] = {
+  VARIANT_PIN_LIST
+};
+#undef PIN
+
+inline void digitalWriteConst(uint8_t pin, uint8_t value) {
+    HAL_GPIO_WritePin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask, value ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+inline int digitalReadConst(uint8_t pin) {
+    return HAL_GPIO_ReadPin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask);
+}
+inline void pinModeConst(uint8_t pin, uint8_t mode) {
+    stm32_port_pin_type port_pin = variant_pin_list_static[pin];
+
+    stm32GpioClockEnable(port_pin.port);
+
+    GPIO_InitTypeDef init;
+
+    init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    init.Pin = port_pin.pin_mask;
+
+    switch ( mode ) {
+      case INPUT:
+        init.Mode = GPIO_MODE_INPUT;
+        init.Pull =  GPIO_NOPULL;
+        break;
+
+      case INPUT_PULLUP:
+        init.Mode = GPIO_MODE_INPUT;
+        init.Pull =  GPIO_PULLUP;
+        break;
+
+      case INPUT_PULLDOWN:
+        init.Mode = GPIO_MODE_INPUT;
+        init.Pull =  GPIO_PULLDOWN;
+        break;
+
+      case OUTPUT:
+        init.Mode = GPIO_MODE_OUTPUT_PP;
+        init.Pull =  GPIO_NOPULL;
+        break;
+
+      default:
+        return;
+        break;
+    }
+
+    HAL_GPIO_Init(port_pin.port, &init);
+
+}
+
+
 #ifdef __cplusplus
 }
 #endif
