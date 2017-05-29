@@ -124,8 +124,8 @@ static void AF__HAL_AFIO_REMAP_I2C1_ENABLE(void) { __HAL_AFIO_REMAP_I2C1_ENABLE(
 static void AF__HAL_AFIO_REMAP_I2S3_DISABLE(void) { __HAL_AFIO_REMAP_I2S3_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_SPI1_DISABLE(void) { __HAL_AFIO_REMAP_SPI1_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_SPI1_ENABLE(void) { __HAL_AFIO_REMAP_SPI1_ENABLE(); }
-static void AF__HAL_AFIO_REMAP_SPI3_DISABLE(void) { __HAL_AFIO_REMAP_SPI3_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_SPI3_ENABLE(void) { __HAL_AFIO_REMAP_SPI3_ENABLE(); }
+//static void AF__HAL_AFIO_REMAP_SPI3_DISABLE(void) { __HAL_AFIO_REMAP_SPI3_DISABLE(); }
+//static void AF__HAL_AFIO_REMAP_SPI3_ENABLE(void) { __HAL_AFIO_REMAP_SPI3_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_TIM10_DISABLE(void) { __HAL_AFIO_REMAP_TIM10_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_TIM10_ENABLE(void) { __HAL_AFIO_REMAP_TIM10_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_TIM11_DISABLE(void) { __HAL_AFIO_REMAP_TIM11_DISABLE(); }
@@ -182,8 +182,8 @@ const stm32_af_pin_list_type chip_af_i2s_ck [] = {
 //I2S2
     { SPI2  , GPIOB, GPIO_PIN_13 , AF_NO_REMAP    }, 
 //I2S3
-    { SPI3  , GPIOB, GPIO_PIN_3  , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
-    { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOB, GPIO_PIN_3  , AF_NO_REMAP},
+//    { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
 }; 
 
 const stm32_af_pin_list_type chip_af_i2s_mck [] = {
@@ -197,16 +197,16 @@ const stm32_af_pin_list_type chip_af_i2s_sd [] = {
 //I2S2
     { SPI2  , GPIOB, GPIO_PIN_15 , AF_NO_REMAP    }, 
 //I2S3
-    { SPI3  , GPIOB, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
-    { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOB, GPIO_PIN_5  , AF_NO_REMAP},
+//    { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
 }; 
 
 const stm32_af_pin_list_type chip_af_i2s_ws [] = {
 //I2S2
     { SPI2  , GPIOB, GPIO_PIN_12 , AF_NO_REMAP    }, 
 //I2S3
-    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
-    { SPI3  , GPIOA, GPIO_PIN_15 , AF__HAL_AFIO_REMAP_I2S3_DISABLE}, 
+//    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
+    { SPI3  , GPIOA, GPIO_PIN_15 , AF_NO_REMAP},
 }; 
 
 // --------------------SDIO--------------------
@@ -271,8 +271,8 @@ const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_14 , AF_NO_REMAP    }, 
 //SPI3
-    { SPI3  , GPIOB, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
-    { SPI3  , GPIOC, GPIO_PIN_11 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOB, GPIO_PIN_4  , AF_NO_REMAP},
+//    { SPI3  , GPIOC, GPIO_PIN_11 , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
 }; 
 
 const stm32_af_pin_list_type chip_af_spi_mosi [] = {
@@ -282,8 +282,8 @@ const stm32_af_pin_list_type chip_af_spi_mosi [] = {
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_15 , AF_NO_REMAP    }, 
 //SPI3
-    { SPI3  , GPIOB, GPIO_PIN_5  , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
-    { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOB, GPIO_PIN_5  , AF_NO_REMAP},
+//    { SPI3  , GPIOC, GPIO_PIN_12 , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
 }; 
 
 const stm32_af_pin_list_type chip_af_spi_nss [] = {
@@ -293,8 +293,8 @@ const stm32_af_pin_list_type chip_af_spi_nss [] = {
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_12 , AF_NO_REMAP    }, 
 //SPI3
-    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
-    { SPI3  , GPIOA, GPIO_PIN_15 , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
+//    { SPI3  , GPIOA, GPIO_PIN_4  , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
+    { SPI3  , GPIOA, GPIO_PIN_15 , AF_NO_REMAP},
 }; 
 
 const stm32_af_pin_list_type chip_af_spi_sck [] = {
@@ -304,8 +304,8 @@ const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_13 , AF_NO_REMAP    }, 
 //SPI3
-    { SPI3  , GPIOB, GPIO_PIN_3  , AF__HAL_AFIO_REMAP_SPI3_DISABLE}, 
-    { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE}, 
+    { SPI3  , GPIOB, GPIO_PIN_3  , AF_NO_REMAP},
+//    { SPI3  , GPIOC, GPIO_PIN_10 , AF__HAL_AFIO_REMAP_SPI3_ENABLE},
 }; 
 
 // --------------------TIM--------------------
