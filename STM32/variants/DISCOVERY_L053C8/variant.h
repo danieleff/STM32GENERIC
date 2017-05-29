@@ -11,45 +11,52 @@
 #define SDA PB9
 #define SCL PB8
 
+#define VARIANT_PIN_LIST \
+   PIN(A,0 ), \
+   PIN(A,1 ), \
+   PIN(A,2 ), \
+   PIN(A,3 ), \
+   PIN(A,4 ), \
+   PIN(A,5 ), \
+   PIN(A,6 ), \
+   PIN(A,7 ), \
+   PIN(A,8 ), \
+   PIN(A,9 ), \
+   PIN(A,10), \
+   PIN(A,11), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(A,15), \
+   PIN(B,0 ), \
+   PIN(B,1 ), \
+   PIN(B,2 ), \
+   PIN(B,3 ), \
+   PIN(B,4 ), \
+   PIN(B,5 ), \
+   PIN(B,6 ), \
+   PIN(B,7 ), \
+   PIN(B,8 ), \
+   PIN(B,9 ), \
+   PIN(B,10), \
+   PIN(B,11), \
+   PIN(B,12), \
+   PIN(B,13), \
+   PIN(B,14), \
+   PIN(B,15), \
+   PIN(C,13), \
+   PIN(C,14), \
+   PIN(C,15), \
+   PIN(H,0 ), \
+   PIN(H,1 ),
+
+#define PIN(a, b) P ## a ## b
+
 enum {
-   PA0 ,
-   PA1 ,
-   PA2 ,
-   PA3 ,
-   PA4 ,
-   PA5 ,
-   PA6 ,
-   PA7 ,
-   PA8 ,
-   PA9 ,
-   PA10,
-   PA11,
-   PA12,
-   PA13,
-   PA14,
-   PA15,
-   PB0 ,
-   PB1 ,
-   PB2 ,
-   PB3 ,
-   PB4 ,
-   PB5 ,
-   PB6 ,
-   PB7 ,
-   PB8 ,
-   PB9 ,
-   PB10,
-   PB11,
-   PB12,
-   PB13,
-   PB14,
-   PB15,
-   PC13,
-   PC14,
-   PC15,
-   PH0 ,
-   PH1 ,
-NUM_PINS,
+    VARIANT_PIN_LIST
+    NUM_PINS,
 };
+#undef PIN
+
 
 #endif
