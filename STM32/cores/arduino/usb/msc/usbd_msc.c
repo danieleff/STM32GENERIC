@@ -43,6 +43,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_msc.h"
 
+void Error_Handler();
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
