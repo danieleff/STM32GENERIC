@@ -102,14 +102,14 @@ static const stm32_port_pin_type variant_pin_list_static[] = {
 };
 #undef PIN
 
-inline void digitalWriteConst(uint8_t pin, uint8_t value) {
+inline static void digitalWriteConst(uint8_t pin, uint8_t value) {
     HAL_GPIO_WritePin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask, value ? GPIO_PIN_SET : GPIO_PIN_RESET);
 }
 
-inline int digitalReadConst(uint8_t pin) {
+inline static int digitalReadConst(uint8_t pin) {
     return HAL_GPIO_ReadPin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask);
 }
-inline void pinModeConst(uint8_t pin, uint8_t mode) {
+inline static void pinModeConst(uint8_t pin, uint8_t mode) {
     stm32_port_pin_type port_pin = variant_pin_list_static[pin];
 
     stm32GpioClockEnable(port_pin.port);
