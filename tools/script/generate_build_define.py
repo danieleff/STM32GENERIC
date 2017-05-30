@@ -109,6 +109,7 @@ class load_mcu:
         self.remaps = {}
         self.defaultremaps = {}
         self.af_functions=[]    
+        self.af_function_used=[]    
         self.pins = []
         self.peripherals = []
         self.groups = {}
@@ -266,23 +267,18 @@ class load_mcu:
         source_code += '};\n'
         source_code += '*/\n'
         
-        if len(self.af_functions) > 0:
-            source_code += 'static void AF_NO_REMAP (void) { }\n'
-            
-        for af_function in self.af_functions:
-            source_code += 'static void ' + af_function + '(void) { ' + af_function[2:] + '(); }\n'
-
+        periph_source_code = "";
         
         for periph in sorted(self.groups):
-            source_code += '\n'
-            source_code += '// --------------------' + periph + '--------------------'
-            source_code += '\n'
+            periph_source_code += '\n'
+            periph_source_code += '// --------------------' + periph + '--------------------'
+            periph_source_code += '\n'
             if 'SDIO' in periph:
-                source_code += '#define STM32_CHIP_HAS_SDIO'
-                source_code += '\n'
+                periph_source_code += '#define STM32_CHIP_HAS_SDIO'
+                periph_source_code += '\n'
             if 'I2S' in periph:
-                source_code += '#define STM32_CHIP_HAS_I2S'
-                source_code += '\n'
+                periph_source_code += '#define STM32_CHIP_HAS_I2S'
+                periph_source_code += '\n'
             
             for sig in sorted(set(self.groups[periph])):
             
@@ -292,28 +288,38 @@ class load_mcu:
                 if 'I2S' == periph and sig == 'CKIN':
                     continue
                     
-                source_code += '\n'
-                source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
+                periph_source_code += '\n'
+                periph_source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
                 #print self.group_signals
                 old = False
                 for signal in sorted(set(self.group_signals[periph + '_' +sig])):
                     if old != signal.split('_')[0]:
-                        source_code += '//' + signal.split('_')[0] + '\n'
+                        periph_source_code += '//' + signal.split('_')[0] + '\n'
                     p = signal.split('_')[0]
                     for pin in sorted(set(self.remaps[signal]), key = natural_sort_key):
                         if pin in self.pins:
                             remap = self.remaps[signal][pin]
+                            self.af_function_used.append(remap)
                             
                             split = signal.split('_')
                             p = split[0]
                             
                             p = p.replace('I2S', 'SPI');
                 
-                            source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
+                            periph_source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
                     
-                source_code += '}; \n'
+                periph_source_code += '}; \n'
         
-        source_code += '\n'
+        periph_source_code += '\n'
+        
+        if len(self.af_functions) > 0:
+            source_code += 'static void AF_NO_REMAP (void) { }\n'
+            
+        for af_function in self.af_functions:
+            if af_function in self.af_function_used:
+                source_code += 'static void ' + af_function + '(void) { ' + af_function[2:] + '(); }\n'
+        
+        source_code += periph_source_code
         
         source_code += 'const stm32_chip_adc1_channel_type chip_adc1_channel[] = {\n'
         
