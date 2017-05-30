@@ -67,8 +67,8 @@ def find_header(name):
                 include = define
                 break
     
-    if not include:
-        raise Exception(name)
+    #if not include:
+    #    raise Exception(name)
     
     return include
     
@@ -104,6 +104,8 @@ class load_mcu:
 
         self.mcu_pins = self.mcu.findall('stm:Pin',  ns);
 
+        self.available_pin_signals = {}
+        
         self.remaps = {}
         self.defaultremaps = {}
         self.af_functions=[]    
@@ -131,6 +133,14 @@ class load_mcu:
             self.PCLK2_PERIPHERALS = []
         
     def find_remaps(self):
+        for pin_element in self.mcu.findall('stm:Pin',  ns):
+            for signal_element in pin_element.findall('stm:Signal',  ns):
+                pin = pin_element.attrib['Name']
+                instance_signal = signal_element.attrib['Name']
+                
+                self.available_pin_signals.setdefault(pin, []).append(instance_signal)
+        
+        
         for pin in self.remap_root.findall('stm:GPIO_Pin',  ns):
             pin_name = pin.attrib['Name']
             
@@ -139,6 +149,9 @@ class load_mcu:
             gpio_signals = pin.findall('stm:PinSignal',  ns)
             for gpio_signal in gpio_signals:
                 instance_signal = gpio_signal.attrib['Name']
+                
+                if pin_name not in self.available_pin_signals or instance_signal not in self.available_pin_signals[pin_name]:
+                    continue
                 
                 instance = instance_signal.split('_')[0]
                 if instance_signal not in self.remaps:
@@ -369,6 +382,8 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         dir = system_dir + name[:7] + "/CMSIS_Inc/"
         #filename = name.lower()
         define = find_header(name)
+        if not define:
+            continue
         
         file.write('\n');
         file.write('#elif defined(' + name + ')\n')
