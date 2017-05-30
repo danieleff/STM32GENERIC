@@ -3,118 +3,61 @@
 //MCU  xml: STM32L475R(C-E-G)Tx.xml
 //GPIO remap/alternate function xml: GPIO-STM32L47x_gpio_v1_0_Modes.xml
 
-/*
-const stm32_port_pin_type variant_pin_list[] = {
-  { GPIOA, GPIO_PIN_0 },
-  { GPIOA, GPIO_PIN_1 },
-  { GPIOA, GPIO_PIN_2 },
-  { GPIOA, GPIO_PIN_3 },
-  { GPIOA, GPIO_PIN_4 },
-  { GPIOA, GPIO_PIN_5 },
-  { GPIOA, GPIO_PIN_6 },
-  { GPIOA, GPIO_PIN_7 },
-  { GPIOA, GPIO_PIN_8 },
-  { GPIOA, GPIO_PIN_9 },
-  { GPIOA, GPIO_PIN_10},
-  { GPIOA, GPIO_PIN_11},
-  { GPIOA, GPIO_PIN_12},
-  { GPIOA, GPIO_PIN_13},
-  { GPIOA, GPIO_PIN_14},
-  { GPIOA, GPIO_PIN_15},
-  { GPIOB, GPIO_PIN_0 },
-  { GPIOB, GPIO_PIN_1 },
-  { GPIOB, GPIO_PIN_2 },
-  { GPIOB, GPIO_PIN_3 },
-  { GPIOB, GPIO_PIN_4 },
-  { GPIOB, GPIO_PIN_5 },
-  { GPIOB, GPIO_PIN_6 },
-  { GPIOB, GPIO_PIN_7 },
-  { GPIOB, GPIO_PIN_8 },
-  { GPIOB, GPIO_PIN_9 },
-  { GPIOB, GPIO_PIN_10},
-  { GPIOB, GPIO_PIN_11},
-  { GPIOB, GPIO_PIN_12},
-  { GPIOB, GPIO_PIN_13},
-  { GPIOB, GPIO_PIN_14},
-  { GPIOB, GPIO_PIN_15},
-  { GPIOC, GPIO_PIN_0 },
-  { GPIOC, GPIO_PIN_1 },
-  { GPIOC, GPIO_PIN_2 },
-  { GPIOC, GPIO_PIN_3 },
-  { GPIOC, GPIO_PIN_4 },
-  { GPIOC, GPIO_PIN_5 },
-  { GPIOC, GPIO_PIN_6 },
-  { GPIOC, GPIO_PIN_7 },
-  { GPIOC, GPIO_PIN_8 },
-  { GPIOC, GPIO_PIN_9 },
-  { GPIOC, GPIO_PIN_10},
-  { GPIOC, GPIO_PIN_11},
-  { GPIOC, GPIO_PIN_12},
-  { GPIOC, GPIO_PIN_13},
-  { GPIOC, GPIO_PIN_14},
-  { GPIOC, GPIO_PIN_15},
-  { GPIOD, GPIO_PIN_2 },
-  { GPIOH, GPIO_PIN_0 },
-  { GPIOH, GPIO_PIN_1 },
-};
-*/
 
-/*
-enum {
-   PA0 ,
-   PA1 ,
-   PA2 ,
-   PA3 ,
-   PA4 ,
-   PA5 ,
-   PA6 ,
-   PA7 ,
-   PA8 ,
-   PA9 ,
-   PA10,
-   PA11,
-   PA12,
-   PA13,
-   PA14,
-   PA15,
-   PB0 ,
-   PB1 ,
-   PB2 ,
-   PB3 ,
-   PB4 ,
-   PB5 ,
-   PB6 ,
-   PB7 ,
-   PB8 ,
-   PB9 ,
-   PB10,
-   PB11,
-   PB12,
-   PB13,
-   PB14,
-   PB15,
-   PC0 ,
-   PC1 ,
-   PC2 ,
-   PC3 ,
-   PC4 ,
-   PC5 ,
-   PC6 ,
-   PC7 ,
-   PC8 ,
-   PC9 ,
-   PC10,
-   PC11,
-   PC12,
-   PC13,
-   PC14,
-   PC15,
-   PD2 ,
-   PH0 ,
-   PH1 ,
-NUM_PINS,
-};
-*/
+#define VARIANT_PIN_LIST_DEFAULT \
+   PIN(A,0), \
+   PIN(A,1), \
+   PIN(A,2), \
+   PIN(A,3), \
+   PIN(A,4), \
+   PIN(A,5), \
+   PIN(A,6), \
+   PIN(A,7), \
+   PIN(A,8), \
+   PIN(A,9), \
+   PIN(A,10), \
+   PIN(A,11), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(A,15), \
+   PIN(B,0), \
+   PIN(B,1), \
+   PIN(B,2), \
+   PIN(B,3), \
+   PIN(B,4), \
+   PIN(B,5), \
+   PIN(B,6), \
+   PIN(B,7), \
+   PIN(B,8), \
+   PIN(B,9), \
+   PIN(B,10), \
+   PIN(B,11), \
+   PIN(B,12), \
+   PIN(B,13), \
+   PIN(B,14), \
+   PIN(B,15), \
+   PIN(C,0), \
+   PIN(C,1), \
+   PIN(C,2), \
+   PIN(C,3), \
+   PIN(C,4), \
+   PIN(C,5), \
+   PIN(C,6), \
+   PIN(C,7), \
+   PIN(C,8), \
+   PIN(C,9), \
+   PIN(C,10), \
+   PIN(C,11), \
+   PIN(C,12), \
+   PIN(C,13), \
+   PIN(C,14), \
+   PIN(C,15), \
+   PIN(D,2), \
+   PIN(H,0), \
+   PIN(H,1), \
+
+
 
 // --------------------ADC--------------------
 
@@ -200,12 +143,10 @@ const stm32_af_pin_list_type chip_af_sdio_d7 [] = {
 const stm32_af_pin_list_type chip_af_spi_miso [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_6  , GPIO_AF5_SPI1  }, 
-    { SPI1  , GPIOB, GPIO_PIN_4  , GPIO_AF5_SPI1  }, 
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_14 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOC, GPIO_PIN_2  , GPIO_AF5_SPI2  }, 
 //SPI3
-    { SPI3  , GPIOB, GPIO_PIN_4  , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOC, GPIO_PIN_11 , GPIO_AF6_SPI3  }, 
 }; 
 
@@ -224,24 +165,20 @@ const stm32_af_pin_list_type chip_af_spi_mosi [] = {
 const stm32_af_pin_list_type chip_af_spi_nss [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_4  , GPIO_AF5_SPI1  }, 
-    { SPI1  , GPIOA, GPIO_PIN_15 , GPIO_AF5_SPI1  }, 
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_9  , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOB, GPIO_PIN_12 , GPIO_AF5_SPI2  }, 
 //SPI3
     { SPI3  , GPIOA, GPIO_PIN_4  , GPIO_AF6_SPI3  }, 
-    { SPI3  , GPIOA, GPIO_PIN_15 , GPIO_AF6_SPI3  }, 
 }; 
 
 const stm32_af_pin_list_type chip_af_spi_sck [] = {
 //SPI1
     { SPI1  , GPIOA, GPIO_PIN_5  , GPIO_AF5_SPI1  }, 
-    { SPI1  , GPIOB, GPIO_PIN_3  , GPIO_AF5_SPI1  }, 
 //SPI2
     { SPI2  , GPIOB, GPIO_PIN_10 , GPIO_AF5_SPI2  }, 
     { SPI2  , GPIOB, GPIO_PIN_13 , GPIO_AF5_SPI2  }, 
 //SPI3
-    { SPI3  , GPIOB, GPIO_PIN_3  , GPIO_AF6_SPI3  }, 
     { SPI3  , GPIOC, GPIO_PIN_10 , GPIO_AF6_SPI3  }, 
 }; 
 

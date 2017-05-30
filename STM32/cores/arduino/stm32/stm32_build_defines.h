@@ -155,6 +155,11 @@
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f051x8.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F051T8.h"
 
+#elif defined(STM32F071C8)
+  #define STM32F071xB 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f071xb.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F071C8.h"
+
 #elif defined(STM32F071CB)
   #define STM32F071xB 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f071xb.s"
@@ -460,6 +465,16 @@
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f100xe.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F100ZE.h"
 
+#elif defined(STM32F101C4)
+  #define STM32F101x6 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f101x6.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F101C4.h"
+
+#elif defined(STM32F101C6)
+  #define STM32F101x6 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f101x6.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F101C6.h"
+
 #elif defined(STM32F101C8)
   #define STM32F101xB 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f101xb.s"
@@ -469,11 +484,6 @@
   #define STM32F101xB 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f101xb.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F101CB.h"
-
-#elif defined(STM32F101C6)
-  #define STM32F101x6 1
-  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f101x6.s"
-  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F101C6.h"
 
 #elif defined(STM32F101R4)
   #define STM32F101x6 1
@@ -1635,6 +1645,81 @@
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f412zx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F412ZG.h"
 
+#elif defined(STM32F413CG)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413CG.h"
+
+#elif defined(STM32F413CH)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413CH.h"
+
+#elif defined(STM32F413MG)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413MG.h"
+
+#elif defined(STM32F413MH)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413MH.h"
+
+#elif defined(STM32F413RG)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413RG.h"
+
+#elif defined(STM32F413RH)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413RH.h"
+
+#elif defined(STM32F413VG)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413VG.h"
+
+#elif defined(STM32F413VH)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413VH.h"
+
+#elif defined(STM32F413ZG)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413ZG.h"
+
+#elif defined(STM32F413ZH)
+  #define STM32F413xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f413xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F413ZH.h"
+
+#elif defined(STM32F423CH)
+  #define STM32F423xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f423xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F423CH.h"
+
+#elif defined(STM32F423MH)
+  #define STM32F423xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f423xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F423MH.h"
+
+#elif defined(STM32F423RH)
+  #define STM32F423xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f423xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F423RH.h"
+
+#elif defined(STM32F423VH)
+  #define STM32F423xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f423xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F423VH.h"
+
+#elif defined(STM32F423ZH)
+  #define STM32F423xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f423xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F423ZH.h"
+
 #elif defined(STM32F427AG)
   #define STM32F427xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f427xx.s"
@@ -2039,6 +2124,111 @@
   #define STM32F479xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f479xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F479ZI.h"
+
+#elif defined(STM32F722IC)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722IC.h"
+
+#elif defined(STM32F722IE)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722IE.h"
+
+#elif defined(STM32F722RC)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722RC.h"
+
+#elif defined(STM32F722RE)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722RE.h"
+
+#elif defined(STM32F722VC)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722VC.h"
+
+#elif defined(STM32F722VE)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722VE.h"
+
+#elif defined(STM32F722ZC)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722ZC.h"
+
+#elif defined(STM32F722ZE)
+  #define STM32F722xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f722xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F722ZE.h"
+
+#elif defined(STM32F732IE)
+  #define STM32F732xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f732xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F732IE.h"
+
+#elif defined(STM32F732RE)
+  #define STM32F732xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f732xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F732RE.h"
+
+#elif defined(STM32F732VE)
+  #define STM32F732xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f732xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F732VE.h"
+
+#elif defined(STM32F732ZE)
+  #define STM32F732xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f732xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F732ZE.h"
+
+#elif defined(STM32F723IC)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723IC.h"
+
+#elif defined(STM32F723IE)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723IE.h"
+
+#elif defined(STM32F723VC)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723VC.h"
+
+#elif defined(STM32F723VE)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723VE.h"
+
+#elif defined(STM32F723ZC)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723ZC.h"
+
+#elif defined(STM32F723ZE)
+  #define STM32F723xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f723xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F723ZE.h"
+
+#elif defined(STM32F733IE)
+  #define STM32F733xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f733xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F733IE.h"
+
+#elif defined(STM32F733VE)
+  #define STM32F733xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f733xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F733VE.h"
+
+#elif defined(STM32F733ZE)
+  #define STM32F733xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32f733xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32F733ZE.h"
 
 #elif defined(STM32F745IE)
   #define STM32F745xx 1
@@ -2470,6 +2660,11 @@
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l041xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L041C6.h"
 
+#elif defined(STM32L041E6)
+  #define STM32L041xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l041xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L041E6.h"
+
 #elif defined(STM32L041F6)
   #define STM32L041xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l041xx.s"
@@ -2679,6 +2874,11 @@
   #define STM32L072xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l072xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L072V8.h"
+
+#elif defined(STM32L082CZ)
+  #define STM32L082xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l082xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L082CZ.h"
 
 #elif defined(STM32L082KB)
   #define STM32L082xx 1
@@ -3105,6 +3305,36 @@
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l431xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L431VC.h"
 
+#elif defined(STM32L451CC)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451CC.h"
+
+#elif defined(STM32L451CE)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451CE.h"
+
+#elif defined(STM32L451RC)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451RC.h"
+
+#elif defined(STM32L451RE)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451RE.h"
+
+#elif defined(STM32L451VC)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451VC.h"
+
+#elif defined(STM32L451VE)
+  #define STM32L451xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l451xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L451VE.h"
+
 #elif defined(STM32L471QE)
   #define STM32L471xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l471xx.s"
@@ -3159,6 +3389,51 @@
   #define STM32L442xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l442xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L442KC.h"
+
+#elif defined(STM32L452CC)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452CC.h"
+
+#elif defined(STM32L452CE)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452CE.h"
+
+#elif defined(STM32L452RC)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452RC.h"
+
+#elif defined(STM32L452RE)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452RE.h"
+
+#elif defined(STM32L452VC)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452VC.h"
+
+#elif defined(STM32L452VE)
+  #define STM32L452xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l452xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L452VE.h"
+
+#elif defined(STM32L462CE)
+  #define STM32L462xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l462xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L462CE.h"
+
+#elif defined(STM32L462RE)
+  #define STM32L462xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l462xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L462RE.h"
+
+#elif defined(STM32L462VE)
+  #define STM32L462xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l462xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L462VE.h"
 
 #elif defined(STM32L433CB)
   #define STM32L433xx 1
@@ -3334,6 +3609,81 @@
   #define STM32L486xx 1
   #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l486xx.s"
   #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L486ZG.h"
+
+#elif defined(STM32L496AE)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496AE.h"
+
+#elif defined(STM32L496AG)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496AG.h"
+
+#elif defined(STM32L496QE)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496QE.h"
+
+#elif defined(STM32L496QG)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496QG.h"
+
+#elif defined(STM32L496RE)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496RE.h"
+
+#elif defined(STM32L496RG)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496RG.h"
+
+#elif defined(STM32L496VE)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496VE.h"
+
+#elif defined(STM32L496VG)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496VG.h"
+
+#elif defined(STM32L496ZE)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496ZE.h"
+
+#elif defined(STM32L496ZG)
+  #define STM32L496xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l496xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L496ZG.h"
+
+#elif defined(STM32L4A6AG)
+  #define STM32L4A6xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l4a6xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L4A6AG.h"
+
+#elif defined(STM32L4A6QG)
+  #define STM32L4A6xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l4a6xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L4A6QG.h"
+
+#elif defined(STM32L4A6RG)
+  #define STM32L4A6xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l4a6xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L4A6RG.h"
+
+#elif defined(STM32L4A6VG)
+  #define STM32L4A6xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l4a6xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L4A6VG.h"
+
+#elif defined(STM32L4A6ZG)
+  #define STM32L4A6xx 1
+  #define CMSIS_STARTUP_ASSEMBLY "startup_stm32l4a6xx.s"
+  #define CHIP_PERIPHERAL_INCLUDE "stm32_STM32L4A6ZG.h"
 #else 
 #error UNKNOWN CHIP 
 #endif
