@@ -250,22 +250,13 @@ class load_mcu:
         
         gpio_pins = [pin for pin in self.pins if pin.startswith('P') and pin != 'PDR_ON']
         
-        source_code += '/*\n'
-        source_code += 'const stm32_port_pin_type variant_pin_list[] = {\n'
-        
-        for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
-             source_code += '  { GPIO' +  pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(2) + '},\n'
-        
-        source_code += '};\n'
-        source_code += '*/\n'
         source_code += '\n'
-        source_code += '/*\n'
-        source_code += 'enum {\n'
+        source_code += '#define VARIANT_PIN_LIST_DEFAULT \\\n'
         for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
-             source_code += '   ' + pin.ljust(4) + ',\n'
-        source_code += 'NUM_PINS,\n'
-        source_code += '};\n'
-        source_code += '*/\n'
+             source_code += '   PIN(' + pin[1] + ',' + pin[2:] + '), \\\n'
+        
+        source_code += '\n'
+        source_code += '\n'
         
         periph_source_code = "";
         
