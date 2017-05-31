@@ -45,6 +45,7 @@ void SystemClock_Config(void) {
 */
     LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
 
+    __HAL_RCC_PWR_CLK_ENABLE();
     LL_RCC_SetUSBClockSource(LL_RCC_USB_CLKSOURCE_PLL_DIV_1_5);
 /*
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB; 
