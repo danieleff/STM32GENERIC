@@ -252,8 +252,12 @@ class load_mcu:
         
         source_code += '\n'
         source_code += '#define VARIANT_PIN_LIST_DEFAULT \\\n'
+        
+        self.default_pin_list = '#define CHIP_PIN_LIST';
         for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
              source_code += '   PIN(' + pin[1] + ',' + pin[2:] + '), \\\n'
+             self.default_pin_list += ' PIN(' + pin[1] + ',' + pin[2:] + '),'
+        self.default_pin_list += '\n'
         
         source_code += '\n'
         source_code += '\n'
@@ -393,6 +397,9 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         mcu.find_remaps()
         mcu.process_pins()
         mcu.generate_source_code()
+        
+        file.write('  ' + mcu.default_pin_list)
+        
     file.write('#else \n')
     file.write('#error UNKNOWN CHIP \n')
     file.write('#endif\n')
