@@ -123,50 +123,10 @@ inline int digitalRead(__ConstPin pin) {
     return LL_GPIO_IsInputPinSet(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
 }
 
-inline void pinMode(__ConstPin pin, uint8_t mode) {
-    stm32_port_pin_type port_pin = variant_pin_list_ll_static[pin];
+extern "C" void pinModeLL(GPIO_TypeDef *port, uint32_t ll_pin, uint8_t mode);
 
-    stm32GpioClockEnable(port_pin.port);
-
-    int pinMode;
-    int outputType;
-    int pull;
-
-    switch ( mode ) {
-      case INPUT:
-          pinMode = LL_GPIO_MODE_INPUT;
-          outputType = LL_GPIO_OUTPUT_OPENDRAIN;
-          pull = LL_GPIO_PULL_DOWN;
-        break;
-
-      case INPUT_PULLUP:
-          pinMode = LL_GPIO_MODE_INPUT;
-          outputType = LL_GPIO_OUTPUT_PUSHPULL;
-          pull = LL_GPIO_PULL_UP;
-        break;
-
-      case INPUT_PULLDOWN:
-          pinMode = LL_GPIO_MODE_INPUT;
-          outputType = LL_GPIO_OUTPUT_PUSHPULL;
-          pull = LL_GPIO_PULL_DOWN;
-        break;
-
-      case OUTPUT:
-          pinMode = LL_GPIO_MODE_OUTPUT;
-          outputType = LL_GPIO_OUTPUT_PUSHPULL;
-          pull = LL_GPIO_PULL_DOWN;
-        break;
-
-      default:
-        return;
-        break;
-    }
-
-    LL_GPIO_SetPinMode(port_pin.port, port_pin.pin_mask, pinMode);
-    LL_GPIO_SetPinPull(port_pin.port, port_pin.pin_mask, pull);
-    LL_GPIO_SetPinOutputType(port_pin.port, port_pin.pin_mask, outputType);
-    LL_GPIO_SetPinSpeed(port_pin.port, port_pin.pin_mask, LL_GPIO_SPEED_FREQ_HIGH);
-
+inline static void pinMode(__ConstPin pin, uint8_t mode) {
+    pinModeLL(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask, mode);
 }
 
 #endif
