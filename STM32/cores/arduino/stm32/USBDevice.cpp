@@ -40,10 +40,10 @@ void USBDeviceClass::reenumerate() {
       volatile unsigned int i;
 
     #ifdef USB_DISC_PIN
-      pinModeConst(USB_DISC_PIN, OUTPUT);
-      digitalWriteConst(USB_DISC_PIN, HIGH);
+      pinMode(USB_DISC_PIN, OUTPUT);
+      digitalWrite(USB_DISC_PIN, HIGH);
         for(i=0;i<512;i++);
-      digitalWriteConst(USB_DISC_PIN, LOW);
+      digitalWrite(USB_DISC_PIN, LOW);
     #else
       //pinMode(USBDP_PIN, OUTPUT);
       //digitalWrite(USBDP_PIN, LOW);
@@ -51,11 +51,11 @@ void USBDeviceClass::reenumerate() {
       //digitalWrite(USBDP_PIN, HIGH);
 
 
-      pinModeConst(PA12, OUTPUT);
-      digitalWriteConst(PA12, LOW);
+      pinMode(PA12, OUTPUT);
+      digitalWrite(PA12, LOW);
       //HAL_Delay(1000);
       for(i=0;i<1512;i++){};
-      pinModeConst(PA12, INPUT);
+      pinMode(PA12, INPUT);
       //digitalWrite(PA12, HIGH);
       //HAL_Delay(1000);
       for(i=0;i<512;i++){};

@@ -29,6 +29,8 @@
 
 #include "variant.h"
 
+#include "stm32_HAL/stm32XXxx_ll_gpio.h"
+
 #define INPUT 0x0
 #define OUTPUT 0x1
 #define INPUT_PULLUP 0x2
@@ -93,53 +95,66 @@ inline int digitalRead(uint8_t pin) {
     
 }
 
+#ifdef __cplusplus
+}
+#endif
+
 
 ///////////////////////////////
 // The following functions are meant to be used with compile time constant parameters
 
-#define PIN(a, b) { GPIO##a , GPIO_PIN_##b }
-
-static const stm32_port_pin_type variant_pin_list_static[] = {
+#define PIN(a, b) { GPIO##a , LL_GPIO_PIN_##b }
+static const stm32_port_pin_type variant_pin_list_ll_static[] = {
   PIN_LIST
 };
 #undef PIN
 
-inline static void digitalWriteConst(uint8_t pin, uint8_t value) {
-    HAL_GPIO_WritePin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask, value ? GPIO_PIN_SET : GPIO_PIN_RESET);
+#ifdef __cplusplus
+
+inline void digitalWrite(__ConstPin pin, uint8_t value) {
+    if (value) {
+        LL_GPIO_SetOutputPin(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
+    } else {
+        LL_GPIO_ResetOutputPin(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
+    }
 }
 
-inline static int digitalReadConst(uint8_t pin) {
-    return HAL_GPIO_ReadPin(variant_pin_list_static[pin].port, variant_pin_list_static[pin].pin_mask);
+inline int digitalRead(__ConstPin pin) {
+    return LL_GPIO_IsInputPinSet(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
 }
-inline static void pinModeConst(uint8_t pin, uint8_t mode) {
-    stm32_port_pin_type port_pin = variant_pin_list_static[pin];
+
+inline void pinMode(__ConstPin pin, uint8_t mode) {
+    stm32_port_pin_type port_pin = variant_pin_list_ll_static[pin];
 
     stm32GpioClockEnable(port_pin.port);
 
-    GPIO_InitTypeDef init;
-
-    init.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    init.Pin = port_pin.pin_mask;
+    int pinMode;
+    int outputType;
+    int pull;
 
     switch ( mode ) {
       case INPUT:
-        init.Mode = GPIO_MODE_INPUT;
-        init.Pull =  GPIO_NOPULL;
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_OPENDRAIN;
+          pull = LL_GPIO_PULL_DOWN;
         break;
 
       case INPUT_PULLUP:
-        init.Mode = GPIO_MODE_INPUT;
-        init.Pull =  GPIO_PULLUP;
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_UP;
         break;
 
       case INPUT_PULLDOWN:
-        init.Mode = GPIO_MODE_INPUT;
-        init.Pull =  GPIO_PULLDOWN;
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_DOWN;
         break;
 
       case OUTPUT:
-        init.Mode = GPIO_MODE_OUTPUT_PP;
-        init.Pull =  GPIO_NOPULL;
+          pinMode = LL_GPIO_MODE_OUTPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_DOWN;
         break;
 
       default:
@@ -147,13 +162,14 @@ inline static void pinModeConst(uint8_t pin, uint8_t mode) {
         break;
     }
 
-    HAL_GPIO_Init(port_pin.port, &init);
+    LL_GPIO_SetPinMode(port_pin.port, port_pin.pin_mask, pinMode);
+    LL_GPIO_SetPinPull(port_pin.port, port_pin.pin_mask, pull);
+    LL_GPIO_SetPinOutputType(port_pin.port, port_pin.pin_mask, outputType);
+    LL_GPIO_SetPinSpeed(port_pin.port, port_pin.pin_mask, LL_GPIO_SPEED_FREQ_HIGH);
 
 }
 
-
-#ifdef __cplusplus
-}
 #endif
+
 
 #endif
