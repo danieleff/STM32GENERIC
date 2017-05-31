@@ -82,6 +82,7 @@
     #include "stm32f1xx_ll_fsmc.c"
     #include "stm32f1xx_ll_sdmmc.c"
     #include "stm32f1xx_ll_usb.c"
+    #include "stm32f1xx_ll_utils.c"
 #endif
 #ifdef STM32F2
     #include "stm32f2xx_hal.c"
