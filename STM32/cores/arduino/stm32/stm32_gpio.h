@@ -25,6 +25,8 @@
 
 #include "stm32_def.h"
 
+#include "stm32_pin_list.h"
+
 #include "variant.h"
 
 #define INPUT 0x0
@@ -98,7 +100,7 @@ inline int digitalRead(uint8_t pin) {
 #define PIN(a, b) { GPIO##a , GPIO_PIN_##b }
 
 static const stm32_port_pin_type variant_pin_list_static[] = {
-  VARIANT_PIN_LIST
+  PIN_LIST
 };
 #undef PIN
 

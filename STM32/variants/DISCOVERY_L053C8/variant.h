@@ -50,13 +50,5 @@
    PIN(H,0 ), \
    PIN(H,1 ),
 
-#define PIN(a, b) P ## a ## b
-
-enum {
-    VARIANT_PIN_LIST
-    NUM_PINS,
-};
-#undef PIN
-
 
 #endif

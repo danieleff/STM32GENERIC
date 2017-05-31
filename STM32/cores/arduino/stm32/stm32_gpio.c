@@ -105,11 +105,3 @@ void pinMode(uint8_t pin, uint8_t mode) {
     
 }
 
-#define PIN(a, b) { GPIO##a , GPIO_PIN_##b }
-
-const stm32_port_pin_type variant_pin_list[] = {
-  VARIANT_PIN_LIST
-};
-
-#undef PIN
-
