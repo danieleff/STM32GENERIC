@@ -67,8 +67,8 @@ def find_header(name):
                 include = define
                 break
     
-    if not include:
-        raise Exception(name)
+    #if not include:
+    #    raise Exception(name)
     
     return include
     
@@ -104,9 +104,12 @@ class load_mcu:
 
         self.mcu_pins = self.mcu.findall('stm:Pin',  ns);
 
+        self.available_pin_signals = {}
+        
         self.remaps = {}
         self.defaultremaps = {}
         self.af_functions=[]    
+        self.af_function_used=[]    
         self.pins = []
         self.peripherals = []
         self.groups = {}
@@ -131,6 +134,14 @@ class load_mcu:
             self.PCLK2_PERIPHERALS = []
         
     def find_remaps(self):
+        for pin_element in self.mcu.findall('stm:Pin',  ns):
+            for signal_element in pin_element.findall('stm:Signal',  ns):
+                pin = pin_element.attrib['Name']
+                instance_signal = signal_element.attrib['Name']
+                
+                self.available_pin_signals.setdefault(pin, []).append(instance_signal)
+        
+        
         for pin in self.remap_root.findall('stm:GPIO_Pin',  ns):
             pin_name = pin.attrib['Name']
             
@@ -139,6 +150,9 @@ class load_mcu:
             gpio_signals = pin.findall('stm:PinSignal',  ns)
             for gpio_signal in gpio_signals:
                 instance_signal = gpio_signal.attrib['Name']
+                
+                if pin_name not in self.available_pin_signals or instance_signal not in self.available_pin_signals[pin_name]:
+                    continue
                 
                 instance = instance_signal.split('_')[0]
                 if instance_signal not in self.remaps:
@@ -236,40 +250,30 @@ class load_mcu:
         
         gpio_pins = [pin for pin in self.pins if pin.startswith('P') and pin != 'PDR_ON']
         
-        source_code += '/*\n'
-        source_code += 'const stm32_port_pin_type variant_pin_list[] = {\n'
-        
-        for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
-             source_code += '  { GPIO' +  pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(2) + '},\n'
-        
-        source_code += '};\n'
-        source_code += '*/\n'
         source_code += '\n'
-        source_code += '/*\n'
-        source_code += 'enum {\n'
-        for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
-             source_code += '   ' + pin.ljust(4) + ',\n'
-        source_code += 'NUM_PINS,\n'
-        source_code += '};\n'
-        source_code += '*/\n'
+        source_code += '#define VARIANT_PIN_LIST_DEFAULT \\\n'
         
-        if len(self.af_functions) > 0:
-            source_code += 'static void AF_NO_REMAP (void) { }\n'
-            
-        for af_function in self.af_functions:
-            source_code += 'static void ' + af_function + '(void) { ' + af_function[2:] + '(); }\n'
-
+        self.default_pin_list = '#define CHIP_PIN_LIST';
+        for pin in sorted(gpio_pins, key=lambda x: (x[0:2], int(x[2:]))):
+             source_code += '   PIN(' + pin[1] + ',' + pin[2:] + '), \\\n'
+             self.default_pin_list += ' PIN(' + pin[1] + ',' + pin[2:] + '),'
+        self.default_pin_list += '\n'
+        
+        source_code += '\n'
+        source_code += '\n'
+        
+        periph_source_code = "";
         
         for periph in sorted(self.groups):
-            source_code += '\n'
-            source_code += '// --------------------' + periph + '--------------------'
-            source_code += '\n'
+            periph_source_code += '\n'
+            periph_source_code += '// --------------------' + periph + '--------------------'
+            periph_source_code += '\n'
             if 'SDIO' in periph:
-                source_code += '#define STM32_CHIP_HAS_SDIO'
-                source_code += '\n'
+                periph_source_code += '#define STM32_CHIP_HAS_SDIO'
+                periph_source_code += '\n'
             if 'I2S' in periph:
-                source_code += '#define STM32_CHIP_HAS_I2S'
-                source_code += '\n'
+                periph_source_code += '#define STM32_CHIP_HAS_I2S'
+                periph_source_code += '\n'
             
             for sig in sorted(set(self.groups[periph])):
             
@@ -279,28 +283,38 @@ class load_mcu:
                 if 'I2S' == periph and sig == 'CKIN':
                     continue
                     
-                source_code += '\n'
-                source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
+                periph_source_code += '\n'
+                periph_source_code += 'const stm32_af_pin_list_type chip_af_'+(periph + '_' + sig).lower()+' [] = {\n'
                 #print self.group_signals
                 old = False
                 for signal in sorted(set(self.group_signals[periph + '_' +sig])):
                     if old != signal.split('_')[0]:
-                        source_code += '//' + signal.split('_')[0] + '\n'
+                        periph_source_code += '//' + signal.split('_')[0] + '\n'
                     p = signal.split('_')[0]
                     for pin in sorted(set(self.remaps[signal]), key = natural_sort_key):
                         if pin in self.pins:
                             remap = self.remaps[signal][pin]
+                            self.af_function_used.append(remap)
                             
                             split = signal.split('_')
                             p = split[0]
                             
                             p = p.replace('I2S', 'SPI');
                 
-                            source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
+                            periph_source_code += '    { ' + p.ljust(6) + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ' + remap.ljust(15) + '}, \n'
                     
-                source_code += '}; \n'
+                periph_source_code += '}; \n'
         
-        source_code += '\n'
+        periph_source_code += '\n'
+        
+        if len(self.af_functions) > 0:
+            source_code += 'static void AF_NO_REMAP (void) { }\n'
+            
+        for af_function in self.af_functions:
+            if af_function in self.af_function_used:
+                source_code += 'static void ' + af_function + '(void) { ' + af_function[2:] + '(); }\n'
+        
+        source_code += periph_source_code
         
         source_code += 'const stm32_chip_adc1_channel_type chip_adc1_channel[] = {\n'
         
@@ -369,6 +383,8 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         dir = system_dir + name[:7] + "/CMSIS_Inc/"
         #filename = name.lower()
         define = find_header(name)
+        if not define:
+            continue
         
         file.write('\n');
         file.write('#elif defined(' + name + ')\n')
@@ -381,6 +397,9 @@ with open(stm32_dir + 'stm32_build_defines.h', 'w') as file:
         mcu.find_remaps()
         mcu.process_pins()
         mcu.generate_source_code()
+        
+        file.write('  ' + mcu.default_pin_list)
+        
     file.write('#else \n')
     file.write('#error UNKNOWN CHIP \n')
     file.write('#endif\n')

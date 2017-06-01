@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f7xx_hal_cec.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    01-July-2016
+  * @version V1.2.2
+  * @date    14-April-2017
   * @brief   CEC HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the High Definition Multimedia Interface 
@@ -49,7 +49,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -88,6 +88,7 @@
   * @{
   */
 #ifdef HAL_CEC_MODULE_ENABLED
+#if defined (CEC)
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -655,7 +656,8 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec)
 
 /**
   * @}
-  */  
+  */
+#endif /* CEC */
 #endif /* HAL_CEC_MODULE_ENABLED */
 /**
   * @}

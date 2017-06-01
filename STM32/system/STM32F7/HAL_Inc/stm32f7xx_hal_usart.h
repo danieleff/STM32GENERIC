@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32f7xx_hal_usart.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    01-July-2016
+  * @version V1.2.2
+  * @date    14-April-2017
   * @brief   Header file of USART HAL module.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -141,13 +141,13 @@ typedef struct
 
   uint16_t                      TxXferSize;       /*!< USART Tx Transfer size              */
 
-  uint16_t                      TxXferCount;      /*!< USART Tx Transfer Counter           */
+  __IO uint16_t                 TxXferCount;      /*!< USART Tx Transfer Counter           */
 
   uint8_t                       *pRxBuffPtr;      /*!< Pointer to USART Rx transfer Buffer */
 
   uint16_t                      RxXferSize;       /*!< USART Rx Transfer size              */
 
-  uint16_t                      RxXferCount;      /*!< USART Rx Transfer Counter           */
+  __IO uint16_t                 RxXferCount;      /*!< USART Rx Transfer Counter           */
 
   uint16_t                      Mask;             /*!< USART Rx RDR register mask          */
 

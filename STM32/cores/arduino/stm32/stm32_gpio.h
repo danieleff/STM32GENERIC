@@ -25,7 +25,11 @@
 
 #include "stm32_def.h"
 
+#include "stm32_pin_list.h"
+
 #include "variant.h"
+
+#include "stm32_HAL/stm32XXxx_ll_gpio.h"
 
 #define INPUT 0x0
 #define OUTPUT 0x1
@@ -94,5 +98,38 @@ inline int digitalRead(uint8_t pin) {
 #ifdef __cplusplus
 }
 #endif
+
+
+///////////////////////////////
+// The following functions are meant to be used with compile time constant parameters
+
+#define PIN(a, b) { GPIO##a , LL_GPIO_PIN_##b }
+static const stm32_port_pin_type variant_pin_list_ll_static[] = {
+  PIN_LIST
+};
+#undef PIN
+
+#ifdef __cplusplus
+
+inline void digitalWrite(__ConstPin pin, uint8_t value) {
+    if (value) {
+        LL_GPIO_SetOutputPin(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
+    } else {
+        LL_GPIO_ResetOutputPin(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
+    }
+}
+
+inline int digitalRead(__ConstPin pin) {
+    return LL_GPIO_IsInputPinSet(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask);
+}
+
+extern "C" void pinModeLL(GPIO_TypeDef *port, uint32_t ll_pin, uint8_t mode);
+
+inline static void pinMode(__ConstPin pin, uint8_t mode) {
+    pinModeLL(variant_pin_list_ll_static[pin].port, variant_pin_list_ll_static[pin].pin_mask, mode);
+}
+
+#endif
+
 
 #endif

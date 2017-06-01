@@ -63,6 +63,7 @@
 #include "usbd_desc.h"
 #include "usbd_ctlreq.h"
 
+void Error_Handler();
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
@@ -523,8 +524,7 @@ static uint8_t  USBD_CDC_Init (USBD_HandleTypeDef *pdev,
       pdev->pClassData = &staticMemory;
       staticMemoryUsed = 1;
   } else {
-      // On the rare ocasion when you want to use CDC on both FS and HS USB
-      pdev->pClassData = malloc(sizeof(USBD_CDC_HandleTypeDef));
+      Error_Handler(); // No memory
   }
 
   if(pdev->pClassData == NULL)
@@ -595,7 +595,7 @@ static uint8_t  USBD_CDC_DeInit (USBD_HandleTypeDef *pdev,
     ((USBD_CDC_ItfTypeDef *)pdev->pUserData)->DeInit();
 
     if (pdev->pClassData != &staticMemory) {
-        free(pdev->pClassData);
+        Error_Handler(); // No memory
     } else {
         staticMemoryUsed = 0;
     }

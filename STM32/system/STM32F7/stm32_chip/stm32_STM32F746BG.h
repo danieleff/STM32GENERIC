@@ -3,352 +3,178 @@
 //MCU  xml: STM32F746B(E-G)Tx.xml
 //GPIO remap/alternate function xml: GPIO-STM32F746_gpio_v1_0_Modes.xml
 
-/*
-const stm32_port_pin_type variant_pin_list[] = {
-  { GPIOA, GPIO_PIN_0 },
-  { GPIOA, GPIO_PIN_1 },
-  { GPIOA, GPIO_PIN_2 },
-  { GPIOA, GPIO_PIN_3 },
-  { GPIOA, GPIO_PIN_4 },
-  { GPIOA, GPIO_PIN_5 },
-  { GPIOA, GPIO_PIN_6 },
-  { GPIOA, GPIO_PIN_7 },
-  { GPIOA, GPIO_PIN_8 },
-  { GPIOA, GPIO_PIN_9 },
-  { GPIOA, GPIO_PIN_10},
-  { GPIOA, GPIO_PIN_11},
-  { GPIOA, GPIO_PIN_12},
-  { GPIOA, GPIO_PIN_13},
-  { GPIOA, GPIO_PIN_14},
-  { GPIOA, GPIO_PIN_15},
-  { GPIOB, GPIO_PIN_0 },
-  { GPIOB, GPIO_PIN_1 },
-  { GPIOB, GPIO_PIN_2 },
-  { GPIOB, GPIO_PIN_3 },
-  { GPIOB, GPIO_PIN_4 },
-  { GPIOB, GPIO_PIN_5 },
-  { GPIOB, GPIO_PIN_6 },
-  { GPIOB, GPIO_PIN_7 },
-  { GPIOB, GPIO_PIN_8 },
-  { GPIOB, GPIO_PIN_9 },
-  { GPIOB, GPIO_PIN_10},
-  { GPIOB, GPIO_PIN_11},
-  { GPIOB, GPIO_PIN_12},
-  { GPIOB, GPIO_PIN_13},
-  { GPIOB, GPIO_PIN_14},
-  { GPIOB, GPIO_PIN_15},
-  { GPIOC, GPIO_PIN_0 },
-  { GPIOC, GPIO_PIN_1 },
-  { GPIOC, GPIO_PIN_2 },
-  { GPIOC, GPIO_PIN_3 },
-  { GPIOC, GPIO_PIN_4 },
-  { GPIOC, GPIO_PIN_5 },
-  { GPIOC, GPIO_PIN_6 },
-  { GPIOC, GPIO_PIN_7 },
-  { GPIOC, GPIO_PIN_8 },
-  { GPIOC, GPIO_PIN_9 },
-  { GPIOC, GPIO_PIN_10},
-  { GPIOC, GPIO_PIN_11},
-  { GPIOC, GPIO_PIN_12},
-  { GPIOC, GPIO_PIN_13},
-  { GPIOC, GPIO_PIN_14},
-  { GPIOC, GPIO_PIN_15},
-  { GPIOD, GPIO_PIN_0 },
-  { GPIOD, GPIO_PIN_1 },
-  { GPIOD, GPIO_PIN_2 },
-  { GPIOD, GPIO_PIN_3 },
-  { GPIOD, GPIO_PIN_4 },
-  { GPIOD, GPIO_PIN_5 },
-  { GPIOD, GPIO_PIN_6 },
-  { GPIOD, GPIO_PIN_7 },
-  { GPIOD, GPIO_PIN_8 },
-  { GPIOD, GPIO_PIN_9 },
-  { GPIOD, GPIO_PIN_10},
-  { GPIOD, GPIO_PIN_11},
-  { GPIOD, GPIO_PIN_12},
-  { GPIOD, GPIO_PIN_13},
-  { GPIOD, GPIO_PIN_14},
-  { GPIOD, GPIO_PIN_15},
-  { GPIOE, GPIO_PIN_0 },
-  { GPIOE, GPIO_PIN_1 },
-  { GPIOE, GPIO_PIN_2 },
-  { GPIOE, GPIO_PIN_3 },
-  { GPIOE, GPIO_PIN_4 },
-  { GPIOE, GPIO_PIN_5 },
-  { GPIOE, GPIO_PIN_6 },
-  { GPIOE, GPIO_PIN_7 },
-  { GPIOE, GPIO_PIN_8 },
-  { GPIOE, GPIO_PIN_9 },
-  { GPIOE, GPIO_PIN_10},
-  { GPIOE, GPIO_PIN_11},
-  { GPIOE, GPIO_PIN_12},
-  { GPIOE, GPIO_PIN_13},
-  { GPIOE, GPIO_PIN_14},
-  { GPIOE, GPIO_PIN_15},
-  { GPIOF, GPIO_PIN_0 },
-  { GPIOF, GPIO_PIN_1 },
-  { GPIOF, GPIO_PIN_2 },
-  { GPIOF, GPIO_PIN_3 },
-  { GPIOF, GPIO_PIN_4 },
-  { GPIOF, GPIO_PIN_5 },
-  { GPIOF, GPIO_PIN_6 },
-  { GPIOF, GPIO_PIN_7 },
-  { GPIOF, GPIO_PIN_8 },
-  { GPIOF, GPIO_PIN_9 },
-  { GPIOF, GPIO_PIN_10},
-  { GPIOF, GPIO_PIN_11},
-  { GPIOF, GPIO_PIN_12},
-  { GPIOF, GPIO_PIN_13},
-  { GPIOF, GPIO_PIN_14},
-  { GPIOF, GPIO_PIN_15},
-  { GPIOG, GPIO_PIN_0 },
-  { GPIOG, GPIO_PIN_1 },
-  { GPIOG, GPIO_PIN_2 },
-  { GPIOG, GPIO_PIN_3 },
-  { GPIOG, GPIO_PIN_4 },
-  { GPIOG, GPIO_PIN_5 },
-  { GPIOG, GPIO_PIN_6 },
-  { GPIOG, GPIO_PIN_7 },
-  { GPIOG, GPIO_PIN_8 },
-  { GPIOG, GPIO_PIN_9 },
-  { GPIOG, GPIO_PIN_10},
-  { GPIOG, GPIO_PIN_11},
-  { GPIOG, GPIO_PIN_12},
-  { GPIOG, GPIO_PIN_13},
-  { GPIOG, GPIO_PIN_14},
-  { GPIOG, GPIO_PIN_15},
-  { GPIOH, GPIO_PIN_0 },
-  { GPIOH, GPIO_PIN_1 },
-  { GPIOH, GPIO_PIN_2 },
-  { GPIOH, GPIO_PIN_3 },
-  { GPIOH, GPIO_PIN_4 },
-  { GPIOH, GPIO_PIN_5 },
-  { GPIOH, GPIO_PIN_6 },
-  { GPIOH, GPIO_PIN_7 },
-  { GPIOH, GPIO_PIN_8 },
-  { GPIOH, GPIO_PIN_9 },
-  { GPIOH, GPIO_PIN_10},
-  { GPIOH, GPIO_PIN_11},
-  { GPIOH, GPIO_PIN_12},
-  { GPIOH, GPIO_PIN_13},
-  { GPIOH, GPIO_PIN_14},
-  { GPIOH, GPIO_PIN_15},
-  { GPIOI, GPIO_PIN_0 },
-  { GPIOI, GPIO_PIN_1 },
-  { GPIOI, GPIO_PIN_2 },
-  { GPIOI, GPIO_PIN_3 },
-  { GPIOI, GPIO_PIN_4 },
-  { GPIOI, GPIO_PIN_5 },
-  { GPIOI, GPIO_PIN_6 },
-  { GPIOI, GPIO_PIN_7 },
-  { GPIOI, GPIO_PIN_8 },
-  { GPIOI, GPIO_PIN_9 },
-  { GPIOI, GPIO_PIN_10},
-  { GPIOI, GPIO_PIN_11},
-  { GPIOI, GPIO_PIN_12},
-  { GPIOI, GPIO_PIN_13},
-  { GPIOI, GPIO_PIN_14},
-  { GPIOI, GPIO_PIN_15},
-  { GPIOJ, GPIO_PIN_0 },
-  { GPIOJ, GPIO_PIN_1 },
-  { GPIOJ, GPIO_PIN_2 },
-  { GPIOJ, GPIO_PIN_3 },
-  { GPIOJ, GPIO_PIN_4 },
-  { GPIOJ, GPIO_PIN_5 },
-  { GPIOJ, GPIO_PIN_6 },
-  { GPIOJ, GPIO_PIN_7 },
-  { GPIOJ, GPIO_PIN_8 },
-  { GPIOJ, GPIO_PIN_9 },
-  { GPIOJ, GPIO_PIN_10},
-  { GPIOJ, GPIO_PIN_11},
-  { GPIOJ, GPIO_PIN_12},
-  { GPIOJ, GPIO_PIN_13},
-  { GPIOJ, GPIO_PIN_14},
-  { GPIOJ, GPIO_PIN_15},
-  { GPIOK, GPIO_PIN_0 },
-  { GPIOK, GPIO_PIN_1 },
-  { GPIOK, GPIO_PIN_2 },
-  { GPIOK, GPIO_PIN_3 },
-  { GPIOK, GPIO_PIN_4 },
-  { GPIOK, GPIO_PIN_5 },
-  { GPIOK, GPIO_PIN_6 },
-  { GPIOK, GPIO_PIN_7 },
-};
-*/
 
-/*
-enum {
-   PA0 ,
-   PA1 ,
-   PA2 ,
-   PA3 ,
-   PA4 ,
-   PA5 ,
-   PA6 ,
-   PA7 ,
-   PA8 ,
-   PA9 ,
-   PA10,
-   PA11,
-   PA12,
-   PA13,
-   PA14,
-   PA15,
-   PB0 ,
-   PB1 ,
-   PB2 ,
-   PB3 ,
-   PB4 ,
-   PB5 ,
-   PB6 ,
-   PB7 ,
-   PB8 ,
-   PB9 ,
-   PB10,
-   PB11,
-   PB12,
-   PB13,
-   PB14,
-   PB15,
-   PC0 ,
-   PC1 ,
-   PC2 ,
-   PC3 ,
-   PC4 ,
-   PC5 ,
-   PC6 ,
-   PC7 ,
-   PC8 ,
-   PC9 ,
-   PC10,
-   PC11,
-   PC12,
-   PC13,
-   PC14,
-   PC15,
-   PD0 ,
-   PD1 ,
-   PD2 ,
-   PD3 ,
-   PD4 ,
-   PD5 ,
-   PD6 ,
-   PD7 ,
-   PD8 ,
-   PD9 ,
-   PD10,
-   PD11,
-   PD12,
-   PD13,
-   PD14,
-   PD15,
-   PE0 ,
-   PE1 ,
-   PE2 ,
-   PE3 ,
-   PE4 ,
-   PE5 ,
-   PE6 ,
-   PE7 ,
-   PE8 ,
-   PE9 ,
-   PE10,
-   PE11,
-   PE12,
-   PE13,
-   PE14,
-   PE15,
-   PF0 ,
-   PF1 ,
-   PF2 ,
-   PF3 ,
-   PF4 ,
-   PF5 ,
-   PF6 ,
-   PF7 ,
-   PF8 ,
-   PF9 ,
-   PF10,
-   PF11,
-   PF12,
-   PF13,
-   PF14,
-   PF15,
-   PG0 ,
-   PG1 ,
-   PG2 ,
-   PG3 ,
-   PG4 ,
-   PG5 ,
-   PG6 ,
-   PG7 ,
-   PG8 ,
-   PG9 ,
-   PG10,
-   PG11,
-   PG12,
-   PG13,
-   PG14,
-   PG15,
-   PH0 ,
-   PH1 ,
-   PH2 ,
-   PH3 ,
-   PH4 ,
-   PH5 ,
-   PH6 ,
-   PH7 ,
-   PH8 ,
-   PH9 ,
-   PH10,
-   PH11,
-   PH12,
-   PH13,
-   PH14,
-   PH15,
-   PI0 ,
-   PI1 ,
-   PI2 ,
-   PI3 ,
-   PI4 ,
-   PI5 ,
-   PI6 ,
-   PI7 ,
-   PI8 ,
-   PI9 ,
-   PI10,
-   PI11,
-   PI12,
-   PI13,
-   PI14,
-   PI15,
-   PJ0 ,
-   PJ1 ,
-   PJ2 ,
-   PJ3 ,
-   PJ4 ,
-   PJ5 ,
-   PJ6 ,
-   PJ7 ,
-   PJ8 ,
-   PJ9 ,
-   PJ10,
-   PJ11,
-   PJ12,
-   PJ13,
-   PJ14,
-   PJ15,
-   PK0 ,
-   PK1 ,
-   PK2 ,
-   PK3 ,
-   PK4 ,
-   PK5 ,
-   PK6 ,
-   PK7 ,
-NUM_PINS,
-};
-*/
+#define VARIANT_PIN_LIST_DEFAULT \
+   PIN(A,0), \
+   PIN(A,1), \
+   PIN(A,2), \
+   PIN(A,3), \
+   PIN(A,4), \
+   PIN(A,5), \
+   PIN(A,6), \
+   PIN(A,7), \
+   PIN(A,8), \
+   PIN(A,9), \
+   PIN(A,10), \
+   PIN(A,11), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(A,15), \
+   PIN(B,0), \
+   PIN(B,1), \
+   PIN(B,2), \
+   PIN(B,3), \
+   PIN(B,4), \
+   PIN(B,5), \
+   PIN(B,6), \
+   PIN(B,7), \
+   PIN(B,8), \
+   PIN(B,9), \
+   PIN(B,10), \
+   PIN(B,11), \
+   PIN(B,12), \
+   PIN(B,13), \
+   PIN(B,14), \
+   PIN(B,15), \
+   PIN(C,0), \
+   PIN(C,1), \
+   PIN(C,2), \
+   PIN(C,3), \
+   PIN(C,4), \
+   PIN(C,5), \
+   PIN(C,6), \
+   PIN(C,7), \
+   PIN(C,8), \
+   PIN(C,9), \
+   PIN(C,10), \
+   PIN(C,11), \
+   PIN(C,12), \
+   PIN(C,13), \
+   PIN(C,14), \
+   PIN(C,15), \
+   PIN(D,0), \
+   PIN(D,1), \
+   PIN(D,2), \
+   PIN(D,3), \
+   PIN(D,4), \
+   PIN(D,5), \
+   PIN(D,6), \
+   PIN(D,7), \
+   PIN(D,8), \
+   PIN(D,9), \
+   PIN(D,10), \
+   PIN(D,11), \
+   PIN(D,12), \
+   PIN(D,13), \
+   PIN(D,14), \
+   PIN(D,15), \
+   PIN(E,0), \
+   PIN(E,1), \
+   PIN(E,2), \
+   PIN(E,3), \
+   PIN(E,4), \
+   PIN(E,5), \
+   PIN(E,6), \
+   PIN(E,7), \
+   PIN(E,8), \
+   PIN(E,9), \
+   PIN(E,10), \
+   PIN(E,11), \
+   PIN(E,12), \
+   PIN(E,13), \
+   PIN(E,14), \
+   PIN(E,15), \
+   PIN(F,0), \
+   PIN(F,1), \
+   PIN(F,2), \
+   PIN(F,3), \
+   PIN(F,4), \
+   PIN(F,5), \
+   PIN(F,6), \
+   PIN(F,7), \
+   PIN(F,8), \
+   PIN(F,9), \
+   PIN(F,10), \
+   PIN(F,11), \
+   PIN(F,12), \
+   PIN(F,13), \
+   PIN(F,14), \
+   PIN(F,15), \
+   PIN(G,0), \
+   PIN(G,1), \
+   PIN(G,2), \
+   PIN(G,3), \
+   PIN(G,4), \
+   PIN(G,5), \
+   PIN(G,6), \
+   PIN(G,7), \
+   PIN(G,8), \
+   PIN(G,9), \
+   PIN(G,10), \
+   PIN(G,11), \
+   PIN(G,12), \
+   PIN(G,13), \
+   PIN(G,14), \
+   PIN(G,15), \
+   PIN(H,0), \
+   PIN(H,1), \
+   PIN(H,2), \
+   PIN(H,3), \
+   PIN(H,4), \
+   PIN(H,5), \
+   PIN(H,6), \
+   PIN(H,7), \
+   PIN(H,8), \
+   PIN(H,9), \
+   PIN(H,10), \
+   PIN(H,11), \
+   PIN(H,12), \
+   PIN(H,13), \
+   PIN(H,14), \
+   PIN(H,15), \
+   PIN(I,0), \
+   PIN(I,1), \
+   PIN(I,2), \
+   PIN(I,3), \
+   PIN(I,4), \
+   PIN(I,5), \
+   PIN(I,6), \
+   PIN(I,7), \
+   PIN(I,8), \
+   PIN(I,9), \
+   PIN(I,10), \
+   PIN(I,11), \
+   PIN(I,12), \
+   PIN(I,13), \
+   PIN(I,14), \
+   PIN(I,15), \
+   PIN(J,0), \
+   PIN(J,1), \
+   PIN(J,2), \
+   PIN(J,3), \
+   PIN(J,4), \
+   PIN(J,5), \
+   PIN(J,6), \
+   PIN(J,7), \
+   PIN(J,8), \
+   PIN(J,9), \
+   PIN(J,10), \
+   PIN(J,11), \
+   PIN(J,12), \
+   PIN(J,13), \
+   PIN(J,14), \
+   PIN(J,15), \
+   PIN(K,0), \
+   PIN(K,1), \
+   PIN(K,2), \
+   PIN(K,3), \
+   PIN(K,4), \
+   PIN(K,5), \
+   PIN(K,6), \
+   PIN(K,7), \
+
+
 
 // --------------------ADC--------------------
 

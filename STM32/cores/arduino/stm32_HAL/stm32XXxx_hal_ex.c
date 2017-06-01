@@ -1,5 +1,8 @@
 #include "stm32_build_defines.h"
 
+// Ignore HAL errors when compiling with -Werror
+#pragma GCC diagnostic ignored "-Wsign-compare"
+
 #ifdef STM32F0
     #include "stm32f0xx_hal_adc_ex.c"
     #include "stm32f0xx_hal_cortex.c"
@@ -136,6 +139,7 @@
     #include "stm32l4xx_hal_cryp_ex.c"
     #include "stm32l4xx_hal_dac_ex.c"
     #include "stm32l4xx_hal_flash_ex.c"
+    #include "stm32l4xx_hal_hash_ex.c"
     #include "stm32l4xx_hal_i2c_ex.c"
     #include "stm32l4xx_hal_opamp_ex.c"
     #include "stm32l4xx_hal_pcd_ex.c"

@@ -3,184 +3,91 @@
 //MCU  xml: STM32F105V(8-B-C)Tx.xml
 //GPIO remap/alternate function xml: GPIO-STM32F107_gpio_v1_0_Modes.xml
 
-/*
-const stm32_port_pin_type variant_pin_list[] = {
-  { GPIOA, GPIO_PIN_0 },
-  { GPIOA, GPIO_PIN_1 },
-  { GPIOA, GPIO_PIN_2 },
-  { GPIOA, GPIO_PIN_3 },
-  { GPIOA, GPIO_PIN_4 },
-  { GPIOA, GPIO_PIN_5 },
-  { GPIOA, GPIO_PIN_6 },
-  { GPIOA, GPIO_PIN_7 },
-  { GPIOA, GPIO_PIN_8 },
-  { GPIOA, GPIO_PIN_9 },
-  { GPIOA, GPIO_PIN_10},
-  { GPIOA, GPIO_PIN_11},
-  { GPIOA, GPIO_PIN_12},
-  { GPIOA, GPIO_PIN_13},
-  { GPIOA, GPIO_PIN_14},
-  { GPIOA, GPIO_PIN_15},
-  { GPIOB, GPIO_PIN_0 },
-  { GPIOB, GPIO_PIN_1 },
-  { GPIOB, GPIO_PIN_2 },
-  { GPIOB, GPIO_PIN_3 },
-  { GPIOB, GPIO_PIN_4 },
-  { GPIOB, GPIO_PIN_5 },
-  { GPIOB, GPIO_PIN_6 },
-  { GPIOB, GPIO_PIN_7 },
-  { GPIOB, GPIO_PIN_8 },
-  { GPIOB, GPIO_PIN_9 },
-  { GPIOB, GPIO_PIN_10},
-  { GPIOB, GPIO_PIN_11},
-  { GPIOB, GPIO_PIN_12},
-  { GPIOB, GPIO_PIN_13},
-  { GPIOB, GPIO_PIN_14},
-  { GPIOB, GPIO_PIN_15},
-  { GPIOC, GPIO_PIN_0 },
-  { GPIOC, GPIO_PIN_1 },
-  { GPIOC, GPIO_PIN_2 },
-  { GPIOC, GPIO_PIN_3 },
-  { GPIOC, GPIO_PIN_4 },
-  { GPIOC, GPIO_PIN_5 },
-  { GPIOC, GPIO_PIN_6 },
-  { GPIOC, GPIO_PIN_7 },
-  { GPIOC, GPIO_PIN_8 },
-  { GPIOC, GPIO_PIN_9 },
-  { GPIOC, GPIO_PIN_10},
-  { GPIOC, GPIO_PIN_11},
-  { GPIOC, GPIO_PIN_12},
-  { GPIOC, GPIO_PIN_13},
-  { GPIOC, GPIO_PIN_14},
-  { GPIOC, GPIO_PIN_15},
-  { GPIOD, GPIO_PIN_0 },
-  { GPIOD, GPIO_PIN_1 },
-  { GPIOD, GPIO_PIN_2 },
-  { GPIOD, GPIO_PIN_3 },
-  { GPIOD, GPIO_PIN_4 },
-  { GPIOD, GPIO_PIN_5 },
-  { GPIOD, GPIO_PIN_6 },
-  { GPIOD, GPIO_PIN_7 },
-  { GPIOD, GPIO_PIN_8 },
-  { GPIOD, GPIO_PIN_9 },
-  { GPIOD, GPIO_PIN_10},
-  { GPIOD, GPIO_PIN_11},
-  { GPIOD, GPIO_PIN_12},
-  { GPIOD, GPIO_PIN_13},
-  { GPIOD, GPIO_PIN_14},
-  { GPIOD, GPIO_PIN_15},
-  { GPIOE, GPIO_PIN_0 },
-  { GPIOE, GPIO_PIN_1 },
-  { GPIOE, GPIO_PIN_2 },
-  { GPIOE, GPIO_PIN_3 },
-  { GPIOE, GPIO_PIN_4 },
-  { GPIOE, GPIO_PIN_5 },
-  { GPIOE, GPIO_PIN_6 },
-  { GPIOE, GPIO_PIN_7 },
-  { GPIOE, GPIO_PIN_8 },
-  { GPIOE, GPIO_PIN_9 },
-  { GPIOE, GPIO_PIN_10},
-  { GPIOE, GPIO_PIN_11},
-  { GPIOE, GPIO_PIN_12},
-  { GPIOE, GPIO_PIN_13},
-  { GPIOE, GPIO_PIN_14},
-  { GPIOE, GPIO_PIN_15},
-};
-*/
 
-/*
-enum {
-   PA0 ,
-   PA1 ,
-   PA2 ,
-   PA3 ,
-   PA4 ,
-   PA5 ,
-   PA6 ,
-   PA7 ,
-   PA8 ,
-   PA9 ,
-   PA10,
-   PA11,
-   PA12,
-   PA13,
-   PA14,
-   PA15,
-   PB0 ,
-   PB1 ,
-   PB2 ,
-   PB3 ,
-   PB4 ,
-   PB5 ,
-   PB6 ,
-   PB7 ,
-   PB8 ,
-   PB9 ,
-   PB10,
-   PB11,
-   PB12,
-   PB13,
-   PB14,
-   PB15,
-   PC0 ,
-   PC1 ,
-   PC2 ,
-   PC3 ,
-   PC4 ,
-   PC5 ,
-   PC6 ,
-   PC7 ,
-   PC8 ,
-   PC9 ,
-   PC10,
-   PC11,
-   PC12,
-   PC13,
-   PC14,
-   PC15,
-   PD0 ,
-   PD1 ,
-   PD2 ,
-   PD3 ,
-   PD4 ,
-   PD5 ,
-   PD6 ,
-   PD7 ,
-   PD8 ,
-   PD9 ,
-   PD10,
-   PD11,
-   PD12,
-   PD13,
-   PD14,
-   PD15,
-   PE0 ,
-   PE1 ,
-   PE2 ,
-   PE3 ,
-   PE4 ,
-   PE5 ,
-   PE6 ,
-   PE7 ,
-   PE8 ,
-   PE9 ,
-   PE10,
-   PE11,
-   PE12,
-   PE13,
-   PE14,
-   PE15,
-NUM_PINS,
-};
-*/
+#define VARIANT_PIN_LIST_DEFAULT \
+   PIN(A,0), \
+   PIN(A,1), \
+   PIN(A,2), \
+   PIN(A,3), \
+   PIN(A,4), \
+   PIN(A,5), \
+   PIN(A,6), \
+   PIN(A,7), \
+   PIN(A,8), \
+   PIN(A,9), \
+   PIN(A,10), \
+   PIN(A,11), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(A,15), \
+   PIN(B,0), \
+   PIN(B,1), \
+   PIN(B,2), \
+   PIN(B,3), \
+   PIN(B,4), \
+   PIN(B,5), \
+   PIN(B,6), \
+   PIN(B,7), \
+   PIN(B,8), \
+   PIN(B,9), \
+   PIN(B,10), \
+   PIN(B,11), \
+   PIN(B,12), \
+   PIN(B,13), \
+   PIN(B,14), \
+   PIN(B,15), \
+   PIN(C,0), \
+   PIN(C,1), \
+   PIN(C,2), \
+   PIN(C,3), \
+   PIN(C,4), \
+   PIN(C,5), \
+   PIN(C,6), \
+   PIN(C,7), \
+   PIN(C,8), \
+   PIN(C,9), \
+   PIN(C,10), \
+   PIN(C,11), \
+   PIN(C,12), \
+   PIN(C,13), \
+   PIN(C,14), \
+   PIN(C,15), \
+   PIN(D,0), \
+   PIN(D,1), \
+   PIN(D,2), \
+   PIN(D,3), \
+   PIN(D,4), \
+   PIN(D,5), \
+   PIN(D,6), \
+   PIN(D,7), \
+   PIN(D,8), \
+   PIN(D,9), \
+   PIN(D,10), \
+   PIN(D,11), \
+   PIN(D,12), \
+   PIN(D,13), \
+   PIN(D,14), \
+   PIN(D,15), \
+   PIN(E,0), \
+   PIN(E,1), \
+   PIN(E,2), \
+   PIN(E,3), \
+   PIN(E,4), \
+   PIN(E,5), \
+   PIN(E,6), \
+   PIN(E,7), \
+   PIN(E,8), \
+   PIN(E,9), \
+   PIN(E,10), \
+   PIN(E,11), \
+   PIN(E,12), \
+   PIN(E,13), \
+   PIN(E,14), \
+   PIN(E,15), \
+
+
 static void AF_NO_REMAP (void) { }
-static void AF__HAL_AFIO_REMAP_CAN1_2(void) { __HAL_AFIO_REMAP_CAN1_2(); }
-static void AF__HAL_AFIO_REMAP_CAN1_3(void) { __HAL_AFIO_REMAP_CAN1_3(); }
-static void AF__HAL_AFIO_REMAP_CAN1_DISABLE(void) { __HAL_AFIO_REMAP_CAN1_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_CAN2_DISABLE(void) { __HAL_AFIO_REMAP_CAN2_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_CAN2_ENABLE(void) { __HAL_AFIO_REMAP_CAN2_ENABLE(); }
-static void AF__HAL_AFIO_REMAP_ETH_DISABLE(void) { __HAL_AFIO_REMAP_ETH_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_ETH_ENABLE(void) { __HAL_AFIO_REMAP_ETH_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_I2C1_DISABLE(void) { __HAL_AFIO_REMAP_I2C1_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_I2C1_ENABLE(void) { __HAL_AFIO_REMAP_I2C1_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_I2S3_DISABLE(void) { __HAL_AFIO_REMAP_I2S3_DISABLE(); }
@@ -188,17 +95,6 @@ static void AF__HAL_AFIO_REMAP_SPI1_DISABLE(void) { __HAL_AFIO_REMAP_SPI1_DISABL
 static void AF__HAL_AFIO_REMAP_SPI1_ENABLE(void) { __HAL_AFIO_REMAP_SPI1_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_SPI3_DISABLE(void) { __HAL_AFIO_REMAP_SPI3_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_SPI3_ENABLE(void) { __HAL_AFIO_REMAP_SPI3_ENABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM1_DISABLE(void) { __HAL_AFIO_REMAP_TIM1_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM1_ENABLE(void) { __HAL_AFIO_REMAP_TIM1_ENABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM1_PARTIAL(void) { __HAL_AFIO_REMAP_TIM1_PARTIAL(); }
-static void AF__HAL_AFIO_REMAP_TIM2_DISABLE(void) { __HAL_AFIO_REMAP_TIM2_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_1(void) { __HAL_AFIO_REMAP_TIM2_PARTIAL_1(); }
-static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_2(void) { __HAL_AFIO_REMAP_TIM2_PARTIAL_2(); }
-static void AF__HAL_AFIO_REMAP_TIM3_DISABLE(void) { __HAL_AFIO_REMAP_TIM3_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM3_ENABLE(void) { __HAL_AFIO_REMAP_TIM3_ENABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM3_PARTIAL(void) { __HAL_AFIO_REMAP_TIM3_PARTIAL(); }
-static void AF__HAL_AFIO_REMAP_TIM4_DISABLE(void) { __HAL_AFIO_REMAP_TIM4_DISABLE(); }
-static void AF__HAL_AFIO_REMAP_TIM4_ENABLE(void) { __HAL_AFIO_REMAP_TIM4_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_USART1_DISABLE(void) { __HAL_AFIO_REMAP_USART1_DISABLE(); }
 static void AF__HAL_AFIO_REMAP_USART1_ENABLE(void) { __HAL_AFIO_REMAP_USART1_ENABLE(); }
 static void AF__HAL_AFIO_REMAP_USART2_DISABLE(void) { __HAL_AFIO_REMAP_USART2_DISABLE(); }

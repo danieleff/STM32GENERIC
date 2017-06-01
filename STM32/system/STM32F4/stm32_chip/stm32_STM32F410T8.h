@@ -3,62 +3,33 @@
 //MCU  xml: STM32F410T(8-B)Yx.xml
 //GPIO remap/alternate function xml: GPIO-STM32F410_gpio_v1_0_Modes.xml
 
-/*
-const stm32_port_pin_type variant_pin_list[] = {
-  { GPIOA, GPIO_PIN_0 },
-  { GPIOA, GPIO_PIN_2 },
-  { GPIOA, GPIO_PIN_3 },
-  { GPIOA, GPIO_PIN_5 },
-  { GPIOA, GPIO_PIN_8 },
-  { GPIOA, GPIO_PIN_12},
-  { GPIOA, GPIO_PIN_13},
-  { GPIOA, GPIO_PIN_14},
-  { GPIOA, GPIO_PIN_15},
-  { GPIOB, GPIO_PIN_2 },
-  { GPIOB, GPIO_PIN_3 },
-  { GPIOB, GPIO_PIN_4 },
-  { GPIOB, GPIO_PIN_5 },
-  { GPIOB, GPIO_PIN_6 },
-  { GPIOB, GPIO_PIN_7 },
-  { GPIOB, GPIO_PIN_8 },
-  { GPIOB, GPIO_PIN_10},
-  { GPIOB, GPIO_PIN_12},
-  { GPIOC, GPIO_PIN_13},
-  { GPIOC, GPIO_PIN_14},
-  { GPIOC, GPIO_PIN_15},
-  { GPIOH, GPIO_PIN_0 },
-  { GPIOH, GPIO_PIN_1 },
-};
-*/
 
-/*
-enum {
-   PA0 ,
-   PA2 ,
-   PA3 ,
-   PA5 ,
-   PA8 ,
-   PA12,
-   PA13,
-   PA14,
-   PA15,
-   PB2 ,
-   PB3 ,
-   PB4 ,
-   PB5 ,
-   PB6 ,
-   PB7 ,
-   PB8 ,
-   PB10,
-   PB12,
-   PC13,
-   PC14,
-   PC15,
-   PH0 ,
-   PH1 ,
-NUM_PINS,
-};
-*/
+#define VARIANT_PIN_LIST_DEFAULT \
+   PIN(A,0), \
+   PIN(A,2), \
+   PIN(A,3), \
+   PIN(A,5), \
+   PIN(A,8), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(A,15), \
+   PIN(B,2), \
+   PIN(B,3), \
+   PIN(B,4), \
+   PIN(B,5), \
+   PIN(B,6), \
+   PIN(B,7), \
+   PIN(B,8), \
+   PIN(B,10), \
+   PIN(B,12), \
+   PIN(C,13), \
+   PIN(C,14), \
+   PIN(C,15), \
+   PIN(H,0), \
+   PIN(H,1), \
+
+
 
 // --------------------ADC--------------------
 

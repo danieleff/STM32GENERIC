@@ -3,50 +3,27 @@
 //MCU  xml: STM32F070F6Px.xml
 //GPIO remap/alternate function xml: GPIO-STM32F042_gpio_v1_0_Modes.xml
 
-/*
-const stm32_port_pin_type variant_pin_list[] = {
-  { GPIOA, GPIO_PIN_0 },
-  { GPIOA, GPIO_PIN_1 },
-  { GPIOA, GPIO_PIN_2 },
-  { GPIOA, GPIO_PIN_3 },
-  { GPIOA, GPIO_PIN_4 },
-  { GPIOA, GPIO_PIN_5 },
-  { GPIOA, GPIO_PIN_6 },
-  { GPIOA, GPIO_PIN_7 },
-  { GPIOA, GPIO_PIN_9 },
-  { GPIOA, GPIO_PIN_10},
-  { GPIOA, GPIO_PIN_11},
-  { GPIOA, GPIO_PIN_12},
-  { GPIOA, GPIO_PIN_13},
-  { GPIOA, GPIO_PIN_14},
-  { GPIOB, GPIO_PIN_1 },
-  { GPIOF, GPIO_PIN_0 },
-  { GPIOF, GPIO_PIN_1 },
-};
-*/
 
-/*
-enum {
-   PA0 ,
-   PA1 ,
-   PA2 ,
-   PA3 ,
-   PA4 ,
-   PA5 ,
-   PA6 ,
-   PA7 ,
-   PA9 ,
-   PA10,
-   PA11,
-   PA12,
-   PA13,
-   PA14,
-   PB1 ,
-   PF0 ,
-   PF1 ,
-NUM_PINS,
-};
-*/
+#define VARIANT_PIN_LIST_DEFAULT \
+   PIN(A,0), \
+   PIN(A,1), \
+   PIN(A,2), \
+   PIN(A,3), \
+   PIN(A,4), \
+   PIN(A,5), \
+   PIN(A,6), \
+   PIN(A,7), \
+   PIN(A,9), \
+   PIN(A,10), \
+   PIN(A,11), \
+   PIN(A,12), \
+   PIN(A,13), \
+   PIN(A,14), \
+   PIN(B,1), \
+   PIN(F,0), \
+   PIN(F,1), \
+
+
 
 // --------------------ADC--------------------
 
@@ -56,14 +33,11 @@ const stm32_af_pin_list_type chip_af_i2c_scl [] = {
 //I2C1
     { I2C1  , GPIOA, GPIO_PIN_9  , GPIO_AF4_I2C1  }, 
     { I2C1  , GPIOA, GPIO_PIN_11 , GPIO_AF5_I2C1  }, 
-    { I2C1  , GPIOF, GPIO_PIN_1  , GPIO_AF1_I2C1  }, 
 }; 
 
 const stm32_af_pin_list_type chip_af_i2c_sda [] = {
 //I2C1
     { I2C1  , GPIOA, GPIO_PIN_10 , GPIO_AF4_I2C1  }, 
-    { I2C1  , GPIOA, GPIO_PIN_12 , GPIO_AF5_I2C1  }, 
-    { I2C1  , GPIOF, GPIO_PIN_0  , GPIO_AF1_I2C1  }, 
 }; 
 
 // --------------------SPI--------------------

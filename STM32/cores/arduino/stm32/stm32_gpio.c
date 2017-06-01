@@ -104,3 +104,48 @@ void pinMode(uint8_t pin, uint8_t mode) {
     HAL_GPIO_Init(port_pin.port, &init);
     
 }
+
+void pinModeLL(GPIO_TypeDef *port, uint32_t ll_pin, uint8_t mode) {
+
+    stm32GpioClockEnable(port);
+
+    int pinMode;
+    int outputType;
+    int pull;
+
+    switch ( mode ) {
+      case INPUT:
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_OPENDRAIN;
+          pull = LL_GPIO_PULL_DOWN;
+        break;
+
+      case INPUT_PULLUP:
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_UP;
+        break;
+
+      case INPUT_PULLDOWN:
+          pinMode = LL_GPIO_MODE_INPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_DOWN;
+        break;
+
+      case OUTPUT:
+          pinMode = LL_GPIO_MODE_OUTPUT;
+          outputType = LL_GPIO_OUTPUT_PUSHPULL;
+          pull = LL_GPIO_PULL_DOWN;
+        break;
+
+      default:
+        return;
+        break;
+    }
+
+    LL_GPIO_SetPinMode(port, ll_pin, pinMode);
+    LL_GPIO_SetPinPull(port, ll_pin, pull);
+    LL_GPIO_SetPinOutputType(port, ll_pin, outputType);
+    LL_GPIO_SetPinSpeed(port, ll_pin, LL_GPIO_SPEED_FREQ_HIGH);
+
+}
