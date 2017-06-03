@@ -27,48 +27,42 @@ void setup()
   tft.begin((uint16_t *)buffer);
   tft.fillScreen( LTDC_BLACK );
 
-  tft.setRotation(1); // horitzontal wide screen
+  //tft.setRotation(1); // horitzontal wide screen
 }
 
 #define SAMPLING_TIME_MS 1000
+
 void loop(void)
 {
   float    adcValue = 0;
-  uint32_t counts=0;
-  uint32_t endTime = millis() + SAMPLING_TIME_MS;
+  uint32_t counts   = 0;
+  uint32_t endTime;
   
+  // meanvalue over a period 
+  endTime= millis() + SAMPLING_TIME_MS;
   while(millis()<endTime)
   {
     adcValue += analogRead( ANALOG_SIGNAL_INPUT );
     counts++;
-  }
-  
-  adcValue=adcValue/counts;
-  
+  } 
+  adcValue = adcValue / counts;
+
   tft.fillScreen(LTDC_BLACK);
   
-  tft.setCursor(0, 0);
-  
+  tft.setCursor(0, 0);  
   tft.setTextColor(LTDC_RED);
   tft.setTextSize(1);
-
   tft.println("analog input PA0");
 
   tft.setTextColor(LTDC_GREEN);
   tft.setTextSize(3);
-
   tft.print("adc value:"); tft.println( (int) adcValue);
 
-  tft.println(""); 
-  tft.println("");
-  tft.println("");
-  
-  //tft.setCursor(3, 5);
-  
+  tft.setCursor(24, 110);
   tft.setTextColor(LTDC_YELLOW); 
   tft.setTextSize(5);
-
-  float voltage = adcValue/1024 * 3.3;
-  tft.print("  "); tft.print(voltage); tft.print(" V");
-
+  float voltage = adcValue / 1024 * 3.3;
+  tft.print( voltage, 3 ); // print 3 post decimal positions
+  tft.print(" V");
 }
+
