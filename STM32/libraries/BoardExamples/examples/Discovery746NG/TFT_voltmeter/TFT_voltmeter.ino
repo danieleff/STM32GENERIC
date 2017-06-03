@@ -58,7 +58,7 @@ void loop(void)
   tft.setTextSize(3);
   tft.print("adc value:"); tft.println( (int) adcValue);
 
-  tft.setCursor(24, 110);
+  tft.setCursor(150, 110);
   tft.setTextColor(LTDC_YELLOW); 
   tft.setTextSize(5);
   float voltage = adcValue / 1024 * 3.3;
