@@ -27,7 +27,7 @@ void setup()
   tft.begin((uint16_t *)buffer);
   tft.fillScreen( LTDC_BLACK );
 
-  //tft.setRotation(1); // horitzontal wide screen
+  //tft.setRotation(0); // horitzontal wide screen
 }
 
 #define SAMPLING_TIME_MS 1000
