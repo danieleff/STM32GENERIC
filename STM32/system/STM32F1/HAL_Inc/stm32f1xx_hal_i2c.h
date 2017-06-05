@@ -205,7 +205,7 @@ typedef struct
 /** @defgroup I2C_addressing_mode I2C addressing mode
   * @{
   */
-#define I2C_ADDRESSINGMODE_7BIT         ((uint32_t)0x00004000)
+#define I2C_ADDRESSINGMODE_7BIT         ((uint32_t)0x00000000)
 #define I2C_ADDRESSINGMODE_10BIT        (I2C_OAR1_ADDMODE | ((uint32_t)0x00004000))
 /**
   * @}
