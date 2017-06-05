@@ -2498,6 +2498,8 @@ implementations require configUSE_TICKLESS_IDLE to be set to a value other than
 
 BaseType_t xTaskIncrementTick( void )
 {
+    if (xSchedulerRunning == pdFALSE) return pdFALSE;
+
 TCB_t * pxTCB;
 TickType_t xItemValue;
 BaseType_t xSwitchRequired = pdFALSE;
