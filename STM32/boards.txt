@@ -464,7 +464,7 @@ DISCOVERY_F746NG.upload.maximum_data_size=327680
 DISCOVERY_F746NG.build.core=arduino
 DISCOVERY_F746NG.build.board=DISCOVERY_F746NG
 
-DISCOVERY_F746NG.build.mcu=cortex-m7
+DISCOVERY_F746NG.build.mcu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F746NG.build.series=STM32F7
 DISCOVERY_F746NG.build.variant=DISCOVERY_F746NG
 DISCOVERY_F746NG.build.extra_flags=-DSTM32F746NG -DDATA_IN_ExtSDRAM
