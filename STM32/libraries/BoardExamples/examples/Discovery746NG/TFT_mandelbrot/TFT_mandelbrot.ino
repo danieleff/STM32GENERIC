@@ -70,26 +70,26 @@ void loop()
   int iX, iY;
   const int iXmax = 480;
   const int iYmax = 272;
-  /* world ( double) coordinate = parameter plane*/
-  double Cx, Cy;
-  const double factor=0.8;
-  const double CxMin = -2.8*factor;
-  const double CxMax = 2.0*factor;
-  const double CyMin = -1.5*factor;
-  const double CyMax = 1.5*factor;
+  /* world ( float) coordinate = parameter plane*/
+  float Cx, Cy;
+  const float factor=0.8;
+  const float CxMin = -2.8*factor;
+  const float CxMax = 2.0*factor;
+  const float CyMin = -1.5*factor;
+  const float CyMax = 1.5*factor;
   /* */
-  double PixelWidth = (CxMax - CxMin) / iXmax;
-  double PixelHeight = (CyMax - CyMin) / iYmax;
+  float PixelWidth = (CxMax - CxMin) / iXmax;
+  float PixelHeight = (CyMax - CyMin) / iYmax;
 
   /* Z=Zx+Zy*i  ;   Z0 = 0 */
-  double Zx, Zy;
-  double Zx2, Zy2; /* Zx2=Zx*Zx;  Zy2=Zy*Zy  */
+  float Zx, Zy;
+  float Zx2, Zy2; /* Zx2=Zx*Zx;  Zy2=Zy*Zy  */
 
   int Iteration;
   const int IterationMax = 220;
   /* bail-out value , radius of circle ;  */
-  const double EscapeRadius = 2;
-  double ER2 = EscapeRadius * EscapeRadius;
+  const float EscapeRadius = 2;
+  float ER2 = EscapeRadius * EscapeRadius;
 
   /* compute and write image data bytes */
   for (iY = 0; iY < iYmax; iY++)
