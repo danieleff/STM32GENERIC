@@ -20,15 +20,14 @@
 */
 #include "I2S.h"
 
-// to use the example check your board schematic
-// if this is the correct pin setting for your board.
-// general setup without master clock
-I2SClass I2S(SPI3, PC12 /*DIN*/ , PA4 /*LRC*/, PC10 /*SCLK*/);
+// SPI2 pins are used for I2S.
+// SPI2 is avalailable on the BalckF407VE and does not conflict with peripherals like SDIO
+I2SClass I2S(SPI2, PC3 /*DIN*/ , PB12 /*LRC*/, PB10 /*SCLK*/);
 
 #define SAMPLINGFREQUENCY 44100
 #define WAVEBUFFERLENGTH  SAMPLINGFREQUENCY * 1 // 1 seconds
 
-#define DAC_DC_VALUE      0x4000
+#define DAC_DC_VALUE      0x4000 // DAC value when there is no sound amplitude
 #define DAC_MAX_AMPLITUDE 0x2000 // experimental maximum on my speakers without distortion
 
 int16_t wave_i16[WAVEBUFFERLENGTH];
@@ -43,19 +42,26 @@ void setup()
   for ( int n = 0; n < WAVEBUFFERLENGTH; n++ ) wave_i16[n] = ( sin( 2 * PI * frequency / SAMPLINGFREQUENCY * n ) ) * amplitude;
 }
 
-uint32_t BufferIndex = 0;
-
-void loop()
+void playBuffer(int16_t *monoBuffer, uint32_t bufferLength)
 {
-  // write left channel
-  I2S.write( wave_i16[ BufferIndex++ ] + DAC_DC_VALUE );
-  // mono amplifier, right channel not available, write zeros
-  I2S.write( 0 );
-
-  if ( BufferIndex > WAVEBUFFERLENGTH)
+  uint32_t n;
+  for ( n = 0; n < bufferLength; n++ )
   {
-    delay( 3000 );
-    BufferIndex = 0;
+    int16_t dacValue = wave_i16[ n ] + DAC_DC_VALUE ;
+
+    // write left channel
+    I2S.write( dacValue );
+
+    // write right channel
+    // mono amplifier, right channel could be anything
+    // we just write the same value as left channel
+    // just in case you want to connect a stereo I2S-DAC
+    I2S.write( dacValue );
   }
 }
 
+void loop()
+{
+  playBuffer(wave_i16,WAVEBUFFERLENGTH);
+  delay( 3000 ); // delay next playing
+}
