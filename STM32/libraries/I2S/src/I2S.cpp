@@ -1,6 +1,8 @@
 #include "I2S.h"
 #include "stm32_gpio_af.h"
 
+#include "stm32_dma.h"
+
 #include "Arduino.h"
 
 I2SClass::I2SClass(SPI_TypeDef *instance) {
@@ -22,7 +24,19 @@ I2SClass::I2SClass(SPI_TypeDef *instance, uint8_t sd, uint8_t ws, uint8_t ck, ui
     stm32SetMCK(mck);
 }
 
+void I2SClass::setBuffer(uint16_t *buffer, int bufferSize) {
+    this->doubleBuffer = buffer;
+    this->halfBufferSize = bufferSize / 2;
+}
+
+int I2SClass::getBufferSize() {
+    return halfBufferSize * 2;
+}
+
 uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample) {
+    static uint16_t static_buffer[2048];
+
+    setBuffer((uint16_t*)&static_buffer, 2048);
 
     #ifdef SPI1
     if (handle.Instance == SPI1) __HAL_RCC_SPI1_CLK_ENABLE();
@@ -100,23 +114,53 @@ uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSam
         return false;
     }
 
+    __HAL_RCC_DMA1_CLK_ENABLE();
+
+
+    if (!stm32DmaAcquire(&dmaHandle, SPI_TX, (void*)handle.Instance, true)) {
+        return false;
+    }
+
+    dmaHandle.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    dmaHandle.Init.PeriphInc = DMA_PINC_DISABLE;
+    dmaHandle.Init.MemInc = DMA_MINC_ENABLE;
+    dmaHandle.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+    dmaHandle.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    dmaHandle.Init.Mode = DMA_NORMAL;
+    dmaHandle.Init.Priority = DMA_PRIORITY_LOW;
+    dmaHandle.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    HAL_DMA_Init(&dmaHandle);
+
+    __HAL_LINKDMA(&handle,hdmatx,dmaHandle);
+
     return HAL_I2S_Init(&handle) == HAL_OK;
 }
 
-void I2SClass::write(uint16_t data) {
-    HAL_I2S_Transmit(&handle, &data, 1, 1000);
+I2SClass *i2sDma;
+
+extern "C" void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s) {
+    i2sDma->dmaDone = true;
 }
 
-void I2SClass::write32(uint32_t data) {
-    HAL_I2S_Transmit(&handle, (uint16_t*)&data, 1, 1000);
+void I2SClass::write(int16_t data) {
+    doubleBuffer[dataIndex + bufferIndex * halfBufferSize] = data;
+    dataIndex++;
+
+    if (dataIndex == halfBufferSize) {
+        while(!dmaDone);
+        i2sDma = this;
+        dmaDone = false;
+        HAL_I2S_Transmit_DMA(&handle, doubleBuffer + bufferIndex * halfBufferSize, halfBufferSize);
+        dataIndex = 0;
+        bufferIndex++;
+        bufferIndex %= 2;
+    }
 }
 
-void I2SClass::write(uint16_t *data, uint16_t size) {
-    HAL_I2S_Transmit(&handle, data, size, 1000);
-}
-
-void I2SClass::write32(uint32_t *data, uint16_t size) {
-    HAL_I2S_Transmit(&handle, (uint16_t*)data, size, 1000);
+void I2SClass::write(int16_t *data, uint16_t size) {
+    for(int i=0; i<size; i++) {
+        write(data[i]);
+    }
 }
 
 void I2SClass::stm32SetSD(uint8_t sd) {

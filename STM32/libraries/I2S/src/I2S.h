@@ -19,11 +19,13 @@ class I2SClass {
 
     uint8_t begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);
 
-    void write(uint16_t data);
-    void write32(uint32_t data);
+    void setBuffer(uint16_t *buffer, int bufferSize);
 
-    void write(uint16_t *data, uint16_t size);
-    void write32(uint32_t *data, uint16_t size);
+    int getBufferSize();
+
+    void write(int16_t data);
+
+    void write(int16_t *data, uint16_t size);
 
     void stm32SetSD(uint8_t sd);
     void stm32SetWS(uint8_t ws);
@@ -42,6 +44,15 @@ class I2SClass {
     uint32_t ckPin = 0;
     GPIO_TypeDef *mckPort = NULL;
     uint32_t mckPin = 0;
+
+    DMA_HandleTypeDef dmaHandle;
+
+    int halfBufferSize;
+    uint16_t *doubleBuffer;
+    volatile uint16_t dataIndex, bufferIndex;
+    volatile bool dmaDone = true;
+
+
 };
 
 #endif
