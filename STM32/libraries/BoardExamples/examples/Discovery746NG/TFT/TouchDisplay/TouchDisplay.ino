@@ -39,47 +39,52 @@ void setup()
   Wire.stm32SetSCL(PH7);
 
   Wire.begin();
-  
+
   UB_Touch_Init();
-  
+
   // The buffer is memory mapped
   // You can directly draw on the display by writing to the buffer
   uint16_t *buffer = (uint16_t *)malloc(LTDC_F746_ROKOTECH.width * LTDC_F746_ROKOTECH.height);
 
   tft.begin((uint16_t *)buffer);
+  
   tft.fillScreen(LTDC_BLACK);
   //tft.setRotation(0);
   tft.setCursor(0, 0);
-  tft.setTextColor(LTDC_GREEN);  tft.setTextSize(3);
-  tft.println("STM32F746 Discovery");
-  delay(3000);
-  tft.setTextColor(LTDC_YELLOW); tft.setTextSize(2);
-  
+  tft.setTextColor(LTDC_BLUE);  tft.setTextSize(3);
+  tft.println("STM32F746 Discovery Touch");
+
 }
+
+#define CURSOR_SIZE 100
+
+int Old_x, Old_y;
 
 void loop()
 {
-  if (UB_Touch_Read() == SUCCESS)
-  {
-    tft.setCursor(0, 0);
+    UB_Touch_Read();
+    
+    int x = Touch_Data.xp;
+    int y = Touch_Data.yp;
 
-    tft.print(Touch_Data.xp); tft.print(" , "); tft.print(Touch_Data.yp);
-    tft.print(" contacts: "); tft.println( P_Touch_GetContacts() );
-
-    if( P_Touch_GetContacts() )
+    if (Old_x != x || Old_y != y)
     {
-      tft.setCursor(Touch_Data.xp, Touch_Data.yp);
-      tft.print("touched");
+      Old_x = x;
+      Old_y = y;
+      
+      tft.fillScreen( LTDC_BLACK );
+
+      tft.setCursor(0, 0);
+
+      tft.print(x); tft.print(" , "); tft.print(y);
+      tft.print(" contacts: "); tft.println( P_Touch_GetContacts() );
+
+      if ( P_Touch_GetContacts() )
+      {
+        tft.fillRect(x - CURSOR_SIZE/2, y - CURSOR_SIZE/2, CURSOR_SIZE, CURSOR_SIZE, LTDC_GREEN);
+      }
+
+      delay(10);
     }
-
-    //delay(100);
-  } else
-  {
-    tft.print(".");
-    delay(200);
-  }
-
-  delay(100);
-  tft.fillScreen(LTDC_BLACK);
-
 }
+
