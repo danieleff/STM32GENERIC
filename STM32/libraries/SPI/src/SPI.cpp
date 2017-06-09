@@ -14,11 +14,6 @@ static uint8_t spi_ff_buffer = 0XFF;
 
 void SPIClass::begin() {
 
-	_DMA_Instance_Type *_StreamTX;
-	_DMA_Instance_Type *_StreamRX;
-	uint32_t _ChannelTX;
-	uint32_t _ChannelRX;
-
 	apb_freq = stm32GetClockFrequency((void*)spiHandle.Instance);
 
 	spiHandle.Init.Mode = SPI_MODE_MASTER;
@@ -34,85 +29,84 @@ void SPIClass::begin() {
 #endif
 
 
-	#ifdef SPI1
-		if (spiHandle.Instance== SPI1) {
-			__HAL_RCC_SPI1_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI1_StreamTX);
-			_StreamRX = SPIx_DMA(SPI1_StreamRX);
-			_ChannelTX = SPI1_ChannelTX;
-			_ChannelRX = SPI1_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI1);
-		}
-	#endif
-	#ifdef SPI2
-		else if (spiHandle.Instance == SPI2) {
-			__HAL_RCC_SPI2_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI2_StreamTX);
-			_StreamRX = SPIx_DMA(SPI2_StreamRX);
-			_ChannelTX = SPI2_ChannelTX;
-			_ChannelRX = SPI2_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI2);
-		}
-	#endif
-	#ifdef SPI3
-		else if (spiHandle.Instance == SPI3) {
-			__HAL_RCC_SPI3_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI3_StreamTX);
-			_StreamRX = SPIx_DMA(SPI3_StreamRX);
-			_ChannelTX = SPI3_ChannelTX;
-			_ChannelRX = SPI3_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI3);
-		}
-	#endif
-	#ifdef SPI4
-		else if (spiHandle.Instance ==  SPI4) {
-			__HAL_RCC_SPI4_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI4_StreamTX);
-			_StreamRX = SPIx_DMA(SPI4_StreamRX);
-			_ChannelTX = SPI4_ChannelTX;
-			_ChannelRX = SPI4_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI4);
-		}
-	#endif
-	#ifdef SPI5
-		else if (spiHandle.Instance ==  SPI5) {
-			__HAL_RCC_SPI5_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI5_StreamTX);
-			_StreamRX = SPIx_DMA(SPI5_StreamRX);
-			_ChannelTX = SPI5_ChannelTX;
-			_ChannelRX = SPI5_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI5);
-		}
-	#endif
-	#ifdef SPI6
-		else if (spiHandle.Instance ==  SPI6) {
-			__HAL_RCC_SPI6_CLK_ENABLE();
-			_StreamTX = SPIx_DMA(SPI6_StreamTX);
-			_StreamRX = SPIx_DMA(SPI6_StreamRX);
-			_ChannelTX = SPI6_ChannelTX;
-			_ChannelRX = SPI6_ChannelRX;
-			/*
-			 * Not used yet, still just polling
-			 */
-			//_SPISetDmaIRQ(SPI6);
-		}
-	#endif
+#ifdef SPI1
+        if (spiHandle.Instance== SPI1) {
+            __HAL_RCC_SPI1_CLK_ENABLE();
+        }
+    #endif
+    #ifdef SPI2
+        else if (spiHandle.Instance == SPI2) {
+            __HAL_RCC_SPI2_CLK_ENABLE();
+        }
+    #endif
+    #ifdef SPI3
+        else if (spiHandle.Instance == SPI3) {
+            __HAL_RCC_SPI3_CLK_ENABLE();
+        }
+    #endif
+    #ifdef SPI4
+        else if (spiHandle.Instance ==  SPI4) {
+            __HAL_RCC_SPI4_CLK_ENABLE();
+        }
+    #endif
+    #ifdef SPI5
+        else if (spiHandle.Instance ==  SPI5) {
+            __HAL_RCC_SPI5_CLK_ENABLE();
+        }
+    #endif
+    #ifdef SPI6
+        else if (spiHandle.Instance ==  SPI6) {
+            __HAL_RCC_SPI6_CLK_ENABLE();
+        }
+    #endif
 
+
+    //////////////// DMA
+
+    #if defined(STM32F1) || defined(STM32F4)
+
+    _DMA_Instance_Type *_StreamTX;
+    _DMA_Instance_Type *_StreamRX;
+    uint32_t _ChannelTX;
+    uint32_t _ChannelRX;
+
+    #ifdef SPI1
+        if (spiHandle.Instance== SPI1) {
+            _StreamTX = SPIx_DMA(SPI1_StreamTX);
+            _StreamRX = SPIx_DMA(SPI1_StreamRX);
+            _ChannelTX = SPI1_ChannelTX;
+            _ChannelRX = SPI1_ChannelRX;
+            /*
+             * Not used yet, still just polling
+             */
+            //_SPISetDmaIRQ(SPI1);
+        }
+    #endif
+    #ifdef SPI2
+        else if (spiHandle.Instance == SPI2) {
+            _StreamTX = SPIx_DMA(SPI2_StreamTX);
+            _StreamRX = SPIx_DMA(SPI2_StreamRX);
+            _ChannelTX = SPI2_ChannelTX;
+            _ChannelRX = SPI2_ChannelRX;
+            /*
+             * Not used yet, still just polling
+             */
+            //_SPISetDmaIRQ(SPI2);
+        }
+    #endif
+    #ifdef SPI3
+        else if (spiHandle.Instance == SPI3) {
+            _StreamTX = SPIx_DMA(SPI3_StreamTX);
+            _StreamRX = SPIx_DMA(SPI3_StreamRX);
+            _ChannelTX = SPI3_ChannelTX;
+            _ChannelRX = SPI3_ChannelRX;
+            /*
+             * Not used yet, still just polling
+             */
+            //_SPISetDmaIRQ(SPI3);
+        }
+    #endif
+    // TODO SPI4/5/6
 
 	hdma_spi_tx.Instance = _StreamTX;
 	hdma_spi_tx.Parent = &spiHandle;
@@ -153,6 +147,8 @@ void SPIClass::begin() {
     hdma_spi_rx.Init.MemBurst = DMA_MBURST_SINGLE;
     hdma_spi_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;
 	*/
+
+    #endif
 
 	stm32AfSPIInit(spiHandle.Instance, mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
 
@@ -243,6 +239,9 @@ void SPIClass::stm32SetSCK(uint8_t sck) {
 void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
 	spiHandle.Instance = instance;
 }
+
+#if defined(STM32F1) || defined(STM32F4)
+
 uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length) {
 	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, receiveBuf, length, 1000);
 	// DMA handles configured in Begin.
@@ -287,3 +286,5 @@ uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
 	spiHandle.State = HAL_SPI_STATE_READY;
 	return 0;
 }
+
+#endif
