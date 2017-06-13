@@ -2,7 +2,6 @@
 #define _SDIO_H_INCLUDED
 
 #include "stdint.h"
-#include "BlockDriver.h"
 #include "stm32_def.h"
 #define sdRdTimeout 200
 #define sdWrTimeout 5000
@@ -141,7 +140,7 @@ class SDIOClass {
 };
 
 static uint32_t m_errorLine = 0;
-static uint8_t m_errorCode = SD_CARD_ERROR_INIT_NOT_CALLED;
+static uint8_t m_errorCode = 0x64; //TODO cleanup, SdFat errors do not belong to SDIO driver (SD_CARD_ERROR_INIT_NOT_CALLED);
 static void (*_sdio_this);
 
 #endif

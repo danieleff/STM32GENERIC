@@ -153,7 +153,7 @@ uint8_t SDIOClass::begin() {
      */
     _useDMA = true;
 
-    m_errorCode = SD_CARD_ERROR_NONE;
+    m_errorCode = 0; //SD_CARD_ERROR_NONE;
     return true;
 }
 /* TODO: This part needs more work, should set the card to idle state
