@@ -164,7 +164,7 @@
 #else  // ENABLE_SDIO_CLASS
   #if defined(ARDUINO_ARCH_STM32)
     #include "stm32_def.h"
-    #if defined(SDIO) || defined(SDMMC)
+    #if defined(SDIO) || defined(SDMMC1)
       #define ENABLE_SDIO_CLASS 1
     #else
       #define ENABLE_SDIO_CLASS 0
