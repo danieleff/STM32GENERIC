@@ -21,6 +21,27 @@
 #endif
 
 
+#ifndef SDIO
+#define SDIO                            SDMMC1
+#define SDIO_RESPONSE_SHORT             SDMMC_RESPONSE_SHORT
+#define SDIO_WAIT_NO                    SDMMC_WAIT_NO
+#define SDIO_CPSM_ENABLE                SDMMC_CPSM_ENABLE
+#define SDIO_RESP1                      SDMMC_RESP1
+#define SDIO_CLOCK_EDGE_RISING          SDMMC_CLOCK_EDGE_RISING
+#define SDIO_CLOCK_BYPASS_DISABLE       SDMMC_CLOCK_BYPASS_DISABLE
+#define SDIO_CLOCK_POWER_SAVE_DISABLE   SDMMC_CLOCK_POWER_SAVE_DISABLE
+#define SDIO_BUS_WIDE_1B                SDMMC_BUS_WIDE_1B
+#define SDIO_HARDWARE_FLOW_CONTROL_DISABLE SDMMC_HARDWARE_FLOW_CONTROL_DISABLE
+#define SDIO_BUS_WIDE_4B                SDMMC_BUS_WIDE_4B
+#define SDIO_FLAG_DCRCFAIL              SDMMC_FLAG_DCRCFAIL
+
+#define SDIO_GetResponse                SDMMC_GetResponse
+#define SDIO_CmdInitTypeDef             SDMMC_CmdInitTypeDef
+#define SDIO_SendCommand                SDMMC_SendCommand
+#define SDIO_TypeDef                    SDMMC_TypeDef
+#endif
+
+
 /*
  * Aux function. Doesn't exist in HAL. Allows to pre-erase blocks when the count of blocks to write is known.
  * ACMD23
