@@ -39,6 +39,7 @@
 #define SDIO_CmdInitTypeDef             SDMMC_CmdInitTypeDef
 #define SDIO_SendCommand                SDMMC_SendCommand
 #define SDIO_TypeDef                    SDMMC_TypeDef
+#define SDIO_IRQHandler                 SDMMC1_IRQHandler
 #endif
 
 
@@ -105,9 +106,9 @@ class SDIOClass {
     uint32_t errorLine();
     void useDMA(bool useDMA);
 
+    SD_HandleTypeDef hsd;
   private:
     uint32_t cardStatus();
-    SD_HandleTypeDef hsd;
     DMA_HandleTypeDef hdma_sdio;
     HAL_SD_CardInfoTypeDef SDCardInfo;
     HAL_SD_CardStateTypeDef CardState;
@@ -117,6 +118,5 @@ class SDIOClass {
 
 static uint32_t m_errorLine = 0;
 static uint8_t m_errorCode = 0x64; //TODO cleanup, SdFat errors do not belong to SDIO driver (SD_CARD_ERROR_INIT_NOT_CALLED);
-static void (*_sdio_this);
 
 #endif

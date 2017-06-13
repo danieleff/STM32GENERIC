@@ -23,6 +23,7 @@
 
 #include "Arduino.h"
 
+static SDIOClass *_sdio_this;
 
 //=============================================================================
 // Error function and macro.
@@ -96,6 +97,9 @@ uint8_t SDIOClass::begin() {
          */
         return true;
     }
+
+    _sdio_this = this;
+
     __HAL_RCC_SDIO_CLK_ENABLE();
 
     stm32AfSDIO4BitInit(SDIO, NULL, 0, NULL, 0,
@@ -136,6 +140,9 @@ uint8_t SDIOClass::begin() {
 
     __HAL_LINKDMA(&hsd, hdmatx, hdma_sdio);
     __HAL_LINKDMA(&hsd, hdmarx, hdma_sdio);
+
+    HAL_NVIC_SetPriority(SDIO_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(SDIO_IRQn);
 
     if (HAL_DMA_Init(&hdma_sdio) != HAL_OK) {
         return false;
@@ -340,3 +347,6 @@ void SDIOClass::useDMA(bool useDMA){
 }
 
 
+extern "C" void SDIO_IRQHandler() {
+    HAL_SD_IRQHandler(&(_sdio_this->hsd));
+}
