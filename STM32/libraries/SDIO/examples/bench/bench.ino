@@ -1,10 +1,8 @@
 /*
  * This program is a simple binary write/read benchmark.
  */
-#include "SDIO.h"
-#include "STM32SdFatSdio.h"
-//#include <SPI.h>
-//#include "SdFat.h"
+
+#include "SdFat.h"
 #include "FreeStack.h"
 
 // Set USE_SDIO to zero for SPI card access. 
@@ -37,7 +35,7 @@ uint8_t buf[BUF_SIZE];
 // Traditional DMA version.
 // SdFatSdio sd;
 // Faster version.
-STM32SdFatSdio sd;
+SdFatSdio sd;
 //SdFatSdioEX sd;
 #else  // USE_SDIO
 SdFat sd;

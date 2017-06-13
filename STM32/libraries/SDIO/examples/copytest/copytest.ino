@@ -6,11 +6,11 @@
  Pito 5/2016, no warranties of any kind
  Pito 5/2017, no warranties of any kind
  */
-#include "SDIO.h"
-#include "STM32SdFatSdio.h"
-#include "CRC32/CRC32.h"
+#include "SdFat.h"
+#include "CRC32.h"
 
-STM32SdFatSdio sd;
+SdFatSdio sd;
+
 SdFile myFileIn;
 SdFile myFileOut;
 CRC32 crc;
