@@ -17,7 +17,7 @@
  * along with the Arduino SdSpiAltDriver Library.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-#if defined(STM32F1)
+#if defined(ARDUINO_ARCH_STM32)
 #include "SdSpiDriver.h"
 #define USE_STM32F1_DMAC 1
 //------------------------------------------------------------------------------

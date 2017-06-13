@@ -184,8 +184,7 @@
   || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
   || (defined(__arm__) && defined(CORE_TEENSY))\
   || defined(ESP8266) \
-  || defined(STM32F1) \
-  || defined(STM32F4)
+  ||  ARDUINO_ARCH_STM32
 #define SD_HAS_CUSTOM_SPI 1
 #else  // SD_HAS_CUSTOM_SPI
 // Use standard SPI library.
