@@ -10,59 +10,16 @@
 #define sd_timeout 250 // timeout in ms in the new HAL API
 #define SDCARD_STATUS_READY_BIT (1UL << 8)
 
-/*
- * Auxiliary macros to derive several names from the same values
- * They derive the name of the DMA Controller+Stream/Channel and the name of the IRQ line
- * corresponding to that name.
- * Also derive the name of ISRs.
- */
-	#define _SDIO_DMA(a) DMA##a
-	#define SDIO_DMA(a) _SDIO_DMA(a)
-	#define _SDIO_DMA_IRQn(a) DMA##a##_IRQn
-	#define SDIO_DMA_IRQn(a) _SDIO_DMA_IRQn(a)
-	#define _SDIO_DMA_IRQHandler(a) DMA##a##_IRQHandler
-	#define SDIO_DMA_IRQHandler(a) _SDIO_DMA_IRQHandler(a)
 
-	#define _SDIOSetDmaIRQ(a) HAL_NVIC_SetPriority(SDIO_DMA_IRQn(a), 0xF, 0); \
-                            HAL_NVIC_SetPriority(SDIO_IRQn, 0xE, 0); \
-							HAL_NVIC_EnableIRQ(SDIO_DMA_IRQn(a)); \
-							HAL_NVIC_EnableIRQ(SDIO_IRQn);
-
-
-/*
- * MCU specific values, used by the macros above.
- */
-
-#ifdef STM32F0
-#endif
-#ifdef STM32F1
-    #define SDIO_Stream 1_Channel3
-    #define SDIO_Channel 0
-	#define _DMA_Instance_Type DMA_Channel_TypeDef
-	/*
-	 * These settings are not possible for F1, L1, F3 series
-	 * So we define them to nothing. We should move these to a single block
-	 * for all the series that are compatible.
-	 */
-	#define	_SDIOSetDMAChannel(hdma_handler,chan)
-	#define _SDIOSetDMAFIFO(hdma_handler)
-
-#endif
-#ifdef STM32F4
-    #define SDIO_Stream 2_Stream6
-    #define SDIO_Channel DMA_CHANNEL_4
-
-	#define _DMA_Instance_Type DMA_Stream_TypeDef
-	#define	_SDIOSetDMAChannel(hdma_handler,chan) hdma_handler.Init.Channel = chan
-
+#if defined(STM32F4) || defined(STM32F7)
 	#define _SDIOSetDMAFIFO(hdma_handler)	do { hdma_handler.Init.FIFOMode = DMA_FIFOMODE_ENABLE; \
 								hdma_handler.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL; \
 								hdma_handler.Init.MemBurst = DMA_MBURST_INC4; \
 								hdma_handler.Init.PeriphBurst = DMA_PBURST_INC4; } while (0)
-
-
-
+#else
+    #define _SDIOSetDMAFIFO(hdma_handler)
 #endif
+
 
 /*
  * Aux function. Doesn't exist in HAL. Allows to pre-erase blocks when the count of blocks to write is known.
@@ -126,8 +83,6 @@ class SDIOClass {
     /** \return error line for last error. Tmp function for debug. */
     uint32_t errorLine();
     void useDMA(bool useDMA);
-    void _sdioDMACallback() { HAL_DMA_IRQHandler(&hdma_sdio); }
-    void _sdioCallback() {HAL_SD_IRQHandler(&hsd);}
 
   private:
     uint32_t cardStatus();

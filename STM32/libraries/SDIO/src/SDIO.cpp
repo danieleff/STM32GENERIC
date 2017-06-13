@@ -19,6 +19,8 @@
 #include "stm32_gpio_af.h"
 #include "SDIO.h"
 
+#include "stm32_dma.h"
+
 #include "Arduino.h"
 
 
@@ -120,16 +122,9 @@ uint8_t SDIOClass::begin() {
         return false;
     }
 
-    /*
-     * TODO: We can move this section to useDMA, that way none of this code is included if not using DMA
-     * We would need another section clearing the settings if not using DMA.
-     */
-    _sdio_this = (void*) this;
     __HAL_RCC_DMA2_CLK_ENABLE();
+    stm32DmaAcquire(&hdma_sdio, SDIO_RXTX, SDIO, true);
 
-    hdma_sdio.Instance = SDIO_DMA(SDIO_Stream);
-    hdma_sdio.Parent = &hsd;
-    _SDIOSetDMAChannel(hdma_sdio, SDIO_Channel);
     hdma_sdio.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_sdio.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_sdio.Init.MemInc = DMA_MINC_ENABLE;
@@ -139,10 +134,8 @@ uint8_t SDIOClass::begin() {
     hdma_sdio.Init.Priority = DMA_PRIORITY_LOW;
     _SDIOSetDMAFIFO(hdma_sdio);
 
-    hsd.hdmatx = &hdma_sdio;
-    hsd.hdmarx = &hdma_sdio;
-
-    _SDIOSetDmaIRQ(SDIO_Stream);
+    __HAL_LINKDMA(&hsd, hdmatx, hdma_sdio);
+    __HAL_LINKDMA(&hsd, hdmarx, hdma_sdio);
 
     if (HAL_DMA_Init(&hdma_sdio) != HAL_OK) {
         return false;
@@ -346,16 +339,4 @@ void SDIOClass::useDMA(bool useDMA){
 	_useDMA = useDMA;
 }
 
-/*
- * DMA Handler declared here to replace the weak one in the core.
- * The name is derived from the Stream name.
- */
-extern "C" {
-void SDIO_DMA_IRQHandler(SDIO_Stream)(void) {
-    reinterpret_cast<class SDIOClass*>(_sdio_this)->_sdioDMACallback();
-}
-void SDIO_IRQHandler(void){
-    reinterpret_cast<class SDIOClass*>(_sdio_this)->_sdioCallback();
-}
-}
 
