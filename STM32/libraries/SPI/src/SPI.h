@@ -4,6 +4,10 @@
 #include <Arduino.h>
 #include "stm32_gpio_af.h"
 
+#if defined(STM32F1) || defined(STM32F4)
+#define SPI_HAS_OLD_DMATRANSFER
+#endif
+
 // SPI_HAS_TRANSACTION means SPI has
 //   - beginTransaction()
 //   - endTransaction()

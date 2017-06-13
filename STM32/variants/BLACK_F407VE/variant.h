@@ -20,9 +20,9 @@
 #define USER_BTN USER_BUTTON0 // STM naming compatibility
 
 //*************** SPI pins ********************************
-#define MOSI PB5
-#define MISO PB4
-#define SCK PB3
+#define MOSI PA7
+#define MISO PA6
+#define SCK PA5
 #define SS PA4
 
 //*************** I2C pins ********************************

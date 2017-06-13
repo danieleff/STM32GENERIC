@@ -27,41 +27,22 @@ I2SClass I2S(SPI2, PC3 /*DIN*/ , PB12 /*LRC*/, PB10 /*SCLK*/);
 #define SAMPLINGFREQUENCY 44100
 #define WAVEBUFFERLENGTH  SAMPLINGFREQUENCY * 1 // 1 seconds
 
-#define DAC_DC_VALUE      0x4000 // DAC value when there is no sound amplitude
 #define DAC_MAX_AMPLITUDE 0x2000 // experimental maximum on my speakers without distortion
-
-int16_t wave_i16[WAVEBUFFERLENGTH];
 
 void setup()
 {
   I2S.begin(I2S_PHILIPS_MODE, SAMPLINGFREQUENCY, 16);
-
-  float   frequency = 440;
-  float   amplitude = DAC_MAX_AMPLITUDE;
-  // calculate buffer values for test tone
-  for ( int n = 0; n < WAVEBUFFERLENGTH; n++ ) wave_i16[n] = ( sin( 2 * PI * frequency / SAMPLINGFREQUENCY * n ) ) * amplitude;
-}
-
-void playBuffer(int16_t *monoBuffer, uint32_t bufferLength)
-{
-  uint32_t n;
-  for ( n = 0; n < bufferLength; n++ )
-  {
-    int16_t dacValue = wave_i16[ n ] + DAC_DC_VALUE ;
-
-    // write left channel
-    I2S.write( dacValue );
-
-    // write right channel
-    // mono amplifier, right channel could be anything
-    // we just write the same value as left channel
-    // just in case you want to connect a stereo I2S-DAC
-    I2S.write( dacValue );
-  }
 }
 
 void loop()
 {
-  playBuffer(wave_i16,WAVEBUFFERLENGTH);
-  delay( 3000 ); // delay next playing
+    for(int n=0; n<WAVEBUFFERLENGTH; n++) {
+        const float   frequency = 440;
+        const float   amplitude = DAC_MAX_AMPLITUDE;
+        int16_t val = ( sin( 2 * PI * frequency / SAMPLINGFREQUENCY * n )) * amplitude;
+        I2S.write(val); //left
+        I2S.write(val); //right
+        n++;
+    }
+    delay(3000);
 }

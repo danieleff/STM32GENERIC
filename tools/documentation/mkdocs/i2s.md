@@ -1,6 +1,7 @@
 ## I2S
 
 Not to be confused with [I2C](i2c.md), is a protocol for connecting to audio devices.
+The samples are sent continuously in the background using DMA transfer. 
 
 ## **This library is in beta, and the API / implementation is subject to change!**
 
@@ -37,27 +38,23 @@ Configure the pins, and the parameters for the connection.
 
 * mode: one of I2S_PHILIPS_MODE,I2S_RIGHT_JUSTIFIED_MODE, I2S_LEFT_JUSTIFIED_MODE
 * sampleRate: between 8000 and 96000
-* bitsPerSample: 16, 24 or 32
+* bitsPerSample: 16. ** (Note: 24 or 32 bit per sample currently not working!) **
 
-#### **`write(uint16_t data);`**
+#### **`write(int16_t data);`**
 
-Send 16 bit data. **Currently in blocking mode**
+Send 16 bit data. Blocks if there is no space left in the internal buffer.
 
+#### **`write(int16_t *data, uint16_t size);`**
 
-#### **`write32(uint32_t data);`**
+Send 16 bit data. Blocks if there is no space left in the internal buffer.
 
-Send 32 bit data. **Currently in blocking mode**
+#### **`setBuffer(uint16_t *buffer, int bufferSize);`**
 
+Set the DMA transfer buffer size. The default buffer is 2048 * 16 bits.
 
-#### **`write(uint16_t *data, uint16_t size);`**
+#### **`int getBufferSize();`**
 
-Send 16 bit data. **Currently in blocking mode**
-
-
-#### **`write(uint32_t *data, uint16_t size);`**
-
-Send 32 bit data. **Currently in blocking mode**
-
+Returns size of the transfer buffer.
 
 #### **`stm32SetSD(uint8_t pin);`**
 
