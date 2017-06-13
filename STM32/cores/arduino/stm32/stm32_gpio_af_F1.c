@@ -49,7 +49,7 @@ void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *inst
     GPIO_InitStruct.Pin = pin;
     GPIO_InitStruct.Mode = mode;
     GPIO_InitStruct.Pull = pull;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM; // Slow signal slew rate to keep noise to minimum
     HAL_GPIO_Init(port, &GPIO_InitStruct);
     
     stm32AfGet(list, size, instance, port, pin)();
