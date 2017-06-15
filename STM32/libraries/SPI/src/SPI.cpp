@@ -279,6 +279,7 @@ static void stm32SpiDmaFinished(SPI_HandleTypeDef *hspi) {
             if (spiClass[i]->callback != NULL) {
                 spiClass[i]->callback();
             }
+            spiClass[i]->setDataWidth16(false);
             spiClass[i]->dmaDone = true;
         }
     }

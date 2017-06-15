@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include "stm32_gpio_af.h"
 
+#include "stm32_HAL/stm32XXxx_ll_spi.h"
+
 #if defined(STM32F1) || defined(STM32F4)
 #define SPI_HAS_OLD_DMATRANSFER
 #endif
@@ -109,6 +111,27 @@ class SPIClass {
     uint16_t transfer16(uint16_t data);
     void transfer(uint8_t *buf, size_t count);
 
+    void setDataWidth16(bool width16) {
+        if (width16) {
+            LL_SPI_SetDataWidth(spiHandle.Instance, LL_SPI_DATAWIDTH_16BIT);
+
+            hdma_spi_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+            hdma_spi_rx.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+
+            hdma_spi_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+            hdma_spi_tx.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+
+        } else if (LL_SPI_GetDataWidth(spiHandle.Instance) == LL_SPI_DATAWIDTH_16BIT) {
+            LL_SPI_SetDataWidth(spiHandle.Instance, LL_SPI_DATAWIDTH_8BIT);
+
+            hdma_spi_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+            hdma_spi_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+
+            hdma_spi_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+            hdma_spi_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+        }
+    }
+
 
     bool transfer(uint8_t data, uint8_t *rxBuffer, size_t count) {
         repeatTransmitData = data;
@@ -131,6 +154,31 @@ class SPIClass {
     }
     bool transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, spi_callback_type callback);
 
+
+    bool transfer16(uint16_t data, uint16_t *rxBuffer, size_t count) {
+        setDataWidth16(true);
+
+        repeatTransmitData = data;
+
+        return transfer((uint8_t*)NULL, (uint8_t*)rxBuffer, count);
+    }
+    bool transfer16(uint16_t *txBuffer, uint16_t *rxBuffer, size_t count) {
+        setDataWidth16(true);
+
+        return transfer((uint8_t*)txBuffer, (uint8_t *)rxBuffer, count);
+    }
+    bool transfer16(uint16_t data, uint16_t *rxBuffer, size_t count, spi_callback_type callback) {
+        setDataWidth16(true);
+
+        repeatTransmitData = data;
+        return transfer((uint8_t*) NULL, (uint8_t*)rxBuffer, count, callback);
+    }
+    bool transfer16(uint16_t *txBuffer, uint16_t *rxBuffer, size_t count, spi_callback_type callback) {
+        setDataWidth16(true);
+
+        return transfer((uint8_t*)txBuffer, (uint8_t*)rxBuffer, count, callback);
+    }
+
     void flush(void);
     bool done(void);
 
@@ -143,7 +191,7 @@ class SPIClass {
     uint16_t repeatTransmitData = 0XFFFF;
     spi_callback_type callback;
 
-    volatile bool dmaDone = false;
+    volatile bool dmaDone = true;
 
   private:
     uint32_t apb_freq = 0;
@@ -170,19 +218,23 @@ inline uint8_t SPIClass::transfer(uint8_t data) {
 	while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_BSY) == SET);
 
 	return *(volatile uint8_t*)&spiHandle.Instance->DR;
-
-	/*
-	if (HAL_SPI_TransmitReceive(&spiHandle, &data, &data, 1, 1000) != HAL_OK) {
-		return 0;
-	}
-	return data;
-	*/
 }
+
 inline uint16_t SPIClass::transfer16(uint16_t data) {
-	if (HAL_SPI_TransmitReceive(&spiHandle, (uint8_t*)&data, (uint8_t*)&data, 2, 1000) != HAL_OK) {
-		return 0;
-	}
-	return data;
+    LL_SPI_SetDataWidth(spiHandle.Instance, LL_SPI_DATAWIDTH_16BIT);
+
+    while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_TXE) == RESET);
+
+    *(volatile uint16_t*)&spiHandle.Instance->DR = data;
+
+    while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_RXNE) == RESET);
+    while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_BSY) == SET);
+
+    uint16_t ret = *(volatile uint16_t*)&spiHandle.Instance->DR;
+
+    LL_SPI_SetDataWidth(spiHandle.Instance, LL_SPI_DATAWIDTH_8BIT);
+
+    return ret;
 }
 
 inline void SPIClass::transfer(uint8_t *buf, size_t count) {
