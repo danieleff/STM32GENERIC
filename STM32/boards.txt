@@ -338,13 +338,13 @@ NUCLEO_64.menu.subboard.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.massstorage_drive=NODE_L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.f_cpu=80000000L
 
-NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
-NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
-NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
-
 NUCLEO_64.menu.upload_method.STLinkMethod=STLink
 NUCLEO_64.menu.upload_method.STLinkMethod.upload.protocol=STLink
 NUCLEO_64.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
+NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
+NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 
 
 ################################################################################
@@ -367,14 +367,14 @@ DISCOVERY_L053C8.build.f_cpu=32000000L
 DISCOVERY_L053C8.upload.protocol=STLink
 DISCOVERY_L053C8.upload.tool=stlink_upload
 
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod=STLink
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.protocol=STLink
+DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
 DISCOVERY_L053C8.menu.upload_method.MassStorageMethod=Mass Storage
 DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.upload.protocol=
 DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 DISCOVERY_L053C8.menu.upload_method.MassStorageMethod.massstorage_drive=DISCOVERY
-
-DISCOVERY_L053C8.menu.upload_method.STLinkMethod=STLink
-DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.protocol=STLink
-DISCOVERY_L053C8.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_L053C8.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 DISCOVERY_L053C8.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
@@ -473,14 +473,14 @@ DISCOVERY_F746NG.build.f_cpu=218000000L
 DISCOVERY_F746NG.upload.protocol=STLink
 DISCOVERY_F746NG.upload.tool=stlink_upload
 
+DISCOVERY_F746NG.menu.upload_method.STLinkMethod=STLink
+DISCOVERY_F746NG.menu.upload_method.STLinkMethod.upload.protocol=STLink
+DISCOVERY_F746NG.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
 DISCOVERY_F746NG.menu.upload_method.MassStorageMethod=Mass Storage
 DISCOVERY_F746NG.menu.upload_method.MassStorageMethod.upload.protocol=
 DISCOVERY_F746NG.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 DISCOVERY_F746NG.menu.upload_method.MassStorageMethod.massstorage_drive=DIS_F746NG
-
-DISCOVERY_F746NG.menu.upload_method.STLinkMethod=STLink
-DISCOVERY_F746NG.menu.upload_method.STLinkMethod.upload.protocol=STLink
-DISCOVERY_F746NG.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 DISCOVERY_F746NG.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 DISCOVERY_F746NG.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
