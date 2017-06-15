@@ -19,6 +19,7 @@
  */
 #if defined(ARDUINO_ARCH_STM32)
 #include "SdSpiDriver.h"
+#include "SdCard/SdInfo.h"
 //------------------------------------------------------------------------------
 static SPIClass& pSpi = SPI;
 //------------------------------------------------------------------------------
@@ -65,8 +66,12 @@ uint8_t SdSpiAltDriver::receive() {
  */
 uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
   int rtn = 0;
-#ifdef SPI_HAS_OLD_DMATRANSFER
-  rtn = pSpi.dmaTransfer(0, buf, n);
+#ifdef SPI_HAS_EXTENDED_TRANSFER
+  if (pSpi.transfer((uint8_t *)NULL, buf, n)) {
+      return 0;
+  } else {
+      return SD_CARD_ERROR_READ;
+  }
 #else  // USE_STM32F1_DMAC
   //  pSpi.read(buf, n); fails ?? use byte transfer
   for (size_t i = 0; i < n; i++) {
@@ -90,8 +95,8 @@ void SdSpiAltDriver::send(uint8_t b) {
  * \param[in] n Number of bytes to send.
  */
 void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
-#ifdef SPI_HAS_OLD_DMATRANSFER
-  pSpi.dmaSend(const_cast<uint8_t*>(buf), n);
+#ifdef SPI_HAS_EXTENDED_TRANSFER
+    pSpi.transfer((uint8_t*)buf, NULL, n);
 #else  // #if USE_STM32F1_DMAC
   for (size_t i = 0; i < n; i++) {
 	  pSpi.transfer(buf[i]);

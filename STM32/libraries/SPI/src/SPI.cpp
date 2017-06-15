@@ -4,12 +4,18 @@
 
 #include "stm32_dma.h"
 
+#include "stm32_HAL/stm32XXxx_ll_spi.h"
+
 #if defined(MOSI) || defined(MISO) || defined(SCK)
 	SPIClass SPI(SPI1, MOSI, MISO, SCK);
 #else
 	SPIClass SPI(SPI1);
 #endif
 
+
+int maxUsedCallback = 0; // This is set in SPI begin()
+SPI_TypeDef *spiCallbackInstances[6];
+SPIClass *spiClass[6];
 
 
 void SPIClass::begin() {
@@ -30,31 +36,55 @@ void SPIClass::begin() {
 #ifdef SPI1
         if (spiHandle.Instance== SPI1) {
             __HAL_RCC_SPI1_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 1);
+            spiCallbackInstances[0] = spiHandle.Instance;
+            spiClass[0] = this;
         }
     #endif
     #ifdef SPI2
         else if (spiHandle.Instance == SPI2) {
             __HAL_RCC_SPI2_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 2);
+            spiCallbackInstances[1] = spiHandle.Instance;
+            spiClass[1] = this;
         }
     #endif
     #ifdef SPI3
         else if (spiHandle.Instance == SPI3) {
             __HAL_RCC_SPI3_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 3);
+            spiCallbackInstances[2] = spiHandle.Instance;
+            spiClass[2] = this;
         }
     #endif
     #ifdef SPI4
         else if (spiHandle.Instance ==  SPI4) {
             __HAL_RCC_SPI4_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 4);
+            spiCallbackInstances[3] = spiHandle.Instance;
+            spiClass[3] = this;
         }
     #endif
     #ifdef SPI5
         else if (spiHandle.Instance ==  SPI5) {
             __HAL_RCC_SPI5_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 5);
+            spiCallbackInstances[4] = spiHandle.Instance;
+            spiClass[4] = this;
         }
     #endif
     #ifdef SPI6
         else if (spiHandle.Instance ==  SPI6) {
             __HAL_RCC_SPI6_CLK_ENABLE();
+
+            maxUsedCallback = max(maxUsedCallback, 6);
+            spiCallbackInstances[5] = spiHandle.Instance;
+            spiClass[5] = this;
         }
     #endif
 
@@ -176,60 +206,88 @@ void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
 	spiHandle.Instance = instance;
 }
 
-#if defined(STM32F1) || defined(STM32F4)
-
-uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length) {
-	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, receiveBuf, length, 1000);
-	// DMA handles configured in Begin.
-	if (length == 0) return 0;
-
-    #ifdef STM32F1
-	    __HAL_DMA_DISABLE(&hdma_spi_tx);
-	    __HAL_DMA_DISABLE(&hdma_spi_rx);
-    #endif
-
-	if (!transmitBuf) {
-		transmitBuf = (uint8_t*)&repeatTransmitData;
-		hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
-	} else {
-		//Need to change the MINC mode since dmaSend with MINC 0 or Null transmitBuf may have been called last
-		hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
-	}
-
-	HAL_DMA_Init(&hdma_spi_tx);
-	HAL_DMA_Init(&hdma_spi_rx);
-
-	HAL_SPI_TransmitReceive_DMA(&spiHandle, transmitBuf, receiveBuf, length);
-
-	while (spiHandle.State != HAL_SPI_STATE_READY);
-
-	return 0;
-}
-uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
+bool SPIClass::transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, spi_callback_type callback) {
+    this->callback = callback;
 
     #ifdef STM32F1
         __HAL_DMA_DISABLE(&hdma_spi_tx);
+        __HAL_DMA_DISABLE(&hdma_spi_rx);
     #endif
 
-	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, buf, length, 1000);
-	//Need to set TX DMA handle.
-	if (minc == 1){
-		hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
-	} else {
-		hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
-	}
+    if (txBuffer != NULL) {
+        hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
+    } else {
+        txBuffer = (uint8_t*)&repeatTransmitData;
+        hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
+    }
 
-	HAL_DMA_Init(&hdma_spi_tx);
+    if (rxBuffer != NULL) {
 
-	HAL_SPI_Transmit_DMA(&spiHandle, transmitBuf, length);
+        if (HAL_DMA_Init(&hdma_spi_tx) != HAL_OK) {
+            return false;
+        }
 
-	while (spiHandle.State != HAL_SPI_STATE_READY);
+        if (HAL_DMA_Init(&hdma_spi_rx) != HAL_OK) {
+            return false;
+        }
 
-	return 0;
+        dmaDone = false;
+        if (HAL_SPI_TransmitReceive_DMA(&spiHandle, txBuffer, rxBuffer, count) != HAL_OK) {
+            return false;
+        }
+    } else {
+        if (HAL_DMA_Init(&hdma_spi_tx) != HAL_OK) {
+            return false;
+        }
+
+        dmaDone = false;
+        if (HAL_SPI_Transmit_DMA(&spiHandle, txBuffer, count) != HAL_OK) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void SPIClass::flush(void) {
+    while (!done()) {
+        yield();
+    }
+}
+bool SPIClass::done(void) {
+    return dmaDone;
+}
+
+uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length) {
+    return transfer(transmitBuf, receiveBuf, length);
+}
+
+uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
+    if (minc) {
+        return transfer(transmitBuf, NULL, length);
+    } else {
+        repeatTransmitData = transmitBuf[0];
+        return transfer((uint8_t*)NULL, NULL, length);
+    }
+}
+
+static void stm32SpiDmaFinished(SPI_HandleTypeDef *hspi) {
+    for(int i=0; i<maxUsedCallback; i++) {
+        if (spiCallbackInstances[i] == hspi->Instance) {
+            spiClass[i]->repeatTransmitData = 0xFFFF;
+
+            if (spiClass[i]->callback != NULL) {
+                spiClass[i]->callback();
+            }
+            spiClass[i]->dmaDone = true;
+        }
+    }
+}
+
+extern "C" void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef *hspi) {
+    stm32SpiDmaFinished(hspi);
 }
 
 extern "C" void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
-    // Called at the end of DMA
+    stm32SpiDmaFinished(hspi);
 }
-
-#endif

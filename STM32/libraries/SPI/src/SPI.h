@@ -8,6 +8,17 @@
 #define SPI_HAS_OLD_DMATRANSFER
 #endif
 
+// SPI_HAS_EXTENDED_TRANSFER means SPI has
+//   - transfer(uint8_t data, uint8_t *rxBuffer, size_t count)
+//   - transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count)
+#define SPI_HAS_EXTENDED_TRANSFER
+
+// SPI_HAS_EXTENDED_NONBLOCKING_TRANSFER means SPI has
+//   - implies SPI_HAS_EXTENDED_TRANSFER
+//   - transfer(uint8_t data, uint8_t *rxBuffer, size_t count, callback)
+//   - transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, callback)
+#define SPI_HAS_EXTENDED_NONBLOCKING_TRANSFER
+
 // SPI_HAS_TRANSACTION means SPI has
 //   - beginTransaction()
 //   - endTransaction()
@@ -64,7 +75,7 @@ class SPISettings {
     uint8_t dataMode;
 };
 
-
+typedef void (*spi_callback_type)();
 
 class SPIClass {
   public:
@@ -97,13 +108,42 @@ class SPIClass {
     uint8_t transfer(uint8_t data);
     uint16_t transfer16(uint16_t data);
     void transfer(uint8_t *buf, size_t count);
-	uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);
-	uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = 1);
+
+
+    bool transfer(uint8_t data, uint8_t *rxBuffer, size_t count) {
+        repeatTransmitData = data;
+        if (transfer((uint8_t*) NULL, rxBuffer, count, NULL)) {
+            flush();
+            return true;
+        }
+        return false;
+    }
+    bool transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count) {
+        if (transfer(txBuffer, rxBuffer, count, NULL)) {
+            flush();
+            return true;
+        }
+        return false;
+    }
+    bool transfer(uint8_t data, uint8_t *rxBuffer, size_t count, spi_callback_type callback) {
+        repeatTransmitData = data;
+        return transfer((uint8_t*) NULL, rxBuffer, count, callback);
+    }
+    bool transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, spi_callback_type callback);
+
+    void flush(void);
+    bool done(void);
+
+	uint8_t __attribute__ ((deprecated)) dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);
+	uint8_t __attribute__ ((deprecated)) dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = 1);
 
 
     SPI_HandleTypeDef spiHandle = {};
 
     uint16_t repeatTransmitData = 0XFFFF;
+    spi_callback_type callback;
+
+    volatile bool dmaDone = false;
 
   private:
     uint32_t apb_freq = 0;
