@@ -25,6 +25,10 @@
 
 #if defined(STM32F2) || defined(STM32F4) || defined(STM32F7)
 #include "stm32_dma_F2F4F7.h"
+#elif defined(STM32F0) || defined(STM32F1) || defined(STM32F3) || defined(STM32L1)
+#include "stm32_dma_F0F1F3L1.h"
+#else
+#error "Unknown chip"
 #endif
 
 //8 handles for DMA1, 8 handles for DMA2
