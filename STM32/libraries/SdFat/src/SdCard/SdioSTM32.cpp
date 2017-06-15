@@ -3,7 +3,7 @@
 
 #include "SdFat.h"
 
-#if defined(ARDUINO_ARCH_STM32) && (defined(SDIO) || defined(SDMMC1))
+#if defined(ARDUINO_ARCH_STM32) && (defined(SD_InitTypeDef))
 
 #include "SDIO.h"
 

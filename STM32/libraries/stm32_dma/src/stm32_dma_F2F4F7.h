@@ -20,12 +20,12 @@ const dma_request_to_instance_t dmaRequestToStream[] = {
     {SPI3, SPI_RX, DMA1_Stream0, DMA_CHANNEL_0, 0, DMA1_Stream0_IRQn},
 #endif
 
-#ifdef SDIO
+#if defined(SDIO) && defined(SD_InitTypeDef)
     {SDIO, SDIO_RXTX, DMA2_Stream6, DMA_CHANNEL_4, 6 + 8, DMA2_Stream6_IRQn},
     {SDIO, SDIO_RXTX, DMA2_Stream3, DMA_CHANNEL_4, 3 + 8, DMA2_Stream3_IRQn},
 #endif
 
-#ifdef SDMMC1
+#if defined(SDMMC1) && defined(SD_InitTypeDef)
     {SDMMC1, SDIO_RXTX, DMA2_Stream6, DMA_CHANNEL_4, 6 + 8, DMA2_Stream6_IRQn},
     {SDMMC1, SDIO_RXTX, DMA2_Stream3, DMA_CHANNEL_4, 3 + 8, DMA2_Stream3_IRQn},
 #endif
