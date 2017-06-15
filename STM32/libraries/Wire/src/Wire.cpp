@@ -57,7 +57,7 @@ void TwoWire::begin(void) {
     handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
     handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
-    setClock(100000);
+    setClock(400000);
 }
 
 void TwoWire::begin(uint8_t address) {
@@ -106,7 +106,7 @@ void TwoWire::begin(uint8_t address) {
     handle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
     handle.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
 
-    setClock(100000);
+    setClock(400000);
     HAL_I2C_Slave_Receive_IT(&handle, &slaveBuffer, 1);
 
     //TODO rewrite IRQ handling to not use HAL_I2C_EV_IRQHandler, so F1 can also work
