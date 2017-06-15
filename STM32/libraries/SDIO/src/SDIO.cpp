@@ -165,10 +165,9 @@ uint8_t SDIOClass::end() {
 }
 
 uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
-    if (((uint32_t)dst & 0x3U) != 0){
-        while (1); //Hang here, dst was not aligned to word, this is a problem
-    }
-    if (!_useDMA){
+    bool aligned = ((uint32_t)dst & 0x3U) == 0;
+
+    if (!_useDMA || !aligned) {
         state = HAL_SD_ReadBlocks(&hsd, dst, block, nb, (uint32_t)sd_timeout);
 
         if (state != HAL_OK) {
@@ -218,9 +217,8 @@ uint8_t SDIOClass::readBlocks(uint32_t block, uint8_t* dst, size_t nb) {
 }
 
 uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
-    if (((uint32_t)src & 0x3) !=0){
-        while (1); //Hang here, src was not aligned to word, this is a problem
-    }
+    bool aligned = ((uint32_t)src & 0x3U) == 0;
+
     uint32_t tickstart = HAL_GetTick();
     while (!(cardStatus() & SDCARD_STATUS_READY_BIT)) {
         SDMMC_CmdStopTransfer(hsd.Instance);
@@ -240,7 +238,7 @@ uint8_t SDIOClass::writeBlocks(uint32_t block, const uint8_t* src, size_t nb) {
     }
     */
 
-    if (!_useDMA){
+    if (!_useDMA || !aligned) {
         state = HAL_SD_WriteBlocks(&hsd,(uint8_t*) src, block, (uint32_t) nb, sd_timeout);
 
         if (state != HAL_OK) {
