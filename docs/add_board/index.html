@@ -199,21 +199,19 @@
     
         <li class="main active"><a href="#add-your-board">Add your board:</a></li>
         
-            <li><a href="#1-create-a-copy-of-the-stm32variantstemplate-folder-with-a-name-of-your-choice">1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice.</a></li>
+            <li><a href="#1-create-a-copy-of-the-stm32variantsxxx-folder-with-a-name-of-your-choice">1. Create a copy of the STM32/variants/xxx folder with a name of your choice.</a></li>
         
             <li><a href="#2-edit-the-ldscriptld-file">2. Edit the ldscript.ld file</a></li>
         
             <li><a href="#3-edit-the-varianth-file">3. Edit the variant.h file</a></li>
         
-            <li><a href="#4-edit-the-variantcpp-file">4. Edit the variant.cpp file</a></li>
+            <li><a href="#4-edit-the-variantc-file">4. Edit the variant.c file</a></li>
         
-            <li><a href="#5-edit-the-systemclock_configc-file">5. Edit the systemclock_config.c file</a></li>
+            <li><a href="#5-edit-the-boardstxt-file">5. Edit the boards.txt file</a></li>
         
-            <li><a href="#6-edit-the-boardstxt-file">6. Edit the boards.txt file</a></li>
+            <li><a href="#6-restart">6. Restart</a></li>
         
-            <li><a href="#7-restart">7. Restart</a></li>
-        
-            <li><a href="#8-run-the-blink-example-on-your-new-board">8. Run the blink example on your new board</a></li>
+            <li><a href="#7-run-the-blink-example-on-your-new-board">7. Run the blink example on your new board</a></li>
         
     
     
@@ -222,38 +220,32 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="add-your-board">Add your board:</h1>
-<h2 id="1-create-a-copy-of-the-stm32variantstemplate-folder-with-a-name-of-your-choice">1. Create a copy of the STM32/variants/TEMPLATE folder with a name of your choice.</h2>
-<p>TODO create TEMPLATE, for now just use an existing one</p>
+<h2 id="1-create-a-copy-of-the-stm32variantsxxx-folder-with-a-name-of-your-choice">1. Create a copy of the STM32/variants/xxx folder with a name of your choice.</h2>
+<p>Use one that is the most similar to your board</p>
 <h2 id="2-edit-the-ldscriptld-file">2. Edit the ldscript.ld file</h2>
 <ol>
 <li>Change the _estack to point to the end of RAM</li>
 <li>FLASH LENGTH to be the size of RAM of the microcontroller</li>
 <li>RAM LENGTH to be the size of RAM of the microcontroller</li>
 </ol>
-<p>TODO CCRAM? SDRAM?</p>
+<p>TODO CCRAM, SDRAM.</p>
 <h2 id="3-edit-the-varianth-file">3. Edit the variant.h file</h2>
 <ol>
-<li>Copy the <code>enum {</code>... from <code>system/STM32XX/stm32_chip/stm32_STM32XXXXXX.h</code> file. </li>
-<li>If the board has pin name - pin number assigments (for example arduino headers), rearrange the enum accordingly.</li>
 <li>Change LED_BUILTIN, MOSI, MISO... macros to point to the primary LED, primary SPI, primary I2C pins.</li>
 <li>Add board specific macros if the board has extra leds, buttons, SPI CS select lines etc...</li>
+<li>If the board has pin name - pin number assigments (for example arduino headers), Copy the VARIANT_PIN_LIST_DEFAULT from <code>system/STM32XX/stm32_chip/stm32_STM32XXXXXX.h</code> file, rename to VARIANT_PIN_LIST, and rearrange accordingly.</li>
 </ol>
-<h2 id="4-edit-the-variantcpp-file">4. Edit the variant.cpp file</h2>
-<ol>
-<li>Copy the <code>const stm32_port_pin_type variant_pin_list[] = {</code> from <code>system/STM32XX/stm32_chip/stm32_STM32XXXXXX.h</code> file.</li>
-<li>Rearrange to be the same as <code>enum {</code> in <code>variant.h</code></li>
-</ol>
-<h2 id="5-edit-the-systemclock_configc-file">5. Edit the systemclock_config.c file</h2>
+<h2 id="4-edit-the-variantc-file">4. Edit the variant.c file</h2>
 <ol>
 <li>Run STM32CubeMX, select the chip for your board</li>
 <li>If the board has external crystal, set RCC HSE to crystal. In clock configuration, set PLL Source to HSE, set HSE to the frequency of the board crystal.</li>
 <li>Set some peripherals (SPI, I2C, SDIO, USB, ...), so that the clock configuration will generate extra code needed for those peripherals, and bounds check the frequencies.</li>
 <li>Go to clock configuration, set everything to maximum :), let CubeMX figure out the rest.</li>
 <li>Click generate. Set toolchain/IDE to SW4STM32. Clik OK</li>
-<li>From the generated src/main.c, copy <code>void SystemClock_Config(void) {</code> into your <code>variant/.../systemclock_config.c</code></li>
+<li>From the generated src/main.c, copy <code>void SystemClock_Config(void) {</code> into your <code>variant/.../variant.c</code></li>
 </ol>
-<h2 id="6-edit-the-boardstxt-file">6. Edit the boards.txt file</h2>
-<p>TODO create template. For now, copy an existing board</p>
+<h2 id="5-edit-the-boardstxt-file">5. Edit the boards.txt file</h2>
+<p>Copy one that is the most similar to your board</p>
 <ol>
 <li>Rename the board</li>
 <li>Change <code>build.mcu=</code> to your cortex-mX version</li>
@@ -263,9 +255,9 @@
 <li>If the external crystal is not the board default in <code>system/STM32XX/HAL_SRC/system_stm32XXxx.c</code>, add <code>-DHSE_VALUE=8000000</code> to <code>xxx.build.extra_flags</code></li>
 <li>TODO explain upload / usb / serial menu options</li>
 </ol>
-<h2 id="7-restart">7. Restart</h2>
+<h2 id="6-restart">6. Restart</h2>
 <p>Restart Arduino IDE</p>
-<h2 id="8-run-the-blink-example-on-your-new-board">8. Run the blink example on your new board</h2>
+<h2 id="7-run-the-blink-example-on-your-new-board">7. Run the blink example on your new board</h2>
 <p>Run examples / basic / blink</p></div>
         </div>
 

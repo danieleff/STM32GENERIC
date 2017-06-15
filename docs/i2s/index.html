@@ -210,13 +210,13 @@
         
             <li><a href="#uint8_t-i2sclassbegini2s_mode_t-mode-uint32_t-samplerate-uint8_t-bitspersample">uint8_t I2SClass::begin(i2s_mode_t mode, uint32_t sampleRate, uint8_t bitsPerSample);</a></li>
         
-            <li><a href="#writeuint16_t-data">write(uint16_t data);</a></li>
+            <li><a href="#writeint16_t-data">write(int16_t data);</a></li>
         
-            <li><a href="#write32uint32_t-data">write32(uint32_t data);</a></li>
+            <li><a href="#writeint16_t-data-uint16_t-size">write(int16_t *data, uint16_t size);</a></li>
         
-            <li><a href="#writeuint16_t-data-uint16_t-size">write(uint16_t *data, uint16_t size);</a></li>
+            <li><a href="#setbufferuint16_t-buffer-int-buffersize">setBuffer(uint16_t *buffer, int bufferSize);</a></li>
         
-            <li><a href="#writeuint32_t-data-uint16_t-size">write(uint32_t *data, uint16_t size);</a></li>
+            <li><a href="#int-getbuffersize">int getBufferSize();</a></li>
         
             <li><a href="#stm32setsduint8_t-pin">stm32SetSD(uint8_t pin);</a></li>
         
@@ -233,7 +233,8 @@
                 <div class="col-md-9" role="main">
 
 <h2 id="i2s">I2S</h2>
-<p>Not to be confused with <a href="../i2c/">I2C</a>, is a protocol for connecting to audio devices.</p>
+<p>Not to be confused with <a href="../i2c/">I2C</a>, is a protocol for connecting to audio devices.
+The samples are sent continuously in the background using DMA transfer. </p>
 <h2 id="this-library-is-in-beta-and-the-api-implementation-is-subject-to-change"><strong>This library is in beta, and the API / implementation is subject to change!</strong></h2>
 <p>To use this library, include it in your code:</p>
 <pre><code class="c++">#include &quot;I2S.h&quot;
@@ -256,16 +257,16 @@ I2SClass i2s(...);
 <ul>
 <li>mode: one of I2S_PHILIPS_MODE,I2S_RIGHT_JUSTIFIED_MODE, I2S_LEFT_JUSTIFIED_MODE</li>
 <li>sampleRate: between 8000 and 96000</li>
-<li>bitsPerSample: 16, 24 or 32</li>
+<li>bitsPerSample: 16. <strong> (Note: 24 or 32 bit per sample currently not working!) </strong></li>
 </ul>
-<h4 id="writeuint16_t-data"><strong><code>write(uint16_t data);</code></strong></h4>
-<p>Send 16 bit data. <strong>Currently in blocking mode</strong></p>
-<h4 id="write32uint32_t-data"><strong><code>write32(uint32_t data);</code></strong></h4>
-<p>Send 32 bit data. <strong>Currently in blocking mode</strong></p>
-<h4 id="writeuint16_t-data-uint16_t-size"><strong><code>write(uint16_t *data, uint16_t size);</code></strong></h4>
-<p>Send 16 bit data. <strong>Currently in blocking mode</strong></p>
-<h4 id="writeuint32_t-data-uint16_t-size"><strong><code>write(uint32_t *data, uint16_t size);</code></strong></h4>
-<p>Send 32 bit data. <strong>Currently in blocking mode</strong></p>
+<h4 id="writeint16_t-data"><strong><code>write(int16_t data);</code></strong></h4>
+<p>Send 16 bit data. Blocks if there is no space left in the internal buffer.</p>
+<h4 id="writeint16_t-data-uint16_t-size"><strong><code>write(int16_t *data, uint16_t size);</code></strong></h4>
+<p>Send 16 bit data. Blocks if there is no space left in the internal buffer.</p>
+<h4 id="setbufferuint16_t-buffer-int-buffersize"><strong><code>setBuffer(uint16_t *buffer, int bufferSize);</code></strong></h4>
+<p>Set the DMA transfer buffer size. The default buffer is 2048 * 16 bits.</p>
+<h4 id="int-getbuffersize"><strong><code>int getBufferSize();</code></strong></h4>
+<p>Returns size of the transfer buffer.</p>
 <h4 id="stm32setsduint8_t-pin"><strong><code>stm32SetSD(uint8_t pin);</code></strong></h4>
 <p>Set the alternative SD pin used by this I2S.</p>
 <p><strong>This method must be called before begin()!</strong></p>

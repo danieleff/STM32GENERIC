@@ -56,11 +56,7 @@ Example:
 SPI.beginTransaction(SPISettings(16000000, MSBFIRST, SPI_MODE0));
 ```
 
-TODO disable interrupt in pin if `usingInterrupt` was used
-
 #### **`endTransaction();`**
-
-TODO enable interrupt in pin if `usingInterrupt` was used
 
 #### **`uint8_t transfer(uint8_t data);`**
 
@@ -74,22 +70,32 @@ Send a 16 bits on SPI, and return the received 16 bit data.
 
 Send the data in the buffer. The received data is stored in the same buffer.
 
-#### **`usingInterrupt();`**
+#### **`transfer(tx, rxBuffer, size_t count[, callback]);`**
 
-TODO not yet implemented
+`tx`|
+---              |---
+uint8_t txData   | the same byte is sent `count` times
+uint8_t *txBuffer| the buffer is sent
+NULL             | 0xFF is sent `count` times
 
-#### **`uint8_t dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc = true);`**
+`rxBuffer`|
+---               |---
+uint8_t *rxBuffer | the received data is stored in the rxBuffer
+NULL              | the received data is ignored
 
-Send data using DMA in **blocking mode**.
+`callback`|
+---                | ---
+parameter not set  | transfer is blocking
+NULL               | transfer is **non-blocking**, sends the data using DMA, and returns immediately.
+function pointer   | transfer is **non-blocking**, sends the data using DMA, and returns immediately.  At the end of the transfer, the callback function is called in interrupt.
 
-* minc: false - only send the first byte of the `transmitBuf`, `length` times
-* minc: true - send `length` bytes from the `transmitBuf`
+#### **`void flush(void);`**
 
-#### **`uint8_t dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length);`**
+Waits for the last non-blocking transfer to complete.
 
-Send and receive data using DMA in **blocking mode**.
+#### **`bool done(void);`**
 
-If `transmitBuf` is NULL, `0xFF` is transmitted instead.
+Returns true if the last non-blocking transfer is completed.
 
 #### **`stm32SetMOSI(uint8_t pin);`**
 
