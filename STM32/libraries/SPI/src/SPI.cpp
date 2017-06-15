@@ -2,6 +2,8 @@
 
 #include "variant.h"
 
+#include "stm32_dma.h"
+
 static uint8_t spi_ff_buffer = 0XFF;
 
 #if defined(MOSI) || defined(MISO) || defined(SCK)
@@ -20,8 +22,6 @@ void SPIClass::begin() {
 	spiHandle.Init.Direction = SPI_DIRECTION_2LINES;
 	spiHandle.Init.DataSize = SPI_DATASIZE_8BIT;
 	spiHandle.Init.NSS = SPI_NSS_SOFT;
-	spiHandle.hdmatx = &hdma_spi_tx;
-	spiHandle.hdmarx = &hdma_spi_rx;
 
 	__HAL_RCC_DMA1_CLK_ENABLE();
 #ifdef __HAL_RCC_DMA2_CLK_ENABLE
@@ -63,54 +63,9 @@ void SPIClass::begin() {
 
     //////////////// DMA
 
-    #if defined(STM32F1) || defined(STM32F4)
+    stm32DmaAcquire(&hdma_spi_tx, SPI_TX, spiHandle.Instance, true);
+    stm32DmaAcquire(&hdma_spi_rx, SPI_RX, spiHandle.Instance, true);
 
-    _DMA_Instance_Type *_StreamTX;
-    _DMA_Instance_Type *_StreamRX;
-    uint32_t _ChannelTX;
-    uint32_t _ChannelRX;
-
-    #ifdef SPI1
-        if (spiHandle.Instance== SPI1) {
-            _StreamTX = SPIx_DMA(SPI1_StreamTX);
-            _StreamRX = SPIx_DMA(SPI1_StreamRX);
-            _ChannelTX = SPI1_ChannelTX;
-            _ChannelRX = SPI1_ChannelRX;
-            /*
-             * Not used yet, still just polling
-             */
-            //_SPISetDmaIRQ(SPI1);
-        }
-    #endif
-    #ifdef SPI2
-        else if (spiHandle.Instance == SPI2) {
-            _StreamTX = SPIx_DMA(SPI2_StreamTX);
-            _StreamRX = SPIx_DMA(SPI2_StreamRX);
-            _ChannelTX = SPI2_ChannelTX;
-            _ChannelRX = SPI2_ChannelRX;
-            /*
-             * Not used yet, still just polling
-             */
-            //_SPISetDmaIRQ(SPI2);
-        }
-    #endif
-    #ifdef SPI3
-        else if (spiHandle.Instance == SPI3) {
-            _StreamTX = SPIx_DMA(SPI3_StreamTX);
-            _StreamRX = SPIx_DMA(SPI3_StreamRX);
-            _ChannelTX = SPI3_ChannelTX;
-            _ChannelRX = SPI3_ChannelRX;
-            /*
-             * Not used yet, still just polling
-             */
-            //_SPISetDmaIRQ(SPI3);
-        }
-    #endif
-    // TODO SPI4/5/6
-
-	hdma_spi_tx.Instance = _StreamTX;
-	hdma_spi_tx.Parent = &spiHandle;
-	_SPISetDMAChannel(hdma_spi_tx, _ChannelTX);
 	hdma_spi_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
 	hdma_spi_tx.Init.PeriphInc = DMA_PINC_DISABLE;
 	hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
@@ -119,18 +74,7 @@ void SPIClass::begin() {
 	hdma_spi_tx.Init.Mode = DMA_NORMAL;
 	hdma_spi_tx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
 	_SPISetDMAFIFO(hdma_spi_tx);
-/*
-	hdma_spi_tx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
-	hdma_spi_tx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-    hdma_spi_tx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
-    hdma_spi_tx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-    hdma_spi_tx.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_spi_tx.Init.PeriphBurst = DMA_PBURST_SINGLE;
-*/
 
-	hdma_spi_rx.Instance = _StreamRX;
-	hdma_spi_rx.Parent = &spiHandle;
-	_SPISetDMAChannel(hdma_spi_rx,_ChannelRX);
 	//hdma_spi_rx.Init.Channel = _ChannelRX;
 	hdma_spi_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
 	hdma_spi_rx.Init.PeriphInc = DMA_PINC_DISABLE;
@@ -140,15 +84,9 @@ void SPIClass::begin() {
 	hdma_spi_rx.Init.Mode = DMA_NORMAL;
 	hdma_spi_rx.Init.Priority = DMA_PRIORITY_VERY_HIGH;
 	_SPISetDMAFIFO(hdma_spi_rx);
-	/*
-	hdma_spi_rx.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
-    hdma_spi_rx.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
-    hdma_spi_rx.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-    hdma_spi_rx.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_spi_rx.Init.PeriphBurst = DMA_PBURST_SINGLE;
-	*/
 
-    #endif
+	__HAL_LINKDMA(&spiHandle, hdmatx, hdma_spi_tx);
+	__HAL_LINKDMA(&spiHandle, hdmarx, hdma_spi_rx);
 
 	stm32AfSPIInit(spiHandle.Instance, mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
 
@@ -246,6 +184,12 @@ uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_
 	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, receiveBuf, length, 1000);
 	// DMA handles configured in Begin.
 	if (length == 0) return 0;
+
+    #ifdef STM32F1
+	    __HAL_DMA_DISABLE(&hdma_spi_tx);
+	    __HAL_DMA_DISABLE(&hdma_spi_rx);
+    #endif
+
 	if (!transmitBuf) {
 		transmitBuf = &spi_ff_buffer;
 		hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
@@ -257,19 +201,18 @@ uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_
 	HAL_DMA_Init(&hdma_spi_tx);
 	HAL_DMA_Init(&hdma_spi_rx);
 
-	/*
-	 * We dont use interrupts here.
-	 */
-
 	HAL_SPI_TransmitReceive_DMA(&spiHandle, transmitBuf, receiveBuf, length);
-	HAL_DMA_PollForTransfer(&hdma_spi_tx, HAL_DMA_FULL_TRANSFER, 10000);
-	HAL_DMA_PollForTransfer(&hdma_spi_rx, HAL_DMA_FULL_TRANSFER, 10000);
-	HAL_DMA_IRQHandler(&hdma_spi_tx);
-	HAL_DMA_IRQHandler(&hdma_spi_rx);
-	spiHandle.State = HAL_SPI_STATE_READY;
+
+	while (spiHandle.State != HAL_SPI_STATE_READY);
+
 	return 0;
 }
 uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
+
+    #ifdef STM32F1
+        __HAL_DMA_DISABLE(&hdma_spi_tx);
+    #endif
+
 	//HAL_SPI_TransmitReceive(&spiHandle, transmitBuf, buf, length, 1000);
 	//Need to set TX DMA handle.
 	if (minc == 1){
@@ -281,10 +224,14 @@ uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
 	HAL_DMA_Init(&hdma_spi_tx);
 
 	HAL_SPI_Transmit_DMA(&spiHandle, transmitBuf, length);
-	HAL_DMA_PollForTransfer(&hdma_spi_tx, HAL_DMA_FULL_TRANSFER, 10000);
-	HAL_DMA_IRQHandler(&hdma_spi_tx);
-	spiHandle.State = HAL_SPI_STATE_READY;
+
+	while (spiHandle.State != HAL_SPI_STATE_READY);
+
 	return 0;
+}
+
+extern "C" void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
+    // Called at the end of DMA
 }
 
 #endif
