@@ -102,6 +102,9 @@ class SPIClass {
 
 
     SPI_HandleTypeDef spiHandle = {};
+
+    uint16_t repeatTransmitData = 0XFFFF;
+
   private:
     uint32_t apb_freq = 0;
 

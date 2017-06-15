@@ -4,8 +4,6 @@
 
 #include "stm32_dma.h"
 
-static uint8_t spi_ff_buffer = 0XFF;
-
 #if defined(MOSI) || defined(MISO) || defined(SCK)
 	SPIClass SPI(SPI1, MOSI, MISO, SCK);
 #else
@@ -191,7 +189,7 @@ uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_
     #endif
 
 	if (!transmitBuf) {
-		transmitBuf = &spi_ff_buffer;
+		transmitBuf = (uint8_t*)&repeatTransmitData;
 		hdma_spi_tx.Init.MemInc = DMA_MINC_DISABLE;
 	} else {
 		//Need to change the MINC mode since dmaSend with MINC 0 or Null transmitBuf may have been called last
