@@ -236,6 +236,7 @@ class SPIClass {
 };
 
 inline uint8_t SPIClass::transfer(uint8_t data) {
+    while(__HAL_SPI_GET_FLAG(&spiHandle, SPI_FLAG_TXE) == RESET);
 
 	*(volatile uint8_t*)&spiHandle.Instance->DR = data;
 
