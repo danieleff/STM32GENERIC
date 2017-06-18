@@ -377,12 +377,15 @@ HAL_StatusTypeDef HAL_SD_InitCard(SD_HandleTypeDef *hsd)
   /* Set Power State to ON */
   SDIO_PowerState_ON(hsd->Instance);
   
+  // danieleff: Without this, it hangs in SD_PowerON / SDMMC_CmdGoIdleState, timeouts waiting for SDIO_FLAG_CMDSENT
+  HAL_Delay(10U);
+  
   /* Enable SDIO Clock */
   __HAL_SD_ENABLE(hsd);
   
   /* Required power up waiting time before starting the SD initialization 
   sequence */
-  HAL_Delay(2U);
+  HAL_Delay(10U);
   
   /* Identify card operating voltage */
   errorstate = SD_PowerON(hsd);
