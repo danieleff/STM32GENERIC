@@ -4,6 +4,7 @@ menu.serial=Serial communication
 menu.subboard=Specific Board
 menu.upload_method=Upload method
 menu.usb=USB
+menu.jtag_swd=JTAG/SWD debugging
 
 
 ################################################################################
@@ -76,6 +77,12 @@ MapleMini_F103CB.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Se
 MapleMini_F103CB.menu.serial.SerialUART1=SerialUART1
 MapleMini_F103CB.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
+MapleMini_F103CB.menu.jtag_swd.Disabled=Disabled [debug pins free]
+MapleMini_F103CB.menu.jtag_swd.Disabled.build.extra_flags_jtag=-DMENU_DEBUG_DISABLED
+MapleMini_F103CB.menu.jtag_swd.SWD=SWD [debug pins reserved: 21(PA14), 22(PA13)]
+MapleMini_F103CB.menu.jtag_swd.SWD.build.extra_flags_jtag=-DMENU_DEBUG_SWD
+MapleMini_F103CB.menu.jtag_swd.JTAG=JTAG [debug pins reserved: 18(PB4), 19(PB3), 20(PA15), 21(PA14), 22(PA13)]
+MapleMini_F103CB.menu.jtag_swd.JTAG.build.extra_flags_jtag=-DMENU_DEBUG_JTAG
 
 ################################################################################
 # BluePill board
@@ -134,6 +141,13 @@ BluePill.menu.serial.SerialUSB=SerialUSB
 BluePill.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
 BluePill.menu.serial.SerialUART1=SerialUART1
 BluePill.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+
+BluePill.menu.jtag_swd.SWD=SWD [debug pins reserved: IO(PA13), CLK(PA14)]
+BluePill.menu.jtag_swd.SWD.build.extra_flags_jtag=-DMENU_DEBUG_SWD
+BluePill.menu.jtag_swd.JTAG=JTAG [debug pins reserved: IO(PA13), CLK(PA14), PA15, PB3, PB4]
+BluePill.menu.jtag_swd.JTAG.build.extra_flags_jtag=-DMENU_DEBUG_JTAG
+BluePill.menu.jtag_swd.Disabled=Disabled [debug pins free]
+BluePill.menu.jtag_swd.Disabled.build.extra_flags_jtag=-DMENU_DEBUG_DISABLED
 
 ################################################################################
 # Generic F103RF board

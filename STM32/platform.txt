@@ -51,7 +51,8 @@ build.extra_flags=
 build.extra_flags_usb=
 build.extra_flags_serial=
 build.extra_flags_serial_auto=
-build.extra_flags_menu={build.extra_flags_usb} {build.extra_flags_serial} {build.extra_flags_serial_auto}
+build.extra_flags_jtag=
+build.extra_flags_menu={build.extra_flags_usb} {build.extra_flags_serial} {build.extra_flags_serial_auto} {build.extra_flags_jtag}
 build.ldscript=ldscript.ld
 
 # These can be overridden in platform.local.txt
