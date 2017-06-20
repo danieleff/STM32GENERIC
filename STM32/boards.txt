@@ -360,6 +360,38 @@ NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
 NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
 NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 
+#################################### Nucleo-144 ############################################
+# NUCLEO 144 board
+
+NUCLEO_144.name=Nucleo-144
+NUCLEO_144.vid.0=0x0483
+NUCLEO_144.pid.0=0x374B
+
+NUCLEO_144.build.core=arduino
+NUCLEO_144.build.board=NUCLEO_144
+NUCLEO_144.upload.tool=nucleoFlasher
+
+NUCLEO_144.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART3
+
+
+NUCLEO_144.menu.subboard.Nucleo_F767ZI=Nucleo-F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_size=2097152
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_data_size=524288
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=((uint32_t)8000000)
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.series=STM32F7
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.variant=NUCLEO_F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.extra_flags=-DSTM32F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.massstorage_drive=EVAL-FUCKST
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.f_cpu=216000000L
+
+
+NUCLEO_144.menu.upload_method.MassStorageMethod=Mass Storage
+NUCLEO_144.menu.upload_method.MassStorageMethod.upload.protocol=
+NUCLEO_144.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+NUCLEO_144.menu.upload_method.STLinkMethod=STLink
+NUCLEO_144.menu.upload_method.STLinkMethod.upload.protocol=STLink
+NUCLEO_144.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 ################################################################################
 # Discovery L053C8 board
