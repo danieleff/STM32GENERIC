@@ -259,15 +259,19 @@ extern void DMA2_Channel3_IRQHandler() {
 }
 
 // F1
+#ifndef DMA2_Channel4_5_IRQHandler  //for f1 by huaweiwx   2017.6.20
 extern void DMA2_Channel4_5_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4 + 8]);
     HAL_DMA_IRQHandler(dmaHandles[5 + 8]);
 }
+#endif
 
 // F1, F3, L1, L4
+#ifdef DMA2_Channel4_IRQHandler     //for f1 by huaweiwx  2017.6.20
 extern void DMA2_Channel4_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4 + 8]);
 }
+#endif
 
 // F1, F3, L1, L4
 extern void DMA2_Channel5_IRQHandler() {
