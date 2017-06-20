@@ -26,6 +26,7 @@ TIM_HandleTypeDef *handle;
 
 static uint32_t counter;
 static uint32_t waitCycles;
+static uint8_t analogWriteResolutionBits = 8;
 
 const uint32_t TIMER_MAX_CYCLES = UINT16_MAX;
 
@@ -51,6 +52,10 @@ typedef struct {
 static stm32_pwm_type pwm_config[sizeof(variant_pin_list) / sizeof(variant_pin_list[0])];
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin);
+
+void analogWriteResolution(int bits) {
+    analogWriteResolutionBits = bits;
+}
 
 void analogWrite(uint8_t pin, int value) {
     static TIM_HandleTypeDef staticHandle;
@@ -98,7 +103,7 @@ void analogWrite(uint8_t pin, int value) {
             pwm_config[i].port = variant_pin_list[pin].port;
             pwm_config[i].pin_mask = variant_pin_list[pin].pin_mask;
             pwm_config[i].frequency = HAL_RCC_GetPCLK2Freq() / PWM_FREQUENCY_HZ;
-            pwm_config[i].duty_cycle = pwm_config[i].frequency * value / 256;
+            pwm_config[i].duty_cycle = pwm_config[i].frequency * value / (1 << analogWriteResolutionBits);
             break;
         }
     }
