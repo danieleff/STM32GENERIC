@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <bit_constants.h>
 
 // #include <avr/pgmspace.h>
 // #include <avr/io.h>
