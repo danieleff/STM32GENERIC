@@ -17,6 +17,7 @@ void setup() {
   BSP_LED_Init(LED4); 
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
   BSP_SDRAM_Init();
+  BSP_GYRO_Init();
   
   BSP_LCD_Init();
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
