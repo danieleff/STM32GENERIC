@@ -45,8 +45,9 @@ void pwm_callback();
 typedef struct {
     GPIO_TypeDef *port;
     uint32_t pin_mask;
-    uint32_t frequency;
-    uint32_t duty_cycle;
+    uint32_t waveLengthCycles;
+    uint32_t dutyCycle;
+    int32_t counterCycles;
 } stm32_pwm_type;
 
 static stm32_pwm_type pwm_config[sizeof(variant_pin_list) / sizeof(variant_pin_list[0])];
@@ -57,7 +58,7 @@ void analogWriteResolution(int bits) {
     analogWriteResolutionBits = bits;
 }
 
-void analogWrite(uint8_t pin, int value) {
+void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
     static TIM_HandleTypeDef staticHandle;
 
     if (handle == NULL) {
@@ -102,11 +103,24 @@ void analogWrite(uint8_t pin, int value) {
 
             pwm_config[i].port = variant_pin_list[pin].port;
             pwm_config[i].pin_mask = variant_pin_list[pin].pin_mask;
-            pwm_config[i].frequency = HAL_RCC_GetPCLK2Freq() / PWM_FREQUENCY_HZ;
-            pwm_config[i].duty_cycle = pwm_config[i].frequency * value / (1 << analogWriteResolutionBits);
+            pwm_config[i].waveLengthCycles = HAL_RCC_GetPCLK2Freq() / frequency;
+            pwm_config[i].dutyCycle = pwm_config[i].waveLengthCycles * dutyCycle / (1 << analogWriteResolutionBits);
+
+            if (durationMillis > 0) {
+                pwm_config[i].counterCycles = HAL_RCC_GetPCLK2Freq() / 1000 * durationMillis;
+            }
+
             break;
         }
     }
+}
+
+extern void tone(uint8_t pin, unsigned int frequency, unsigned long durationMillis) {
+    pwmWrite(pin, 1 << (analogWriteResolutionBits - 1), frequency, durationMillis);
+}
+
+void analogWrite(uint8_t pin, int value) {
+    pwmWrite(pin, value, PWM_FREQUENCY_HZ, 0);
 }
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin_mask) {
@@ -138,25 +152,35 @@ void pwm_callback() {
             __HAL_TIM_CLEAR_IT(handle, TIM_IT_UPDATE);
 
             counter += waitCycles;
-            waitCycles = TIMER_MAX_CYCLES;
+            uint32_t nextWaitCycles = TIMER_MAX_CYCLES;
 
             for(size_t i=0; i<sizeof(pwm_config); i++) {
                 if (pwm_config[i].port != NULL) {
-                    if (pwm_config[i].duty_cycle > counter % pwm_config[i].frequency) {
+                    if (pwm_config[i].dutyCycle > counter % pwm_config[i].waveLengthCycles) {
                         pwm_config[i].port->BSRR = pwm_config[i].pin_mask;
-                        waitCycles = min(waitCycles, pwm_config[i].duty_cycle - (counter % pwm_config[i].frequency));
+                        nextWaitCycles = min(nextWaitCycles, pwm_config[i].dutyCycle - (counter % pwm_config[i].waveLengthCycles));
                     } else {
                         pwm_config[i].port->BSRR = pwm_config[i].pin_mask << 16;
-                        period = min(period, 256 - counter % pwm_config[i].frequency);
+                        nextWaitCycles = min(nextWaitCycles, pwm_config[i].waveLengthCycles - counter % pwm_config[i].waveLengthCycles);
+                    }
+
+                    if (pwm_config[i].counterCycles > 0) {
+                        if (pwm_config[i].counterCycles <= (int)waitCycles) {
+                            stm32_pwm_disable(pwm_config[i].port, pwm_config[i].pin_mask);
+                        } else {
+                            pwm_config[i].counterCycles -= waitCycles;
+                        }
                     }
                 } else {
                     break;
                 }
             }
 
-            if (!waitCycles || waitCycles > TIMER_MAX_CYCLES) {
-                waitCycles = TIMER_MAX_CYCLES;
+            if (!nextWaitCycles || nextWaitCycles > TIMER_MAX_CYCLES) {
+                nextWaitCycles = TIMER_MAX_CYCLES;
             }
+            waitCycles = nextWaitCycles;
+
             __HAL_TIM_SET_AUTORELOAD(handle, waitCycles);
         }
     }
