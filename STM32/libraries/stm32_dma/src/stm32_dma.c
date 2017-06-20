@@ -267,7 +267,7 @@ extern void DMA2_Channel4_5_IRQHandler() {
 #endif
 
 // F1, F3, L1, L4
-#ifdef DMA2_Channel4_IRQHandler     //for f1 by huaweiwx  2017.6.20
+#ifndef DMA2_Channel4_IRQHandler     //for f1 by huaweiwx  2017.6.20
 extern void DMA2_Channel4_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4 + 8]);
 }
