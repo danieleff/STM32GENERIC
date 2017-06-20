@@ -22,6 +22,12 @@
 
 #include "stm32_gpio_af.h"
 
+//add by huaweiwx@sina.com  2017.6.4
+#ifdef STM32F1  
+  #ifndef  AFIO_MAPR_SPI3_REMAP
+    #define  __HAL_AFIO_REMAP_SPI3_DISABLE  AF_NO_REMAP
+  #endif
+#endif
 #include CHIP_PERIPHERAL_INCLUDE
 
 GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin) {
@@ -98,7 +104,10 @@ void stm32AfI2SInitWithMck(const SPI_TypeDef *instance,
     stm32AfInit(chip_af_i2s_sd, sizeof(chip_af_i2s_sd) / sizeof(chip_af_i2s_sd[0]), instance, sdPort, sdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
     stm32AfInit(chip_af_i2s_ws, sizeof(chip_af_i2s_ws) / sizeof(chip_af_i2s_ws[0]), instance, wsPort, wsPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
     stm32AfInit(chip_af_i2s_ck, sizeof(chip_af_i2s_ck) / sizeof(chip_af_i2s_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+
+#ifndef STM32_CHIP_NOT_MCK //add by huaweiwx@sina.com 2017.6.4	
     stm32AfInit(chip_af_i2s_mck, sizeof(chip_af_i2s_mck) / sizeof(chip_af_i2s_mck[0]), instance, mckPort, mckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+#endif
 }
 
 #endif
@@ -107,8 +116,8 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin) {
 
-    stm32AfInit(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
     stm32AfInit(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
+    stm32AfInit(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
 }
 
 #ifdef STM32_CHIP_HAS_SDIO
