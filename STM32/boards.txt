@@ -538,7 +538,7 @@ NUCLEO_144.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART3
 NUCLEO_144.menu.subboard.Nucleo_F767ZI=Nucleo-F767ZI
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_size=2097152
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_data_size=524288
-NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=((uint32_t)8000000)
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=8000000
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.series=STM32F7
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.variant=NUCLEO_F767ZI
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.extra_flags=-DSTM32F767ZI
