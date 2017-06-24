@@ -1,12 +1,10 @@
 /**
   ******************************************************************************
-  * @file    stm32f1xx_hal_msp_template.c
+  * @file    stm32f1xx_ll_crc.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    29-April-2016
-  * @brief   HAL BSP module.
-  *          This file template is located in the HAL folder and should be copied 
-  *          to the user folder.
+  * @version V1.1.0
+  * @date    14-April-2017
+  * @brief   CRC LL module driver.
   ******************************************************************************
   * @attention
   *
@@ -34,66 +32,74 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************  
-  */ 
+  ******************************************************************************
+  */
+#if defined(USE_FULL_LL_DRIVER)
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f1xx_hal.h"
+#include "stm32f1xx_ll_crc.h"
+#include "stm32f1xx_ll_bus.h"
 
-/** @addtogroup STM32F1xx_HAL_Driver
+#ifdef  USE_FULL_ASSERT
+#include "stm32_assert.h"
+#else
+#define assert_param(expr) ((void)0U)
+#endif
+
+/** @addtogroup STM32F1xx_LL_Driver
   * @{
   */
 
-/** @defgroup HAL_MSP HAL_MSP
-  * @brief HAL MSP module.
+#if defined (CRC)
+
+/** @addtogroup CRC_LL
   * @{
   */
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
+/* Private types -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+/* Private constants ---------------------------------------------------------*/
+/* Private macros ------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
 
-/** @defgroup HAL_MSP_Exported_Functions HAL MSP Exported Functions
+/* Exported functions --------------------------------------------------------*/
+/** @addtogroup CRC_LL_Exported_Functions
+  * @{
+  */
+
+/** @addtogroup CRC_LL_EF_Init
   * @{
   */
 
 /**
-  * @brief  Initializes the Global MSP.
-  * @retval None
+  * @brief  De-initialize CRC registers (Registers restored to their default values).
+  * @param  CRCx CRC Instance
+  * @retval An ErrorStatus enumeration value:
+  *          - SUCCESS: CRC registers are de-initialized
+  *          - ERROR: CRC registers are not de-initialized
   */
-void HAL_MspInit(void)
+ErrorStatus LL_CRC_DeInit(CRC_TypeDef *CRCx)
 {
+  ErrorStatus status = SUCCESS;
 
-}
+  /* Check the parameters */
+  assert_param(IS_CRC_ALL_INSTANCE(CRCx));
 
-/**
-  * @brief  DeInitializes the Global MSP.
-  * @retval None
-  */
-void HAL_MspDeInit(void)
-{
+  if (CRCx == CRC)
+  {
 
-}
+    /* Reset the CRC calculation unit */
+    LL_CRC_ResetCRCCalculationUnit(CRCx);
 
-/**
-  * @brief  Initializes the PPP MSP.
-  * @retval None
-  */
-void HAL_PPP_MspInit(void)
-{
+    /* Reset IDR register */
+    LL_CRC_Write_IDR(CRCx, 0x00U);
+  }
+  else
+  {
+    status = ERROR;
+  }
 
-}
-
-/**
-  * @brief  DeInitializes the PPP MSP.
-  * @retval None
-  */
-void HAL_PPP_MspDeInit(void)
-{
-
+  return (status);
 }
 
 /**
@@ -107,5 +113,14 @@ void HAL_PPP_MspDeInit(void)
 /**
   * @}
   */
+
+#endif /* defined (CRC) */
+
+/**
+  * @}
+  */
+
+#endif /* USE_FULL_LL_DRIVER */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
