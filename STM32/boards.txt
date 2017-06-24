@@ -204,6 +204,97 @@ Generic103RF.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Serial
 Generic103RF.menu.serial.SerialUART1=SerialUART1
 Generic103RF.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
+###################################### F103Z ##########################################
+F103Z.name=huaweiwx F103Z boards
+F103Z.build.mcu=cortex-m3
+F103Z.build.board=F103Z
+F103Z.build.core=arduino
+F103Z.build.series=STM32F1
+F103Z.build.f_cpu=72000000L
+
+F103Z.menu.subboard.F103ZE1=RedBull(F103ZE)
+F103Z.menu.subboard.F103ZE1.upload.maximum_size=524288
+F103Z.menu.subboard.F103ZE1.upload.maximum_data_size=65536
+F103Z.menu.subboard.F103ZE1.upload.device=STM32F103ZE
+F103Z.menu.subboard.F103ZE1.build.variant=F103Z
+F103Z.menu.subboard.F103ZE1.build.board=REDBULL
+F103Z.menu.subboard.F103ZE1.build.extra_flags=-DSTM32F103ZE
+F103Z.menu.subboard.F103ZE1.build.ldscript=f103xE.ld
+
+F103Z.menu.subboard.F103ZE=GENERIC(STM32F103ZE)
+F103Z.menu.subboard.F103ZE.upload.maximum_size=524288
+F103Z.menu.subboard.F103ZE.upload.maximum_data_size=65536
+F103Z.menu.subboard.F103ZE.upload.device=STM32F103ZE
+F103Z.menu.subboard.F103ZE.build.variant=F103Z
+F103Z.menu.subboard.F103ZE.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZE.build.extra_flags=-DSTM32F103ZE
+F103Z.menu.subboard.F103ZE.build.ldscript=f103xE.ld
+
+F103Z.menu.subboard.F103ZF=GENERIC(STM32F103ZF)
+F103Z.menu.subboard.F103ZF.upload.maximum_size=786432
+F103Z.menu.subboard.F103ZF.upload.maximum_data_size=98304
+F103Z.menu.subboard.F103ZF.upload.device=STM32F103ZF
+F103Z.menu.subboard.F103ZF.build.extra_flags=-DSTM32F103ZF
+F103Z.menu.subboard.F103ZF.build.variant=F103Z
+F103Z.menu.subboard.F103ZF.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZF.build.ldscript=f103xF.ld
+
+F103Z.menu.subboard.F103ZG=GENERIC(STM32F103ZG)
+F103Z.menu.subboard.F103ZG.upload.maximum_size=1048576
+F103Z.menu.subboard.F103ZG.upload.maximum_data_size=98304
+F103Z.menu.subboard.F103ZG.upload.device=STM32F103ZG
+F103Z.menu.subboard.F103ZG.build.extra_flags=-DSTM32F103ZG
+F103Z.menu.subboard.F103ZG.build.series=STM32F1
+F103Z.menu.subboard.F103ZG.build.variant=F103Z
+F103Z.menu.subboard.F103ZG.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZG.build.ldscript=f103xG.ld
+
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+F103Z.menu.upload_method.STLinkMethod=STLink
+F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLink
+F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+F103Z.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.jLinkMethod=JLink
+F103Z.menu.upload_method.jLinkMethod.upload.tool=jlink_upload
+F103Z.menu.upload_method.jLinkMethod.upload.protocol=jlink
+F103Z.menu.upload_method.jLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.MassStorageMethod=Mass Storage [STLINK V2.1]
+F103Z.menu.upload_method.MassStorageMethod.upload.protocol=
+F103Z.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+F103Z.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+F103Z.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+F103Z.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+F103Z.menu.upload_method.BMPMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.serialMethod=Serial [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+F103Z.menu.upload_method.serialMethod.upload.protocol=maple_serial
+F103Z.menu.upload_method.serialMethod.upload.tool=serial_upload
+F103Z.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+
+F103Z.menu.usb.Disabled=Disabled, no USB
+F103Z.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/12]
+F103Z.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+F103Z.menu.usb.SerialMSC=Mass storage
+F103Z.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
+
+F103Z.menu.serial.SerialUART1=SerialUART1
+F103Z.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+F103Z.menu.serial.SerialUSB=SerialUSB
+F103Z.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+F103Z.menu.serial.Automatic=Automatically selected based on upload method
+
+F103Z.menu.jtag_swd.JTAG=JTAG [debug pins reserved: PB4,PB3,PA15,PA14,PA13]
+F103Z.menu.jtag_swd.JTAG.build.extra_flags_jtag=-DMENU_DEBUG_JTAG
+F103Z.menu.jtag_swd.SWD=SWD [debug pins reserved: PA14,PA13]
+F103Z.menu.jtag_swd.SWD.build.extra_flags_jtag=-DMENU_DEBUG_SWD
+F103Z.menu.jtag_swd.Disabled=Disabled [debug pins free]
+F103Z.menu.jtag_swd.Disabled.build.extra_flags_jtag=-DMENU_DEBUG_DISABLED
 ################################################################################
 # BLACK_F407XX board
 
@@ -432,102 +523,6 @@ DISCOVERY_L053C8.menu.serial.SerialUART1=SerialUART1 [Through ST-Link Virtual CO
 DISCOVERY_L053C8.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 DISCOVERY_L053C8.menu.serial.SerialUSB=SerialUSB (USB connector)
 DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-
-###################################### F103Z ##########################################
-F103Z.name=F103Z
-F103Z.build.mcu=cortex-m3
-F103Z.build.board=F103Z
-F103Z.build.core=arduino
-F103Z.build.series=STM32F1
-F103Z.build.f_cpu=72000000L
-
-F103Z.menu.subboard.F103ZE1=RedBull(F103ZE)
-F103Z.menu.subboard.F103ZE1.upload.maximum_size=524288
-F103Z.menu.subboard.F103ZE1.upload.maximum_data_size=65536
-F103Z.menu.subboard.F103ZE1.upload.device=STM32F103ZE
-F103Z.menu.subboard.F103ZE1.build.variant=F103Z
-F103Z.menu.subboard.F103ZE1.build.board=REDBULL
-F103Z.menu.subboard.F103ZE1.build.extra_flags=-DSTM32F103ZE
-F103Z.menu.subboard.F103ZE1.build.ldscript=f103xE.ld
-F103Z.menu.subboard.F103ZE1.massstorage_drive=NUCLEO
-
-F103Z.menu.subboard.F103ZE=GENERIC(STM32F103ZE)
-F103Z.menu.subboard.F103ZE.upload.maximum_size=524288
-F103Z.menu.subboard.F103ZE.upload.maximum_data_size=65536
-F103Z.menu.subboard.F103ZE.upload.device=STM32F103ZE
-F103Z.menu.subboard.F103ZE.build.variant=F103Z
-F103Z.menu.subboard.F103ZE.build.board=GENERIC_F103Z
-F103Z.menu.subboard.F103ZE.build.extra_flags=-DSTM32F103ZE
-F103Z.menu.subboard.F103ZE.build.ldscript=f103xE.ld
-F103Z.menu.subboard.F103ZE.massstorage_drive=NUCLEO
-
-F103Z.menu.subboard.F103ZF=GENERIC(STM32F103ZF)
-F103Z.menu.subboard.F103ZF.upload.maximum_size=786432
-F103Z.menu.subboard.F103ZF.upload.maximum_data_size=98304
-F103Z.menu.subboard.F103ZF.upload.device=STM32F103ZF
-F103Z.menu.subboard.F103ZF.build.extra_flags=-DSTM32F103ZF
-F103Z.menu.subboard.F103ZF.build.variant=F103Z
-F103Z.menu.subboard.F103ZF.build.board=GENERIC_F103Z
-F103Z.menu.subboard.F103ZF.build.ldscript=f103xF.ld
-F103Z.menu.subboard.F103ZF.massstorage_drive=NUCLEO
-
-F103Z.menu.subboard.F103ZG=GENERIC(STM32F103ZG)
-F103Z.menu.subboard.F103ZG.upload.maximum_size=1048576
-F103Z.menu.subboard.F103ZG.upload.maximum_data_size=98304
-F103Z.menu.subboard.F103ZG.upload.device=STM32F103ZG
-F103Z.menu.subboard.F103ZG.build.extra_flags=-DSTM32F103ZG
-F103Z.menu.subboard.F103ZG.build.series=STM32F1
-F103Z.menu.subboard.F103ZG.build.variant=F103Z
-F103Z.menu.subboard.F103ZG.build.board=GENERIC_F103Z
-F103Z.menu.subboard.F103ZG.build.ldscript=f103xG.ld
-F103Z.menu.subboard.F103ZG.massstorage_drive=NUCLEO
-
-
-#---------------------------- UPLOAD METHODS ---------------------------
-
-F103Z.menu.upload_method.STLinkMethod=STLink
-F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLink
-F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
-F103Z.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
-
-F103Z.menu.upload_method.jLinkMethod=JLink
-F103Z.menu.upload_method.jLinkMethod.upload.tool=jlink_upload
-F103Z.menu.upload_method.jLinkMethod.upload.protocol=jlink
-F103Z.menu.upload_method.jLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
-
-F103Z.menu.upload_method.MassStorageMethod=Mass Storage [STLINK V2.1]
-F103Z.menu.upload_method.MassStorageMethod.upload.protocol=
-F103Z.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
-
-F103Z.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
-F103Z.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
-F103Z.menu.upload_method.BMPMethod.upload.tool=bmp_upload
-F103Z.menu.upload_method.BMPMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
-
-F103Z.menu.upload_method.serialMethod=Serial [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
-F103Z.menu.upload_method.serialMethod.upload.protocol=maple_serial
-F103Z.menu.upload_method.serialMethod.upload.tool=serial_upload
-F103Z.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
-
-
-F103Z.menu.usb.Disabled=Disabled, no USB
-F103Z.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/12]
-F103Z.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-#F103Z.menu.usb.SerialMSC=Mass storage
-#F103Z.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
-
-F103Z.menu.serial.SerialUART1=SerialUART1
-F103Z.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
-F103Z.menu.serial.SerialUSB=SerialUSB
-F103Z.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-F103Z.menu.serial.Automatic=Automatically selected based on upload method
-
-F103Z.menu.jtag_swd.JTAG=JTAG [debug pins reserved: PB4,PB3,PA15,PA14,PA13]
-F103Z.menu.jtag_swd.JTAG.build.extra_flags_jtag=-DMENU_DEBUG_JTAG
-F103Z.menu.jtag_swd.SWD=SWD [debug pins reserved: PA14,PA13]
-F103Z.menu.jtag_swd.SWD.build.extra_flags_jtag=-DMENU_DEBUG_SWD
-F103Z.menu.jtag_swd.Disabled=Disabled [debug pins free]
-F103Z.menu.jtag_swd.Disabled.build.extra_flags_jtag=-DMENU_DEBUG_DISABLED
 
 ####################################### Discovery F303VC #########################################
 # Discovery F303VC board
