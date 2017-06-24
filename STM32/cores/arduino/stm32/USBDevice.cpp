@@ -39,11 +39,19 @@ void USBDeviceClass::reenumerate() {
     /* Re-enumerate the USB */
       volatile unsigned int i;
 
-    #ifdef USB_DISC_PIN
+    #ifdef USB_DISC_PIN 
       pinMode(USB_DISC_PIN, OUTPUT);
-      digitalWrite(USB_DISC_PIN, HIGH);
+	  #ifdef USB_DISC_LOW                 //add by huaweiwx@sina.com 2017.6.18
+        digitalWrite(USB_DISC_PIN, LOW);  //for SZ_III
+	  #else 	
+        digitalWrite(USB_DISC_PIN, HIGH); //for ArmFly/RedBull
+	  #endif
         for(i=0;i<512;i++);
-      digitalWrite(USB_DISC_PIN, LOW);
+	  #ifdef USB_DISC_LOW
+        digitalWrite(USB_DISC_PIN, HIGH);
+	  #else 	
+        digitalWrite(USB_DISC_PIN, LOW);
+	  #endif
     #else
       //pinMode(USBDP_PIN, OUTPUT);
       //digitalWrite(USBDP_PIN, LOW);
