@@ -523,9 +523,10 @@ NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 #################################### Nucleo-144 ############################################
 # NUCLEO 144 board
 
-NUCLEO_144.name=Nucleo-144
-NUCLEO_144.vid.0=0x0483
-NUCLEO_144.pid.0=0x374B
+NUCLEO_144.name=Nucleo-144 boards
+#vid pid confuses arduino port naming
+#NUCLEO_144.vid.0=0x0483
+#NUCLEO_144.pid.0=0x374B
 
 NUCLEO_144.build.core=arduino
 NUCLEO_144.build.board=NUCLEO_144
