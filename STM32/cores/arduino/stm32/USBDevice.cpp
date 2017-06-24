@@ -39,7 +39,7 @@ void USBDeviceClass::reenumerate() {
     /* Re-enumerate the USB */
       volatile unsigned int i;
 
-    #ifdef USB_DISC_PIN 
+    #ifdef USB_DISC_PIN
       pinMode(USB_DISC_PIN, OUTPUT);
 	  #ifdef USB_DISC_LOW                 //add by huaweiwx@sina.com 2017.6.18
         digitalWrite(USB_DISC_PIN, LOW);  //for SZ_III
