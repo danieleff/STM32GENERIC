@@ -43,6 +43,9 @@ void stm32_adc_init(ADC_HandleTypeDef *handle);
 #define ADC_CLOCK_DIV ADC_CLOCK_ASYNC_DIV1
 #elif defined(ADC_CLOCKPRESCALER_PCLK_DIV2)
 #define ADC_CLOCK_DIV ADC_CLOCKPRESCALER_PCLK_DIV2
+
+#elif defined(STM32F1)
+#define ADC_CLOCK_DIV
 #else
 #error "Unknown clock"
 #endif
