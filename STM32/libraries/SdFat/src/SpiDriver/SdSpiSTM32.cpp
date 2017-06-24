@@ -21,14 +21,52 @@
 #include "SdSpiDriver.h"
 #include "SdCard/SdInfo.h"
 //------------------------------------------------------------------------------
-static SPIClass& pSpi = SPI;
+//static SPIClass& pSpi = SPI;
+
+static SPIClass m_SPI1(SPI1);
+
+#ifdef SPI2
+    static SPIClass m_SPI2(SPI2);
+#endif
+#ifdef SPI3
+    static SPIClass m_SPI3(SPI3);
+#endif
+#ifdef SPI4
+    static SPIClass m_SPI3(SPI4);
+#endif
+#ifdef SPI5
+    static SPIClass m_SPI3(SPI5);
+#endif
+#ifdef SPI6
+    static SPIClass m_SPI3(SPI6);
+#endif
+
+static SPIClass* pSpi[] = {
+        &m_SPI1,
+#ifdef SPI2
+        &m_SPI2,
+#endif
+#ifdef SPI3
+        &m_SPI3,
+#endif
+#ifdef SPI4
+        &m_SPI4,
+#endif
+#ifdef SPI5
+        &m_SPI5,
+#endif
+#ifdef SPI6
+        &m_SPI6,
+#endif
+};
+
 //------------------------------------------------------------------------------
 /** Set SPI options for access to SD/SDHC cards.
  *
  * \param[in] divisor SCK clock divider relative to the APB1 or APB2 clock.
  */
 void SdSpiAltDriver::activate() {
-  pSpi.beginTransaction(m_spiSettings);
+  pSpi[m_spiPort]->beginTransaction(m_spiSettings);
 }
 //------------------------------------------------------------------------------
 /** Initialize the SPI bus.
@@ -39,14 +77,14 @@ void SdSpiAltDriver::begin(uint8_t csPin) {
   m_csPin = csPin;
   pinMode(m_csPin, OUTPUT);
   digitalWrite(m_csPin, HIGH);
-  pSpi.begin();
+  pSpi[m_spiPort]->begin();
 }
 //------------------------------------------------------------------------------
 /**
  * End SPI transaction.
  */
 void SdSpiAltDriver::deactivate() {
-  pSpi.endTransaction();
+  pSpi[m_spiPort]->endTransaction();
 }
 //------------------------------------------------------------------------------
 /** Receive a byte.
@@ -54,7 +92,7 @@ void SdSpiAltDriver::deactivate() {
  * \return The byte.
  */
 uint8_t SdSpiAltDriver::receive() {
-  return pSpi.transfer(0XFF);
+  return pSpi[m_spiPort]->transfer(0XFF);
 }
 //------------------------------------------------------------------------------
 /** Receive multiple bytes.
@@ -67,7 +105,7 @@ uint8_t SdSpiAltDriver::receive() {
 uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
   int rtn = 0;
 #ifdef SPI_HAS_EXTENDED_TRANSFER
-  if (pSpi.transfer((uint8_t *)NULL, buf, n)) {
+  if (pSpi[m_spiPort]->transfer((uint8_t *)NULL, buf, n)) {
       return 0;
   } else {
       return SD_CARD_ERROR_READ;
@@ -86,7 +124,7 @@ uint8_t SdSpiAltDriver::receive(uint8_t* buf, size_t n) {
  * \param[in] b Byte to send
  */
 void SdSpiAltDriver::send(uint8_t b) {
-  pSpi.transfer(b);
+  pSpi[m_spiPort]->transfer(b);
 }
 //------------------------------------------------------------------------------
 /** Send multiple bytes.
@@ -96,7 +134,7 @@ void SdSpiAltDriver::send(uint8_t b) {
  */
 void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
 #ifdef SPI_HAS_EXTENDED_TRANSFER
-    pSpi.transfer((uint8_t*)buf, NULL, n);
+    pSpi[m_spiPort]->transfer((uint8_t*)buf, NULL, n);
 #else  // #if USE_STM32F1_DMAC
   for (size_t i = 0; i < n; i++) {
 	  pSpi.transfer(buf[i]);
@@ -104,5 +142,7 @@ void SdSpiAltDriver::send(const uint8_t* buf , size_t n) {
 #endif  // USE_STM32F1_DMAC
 }
 //-----------------------------------------------------------------------------
-
+void SdSpiAltDriver::setPort(uint8_t portNumber) {
+  m_spiPort = portNumber < 1 || portNumber > (sizeof(pSpi) / sizeof(pSpi[0])) ? 0 : portNumber -1;
+}
 #endif  // defined(STM32F1)
