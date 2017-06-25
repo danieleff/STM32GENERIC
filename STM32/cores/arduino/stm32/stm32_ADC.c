@@ -50,6 +50,11 @@ void stm32_adc_init(ADC_HandleTypeDef *handle);
 #error "Unknown clock"
 #endif
 
+static int readResolution = 10;
+
+void analogReadResolution(int resolution) {
+    readResolution = resolution;
+}
 
 int analogRead(uint8_t pin) {
     static ADC_HandleTypeDef handle = {};
@@ -125,5 +130,5 @@ int analogRead(uint8_t pin) {
             return 0;
     }
 
-    return HAL_ADC_GetValue(&handle) >> 2;
+    return (HAL_ADC_GetValue(&handle) << readResolution) >> 12;
 }
