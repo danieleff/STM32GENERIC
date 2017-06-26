@@ -27,6 +27,10 @@
 #include "stm32_dma_F2F4F7.h"
 #elif defined(STM32F0) || defined(STM32F1) || defined(STM32F3) || defined(STM32L1)
 #include "stm32_dma_F0F1F3L1.h"
+#elif defined(STM32L0)
+#include "stm32_dma_L0.h"
+#elif defined(STM32L4)
+#include "stm32_dma_L4.h"
 #else
 #error "Unknown chip"
 #endif

@@ -42,6 +42,11 @@
 #define SDIO_IRQHandler                 SDMMC1_IRQHandler
 #endif
 
+// Fix typo for L4
+#ifndef HAL_SD_CardStateTypeDef
+#define HAL_SD_CardStateTypeDef HAL_SD_CardStateTypedef
+#define HAL_SD_CardStatusTypeDef HAL_SD_CardStatusTypedef
+#endif
 
 /*
  * Aux function. Doesn't exist in HAL. Allows to pre-erase blocks when the count of blocks to write is known.
