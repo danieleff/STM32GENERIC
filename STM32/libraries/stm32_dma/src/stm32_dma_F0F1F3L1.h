@@ -28,6 +28,6 @@ const dma_request_to_instance_t dmaRequestToStream[] = {
 
 };
 
-inline static setDmaInstance(DMA_HandleTypeDef *handle, dma_request_to_instance_t dmaRequestToStream) {
+inline static void setDmaInstance(DMA_HandleTypeDef *handle, dma_request_to_instance_t dmaRequestToStream) {
     handle->Instance = dmaRequestToStream.dmaInstance;
 }

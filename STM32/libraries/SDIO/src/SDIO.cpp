@@ -134,7 +134,13 @@ uint8_t SDIOClass::begin() {
     hdma_sdio.Init.MemInc = DMA_MINC_ENABLE;
     hdma_sdio.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
     hdma_sdio.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+
+#ifdef DMA_PFCTRL
     hdma_sdio.Init.Mode = DMA_PFCTRL;
+#else
+    hdma_sdio.Init.Mode = DMA_NORMAL;
+#endif
+
     hdma_sdio.Init.Priority = DMA_PRIORITY_LOW;
     _SDIOSetDMAFIFO(hdma_sdio);
 

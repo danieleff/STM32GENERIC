@@ -36,6 +36,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include  "usbd_ioreq.h"
 
+void USBSerial_Tx_Handler();
+
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */

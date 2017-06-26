@@ -204,6 +204,166 @@ Generic103RF.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=Serial
 Generic103RF.menu.serial.SerialUART1=SerialUART1
 Generic103RF.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 
+###################################### F103Z ##########################################
+F103Z.name=huaweiwx F103Z boards
+F103Z.build.mcu=cortex-m3
+F103Z.build.board=F103Z
+F103Z.build.core=arduino
+F103Z.build.series=STM32F1
+F103Z.build.f_cpu=72000000L
+
+F103Z.menu.subboard.F103ZE1=RedBull(F103ZE)
+F103Z.menu.subboard.F103ZE1.upload.maximum_size=524288
+F103Z.menu.subboard.F103ZE1.upload.maximum_data_size=65536
+F103Z.menu.subboard.F103ZE1.upload.device=STM32F103ZE
+F103Z.menu.subboard.F103ZE1.build.variant=F103Z
+F103Z.menu.subboard.F103ZE1.build.board=REDBULL
+F103Z.menu.subboard.F103ZE1.build.extra_flags=-DSTM32F103ZE
+F103Z.menu.subboard.F103ZE1.build.ldscript=f103xE.ld
+
+F103Z.menu.subboard.F103ZE=GENERIC(STM32F103ZE)
+F103Z.menu.subboard.F103ZE.upload.maximum_size=524288
+F103Z.menu.subboard.F103ZE.upload.maximum_data_size=65536
+F103Z.menu.subboard.F103ZE.upload.device=STM32F103ZE
+F103Z.menu.subboard.F103ZE.build.variant=F103Z
+F103Z.menu.subboard.F103ZE.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZE.build.extra_flags=-DSTM32F103ZE
+F103Z.menu.subboard.F103ZE.build.ldscript=f103xE.ld
+
+F103Z.menu.subboard.F103ZF=GENERIC(STM32F103ZF)
+F103Z.menu.subboard.F103ZF.upload.maximum_size=786432
+F103Z.menu.subboard.F103ZF.upload.maximum_data_size=98304
+F103Z.menu.subboard.F103ZF.upload.device=STM32F103ZF
+F103Z.menu.subboard.F103ZF.build.extra_flags=-DSTM32F103ZF
+F103Z.menu.subboard.F103ZF.build.variant=F103Z
+F103Z.menu.subboard.F103ZF.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZF.build.ldscript=f103xF.ld
+
+F103Z.menu.subboard.F103ZG=GENERIC(STM32F103ZG)
+F103Z.menu.subboard.F103ZG.upload.maximum_size=1048576
+F103Z.menu.subboard.F103ZG.upload.maximum_data_size=98304
+F103Z.menu.subboard.F103ZG.upload.device=STM32F103ZG
+F103Z.menu.subboard.F103ZG.build.extra_flags=-DSTM32F103ZG
+F103Z.menu.subboard.F103ZG.build.series=STM32F1
+F103Z.menu.subboard.F103ZG.build.variant=F103Z
+F103Z.menu.subboard.F103ZG.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZG.build.ldscript=f103xG.ld
+
+
+#---------------------------- UPLOAD METHODS ---------------------------
+
+F103Z.menu.upload_method.STLinkMethod=STLink
+F103Z.menu.upload_method.STLinkMethod.upload.protocol=STLink
+F103Z.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+F103Z.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.jLinkMethod=JLink
+F103Z.menu.upload_method.jLinkMethod.upload.tool=jlink_upload
+F103Z.menu.upload_method.jLinkMethod.upload.protocol=jlink
+F103Z.menu.upload_method.jLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.MassStorageMethod=Mass Storage [STLINK V2.1]
+F103Z.menu.upload_method.MassStorageMethod.upload.protocol=
+F103Z.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+F103Z.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+F103Z.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+F103Z.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+F103Z.menu.upload_method.BMPMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+F103Z.menu.upload_method.serialMethod=Serial [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+F103Z.menu.upload_method.serialMethod.upload.protocol=maple_serial
+F103Z.menu.upload_method.serialMethod.upload.tool=serial_upload
+F103Z.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+
+F103Z.menu.usb.Disabled=Disabled, no USB
+F103Z.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/12]
+F103Z.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+F103Z.menu.usb.SerialMSC=Mass storage
+F103Z.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
+
+F103Z.menu.serial.SerialUART1=SerialUART1
+F103Z.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+F103Z.menu.serial.SerialUSB=SerialUSB
+F103Z.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+F103Z.menu.serial.Automatic=Automatically selected based on upload method
+
+F103Z.menu.jtag_swd.JTAG=JTAG [debug pins reserved: PB4,PB3,PA15,PA14,PA13]
+F103Z.menu.jtag_swd.JTAG.build.extra_flags_jtag=-DMENU_DEBUG_JTAG
+F103Z.menu.jtag_swd.SWD=SWD [debug pins reserved: PA14,PA13]
+F103Z.menu.jtag_swd.SWD.build.extra_flags_jtag=-DMENU_DEBUG_SWD
+F103Z.menu.jtag_swd.Disabled=Disabled [debug pins free]
+F103Z.menu.jtag_swd.Disabled.build.extra_flags_jtag=-DMENU_DEBUG_DISABLED
+
+################################################################################
+# BLUE_F103XX board
+
+BLUE_F103XX.name=BLUE F103VE/ZE/ZG boards
+
+BLUE_F103XX.upload.maximum_size=524288
+BLUE_F103XX.upload.maximum_data_size=65536
+
+BLUE_F103XX.build.mcu=cortex-m3 
+BLUE_F103XX.build.core=arduino
+BLUE_F103XX.build.board=BLUE_F103XX
+BLUE_F103XX.build.series=STM32F1
+BLUE_F103XX.build.f_cpu=72000000L
+BLUE_F103XX.upload.tool=maple_upload
+BLUE_F103XX.upload.protocol=maple_dfu
+
+BLUE_F103XX.menu.upload_method.DFUUploadMethod=USB DFU - STM32duino bootloader (0x2000)
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.upload.protocol=maple_dfu
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.upload.tool=maple_upload
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.build.extra_flags=-DSTM32F103ZE -DVECT_TAB_OFFSET=0x2000
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.build.ldscript=ldscript_bootloader_2000.ld
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.upload.usbID=1EAF:0003
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.upload.altID=2
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.flash.maximum_size=516096
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.maximum_data_size=65536
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.ram.maximum_size=65536
+BLUE_F103XX.menu.upload_method.DFUUploadMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+
+BLUE_F103XX.menu.upload_method.STLinkMethod=STLink [Automatic serial = SerialUSB]
+BLUE_F103XX.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BLUE_F103XX.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+BLUE_F103XX.menu.upload_method.STLinkMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+
+BLUE_F103XX.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+BLUE_F103XX.menu.upload_method.serialMethod.upload.protocol=maple_serial
+BLUE_F103XX.menu.upload_method.serialMethod.upload.tool=serial_upload
+BLUE_F103XX.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+BLUE_F103XX.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
+BLUE_F103XX.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+BLUE_F103XX.menu.usb.SerialMSC=Mass storage [testing, see documentation]
+BLUE_F103XX.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
+BLUE_F103XX.menu.usb.Disabled=Disabled, no USB
+
+BLUE_F103XX.menu.serial.Automatic=Automatically selected based on upload method
+BLUE_F103XX.menu.serial.SerialUSB=SerialUSB
+BLUE_F103XX.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+BLUE_F103XX.menu.serial.SerialUART1=SerialUART1
+BLUE_F103XX.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+
+BLUE_F103XX.menu.subboard.BLUE_F103VE=BLUE F103VE vcc-gnd.com
+BLUE_F103XX.menu.subboard.BLUE_F103VE.upload.maximum_size=524288
+BLUE_F103XX.menu.subboard.BLUE_F103VE.upload.maximum_data_size=65536
+BLUE_F103XX.menu.subboard.BLUE_F103VE.build.variant=BLUE_F103VE
+BLUE_F103XX.menu.subboard.BLUE_F103VE.build.extra_flags=-DSTM32F103VE -DHSE_VALUE=8000000
+
+BLUE_F103XX.menu.subboard.BLUE_F103ZE=BLUE F103ZE vcc-gnd.com
+BLUE_F103XX.menu.subboard.BLUE_F103ZE.upload.maximum_size=524288
+BLUE_F103XX.menu.subboard.BLUE_F103ZE.upload.maximum_data_size=65536
+BLUE_F103XX.menu.subboard.BLUE_F103ZE.build.variant=BLUE_F103ZE
+BLUE_F103XX.menu.subboard.BLUE_F103ZE.build.extra_flags=-DSTM32F103ZE -DHSE_VALUE=8000000
+
+BLUE_F103XX.menu.subboard.BLUE_F103ZG=BLUE F103ZG vcc-gnd.com
+BLUE_F103XX.menu.subboard.BLUE_F103ZG.upload.maximum_size=1048576
+BLUE_F103XX.menu.subboard.BLUE_F103ZG.upload.maximum_data_size=98304
+BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.variant=BLUE_F103ZG
+BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.extra_flags=-DSTM32F103ZG -DHSE_VALUE=8000000
+
 ################################################################################
 # BLACK_F407XX board
 
@@ -360,6 +520,39 @@ NUCLEO_64.menu.upload_method.MassStorageMethod=Mass Storage
 NUCLEO_64.menu.upload_method.MassStorageMethod.upload.protocol=
 NUCLEO_64.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 
+#################################### Nucleo-144 ############################################
+# NUCLEO 144 board
+
+NUCLEO_144.name=Nucleo-144 boards
+#vid pid confuses arduino port naming
+#NUCLEO_144.vid.0=0x0483
+#NUCLEO_144.pid.0=0x374B
+
+NUCLEO_144.build.core=arduino
+NUCLEO_144.build.board=NUCLEO_144
+NUCLEO_144.upload.tool=nucleoFlasher
+
+NUCLEO_144.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART3
+
+
+NUCLEO_144.menu.subboard.Nucleo_F767ZI=Nucleo-F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_size=2097152
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_data_size=524288
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=8000000
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.series=STM32F7
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.variant=NUCLEO_F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.extra_flags=-DSTM32F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.massstorage_drive=NODE_F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.f_cpu=216000000L
+
+
+NUCLEO_144.menu.upload_method.MassStorageMethod=Mass Storage
+NUCLEO_144.menu.upload_method.MassStorageMethod.upload.protocol=
+NUCLEO_144.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+NUCLEO_144.menu.upload_method.STLinkMethod=STLink
+NUCLEO_144.menu.upload_method.STLinkMethod.upload.protocol=STLink
+NUCLEO_144.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
 
 ################################################################################
 # Discovery L053C8 board
@@ -401,6 +594,39 @@ DISCOVERY_L053C8.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 DISCOVERY_L053C8.menu.serial.SerialUSB=SerialUSB (USB connector)
 DISCOVERY_L053C8.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
 
+####################################### Discovery F303VC #########################################
+# Discovery F303VC board
+
+DISCOVERY_F303VC.name=Discovery F303VC
+
+DISCOVERY_F303VC.upload.maximum_size=524288
+DISCOVERY_F303VC.upload.maximum_data_size=40960
+
+DISCOVERY_F303VC.build.core=arduino
+DISCOVERY_F303VC.build.board=DISCOVERY_F303VC
+
+DISCOVERY_F303VC.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+DISCOVERY_F303VC.build.series=STM32F3
+DISCOVERY_F303VC.build.variant=DISCOVERY_F303VC
+DISCOVERY_F303VC.build.extra_flags=-DSTM32F303VC
+DISCOVERY_F303VC.build.f_cpu=72000000L
+
+DISCOVERY_F303VC.upload.protocol=STLink
+DISCOVERY_F303VC.upload.tool=stlink_upload
+
+DISCOVERY_F303VC.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
+
+#DISCOVERY_F303VC.menu.usb.Disabled=Disabled, no USB
+#DISCOVERY_F303VC.menu.usb.SerialUSB=Serial [Virtual COM port]
+#DISCOVERY_F303VC.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+#DISCOVERY_F303VC.menu.usb.SerialMSC=Mass storage
+#DISCOVERY_F303VC.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
+
+#DISCOVERY_F303VC.menu.serial.SerialUSB=SerialUSB
+#DISCOVERY_F303VC.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+
+#DISCOVERY_F303VC.menu.serial.SerialUART2=SerialUART2 [PA2/PA3]
+#DISCOVERY_F303VC.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
 
 ################################################################################
 # Discovery F407VG board

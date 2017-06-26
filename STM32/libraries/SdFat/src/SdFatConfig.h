@@ -177,14 +177,13 @@
 /**
  * Determine the default SPI configuration.
  */
-#if defined(__STM32F1__)
+#if defined(__STM32F1__) || ARDUINO_ARCH_STM32
 // has multiple SPI ports
 #define SD_HAS_CUSTOM_SPI 2
 #elif defined(__AVR__)\
   || defined(__SAM3X8E__) || defined(__SAM3X8H__)\
   || (defined(__arm__) && defined(CORE_TEENSY))\
-  || defined(ESP8266) \
-  ||  ARDUINO_ARCH_STM32
+  || defined(ESP8266)
 #define SD_HAS_CUSTOM_SPI 1
 #else  // SD_HAS_CUSTOM_SPI
 // Use standard SPI library.

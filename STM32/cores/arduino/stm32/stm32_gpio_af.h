@@ -133,9 +133,14 @@ uint32_t stm32GetClockFrequency(void *instance);
 uint8_t stm32ADC1GetChannel(GPIO_TypeDef *port, uint32_t pin_mask);
 
 /**
- * Internal: set the AF function for the selected peripheral on the selected pin
+ * Internal: set the AF function for the selected peripheral on the selected pin, with GPIO_SPEED_FREQ_VERY_HIGH speed
  */
 void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull);
+
+/**
+ * Internal: set the AF function for the selected peripheral on the selected pin, with the specified GPIO speed
+ */
+void stm32AfInitSpeed(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull, uint32_t speed);
 
 /**
  * Internal: get the default pin for the given peripheral

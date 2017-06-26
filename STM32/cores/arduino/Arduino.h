@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <bit_constants.h>
 
 // #include <avr/pgmspace.h>
 // #include <avr/io.h>
@@ -104,8 +105,10 @@ void pinMode(uint8_t, uint8_t);
 //void digitalWrite(uint8_t, uint8_t);
 //int digitalRead(uint8_t);
 int analogRead(uint8_t);
+void analogReadResolution(int resolution);
 void analogReference(uint8_t mode);
 void analogWrite(uint8_t, int);
+void analogWriteResolution(int bits);
 
 //unsigned long millis(void);
 //unsigned long micros(void);
@@ -164,7 +167,7 @@ uint16_t makeWord(byte h, byte l);
 unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
 unsigned long pulseInLong(uint8_t pin, uint8_t state, unsigned long timeout = 1000000L);
 
-void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
+extern "C" void tone(uint8_t _pin, unsigned int frequency, unsigned long duration = 0);
 void noTone(uint8_t _pin);
 
 // WMath prototypes
