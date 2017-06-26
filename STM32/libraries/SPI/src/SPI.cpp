@@ -211,10 +211,9 @@ void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
 bool SPIClass::transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, spi_callback_type callback) {
     this->callback = callback;
 
-    #ifdef STM32F1
-        __HAL_DMA_DISABLE(&hdma_spi_tx);
-        __HAL_DMA_DISABLE(&hdma_spi_rx);
-    #endif
+    //Some series (F1, L0) will ignore MemInc setting if the DMA is still enabled
+    __HAL_DMA_DISABLE(&hdma_spi_tx);
+    __HAL_DMA_DISABLE(&hdma_spi_rx);
 
     if (txBuffer != NULL) {
         hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
