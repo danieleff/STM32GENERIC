@@ -30,6 +30,11 @@
 #endif
 #include CHIP_PERIPHERAL_INCLUDE
 
+void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+    stm32AfInitSpeed(list, size, instance, port, pin, mode, pull, GPIO_SPEED_FREQ_VERY_HIGH);
+}
+
+
 GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance) {
