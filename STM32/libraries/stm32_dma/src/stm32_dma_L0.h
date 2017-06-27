@@ -1,3 +1,5 @@
+// L0 RM0367 http://www.st.com/content/ccc/resource/technical/document/reference_manual/2f/b9/c6/34/28/29/42/d2/DM00095744.pdf/files/DM00095744.pdf/jcr:content/translations/en.DM00095744.pdf#page=271
+
 #define DMA1_Channel2_IRQn DMA1_Channel2_3_IRQn
 #define DMA1_Channel3_IRQn DMA1_Channel2_3_IRQn
 
