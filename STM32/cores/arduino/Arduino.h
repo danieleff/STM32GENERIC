@@ -184,6 +184,7 @@ long map(long, long, long, long, long);
 
 #include "SerialUART.h"
 #include <SerialUSB.h>
+#include "Streaming.h"  //add by huaweiwx@sina.com
 
 #if defined(MENU_SERIAL)
 #define Serial MENU_SERIAL
