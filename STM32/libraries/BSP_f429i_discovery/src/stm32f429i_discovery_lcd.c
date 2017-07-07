@@ -184,8 +184,10 @@ uint8_t BSP_LCD_Init(void)
     LtdcHandler.Init.AccumulatedActiveH = 323;
     /* Configure total width */
     LtdcHandler.Init.TotalWidth = 279;
+    //LtdcHandler.Init.TotalWidth = 240;
     /* Configure total height */
     LtdcHandler.Init.TotalHeigh = 327;
+    //LtdcHandler.Init.TotalHeigh = 320;
     
     /* Configure R,G,B component values for LCD background color */
     LtdcHandler.Init.Backcolor.Red= 0;
