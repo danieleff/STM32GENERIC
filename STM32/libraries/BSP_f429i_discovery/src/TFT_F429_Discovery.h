@@ -17,7 +17,8 @@
 #include "Arduino.h"
 
 #include "Adafruit_GFX.h"
-#include "BSP_f429i_discovery.h"
+//#include "BSP_f429i_discovery.h"
+#include "stm32f429i_discovery_lcd.h"
 
 #define LTDC_BLACK       0x0000      /*   0,   0,   0 */
 #define LTDC_NAVY        0x000F      /*   0,   0, 128 */
