@@ -97,39 +97,54 @@ void SerialUSBClass::flush(void){
 
 size_t SerialUSBClass::write(const uint8_t *buffer, size_t size){
    unsigned long timeout=millis()+5;
-  if(hUsbDeviceFS.dev_state == USBD_STATE_CONFIGURED)
-  {
-    while(millis()<timeout)
-   {
-      if(CDC_Transmit_FS((uint8_t*)buffer, size) == USBD_OK)
-     {
-         return size;
-      }
+
+    if(hUsbDeviceFS.dev_state != USBD_STATE_CONFIGURED) {
+        return 0;
     }
-  }
-  
+
+   for(size_t i=0; i < size; i++) {
+
+       tx_buffer.buffer[tx_buffer.iHead] = *buffer;
+       tx_buffer.iHead = (tx_buffer.iHead + 1) % sizeof(tx_buffer.buffer);
+       buffer++;
+
+       while(tx_buffer.iHead == tx_buffer.iTail && millis()<timeout);
+       if (tx_buffer.iHead == tx_buffer.iTail) break;
+   }
+
+   if (transmitting == 0) {
+       if (tx_buffer.iHead > tx_buffer.iTail) {
+           transmitting = tx_buffer.iHead - tx_buffer.iTail;
+       } else {
+           transmitting = sizeof(tx_buffer.buffer) - tx_buffer.iTail;
+       }
+       CDC_Transmit_FS(&tx_buffer.buffer[tx_buffer.iTail], transmitting);
+
+       return size;
+   }
+
   return 0;
 
-
-/*   uint8_t i;
-
-  if(hUsbDeviceFS.dev_state == USBD_STATE_CONFIGURED){
-
-    //HAL_NVIC_DisableIRQ(USB_LP_CAN1_RX0_IRQn);
-    for(i=0;i<200;i++)
-      if(CDC_Transmit_FS((uint8_t*)buffer, size) == USBD_OK){
-        return size;
-        //break;
-      }
-
-
-    //HAL_NVIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
-  }
-  return 0; */
 }
 
 size_t SerialUSBClass::write(uint8_t c) {
   return write(&c, 1);
+}
+
+void SerialUSBClass::CDC_TxHandler() {
+  tx_buffer.iTail += transmitting;
+  tx_buffer.iTail = tx_buffer.iTail % sizeof(tx_buffer.buffer);
+
+  if (tx_buffer.iHead != tx_buffer.iTail) {
+      if (tx_buffer.iHead > tx_buffer.iTail) {
+         transmitting = tx_buffer.iHead - tx_buffer.iTail;
+     } else {
+         transmitting = sizeof(tx_buffer.buffer) - tx_buffer.iTail;
+     }
+     CDC_Transmit_FS(tx_buffer.buffer + tx_buffer.iTail, transmitting);
+  } else {
+      transmitting = 0;
+  }
 }
 
 void SerialUSBClass::CDC_RxHandler (uint8_t* Buf, uint16_t Len){
@@ -198,6 +213,10 @@ bool SerialUSBClass::dtr() {
 bool SerialUSBClass::rts() {
 	//return _usbLineInfo.lineState & 0x2;
   return 0;
+}
+
+extern "C" void USBSerial_Tx_Handler(){
+  SerialUSB.CDC_TxHandler();
 }
 
 extern "C" void USBSerial_Rx_Handler(uint8_t *data, uint16_t len){

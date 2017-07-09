@@ -686,6 +686,7 @@ static uint8_t  USBD_CDC_DataIn (USBD_HandleTypeDef *pdev, uint8_t epnum)
   {
     
     hcdc->TxState = 0;
+    USBSerial_Tx_Handler();
 
     return USBD_OK;
   }

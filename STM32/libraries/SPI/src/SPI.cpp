@@ -206,13 +206,14 @@ void SPIClass::stm32SetInstance(SPI_TypeDef *instance) {
 	spiHandle.Instance = instance;
 }
 
+/** Returns true on success, false on failure
+ * */
 bool SPIClass::transfer(uint8_t *txBuffer, uint8_t *rxBuffer, size_t count, spi_callback_type callback) {
     this->callback = callback;
 
-    #ifdef STM32F1
-        __HAL_DMA_DISABLE(&hdma_spi_tx);
-        __HAL_DMA_DISABLE(&hdma_spi_rx);
-    #endif
+    //Some series (F1, L0) will ignore MemInc setting if the DMA is still enabled
+    __HAL_DMA_DISABLE(&hdma_spi_tx);
+    __HAL_DMA_DISABLE(&hdma_spi_rx);
 
     if (txBuffer != NULL) {
         hdma_spi_tx.Init.MemInc = DMA_MINC_ENABLE;
@@ -258,16 +259,20 @@ bool SPIClass::done(void) {
     return dmaDone;
 }
 
+/** Returns 0 on success, 1 on failure
+ * */
 uint8_t SPIClass::dmaTransfer(uint8_t *transmitBuf, uint8_t *receiveBuf, uint16_t length) {
-    return transfer(transmitBuf, receiveBuf, length);
+    return !transfer(transmitBuf, receiveBuf, length);
 }
 
+/** Returns 0 on success, 1 on failure
+ * */
 uint8_t SPIClass::dmaSend(uint8_t *transmitBuf, uint16_t length, bool minc) {
     if (minc) {
-        return transfer(transmitBuf, NULL, length);
+        return !transfer(transmitBuf, NULL, length);
     } else {
         repeatTransmitData = transmitBuf[0];
-        return transfer((uint8_t*)NULL, NULL, length);
+        return !transfer((uint8_t*)NULL, NULL, length);
     }
 }
 

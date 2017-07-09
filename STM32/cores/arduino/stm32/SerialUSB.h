@@ -89,6 +89,9 @@ class SerialUSBClass : public Stream{
       volatile uint16_t iTail;
     };
     ring_buffer rx_buffer;
+
+    ring_buffer tx_buffer;
+    volatile int transmitting = 0;
 };
 
 extern SerialUSBClass SerialUSB;

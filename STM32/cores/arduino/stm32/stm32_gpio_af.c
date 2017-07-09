@@ -30,6 +30,11 @@
 #endif
 #include CHIP_PERIPHERAL_INCLUDE
 
+void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+    stm32AfInitSpeed(list, size, instance, port, pin, mode, pull, GPIO_SPEED_FREQ_VERY_HIGH);
+}
+
+
 GPIO_TypeDef *stm32AfGetDefault(const stm32_af_pin_list_type list[], int size, const void *instance, uint32_t *pin) {
     for(int i=0; i<size; i++) {
         if (instance == list[i].instance) {
@@ -116,8 +121,8 @@ void stm32AfI2CInit(const I2C_TypeDef *instance,
     GPIO_TypeDef *sdaPort, uint32_t sdaPin,
     GPIO_TypeDef *sclPort, uint32_t sclPin) {
 
-    stm32AfInit(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
     stm32AfInit(chip_af_i2c_scl, sizeof(chip_af_i2c_scl) / sizeof(chip_af_i2c_scl[0]), instance, sclPort, sclPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
+    stm32AfInit(chip_af_i2c_sda, sizeof(chip_af_i2c_sda) / sizeof(chip_af_i2c_sda[0]), instance, sdaPort, sdaPin, GPIO_MODE_AF_OD, GPIO_PULLUP);
 }
 
 #ifdef STM32_CHIP_HAS_SDIO
@@ -128,9 +133,9 @@ void stm32AfSDIO1BitInit(const SD_TypeDef *instance,
     GPIO_TypeDef *d0Port, uint32_t d0Pin
     ) {
 
-    stm32AfInit(chip_af_sdio_ck, sizeof(chip_af_sdio_ck) / sizeof(chip_af_sdio_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
-    stm32AfInit(chip_af_sdio_cmd, sizeof(chip_af_sdio_cmd) / sizeof(chip_af_sdio_cmd[0]), instance, cmdPort, cmdPin, GPIO_MODE_AF_PP, GPIO_NOPULL);
-    stm32AfInit(chip_af_sdio_d0, sizeof(chip_af_sdio_d0) / sizeof(chip_af_sdio_d0[0]), instance, d0Port, d0Pin, GPIO_MODE_AF_PP, GPIO_NOPULL);
+    stm32AfInitSpeed(chip_af_sdio_ck, sizeof(chip_af_sdio_ck) / sizeof(chip_af_sdio_ck[0]), instance, ckPort, ckPin, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_MEDIUM);
+    stm32AfInitSpeed(chip_af_sdio_cmd, sizeof(chip_af_sdio_cmd) / sizeof(chip_af_sdio_cmd[0]), instance, cmdPort, cmdPin, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_MEDIUM);
+    stm32AfInitSpeed(chip_af_sdio_d0, sizeof(chip_af_sdio_d0) / sizeof(chip_af_sdio_d0[0]), instance, d0Port, d0Pin, GPIO_MODE_AF_PP, GPIO_NOPULL, GPIO_SPEED_FREQ_MEDIUM);
 }
 
 void stm32AfSDIO4BitInit(const SD_TypeDef *instance,

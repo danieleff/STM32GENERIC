@@ -12,6 +12,10 @@ TODO create boards manager package
 2. Unzip it into [Arduino]/hardware folder
 3. Install Arduino Zero from the board manager for the arm-none-eabi-gcc compiler
 
+Additional instructions for F7 boards:
+
+1. Download the [latest GNU ARM Embedded Toolchain](https://developer.arm.com/open-source/gnu-toolchain/gnu-rm/downloads)
+2. Change compiler.path in [platform.txt](https://github.com/danieleff/STM32GENERIC/blob/master/STM32/platform.txt#L21) to point to that you downloaded.
 
 ## Uploading
 

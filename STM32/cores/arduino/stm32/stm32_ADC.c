@@ -43,10 +43,18 @@ void stm32_adc_init(ADC_HandleTypeDef *handle);
 #define ADC_CLOCK_DIV ADC_CLOCK_ASYNC_DIV1
 #elif defined(ADC_CLOCKPRESCALER_PCLK_DIV2)
 #define ADC_CLOCK_DIV ADC_CLOCKPRESCALER_PCLK_DIV2
+
+#elif defined(STM32F1)
+#define ADC_CLOCK_DIV
 #else
 #error "Unknown clock"
 #endif
 
+static int readResolution = 10;
+
+void analogReadResolution(int resolution) {
+    readResolution = resolution;
+}
 
 int analogRead(uint8_t pin) {
     static ADC_HandleTypeDef handle = {};
@@ -122,5 +130,5 @@ int analogRead(uint8_t pin) {
             return 0;
     }
 
-    return HAL_ADC_GetValue(&handle) >> 2;
+    return (HAL_ADC_GetValue(&handle) << readResolution) >> 12;
 }

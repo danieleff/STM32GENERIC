@@ -37,7 +37,7 @@ int8_t stm32AfGet(const stm32_af_pin_list_type list[], int size, const void *ins
     return 0;
 }
 
-void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull) {
+void stm32AfInitSpeed(const stm32_af_pin_list_type list[], int size, const void *instance, GPIO_TypeDef *port, uint32_t pin, uint32_t mode, uint32_t pull, uint32_t speed) {
     if (stm32_pwm_disable_callback != NULL) {
         (*stm32_pwm_disable_callback)(port, pin);
     }
@@ -50,7 +50,7 @@ void stm32AfInit(const stm32_af_pin_list_type list[], int size, const void *inst
     GPIO_InitStruct.Pin = pin;
     GPIO_InitStruct.Mode = mode;
     GPIO_InitStruct.Pull = pull;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_MEDIUM; // Slow signal slew rate to keep noise to minimum
+    GPIO_InitStruct.Speed = speed;
     GPIO_InitStruct.Alternate = stm32AfGet(list, size, instance, port, pin);
     HAL_GPIO_Init(port, &GPIO_InitStruct);
 }

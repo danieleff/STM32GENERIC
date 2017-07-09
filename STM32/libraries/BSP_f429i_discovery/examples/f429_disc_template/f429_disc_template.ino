@@ -1,8 +1,8 @@
 /*
-  Blink
-  Turns on an LED on for one second, then off for one second, repeatedly.
-
-  This example code is in the public domain.
+  NOTE: This is a low level example for the F429 discovery board, and is not to be used as-is.
+  
+  Dear reader if you have the time, please rewrite this from BSP to be like all arduino libraries (most notably Arduino GFX, and LTDC).
+  Thank you.
 */
 
 #include "BSP_f429i_discovery.h"

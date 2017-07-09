@@ -184,8 +184,10 @@ uint8_t BSP_LCD_Init(void)
     LtdcHandler.Init.AccumulatedActiveH = 323;
     /* Configure total width */
     LtdcHandler.Init.TotalWidth = 279;
+    //LtdcHandler.Init.TotalWidth = 240;
     /* Configure total height */
     LtdcHandler.Init.TotalHeigh = 327;
+    //LtdcHandler.Init.TotalHeigh = 320;
     
     /* Configure R,G,B component values for LCD background color */
     LtdcHandler.Init.Backcolor.Red= 0;
@@ -1310,6 +1312,7 @@ void BSP_LCD_DrawPixel(uint16_t Xpos, uint16_t Ypos, uint32_t RGB_Code)
 {
   /* Write data value to all SDRAM memory */
   *(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos))) = RGB_Code;
+  //*(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos))) = 0xff;
 }
 
 /**
