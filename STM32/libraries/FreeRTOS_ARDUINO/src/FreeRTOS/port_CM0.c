@@ -69,7 +69,8 @@
 
 #include "stm32_def.h"
 
-#if defined(__CM0PLUS_CMSIS_VERSION)
+//add __CM0_CMSIS_VERSION by huaweiwx@sina.com 2016.6.13 please test!!
+#if defined(__CM0PLUS_CMSIS_VERSION)||defined(__CM0_CMSIS_VERSION)
 
 /*-----------------------------------------------------------
  * Implementation of functions defined in portable.h for the ARM CM0 port.

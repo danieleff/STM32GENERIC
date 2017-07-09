@@ -66,7 +66,7 @@
 
     1 tab == 4 spaces!
 */
-
+#include "stm32_def.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "croutine.h"

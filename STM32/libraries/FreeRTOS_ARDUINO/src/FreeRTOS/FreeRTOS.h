@@ -93,10 +93,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 /* Application specific configuration options. */
-#include "FreeRTOSConfig.h"
 
+//#include "FreeRTOSConfig.h"
+#if __has_include("FreeRTOSConfig.h")  //
+#   include "FreeRTOSConfig.h"
+#else
+#   include "default/FreeRTOSConfig.h"
+#endif
 /* Basic FreeRTOS definitions. */
 #include "projdefs.h"
 
