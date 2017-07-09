@@ -1,0 +1,3 @@
+defined FreeRTOSConfig.h while notfound user's FreeRTOSConfig.h
+
+在用户搜索路径中未找到 FreeRTOSConfig.h 使用该缺省文件

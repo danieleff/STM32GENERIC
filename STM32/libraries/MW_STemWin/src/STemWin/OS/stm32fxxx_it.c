@@ -28,7 +28,7 @@
 /* Includes ------------------------------------------------------------------*/
 #ifndef OS_SUPPORT
 
-#ifdef ARDUINO_ARCH_HALMX
+#if defined(ARDUINO_ARCH_HALMX)||defined(ARDUINO_ARCH_STM32)
  #include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
 #else
  #include "stm32f4xx_hal.h"

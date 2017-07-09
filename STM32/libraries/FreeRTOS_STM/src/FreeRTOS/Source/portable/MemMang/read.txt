@@ -1,0 +1,1 @@
+defined USE_HEAP_x to use heap_x.c in file FreeRTOSConfig.h

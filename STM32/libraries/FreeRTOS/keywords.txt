@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map SPI
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+#FreeRTOS
+xTaskCreate	KEYWORD2
+vTaskStartScheduler	KEYWORD2
+vTaskDelay	KEYWORD2
+vTaskDelayUntil	KEYWORD2
+vTaskSuspend	KEYWORD2
+vTaskDelete	KEYWORD2
+vTaskPrioritySet	KEYWORD2
+uxTaskPriorityGet	KEYWORD2
+vApplicationIdleHook	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+pvParameters	LITERAL1
+portTICK_PERIOD_MS	LITERAL1
