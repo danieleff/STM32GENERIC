@@ -44,6 +44,7 @@
   *
   ******************************************************************************
   */ 
+#if __has_include("MW_STemWin.h")  
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
@@ -1361,6 +1362,6 @@ static void BSP_LCD_DrawBitmap8bpp(int32_t LayerIndex, int32_t x, int32_t y, U8 
   PixelFormat = LCD_LL_GetPixelformat(LayerIndex);
   DMA2D_DrawBitmapL8((void *)p, (void *)AddrDst, OffLineSrc, OffLineDst, PixelFormat, xSize, ySize);
 }
+
+#endif
 /*************************** End of file ****************************/
-
-

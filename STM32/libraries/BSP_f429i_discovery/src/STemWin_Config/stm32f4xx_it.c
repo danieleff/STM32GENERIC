@@ -25,6 +25,7 @@
   ******************************************************************************
   */
 
+#if __has_include("MW_STemWin.h")  
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
 #include "STemWin/inc/GUI.h"
@@ -42,5 +43,6 @@ void LTDC_IRQHandler(void)
 {
   HAL_LTDC_IRQHandler(&hltdc);
 }
+#endif
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
