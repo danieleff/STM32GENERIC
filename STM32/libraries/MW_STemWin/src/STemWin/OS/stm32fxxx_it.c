@@ -26,14 +26,10 @@
 */
 
 /* Includes ------------------------------------------------------------------*/
-#ifndef OS_SUPPORT
+#if !(__has_include("FreeRTOS.h"))
 
-#if defined(ARDUINO_ARCH_HALMX)||defined(ARDUINO_ARCH_STM32)
- #include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
-#else
- #include "stm32f4xx_hal.h"
- #include "stm32f4xx_it.h"
-#endif
+
+#include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
 
 #include "STemWin/inc/GUI.h"
 #include "STemWin/inc/WM.h"
@@ -45,7 +41,8 @@
 * @retval None
 */
 
-extern volatile GUI_TIMER_TIME OS_TimeMS;
+extern volatile GUI_TIMER_TIME  OS_TimeMS;
+
 void HAL_SYSTICK_Callback (void)
 {
   OS_TimeMS++;

@@ -52,15 +52,9 @@ Purpose     : This file provides emWin Interface with FreeRTOS
   */
 
 /* Includes ------------------------------------------------------------------*/
-#ifdef OS_SUPPORT
-    
-    /* FreeRTOS include files */
-#if __has_include("FreeRTOS.h") //check has FreeRTOS.h file in path
-//   #include "FreeRTOS.h"
-   #include "FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
-#else
-  #error "!Selected STemWin OS lib but you uninclude ftreertos head file!"	
-#endif
+#if __has_include(<FreeRTOS.h>)   
+#include "FreeRTOS.h"
+#include "FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
 #include "STemWin/inc/GUI.h"
     
 /*********************************************************************
@@ -193,6 +187,6 @@ functions automatically)
 //void GUI_X_Log (const char *s) { }
 //void GUI_X_Warn (const char *s) { }
 //void GUI_X_ErrorOut(const char *s) { }
-
 #endif
+
 /*************************** End of file ****************************/

@@ -1,4 +1,4 @@
-#if defined(ARDUINO_ARCH_HALMX)||defined(ARDUINO_ARCH_STM32)
+#ifdef ARDUINO_ARCH_HALMX
 #include <FreeRTOS.h>
 #elif defined(ARDUINO_ARCH_MAPLE_STM32F1)||defined(ARDUINO_ARCH_MAPLE_STM32F3)||defined(ARDUINO_ARCH_MAPLE_STM32F4)
 #include <MapleFreeRTOS821.h>

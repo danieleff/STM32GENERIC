@@ -72,6 +72,7 @@ Purpose     : Display controller initialization
   *
   ******************************************************************************
   */
+#if __has_include("MW_STemWin.h")  
 #include "STemWin/inc/GUI.h"
 
 /*********************************************************************
@@ -114,7 +115,7 @@ void GUI_X_Config(void) {
   //
   GUI_SetDefaultFont(GUI_FONT_6X8);
 }
-
+#endif
 /*************************** End of file ****************************/
 
 

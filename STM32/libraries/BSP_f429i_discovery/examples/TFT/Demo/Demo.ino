@@ -7,7 +7,7 @@
  * Sketch=>Include Libraries=>Manage Libraries=>Adafruit GFX
  *
  */
-
+#include "BSP_f429i_discovery.h"      //F429discovery STemWin config & driver lib 
 #include "TFT_F429_Discovery.h"
 
 TFT_F429_Discovery tft;

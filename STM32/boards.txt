@@ -683,9 +683,10 @@ DISCOVERY_F429ZI.build.extra_flags=-DSTM32F429ZI -DSTM32F429xx -DHSE_VALUE=80000
 DISCOVERY_F429ZI.menu.extern_lib.NONE = NONE
 DISCOVERY_F429ZI.menu.extern_lib.STemWin =STemWin
 DISCOVERY_F429ZI.menu.extern_lib.STemWin.build.extra_lib={build.variant.path}/lib/STemWin532_CM4_GCC.a
-#DISCOVERY_F429ZI.menu.extern_lib.STemWinOS =STemWin_OS
-#DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_lib={build.variant.path}/lib/STemWin532_CM4_OS_GCC.a
-#DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_flags_os=-DOS_SUPPORT
+DISCOVERY_F429ZI.menu.extern_lib.STemWin.build.extra_flags_os=-DOS_SUPPORT=0
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS =STemWin_OS
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_lib={build.variant.path}/lib/STemWin532_CM4_OS_GCC.a
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_flags_os=-DOS_SUPPORT=1
 
 DISCOVERY_F429ZI.upload.protocol=STLink
 DISCOVERY_F429ZI.upload.tool=stlink_upload

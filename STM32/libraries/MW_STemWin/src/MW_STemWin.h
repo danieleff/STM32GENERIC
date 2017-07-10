@@ -216,6 +216,13 @@ U32      SetUserAlpha(GUI_ALPHA_STATE * pAlphaState, U32 UserAlpha){return GUI_S
 //void     {GUI_SetFuncMixColors    (LCD_COLOR (* pFunc)(LCD_COLOR Color, LCD_COLOR BkColor, U8 Intens));};
 //void     {GUI_SetFuncMixColorsBulk(void (* pFunc)(U32 * pFG, U32 * pBG, U32 * pDst, unsigned OffFG, unsigned OffBG, unsigned OffDest, unsigned xSize, unsigned ySize, U8 Intens));};
 unsigned PreserveTrans(unsigned OnOff){return GUI_PreserveTrans(OnOff);};
+
+/*********************************************************************
+*       Polygon helpers
+*/
+void RotatePolygon(GUI_POINT * pDest, const GUI_POINT * pSrc, int NumPoints, float Angle){GUI_RotatePolygon(pDest,pSrc,NumPoints,Angle);};
+void MagnifyPolygon(GUI_POINT * pDest, const GUI_POINT * pSrc, int NumPoints, int Mag){GUI_MagnifyPolygon(pDest, pSrc, NumPoints, Mag);};
+void EnlargePolygon(GUI_POINT * pDest, const GUI_POINT * pSrc, int NumPoints, int Len){GUI_EnlargePolygon(pDest, pSrc, NumPoints, Len);};
 		
 	private:
 
