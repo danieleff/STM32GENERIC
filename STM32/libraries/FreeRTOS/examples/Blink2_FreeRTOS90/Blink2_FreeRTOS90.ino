@@ -1,9 +1,4 @@
-#ifdef ARDUINO_ARCH_HALMX
 #include <FreeRTOS.h>
-#elif defined(ARDUINO_ARCH_MAPLE_STM32F1)||defined(ARDUINO_ARCH_MAPLE_STM32F3)||defined(ARDUINO_ARCH_MAPLE_STM32F4)
-#include <MapleFreeRTOS821.h>
-#endif
-
 /*
   Blink2_FreeRTOS90.ino
   Turns on 2 LEDs on/off , running in FreeRTOS V9.0.
