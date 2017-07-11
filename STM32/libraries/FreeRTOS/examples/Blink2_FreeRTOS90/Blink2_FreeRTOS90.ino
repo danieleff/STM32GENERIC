@@ -1,4 +1,3 @@
-#include <FreeRTOS.h>
 /*
   Blink2_FreeRTOS90.ino
   Turns on 2 LEDs on/off , running in FreeRTOS V9.0.
@@ -12,30 +11,31 @@
   modified May 2 2017  by huaweiwx@sina.com
 */
 
-#define LED  LED_BUILTIN
-#define LED_ON bitRead(LED_BUILTIN_MASK,0)
+#include <FreeRTOS.h>
 
-#if defined(LED_BUILTIN1)
- #define LED1 LED_BUILTIN1
- #define LED1_ON bitRead(LED_BUILTIN_MASK,1)
-#endif
-
-#ifdef ARDUINO_NUCLEO_64
-  #define    mySerial  SerialUART2
-#elif defined(ARDUINO_NUCLEO_144)
-   SerialUART mySerial(USART3,PD9,PD8); 
+#ifdef  LED_BUILTIN
+#	define LED    LED_BUILTIN
+#	define LED_ON bitRead(LED_BUILTIN_MASK,0)
 #else
-  #define mySerial  SerialUART1
+#	define LED  13
+#	define LED_ON 1
 #endif
+
+#ifdef LED_BUILTIN1
+#	define LED1 LED_BUILTIN1
+#	define LED1_ON bitRead(LED_BUILTIN_MASK,1)
+#endif
+
+#define mySerial Serial  //select default USART
 
 static void myTask1(void  __attribute__ ((unused)) *argument)
 {
   /*Task setup*/
   pinMode(LED, OUTPUT);
 
-#if defined(ARDUINO_ARCH_NUCLEO_144)  //NucleoF401 default com is uart2
-//  mySerial.stm32SetRX(PD9); //for NUCLEO 767ZI
-//  mySerial.stm32SetTX(PD8);
+#if defined(ARDUINO_NUCLEO_144)
+  mySerial.stm32SetRX(PD9); //for NUCLEO 767ZI
+  mySerial.stm32SetTX(PD8);
 #endif
 
   mySerial.begin(115200);
@@ -45,10 +45,10 @@ static void myTask1(void  __attribute__ ((unused)) *argument)
   /* Infinite loop */
   for (;;)
   {
-    digitalWrite(LED, LED_ON);   // turn the LED on (HIGH is the voltage level)
-    vTaskDelay(50);              // wait for a second
-    digitalToggle(LED);    // turn the LED off by making the voltage LOW
-    vTaskDelay(950);              // wait for a second
+    digitalWrite(LED, LED_ON);	// turn the LED on (HIGH is the voltage level)
+    vTaskDelay(50);				// wait for a second
+    digitalToggle(LED);			// turn the LED off by making the voltage LOW
+    vTaskDelay(950); 	// wait for a second
     i++;
     mySerial << "Count:" << _HEX(i) << " in myTask1\n";
   }
@@ -64,7 +64,7 @@ static void myTask2(void __attribute__ ((unused)) *argument)
   /* Infinite loop */
   for (;;)
   {
-    digitalWrite(LED1,LED1_ON);   // turn the LED on (HIGH is the voltage level)
+    digitalWrite(LED1, LED1_ON);  // turn the LED on (HIGH is the voltage level)
     vTaskDelay(50);              // wait for a second
     digitalToggle(LED1);    // turn the LED off by making the voltage LOW
     vTaskDelay(200);              // wait for a second
@@ -98,6 +98,6 @@ void setup() {
 // the loop function runs over and over again forever
 void loop() {
   /*
-    !!! this no runed in freertos  !!!
+    !!! this no runed in FreeRTOS  !!!
   */
 }
