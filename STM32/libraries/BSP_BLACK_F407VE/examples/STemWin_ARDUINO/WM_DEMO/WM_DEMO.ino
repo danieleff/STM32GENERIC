@@ -19,7 +19,7 @@ STemWinGUI GUI;
 void setup() {
   pinMode(LED, OUTPUT);
   pinMode(LED1, OUTPUT);
-  GUI_Init();
+  GUI.Init();
 }
 
 void loop() {
