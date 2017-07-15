@@ -130,10 +130,12 @@ class load_mcu:
     def find_remaps(self):
         for pin_element in self.mcu_xml.findall('stm:Pin',  ns):
             for signal_element in pin_element.findall('stm:Signal',  ns):
-                pin = pin_element.attrib['Name']
+                pin_name = pin_element.attrib['Name']
+                pin_name = re.search('^(\D*\d*)', pin_name).group(1)
+                
                 instance_signal = signal_element.attrib['Name']
                 
-                self.pin_to_instance_signals.setdefault(pin, []).append(instance_signal)
+                self.pin_to_instance_signals.setdefault(pin_name, []).append(instance_signal)
         
         for pin in self.remap_xml.findall('stm:GPIO_Pin',  ns):
             pin_name = pin.attrib['Name']
