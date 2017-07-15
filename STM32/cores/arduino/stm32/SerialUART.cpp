@@ -108,6 +108,13 @@ void SerialUART::begin(const uint32_t baud) {
   }
   #endif
   
+  #ifdef UART4
+  if (handle->Instance == UART4) {
+    __HAL_RCC_UART4_CLK_ENABLE();
+    HAL_NVIC_SetPriority(UART4_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(UART4_IRQn);
+  }
+  #endif
   #ifdef USART4
   if (handle->Instance == USART4) {
     __HAL_RCC_USART4_CLK_ENABLE();
@@ -116,6 +123,29 @@ void SerialUART::begin(const uint32_t baud) {
   }
   #endif
   
+  #ifdef UART5
+  if (handle->Instance == UART5) {
+    __HAL_RCC_UART5_CLK_ENABLE();
+    HAL_NVIC_SetPriority(UART5_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(UART5_IRQn);
+  }
+  #endif
+  #ifdef USART5
+  if (handle->Instance == USART5) {
+    __HAL_RCC_USART5_CLK_ENABLE();
+    HAL_NVIC_SetPriority(USART5_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART5_IRQn);
+  }
+  #endif
+
+  #ifdef USART6
+  if (handle->Instance == USART6) {
+    __HAL_RCC_USART6_CLK_ENABLE();
+    HAL_NVIC_SetPriority(USART6_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART6_IRQn);
+  }
+  #endif
+
   stm32AfUARTInit(instance, rxPort, rxPin, txPort, txPin);
   
   handle->Init.BaudRate = baud; 
@@ -204,6 +234,13 @@ extern "C" void USART3_IRQHandler(void) {
 SerialUART SerialUART3(USART3);
 #endif
 
+#ifdef UART4
+extern "C" void UART4_IRQHandler(void) {
+  interruptUART = &SerialUART4;
+  HAL_UART_IRQHandler(interruptUART->handle);
+}
+SerialUART SerialUART4(UART4);
+#endif
 #ifdef USART4
 extern "C" void USART4_IRQHandler(void) {
   interruptUART = &SerialUART4;
@@ -212,6 +249,28 @@ extern "C" void USART4_IRQHandler(void) {
 SerialUART SerialUART4(USART4);
 #endif
 
+#ifdef UART5
+extern "C" void UART5_IRQHandler(void) {
+  interruptUART = &SerialUART5;
+  HAL_UART_IRQHandler(interruptUART->handle);
+}
+SerialUART SerialUART5(UART5);
+#endif
+#ifdef USART5
+extern "C" void USART5_IRQHandler(void) {
+  interruptUART = &SerialUART5;
+  HAL_UART_IRQHandler(interruptUART->handle);
+}
+SerialUART SerialUART5(USART5);
+#endif
+
+#ifdef USART6
+extern "C" void USART6_IRQHandler(void) {
+  interruptUART = &SerialUART6;
+  HAL_UART_IRQHandler(interruptUART->handle);
+}
+SerialUART SerialUART6(USART6);
+#endif
 
 extern "C" void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
   interruptUART->txStart++;
