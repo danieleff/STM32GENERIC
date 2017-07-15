@@ -16,7 +16,7 @@
 
 #include "stm32_SPI_variant_5.h"
 
-#include "stm32_SWPMI_variant_1.h"
+#include "stm32_SWPMI_variant_3.h"
 
 #include "stm32_TIM_variant_10.h"
 

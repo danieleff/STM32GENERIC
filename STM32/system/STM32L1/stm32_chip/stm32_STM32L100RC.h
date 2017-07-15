@@ -14,7 +14,7 @@
 
 #include "stm32_SPI_variant_2.h"
 
-#include "stm32_TIM_variant_2.h"
+#include "stm32_TIM_variant_3.h"
 
 #include "stm32_USART_variant_2.h"
 

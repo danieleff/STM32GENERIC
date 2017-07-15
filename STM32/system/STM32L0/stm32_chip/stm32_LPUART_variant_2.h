@@ -1,6 +1,7 @@
 
 const stm32_af_pin_list_type chip_af_lpuart_rx [] = {
 //LPUART1
+    { LPUART1, GPIOA, GPIO_PIN_0  , GPIO_AF6_LPUART1}, 
     { LPUART1, GPIOA, GPIO_PIN_3  , GPIO_AF6_LPUART1}, 
     { LPUART1, GPIOA, GPIO_PIN_13 , GPIO_AF6_LPUART1}, 
     { LPUART1, GPIOB, GPIO_PIN_7  , GPIO_AF6_LPUART1}, 

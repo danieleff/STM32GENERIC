@@ -23,7 +23,7 @@ const stm32_af_pin_list_type chip_af_i2c_sda [] = {
     { I2C2  , GPIOB, GPIO_PIN_11 , GPIO_AF4_I2C2  }, 
     { I2C2  , GPIOB, GPIO_PIN_14 , GPIO_AF4_I2C2  }, 
 //I2C3
-    { I2C3  , GPIOB, GPIO_PIN_4  , AF_NO_REMAP    }, 
+    { I2C3  , GPIOB, GPIO_PIN_4  , GPIO_AF4_I2C3  }, 
 //I2C4
     { I2C4  , GPIOB, GPIO_PIN_7  , GPIO_AF5_I2C4  }, 
     { I2C4  , GPIOB, GPIO_PIN_11 , GPIO_AF3_I2C4  }, 

@@ -14,7 +14,7 @@
 
 #include "stm32_TIM_variant_10.h"
 
-#include "stm32_USART_variant_5.h"
+#include "stm32_USART_variant_8.h"
 
 #include "stm32_ADC_variant_6.h"
 

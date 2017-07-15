@@ -6,12 +6,6 @@ const stm32_af_pin_list_type chip_af_usart_rx [] = {
 //USART2
     { USART2, GPIOA, GPIO_PIN_3  , GPIO_AF4_USART2}, 
     { USART2, GPIOA, GPIO_PIN_15 , GPIO_AF4_USART2}, 
-//USART4
-    { USART4, GPIOA, GPIO_PIN_1  , GPIO_AF6_USART4}, 
-    { USART4, GPIOC, GPIO_PIN_11 , GPIO_AF6_USART4}, 
-//USART5
-    { USART5, GPIOB, GPIO_PIN_4  , GPIO_AF6_USART5}, 
-    { USART5, GPIOD, GPIO_PIN_2  , GPIO_AF6_USART5}, 
 }; 
 
 const stm32_af_pin_list_type chip_af_usart_tx [] = {
@@ -21,10 +15,4 @@ const stm32_af_pin_list_type chip_af_usart_tx [] = {
 //USART2
     { USART2, GPIOA, GPIO_PIN_2  , GPIO_AF4_USART2}, 
     { USART2, GPIOA, GPIO_PIN_14 , GPIO_AF4_USART2}, 
-//USART4
-    { USART4, GPIOA, GPIO_PIN_0  , GPIO_AF6_USART4}, 
-    { USART4, GPIOC, GPIO_PIN_10 , GPIO_AF6_USART4}, 
-//USART5
-    { USART5, GPIOB, GPIO_PIN_3  , GPIO_AF6_USART5}, 
-    { USART5, GPIOC, GPIO_PIN_12 , GPIO_AF2_USART5}, 
 }; 

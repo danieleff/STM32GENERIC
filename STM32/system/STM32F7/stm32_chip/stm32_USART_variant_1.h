@@ -29,6 +29,7 @@ const stm32_af_pin_list_type chip_af_usart_rx [] = {
 
 const stm32_af_pin_list_type chip_af_usart_tx [] = {
 //UART4
+    { UART4 , GPIOA, GPIO_PIN_0  , GPIO_AF8_UART4 }, 
     { UART4 , GPIOC, GPIO_PIN_10 , GPIO_AF8_UART4 }, 
     { UART4 , GPIOH, GPIO_PIN_13 , GPIO_AF8_UART4 }, 
 //UART5

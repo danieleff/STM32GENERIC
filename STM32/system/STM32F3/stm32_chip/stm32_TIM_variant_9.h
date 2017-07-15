@@ -18,6 +18,7 @@ const stm32_tim_pin_list_type chip_tim1 [] = {
     { TIM1  ,GPIOA, GPIO_PIN_10 ,TIM_CH3    , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOB, GPIO_PIN_1  ,TIM_CH3N   , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOB, GPIO_PIN_15 ,TIM_CH3N   , GPIO_AF4_TIM1  }, 
+    { TIM1  ,GPIOF, GPIO_PIN_0  ,TIM_CH3N   , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOA, GPIO_PIN_11 ,TIM_CH4    , GPIO_AF11_TIM1 }, 
     { TIM1  ,GPIOA, GPIO_PIN_12 ,TIM_ETR    , GPIO_AF11_TIM1 }, 
 }; 
@@ -135,6 +136,7 @@ const stm32_tim_pin_list_type chip_tim [] = {
     { TIM1  ,GPIOA, GPIO_PIN_10 ,TIM_CH3    , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOB, GPIO_PIN_1  ,TIM_CH3N   , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOB, GPIO_PIN_15 ,TIM_CH3N   , GPIO_AF4_TIM1  }, 
+    { TIM1  ,GPIOF, GPIO_PIN_0  ,TIM_CH3N   , GPIO_AF6_TIM1  }, 
     { TIM1  ,GPIOA, GPIO_PIN_11 ,TIM_CH4    , GPIO_AF11_TIM1 }, 
     { TIM1  ,GPIOA, GPIO_PIN_12 ,TIM_ETR    , GPIO_AF11_TIM1 }, 
     { TIM2  ,GPIOA, GPIO_PIN_0  ,TIM_CH1    , GPIO_AF1_TIM2  }, 

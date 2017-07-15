@@ -20,7 +20,7 @@
 
 #include "stm32_TIM_variant_9.h"
 
-#include "stm32_USART_variant_10.h"
+#include "stm32_USART_variant_14.h"
 
 #include "stm32_ADC_variant_4.h"
 
