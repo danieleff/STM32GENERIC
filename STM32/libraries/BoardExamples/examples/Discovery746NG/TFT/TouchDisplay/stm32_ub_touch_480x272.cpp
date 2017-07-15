@@ -2,6 +2,8 @@
 // http://mikrocontroller.bplaced.net/wordpress/?page_id=5329
 // datasheet:
 // https://www.newhavendisplay.com/appnotes/datasheets/touchpanel/FT5336.pdf
+// register description:
+// https://www.newhavendisplay.com/app_notes/FT5x06_registers.pdf
 //--------------------------------------------------------------
 // File     : stm32_ub_touch_480x272.c
 // Datum    : 15.07.2015
