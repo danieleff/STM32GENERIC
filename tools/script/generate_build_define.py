@@ -78,7 +78,55 @@ def generate_source_code(mcu):
         if 'I2S' in periph:
             periph_source_code += '#define STM32_CHIP_HAS_I2S'
             periph_source_code += '\n'
-        
+    
+        if periph == 'TIM':
+            old = False
+            
+            all_timers_source_code = ''
+            
+            for i in range(1, 19): 
+                instance = 'TIM' + str(i)
+                 
+                periph_source_code += '\n' 
+                periph_source_code += 'const stm32_tim_pin_list_type chip_' + instance.lower() + ' [] = {\n' 
+                     
+                for periph_signal in sorted(set(mcu.peripheral_signal_to_instance_signals)): 
+                         
+                    for signal in sorted(set(mcu.peripheral_signal_to_instance_signals[periph_signal])): 
+                         
+                        for pin in sorted(set(mcu.instance_signal_to_pin_to_af[signal]), key = natural_sort_key): 
+                             
+                            p = signal.split('_')[0] 
+                            sig = signal.split('_')[1] 
+                             
+                            if p != instance: 
+                                continue 
+                                 
+                            if sig not in ('BKIN', 'BKIN2', 'CH1', 'CH1N', 'CH2', 'CH2N', 'CH3', 'CH3N', 'CH4', 'CH4N', 'ETR'): 
+                                continue 
+                     
+                            if pin in mcu.pins: 
+                                remap = mcu.instance_signal_to_pin_to_af[signal][pin] 
+                                mcu.af_function_used.append(remap) 
+                                 
+                                split = signal.split('_') 
+                                p = split[0] 
+                                 
+                                p = p.replace('I2S', 'SPI'); 
+                     
+                                timer_line = '    { ' + p.ljust(6) + ',GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ',TIM_' + sig.ljust(7) + ', ' + remap.ljust(15) + '}, \n'
+                     
+                                periph_source_code += timer_line
+                                
+                                all_timers_source_code += timer_line
+                 
+                periph_source_code += '}; \n' 
+            
+            periph_source_code += '\n' 
+            periph_source_code += 'const stm32_tim_pin_list_type chip_tim [] = {\n' 
+            periph_source_code += all_timers_source_code
+            periph_source_code += '}; \n' 
+                
         for sig in sorted(set(mcu.peripheral_to_signals[periph])):
         
             if 'SDIO' not in periph and 'I2S' not in periph and sig not in ['SDA', 'SCL', 'TX', 'RX', 'MISO', 'MOSI', 'SCK', 'NSS']:

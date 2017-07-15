@@ -30,6 +30,15 @@
 
 #include "stm32_gpio.h"
 
+typedef enum {
+    TIM_BKIN, TIM_BKIN2,
+    TIM_CH1, TIM_CH1N,
+    TIM_CH2, TIM_CH2N,
+    TIM_CH3, TIM_CH3N,
+    TIM_CH4, TIM_CH4N,
+    TIM_ETR
+} TIMER_SIGNALS;
+
 #ifdef STM32F1
 
 typedef void (*stm32_af_callback)();
@@ -41,6 +50,14 @@ typedef struct {
     stm32_af_callback alternate;
 } stm32_af_pin_list_type;
 
+typedef struct {
+    void *instance;
+    GPIO_TypeDef *port;
+    uint32_t pinMask;
+    uint8_t signalType;
+    stm32_af_callback alternate;
+} stm32_tim_pin_list_type;
+
 #else
 
 typedef struct {
@@ -49,6 +66,14 @@ typedef struct {
     uint32_t pin;
     uint8_t alternate;
 } stm32_af_pin_list_type;
+
+typedef struct {
+    void *instance;
+    GPIO_TypeDef *port;
+    uint32_t pinMask;
+    uint8_t signalType;
+    uint8_t alternate;
+} stm32_tim_pin_list_type;
 
 #endif
 
