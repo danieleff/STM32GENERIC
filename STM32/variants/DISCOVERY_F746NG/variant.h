@@ -3,10 +3,11 @@
 
 #define LED_BUILTIN PI1
 
-#define MOSI PB5
-#define MISO PB4
-#define SCK PB3
-#define SS PA4
+// SPI on SPI2
+#define MOSI PB15
+#define MISO PB14
+#define SCK PI1
+#define SS PI0
 
 #define SDA PB9
 #define SCL PB8
