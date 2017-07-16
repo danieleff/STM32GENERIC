@@ -89,6 +89,31 @@ void stm32AfSPIInit(const SPI_TypeDef *instance,
 
 }
 
+SPI_TypeDef *stm32GetSPIInstance(GPIO_TypeDef *mosiPort, uint32_t mosiPin,
+    GPIO_TypeDef *misoPort, uint32_t misoPin,
+    GPIO_TypeDef *sckPort, uint32_t sckPin) {
+
+    for (size_t i=0; i<sizeof(chip_af_spi_mosi) / sizeof(chip_af_spi_mosi[0]); i++) {
+        if (chip_af_spi_mosi[i].port == mosiPort && chip_af_spi_mosi[i].pin == mosiPin) {
+
+            for (size_t j=0; j<sizeof(chip_af_spi_miso) / sizeof(chip_af_spi_miso[0]); j++) {
+                if (chip_af_spi_miso[j].port == misoPort && chip_af_spi_miso[j].pin == misoPin && chip_af_spi_mosi[i].instance == chip_af_spi_miso[j].instance) {
+
+                    for (size_t k=0; k<sizeof(chip_af_spi_sck) / sizeof(chip_af_spi_sck[0]); k++) {
+                       if (chip_af_spi_sck[k].port == sckPort && chip_af_spi_sck[k].pin == sckPin && chip_af_spi_mosi[i].instance == chip_af_spi_sck[k].instance) {
+
+                           return chip_af_spi_mosi[i].instance;
+
+                       }
+                    }
+                }
+            }
+        }
+    }
+
+    return NULL;
+}
+
 #ifdef STM32_CHIP_HAS_I2S
 
 void stm32AfI2SInit(const SPI_TypeDef *instance,
