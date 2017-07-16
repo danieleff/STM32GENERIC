@@ -1,0 +1,181 @@
+static void AF_NO_REMAP (void) { }
+#ifdef __HAL_AFIO_REMAP_I2C1_DISABLE
+static void AF__HAL_AFIO_REMAP_I2C1_DISABLE(void) { __HAL_AFIO_REMAP_I2C1_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_I2C1_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_I2C1_ENABLE
+static void AF__HAL_AFIO_REMAP_I2C1_ENABLE(void) { __HAL_AFIO_REMAP_I2C1_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_I2C1_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_SPI1_DISABLE
+static void AF__HAL_AFIO_REMAP_SPI1_DISABLE(void) { __HAL_AFIO_REMAP_SPI1_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_SPI1_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_SPI1_ENABLE
+static void AF__HAL_AFIO_REMAP_SPI1_ENABLE(void) { __HAL_AFIO_REMAP_SPI1_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_SPI1_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM12_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM12_DISABLE(void) { __HAL_AFIO_REMAP_TIM12_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM12_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM12_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM12_ENABLE(void) { __HAL_AFIO_REMAP_TIM12_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM12_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM13_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM13_DISABLE(void) { __HAL_AFIO_REMAP_TIM13_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM13_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM13_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM13_ENABLE(void) { __HAL_AFIO_REMAP_TIM13_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM13_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM14_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM14_DISABLE(void) { __HAL_AFIO_REMAP_TIM14_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM14_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM14_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM14_ENABLE(void) { __HAL_AFIO_REMAP_TIM14_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM14_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM15_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM15_DISABLE(void) { __HAL_AFIO_REMAP_TIM15_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM15_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM15_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM15_ENABLE(void) { __HAL_AFIO_REMAP_TIM15_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM15_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM16_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM16_DISABLE(void) { __HAL_AFIO_REMAP_TIM16_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM16_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM16_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM16_ENABLE(void) { __HAL_AFIO_REMAP_TIM16_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM16_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM17_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM17_DISABLE(void) { __HAL_AFIO_REMAP_TIM17_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM17_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM17_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM17_ENABLE(void) { __HAL_AFIO_REMAP_TIM17_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM17_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM1_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM1_DISABLE(void) { __HAL_AFIO_REMAP_TIM1_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM1_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM1_PARTIAL
+static void AF__HAL_AFIO_REMAP_TIM1_PARTIAL(void) { __HAL_AFIO_REMAP_TIM1_PARTIAL(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM1_PARTIAL(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM2_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM2_DISABLE(void) { __HAL_AFIO_REMAP_TIM2_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM2_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM2_PARTIAL_1
+static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_1(void) { __HAL_AFIO_REMAP_TIM2_PARTIAL_1(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_1(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM2_PARTIAL_2
+static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_2(void) { __HAL_AFIO_REMAP_TIM2_PARTIAL_2(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM2_PARTIAL_2(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM3_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM3_DISABLE(void) { __HAL_AFIO_REMAP_TIM3_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM3_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM3_ENABLE
+static void AF__HAL_AFIO_REMAP_TIM3_ENABLE(void) { __HAL_AFIO_REMAP_TIM3_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM3_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM3_PARTIAL
+static void AF__HAL_AFIO_REMAP_TIM3_PARTIAL(void) { __HAL_AFIO_REMAP_TIM3_PARTIAL(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM3_PARTIAL(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_TIM4_DISABLE
+static void AF__HAL_AFIO_REMAP_TIM4_DISABLE(void) { __HAL_AFIO_REMAP_TIM4_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_TIM4_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_USART1_DISABLE
+static void AF__HAL_AFIO_REMAP_USART1_DISABLE(void) { __HAL_AFIO_REMAP_USART1_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_USART1_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_USART1_ENABLE
+static void AF__HAL_AFIO_REMAP_USART1_ENABLE(void) { __HAL_AFIO_REMAP_USART1_ENABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_USART1_ENABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_USART2_DISABLE
+static void AF__HAL_AFIO_REMAP_USART2_DISABLE(void) { __HAL_AFIO_REMAP_USART2_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_USART2_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_USART3_DISABLE
+static void AF__HAL_AFIO_REMAP_USART3_DISABLE(void) { __HAL_AFIO_REMAP_USART3_DISABLE(); }
+#else
+static void AF__HAL_AFIO_REMAP_USART3_DISABLE(void) { AF_NO_REMAP(); }
+#endif
+
+#ifdef __HAL_AFIO_REMAP_USART3_PARTIAL
+static void AF__HAL_AFIO_REMAP_USART3_PARTIAL(void) { __HAL_AFIO_REMAP_USART3_PARTIAL(); }
+#else
+static void AF__HAL_AFIO_REMAP_USART3_PARTIAL(void) { AF_NO_REMAP(); }
+#endif
+

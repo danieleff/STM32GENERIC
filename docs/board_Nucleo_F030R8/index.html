@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Nucleo-F030R8 - STM32GENERIC</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+         
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">STM32GENERIC</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Installation</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../upload/">Uploading</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../menu_options/">Menu options</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../arduino_api/">Arduino API</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../spi/">SPI</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../i2c/">I2C</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../i2s/">I2S</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../sdio/">SDIO</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../uart/">UART Serial</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../usb_cdc/">USB Serial</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../usb_msc/">USB Mass Storage</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../stm32_hal/">STM32 HAL</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../build_macros/">Build macros</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../libraries/">Libraries</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../board_MapleMini_F103CB/">MapleMini F103CB</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_BluePill/">BluePill F103CB</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_Generic103RF/">Generic F103RF</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">huaweiwx F103Z boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_F103ZE1/">RedBull(F103ZE)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZE/">GENERIC(STM32F103ZE)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZF/">GENERIC(STM32F103ZF)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZG/">GENERIC(STM32F103ZG)</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">BLUE F103VE/ZE/ZG boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_BLUE_F103VE/">BLUE F103VE vcc-gnd.com</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLUE_F103ZE/">BLUE F103ZE vcc-gnd.com</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLUE_F103ZG/">BLUE F103ZG vcc-gnd.com</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">BLACK F407VE/ZE/ZG boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_BLACK_F407VE/">BLACK F407VE (V2.0)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLACK_F407ZE/">BLACK F407ZE (V3.0)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLACK_F407ZG/">BLACK F407ZG (M4 DEMO)</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Nucleo-64 boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li class="active">
+    <a href="./">Nucleo-F030R8</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F103RB/">Nucleo-F103RB</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F303RE/">Nucleo-F303RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F401RE/">Nucleo-F401RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F411RE/">Nucleo-F411RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L053R8/">Nucleo-L053R8</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L152RE/">Nucleo-L152RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L476RG/">Nucleo-L476RG</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Nucleo-144 boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_Nucleo_F767ZI/">Nucleo-F767ZI</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_L053C8/">Discovery L053C8</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F303VC/">Discovery F303VC</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F407VG/">Discovery F407VG</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F746NG/">Discovery F746NG</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../add_board/">Adding a board</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../test/">Testing a board</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../about/">About</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../board_BLACK_F407ZG/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../board_Nucleo_F103RB/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+    
+        <li class="main active"><a href="#nucleo-f030r8">Nucleo-F030R8</a></li>
+        
+            <li><a href="#spi">SPI</a></li>
+        
+            <li><a href="#i2c">I2C</a></li>
+        
+            <li><a href="#usart">USART</a></li>
+        
+            <li><a href="#tim">TIM</a></li>
+        
+            <li><a href="#adc">ADC</a></li>
+        
+            <li><a href="#gpio">GPIO</a></li>
+        
+    
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="nucleo-f030r8">Nucleo-F030R8</h1>
+<p>Below are the pins usable for the peripherals. Pins in <strong>bold</strong> are the default.</p>
+<h2 id="spi">SPI</h2>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>MOSI</th>
+<th>MISO</th>
+<th>SCK</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPI1</td>
+<td><strong>11 (PA7)</strong>, 4 (PB5)</td>
+<td><strong>12 (PA6)</strong>, 5 (PB4)</td>
+<td><strong>13 (PA5)</strong>, 3 (PB3)</td>
+<td></td>
+</tr>
+<tr>
+<td>SPI2</td>
+<td><strong>33 (PB15)</strong></td>
+<td><strong>32 (PB14)</strong></td>
+<td><strong>31 (PB13)</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="i2c">I2C</h2>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>SDA</th>
+<th>SCL</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C1</td>
+<td>29 (PB7), <strong>14 (PB9)</strong></td>
+<td>10 (PB6), <strong>15 (PB8)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>I2C2</td>
+<td><strong>PB11</strong></td>
+<td><strong>6 (PB10)</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="usart">USART</h2>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>RX</th>
+<th>TX</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>USART1</td>
+<td><strong>2 (PA10)</strong>, 29 (PB7)</td>
+<td><strong>8 (PA9)</strong>, 10 (PB6)</td>
+<td></td>
+</tr>
+<tr>
+<td>USART2</td>
+<td><strong>0 (PA3)</strong>, 26 (PA15)</td>
+<td><strong>1 (PA2)</strong>, 25 (PA14)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tim">TIM</h2>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>CH1</th>
+<th>CH2</th>
+<th>CH3</th>
+<th>CH4</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TIM1</td>
+<td><strong>7 (PA8)</strong>, <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">31 (PB13)</span></td>
+<td><strong>8 (PA9)</strong>, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span></td>
+<td><strong>2 (PA10)</strong>, <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span></td>
+<td><strong>22 (PA11)</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>TIM3</td>
+<td><strong>12 (PA6)</strong>, 5 (PB4), 38 (PC6)</td>
+<td><strong>11 (PA7)</strong>, 4 (PB5), 9 (PC7)</td>
+<td><strong>19 (PB0)</strong>, 39 (PC8)</td>
+<td><strong>27 (PB1)</strong>, 40 (PC9)</td>
+<td></td>
+</tr>
+<tr>
+<td>TIM14</td>
+<td><strong>18 (PA4)</strong>, 11 (PA7), 27 (PB1)</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TIM15</td>
+<td><strong>1 (PA2)</strong>, 32 (PB14), <span style="text-decoration: overline">33 (PB15)</span></td>
+<td><strong>0 (PA3)</strong>, 33 (PB15)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TIM16</td>
+<td><strong>12 (PA6)</strong>, 15 (PB8), <span style="text-decoration: overline">10 (PB6)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>TIM17</td>
+<td><strong>11 (PA7)</strong>, 14 (PB9), <span style="text-decoration: overline">29 (PB7)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="adc">ADC</h2>
+<table>
+<thead>
+<tr>
+<th>Instance</th>
+<th>Channel</th>
+<th>Pin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADC</td>
+<td>IN0</td>
+<td>16 (PA0)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN1</td>
+<td>17 (PA1)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN2</td>
+<td>1 (PA2)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN3</td>
+<td>0 (PA3)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN4</td>
+<td>18 (PA4)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN5</td>
+<td>13 (PA5)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN6</td>
+<td>12 (PA6)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN7</td>
+<td>11 (PA7)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN8</td>
+<td>19 (PB0)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN9</td>
+<td>27 (PB1)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN10</td>
+<td>21 (PC0)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN11</td>
+<td>20 (PC1)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN12</td>
+<td>34 (PC2)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN13</td>
+<td>35 (PC3)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN14</td>
+<td>36 (PC4)</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>IN15</td>
+<td>37 (PC5)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gpio">GPIO</h2>
+<table>
+<thead>
+<tr>
+<th>Pin</th>
+<th>Peripheral signal available on the pin</th>
+<th>Board macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 (PA3)</td>
+<td>ADC_IN3, TIM15_CH2, USART2_RX</td>
+<td></td>
+</tr>
+<tr>
+<td>1 (PA2)</td>
+<td>ADC_IN2, TIM15_CH1, USART2_TX</td>
+<td></td>
+</tr>
+<tr>
+<td>2 (PA10)</td>
+<td>TIM1_CH3, TIM17_BKIN, USART1_RX</td>
+<td></td>
+</tr>
+<tr>
+<td>3 (PB3)</td>
+<td>SPI1_SCK</td>
+<td></td>
+</tr>
+<tr>
+<td>4 (PB5)</td>
+<td>I2C1_SMBA, SPI1_MOSI, TIM3_CH2, TIM16_BKIN</td>
+<td></td>
+</tr>
+<tr>
+<td>5 (PB4)</td>
+<td>SPI1_MISO, TIM3_CH1</td>
+<td></td>
+</tr>
+<tr>
+<td>6 (PB10)</td>
+<td>I2C2_SCL</td>
+<td></td>
+</tr>
+<tr>
+<td>7 (PA8)</td>
+<td>RCC_MCO, TIM1_CH1, USART1_CK</td>
+<td></td>
+</tr>
+<tr>
+<td>8 (PA9)</td>
+<td>TIM1_CH2, TIM15_BKIN, USART1_TX</td>
+<td></td>
+</tr>
+<tr>
+<td>9 (PC7)</td>
+<td>TIM3_CH2</td>
+<td></td>
+</tr>
+<tr>
+<td>10 (PB6)</td>
+<td>I2C1_SCL, TIM16_CH1N, USART1_TX</td>
+<td></td>
+</tr>
+<tr>
+<td>11 (PA7)</td>
+<td>ADC_IN7, SPI1_MOSI, TIM1_CH1N, TIM3_CH2, TIM14_CH1, TIM17_CH1</td>
+<td><strong>MOSI</strong></td>
+</tr>
+<tr>
+<td>12 (PA6)</td>
+<td>ADC_IN6, SPI1_MISO, TIM1_BKIN, TIM3_CH1, TIM16_CH1</td>
+<td><strong>MISO</strong></td>
+</tr>
+<tr>
+<td>13 (PA5)</td>
+<td>ADC_IN5, SPI1_SCK</td>
+<td><strong>LED_BUILTIN</strong>, <strong>SCK</strong></td>
+</tr>
+<tr>
+<td>14 (PB9)</td>
+<td>I2C1_SDA, IR_OUT, TIM17_CH1</td>
+<td><strong>SDA</strong></td>
+</tr>
+<tr>
+<td>15 (PB8)</td>
+<td>I2C1_SCL, TIM16_CH1</td>
+<td><strong>SCL</strong></td>
+</tr>
+<tr>
+<td>16 (PA0)</td>
+<td>ADC_IN0, RTC_TAMP2, SYS_WKUP1, USART2_CTS</td>
+<td><strong>A0</strong></td>
+</tr>
+<tr>
+<td>17 (PA1)</td>
+<td>ADC_IN1, USART2_DE, USART2_RTS</td>
+<td><strong>A1</strong></td>
+</tr>
+<tr>
+<td>18 (PA4)</td>
+<td>ADC_IN4, SPI1_NSS, TIM14_CH1, USART2_CK</td>
+<td><strong>A2</strong>, <strong>SS</strong></td>
+</tr>
+<tr>
+<td>19 (PB0)</td>
+<td>ADC_IN8, TIM1_CH2N, TIM3_CH3</td>
+<td><strong>A3</strong></td>
+</tr>
+<tr>
+<td>20 (PC1)</td>
+<td>ADC_IN11</td>
+<td><strong>A4</strong></td>
+</tr>
+<tr>
+<td>21 (PC0)</td>
+<td>ADC_IN10</td>
+<td><strong>A5</strong></td>
+</tr>
+<tr>
+<td>22 (PA11)</td>
+<td>TIM1_CH4, USART1_CTS</td>
+<td></td>
+</tr>
+<tr>
+<td>23 (PA12)</td>
+<td>TIM1_ETR, USART1_DE, USART1_RTS</td>
+<td></td>
+</tr>
+<tr>
+<td>24 (PA13)</td>
+<td>IR_OUT, SYS_SWDIO</td>
+<td></td>
+</tr>
+<tr>
+<td>25 (PA14)</td>
+<td>SYS_SWCLK, USART2_TX</td>
+<td></td>
+</tr>
+<tr>
+<td>26 (PA15)</td>
+<td>SPI1_NSS, USART2_RX</td>
+<td></td>
+</tr>
+<tr>
+<td>27 (PB1)</td>
+<td>ADC_IN9, TIM1_CH3N, TIM3_CH4, TIM14_CH1</td>
+<td></td>
+</tr>
+<tr>
+<td>28 (PB2)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>29 (PB7)</td>
+<td>I2C1_SDA, TIM17_CH1N, USART1_RX</td>
+<td></td>
+</tr>
+<tr>
+<td>30 (PB12)</td>
+<td>SPI2_NSS, TIM1_BKIN</td>
+<td></td>
+</tr>
+<tr>
+<td>31 (PB13)</td>
+<td>SPI2_SCK, TIM1_CH1N</td>
+<td></td>
+</tr>
+<tr>
+<td>32 (PB14)</td>
+<td>SPI2_MISO, TIM1_CH2N, TIM15_CH1</td>
+<td></td>
+</tr>
+<tr>
+<td>33 (PB15)</td>
+<td>RTC_REFIN, SPI2_MOSI, TIM1_CH3N, TIM15_CH1N, TIM15_CH2</td>
+<td></td>
+</tr>
+<tr>
+<td>34 (PC2)</td>
+<td>ADC_IN12</td>
+<td></td>
+</tr>
+<tr>
+<td>35 (PC3)</td>
+<td>ADC_IN13</td>
+<td></td>
+</tr>
+<tr>
+<td>36 (PC4)</td>
+<td>ADC_IN14</td>
+<td></td>
+</tr>
+<tr>
+<td>37 (PC5)</td>
+<td>ADC_IN15</td>
+<td></td>
+</tr>
+<tr>
+<td>38 (PC6)</td>
+<td>TIM3_CH1</td>
+<td></td>
+</tr>
+<tr>
+<td>39 (PC8)</td>
+<td>TIM3_CH3</td>
+<td></td>
+</tr>
+<tr>
+<td>40 (PC9)</td>
+<td>TIM3_CH4</td>
+<td></td>
+</tr>
+<tr>
+<td>41 (PC10)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>42 (PC11)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>43 (PC12)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>44 (PC13)</td>
+<td>RTC_OUT_ALARM, RTC_OUT_CALIB, RTC_TAMP1, RTC_TS, SYS_WKUP2</td>
+<td></td>
+</tr>
+<tr>
+<td>45 (PC14)</td>
+<td>RCC_OSC32_IN</td>
+<td></td>
+</tr>
+<tr>
+<td>46 (PC15)</td>
+<td>RCC_OSC32_OUT</td>
+<td></td>
+</tr>
+<tr>
+<td>47 (PD2)</td>
+<td>TIM3_ETR</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

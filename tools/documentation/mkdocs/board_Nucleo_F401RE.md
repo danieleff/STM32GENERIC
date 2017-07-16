@@ -1,0 +1,121 @@
+#Nucleo-F401RE
+
+Below are the pins usable for the peripherals. Pins in **bold** are the default.
+
+## SPI
+
+Instance |MOSI|MISO|SCK|
+-|-|-|-|
+SPI1|**11 (PA7)**, 4 (PB5)|**12 (PA6)**, 5 (PB4)|**13 (PA5)**, 3 (PB3)|
+SPI2|**33 (PB15)**, 35 (PC3)|**32 (PB14)**, 34 (PC2)|**6 (PB10)**, 31 (PB13)|
+SPI3|**4 (PB5)**, 43 (PC12)|**5 (PB4)**, 42 (PC11)|**3 (PB3)**, 41 (PC10)|
+
+## I2C
+
+Instance |SDA|SCL|
+-|-|-|
+I2C1|29 (PB7), **14 (PB9)**|10 (PB6), **15 (PB8)**|
+I2C2|**3 (PB3)**|**6 (PB10)**|
+I2C3|**5 (PB4)**, 40 (PC9)|**7 (PA8)**|
+
+## USART
+
+Instance |RX|TX|
+-|-|-|
+USART1|**2 (PA10)**, 29 (PB7)|**8 (PA9)**, 10 (PB6)|
+USART2|**0 (PA3)**|**1 (PA2)**|
+USART6|**23 (PA12)**, 9 (PC7)|**22 (PA11)**, 38 (PC6)|
+
+## I2S
+
+Instance |CK|SD|WS|MCK|
+-|-|-|-|-|
+I2S2|**6 (PB10)**, 31 (PB13)|**33 (PB15)**, 35 (PC3)|**14 (PB9)**, 30 (PB12)|**38 (PC6)**|
+I2S3|**3 (PB3)**, 41 (PC10)|**4 (PB5)**, 43 (PC12)|**18 (PA4)**, 26 (PA15)|**9 (PC7)**|
+
+## TIM
+
+Instance |CH1|CH2|CH3|CH4|
+-|-|-|-|-|
+TIM1|**7 (PA8)**, <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">31 (PB13)</span>|**8 (PA9)**, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**2 (PA10)**, <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>|**22 (PA11)**|
+TIM2|**13 (PA5)**, 26 (PA15)|**17 (PA1)**, 3 (PB3)|**1 (PA2)**, 6 (PB10)|**0 (PA3)**|
+TIM3|**12 (PA6)**, 5 (PB4), 38 (PC6)|**11 (PA7)**, 4 (PB5), 9 (PC7)|**19 (PB0)**, 39 (PC8)|**27 (PB1)**, 40 (PC9)|
+TIM4|**10 (PB6)**|**29 (PB7)**|**15 (PB8)**|**14 (PB9)**|
+TIM5|**16 (PA0)**|**17 (PA1)**|**1 (PA2)**|**0 (PA3)**|
+TIM9|**1 (PA2)**|**0 (PA3)**|||
+TIM10|**15 (PB8)**||||
+TIM11|**14 (PB9)**||||
+
+## ADC 
+
+Instance | Channel | Pin
+-|-|-
+ADC1|IN0|16 (PA0)|
+ADC1|IN1|17 (PA1)|
+ADC1|IN2|1 (PA2)|
+ADC1|IN3|0 (PA3)|
+ADC1|IN4|18 (PA4)|
+ADC1|IN5|13 (PA5)|
+ADC1|IN6|12 (PA6)|
+ADC1|IN7|11 (PA7)|
+ADC1|IN8|19 (PB0)|
+ADC1|IN9|27 (PB1)|
+ADC1|IN10|21 (PC0)|
+ADC1|IN11|20 (PC1)|
+ADC1|IN12|34 (PC2)|
+ADC1|IN13|35 (PC3)|
+ADC1|IN14|36 (PC4)|
+ADC1|IN15|37 (PC5)|
+
+## GPIO 
+
+Pin | Peripheral signal available on the pin | Board macro
+-|-|-
+0 (PA3) |ADC1_IN3, TIM2_CH4, TIM5_CH4, TIM9_CH2, USART2_RX||
+1 (PA2) |ADC1_IN2, TIM2_CH3, TIM5_CH3, TIM9_CH1, USART2_TX||
+2 (PA10) |TIM1_CH3, USART1_RX, USB_OTG_FS_ID||
+3 (PB3) |I2C2_SDA, I2S3_CK, SPI1_SCK, SPI3_SCK, SYS_JTDO-SWO, TIM2_CH2||
+4 (PB5) |I2C1_SMBA, I2S3_SD, SPI1_MOSI, SPI3_MOSI, TIM3_CH2||
+5 (PB4) |I2C3_SDA, I2S3_ext_SD, SPI1_MISO, SPI3_MISO, SYS_JTRST, TIM3_CH1||
+6 (PB10) |I2C2_SCL, I2S2_CK, SPI2_SCK, TIM2_CH3||
+7 (PA8) |I2C3_SCL, RCC_MCO_1, TIM1_CH1, USART1_CK, USB_OTG_FS_SOF||
+8 (PA9) |I2C3_SMBA, TIM1_CH2, USART1_TX, USB_OTG_FS_VBUS||
+9 (PC7) |I2S3_MCK, SDIO_D7, TIM3_CH2, USART6_RX||
+10 (PB6) |I2C1_SCL, TIM4_CH1, USART1_TX||
+11 (PA7) |ADC1_IN7, SPI1_MOSI, TIM1_CH1N, TIM3_CH2|**MOSI**|
+12 (PA6) |ADC1_IN6, SPI1_MISO, TIM1_BKIN, TIM3_CH1|**MISO**|
+13 (PA5) |ADC1_IN5, SPI1_SCK, TIM2_CH1, TIM2_ETR|**LED_BUILTIN**, **SCK**|
+14 (PB9) |I2C1_SDA, I2S2_WS, SDIO_D5, SPI2_NSS, TIM4_CH4, TIM11_CH1|**SDA**|
+15 (PB8) |I2C1_SCL, SDIO_D4, TIM4_CH3, TIM10_CH1|**SCL**|
+16 (PA0) |ADC1_IN0, SYS_WKUP, TIM5_CH1, USART2_CTS|**A0**|
+17 (PA1) |ADC1_IN1, TIM2_CH2, TIM5_CH2, USART2_RTS|**A1**|
+18 (PA4) |ADC1_IN4, I2S3_WS, SPI1_NSS, SPI3_NSS, USART2_CK|**A2**, **SS**|
+19 (PB0) |ADC1_IN8, TIM1_CH2N, TIM3_CH3|**A3**|
+20 (PC1) |ADC1_IN11|**A4**|
+21 (PC0) |ADC1_IN10|**A5**|
+22 (PA11) |ADC1_EXTI11, TIM1_CH4, USART1_CTS, USART6_TX, USB_OTG_FS_DM||
+23 (PA12) |TIM1_ETR, USART1_RTS, USART6_RX, USB_OTG_FS_DP||
+24 (PA13) |SYS_JTMS-SWDIO||
+25 (PA14) |SYS_JTCK-SWCLK||
+26 (PA15) |I2S3_WS, SPI1_NSS, SPI3_NSS, SYS_JTDI, TIM2_CH1, TIM2_ETR||
+27 (PB1) |ADC1_IN9, TIM1_CH3N, TIM3_CH4||
+28 (PB2) |||
+29 (PB7) |I2C1_SDA, TIM4_CH2, USART1_RX||
+30 (PB12) |I2C2_SMBA, I2S2_WS, SPI2_NSS, TIM1_BKIN||
+31 (PB13) |I2S2_CK, SPI2_SCK, TIM1_CH1N||
+32 (PB14) |I2S2_ext_SD, SPI2_MISO, TIM1_CH2N||
+33 (PB15) |I2S2_SD, RTC_REFIN, SPI2_MOSI, TIM1_CH3N||
+34 (PC2) |ADC1_IN12, I2S2_ext_SD, SPI2_MISO||
+35 (PC3) |ADC1_IN13, I2S2_SD, SPI2_MOSI||
+36 (PC4) |ADC1_IN14||
+37 (PC5) |ADC1_IN15||
+38 (PC6) |I2S2_MCK, SDIO_D6, TIM3_CH1, USART6_TX||
+39 (PC8) |SDIO_D0, TIM3_CH3, USART6_CK||
+40 (PC9) |I2C3_SDA, I2S_CKIN, RCC_MCO_2, SDIO_D1, TIM3_CH4||
+41 (PC10) |I2S3_CK, SDIO_D2, SPI3_SCK||
+42 (PC11) |I2S3_ext_SD, SDIO_D3, SPI3_MISO||
+43 (PC12) |I2S3_SD, SDIO_CK, SPI3_MOSI||
+44 (PC13) |RTC_AF1||
+45 (PC14) |RCC_OSC32_IN||
+46 (PC15) |ADC1_EXTI15, RCC_OSC32_OUT||
+47 (PD2) |SDIO_CMD, TIM3_ETR||

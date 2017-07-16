@@ -79,9 +79,19 @@ extern SerialUART SerialUART3;
 #define Serial3 SerialUART3
 #endif
 
-#ifdef USART4
+#if defined(USART4) || defined(UART4)
 extern SerialUART SerialUART4;
-#define Serial4 SerialUART4
+#define Serial5 SerialUART5
+#endif
+
+#if defined(USART5) || defined(UART5)
+extern SerialUART SerialUART5;
+#define Serial5 SerialUART5
+#endif
+
+#ifdef USART6
+extern SerialUART SerialUART6;
+#define Serial6 SerialUART6
 #endif
 
 #endif // _UART_CLASS_
