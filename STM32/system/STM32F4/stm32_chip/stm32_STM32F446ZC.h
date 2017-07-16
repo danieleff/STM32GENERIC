@@ -22,7 +22,7 @@
 
 #include "stm32_USART_variant_25.h"
 
-#include "stm32_ADC_variant_14.h"
+#include "stm32_ADC_variant_5.h"
 
 #include "stm32_FREQ_variant_10.h"
 

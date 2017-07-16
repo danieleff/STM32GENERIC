@@ -193,7 +193,7 @@ def generate_source_code(mcu):
     adc_source_code = 'const stm32_chip_adc1_channel_type chip_adc1_channel[] = {\n'
     
     for instance_signal in sorted(mcu.instance_signal_to_default_pin.keys(), key = natural_sort_key):
-        if 'ADC' not in instance_signal and '_IN' not in instance_signal:
+        if 'ADC' not in instance_signal or '_IN' not in instance_signal:
             continue
             
         (instance, channel) = instance_signal.split('_', 1)

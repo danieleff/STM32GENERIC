@@ -20,7 +20,7 @@
 
 #include "stm32_USART_variant_10.h"
 
-#include "stm32_ADC_variant_5.h"
+#include "stm32_ADC_variant_1.h"
 
 #include "stm32_FREQ_variant_5.h"
 
