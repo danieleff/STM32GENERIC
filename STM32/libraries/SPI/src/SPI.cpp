@@ -7,7 +7,7 @@
 #include "stm32_HAL/stm32XXxx_ll_spi.h"
 
 #if defined(MOSI) || defined(MISO) || defined(SCK)
-	SPIClass SPI(SPI1, MOSI, MISO, SCK);
+	SPIClass SPI(MOSI, MISO, SCK);
 #else
 	SPIClass SPI(SPI1);
 #endif
