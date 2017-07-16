@@ -221,3 +221,8 @@ strong code {
     border: 0;
     color: #00979C;
 }
+
+.bs-sidenav {
+    font-size: small;
+    font-family: monospace;
+}

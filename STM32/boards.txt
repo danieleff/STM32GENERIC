@@ -18,7 +18,7 @@ MapleMini_F103CB.upload.maximum_data_size=20480
 MapleMini_F103CB.upload.tool=maple_upload
 
 MapleMini_F103CB.build.mcu=cortex-m3
-MapleMini_F103CB.build.board=MAPLE_MINI
+MapleMini_F103CB.build.board=MAPLEMINI_F103CB
 MapleMini_F103CB.build.core=arduino
 MapleMini_F103CB.build.variant=MAPLE_MINI
 MapleMini_F103CB.build.series=STM32F1
@@ -95,7 +95,7 @@ BluePill.upload.maximum_data_size=20480
 BluePill.upload.tool=maple_upload
 
 BluePill.build.mcu=cortex-m3
-BluePill.build.board=BLUEPILL
+BluePill.build.board=BLUEPILL_F103C8
 BluePill.build.core=arduino
 BluePill.build.variant=BLUEPILL
 BluePill.build.series=STM32F1
@@ -226,7 +226,7 @@ F103Z.menu.subboard.F103ZE.upload.maximum_size=524288
 F103Z.menu.subboard.F103ZE.upload.maximum_data_size=65536
 F103Z.menu.subboard.F103ZE.upload.device=STM32F103ZE
 F103Z.menu.subboard.F103ZE.build.variant=F103Z
-F103Z.menu.subboard.F103ZE.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZE.build.board=GENERIC_F103ZE
 F103Z.menu.subboard.F103ZE.build.extra_flags=-DSTM32F103ZE
 F103Z.menu.subboard.F103ZE.build.ldscript=f103xE.ld
 
@@ -236,7 +236,7 @@ F103Z.menu.subboard.F103ZF.upload.maximum_data_size=98304
 F103Z.menu.subboard.F103ZF.upload.device=STM32F103ZF
 F103Z.menu.subboard.F103ZF.build.extra_flags=-DSTM32F103ZF
 F103Z.menu.subboard.F103ZF.build.variant=F103Z
-F103Z.menu.subboard.F103ZF.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZF.build.board=GENERIC_F103ZF
 F103Z.menu.subboard.F103ZF.build.ldscript=f103xF.ld
 
 F103Z.menu.subboard.F103ZG=GENERIC(STM32F103ZG)
@@ -246,7 +246,7 @@ F103Z.menu.subboard.F103ZG.upload.device=STM32F103ZG
 F103Z.menu.subboard.F103ZG.build.extra_flags=-DSTM32F103ZG
 F103Z.menu.subboard.F103ZG.build.series=STM32F1
 F103Z.menu.subboard.F103ZG.build.variant=F103Z
-F103Z.menu.subboard.F103ZG.build.board=GENERIC_F103Z
+F103Z.menu.subboard.F103ZG.build.board=GENERIC_F103ZG
 F103Z.menu.subboard.F103ZG.build.ldscript=f103xG.ld
 
 
@@ -350,18 +350,21 @@ BLUE_F103XX.menu.subboard.BLUE_F103VE=BLUE F103VE vcc-gnd.com
 BLUE_F103XX.menu.subboard.BLUE_F103VE.upload.maximum_size=524288
 BLUE_F103XX.menu.subboard.BLUE_F103VE.upload.maximum_data_size=65536
 BLUE_F103XX.menu.subboard.BLUE_F103VE.build.variant=BLUE_F103VE
+BLUE_F103XX.menu.subboard.BLUE_F103VE.build.board=BLUE_F103VE
 BLUE_F103XX.menu.subboard.BLUE_F103VE.build.extra_flags=-DSTM32F103VE -DHSE_VALUE=8000000
 
 BLUE_F103XX.menu.subboard.BLUE_F103ZE=BLUE F103ZE vcc-gnd.com
 BLUE_F103XX.menu.subboard.BLUE_F103ZE.upload.maximum_size=524288
 BLUE_F103XX.menu.subboard.BLUE_F103ZE.upload.maximum_data_size=65536
 BLUE_F103XX.menu.subboard.BLUE_F103ZE.build.variant=BLUE_F103ZE
+BLUE_F103XX.menu.subboard.BLUE_F103ZE.build.board=BLUE_F103ZE
 BLUE_F103XX.menu.subboard.BLUE_F103ZE.build.extra_flags=-DSTM32F103ZE -DHSE_VALUE=8000000
 
 BLUE_F103XX.menu.subboard.BLUE_F103ZG=BLUE F103ZG vcc-gnd.com
 BLUE_F103XX.menu.subboard.BLUE_F103ZG.upload.maximum_size=1048576
 BLUE_F103XX.menu.subboard.BLUE_F103ZG.upload.maximum_data_size=98304
 BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.variant=BLUE_F103ZG
+BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.board=BLUE_F103ZG
 BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.extra_flags=-DSTM32F103ZG -DHSE_VALUE=8000000
 
 ################################################################################
@@ -407,18 +410,21 @@ BLACK_F407XX.menu.subboard.BLACK_F407VE=BLACK F407VE (V2.0)
 BLACK_F407XX.menu.subboard.BLACK_F407VE.upload.maximum_size=524288
 BLACK_F407XX.menu.subboard.BLACK_F407VE.upload.maximum_data_size=131072
 BLACK_F407XX.menu.subboard.BLACK_F407VE.build.variant=BLACK_F407VE
+BLACK_F407XX.menu.subboard.BLACK_F407VE.build.board=BLACK_F407VE
 BLACK_F407XX.menu.subboard.BLACK_F407VE.build.extra_flags=-DSTM32F407VE -DHSE_VALUE=8000000
 
 BLACK_F407XX.menu.subboard.BLACK_F407ZE=BLACK F407ZE (V3.0)
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_size=1232896
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.upload.maximum_data_size=131072
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.variant=BLACK_F407ZE
+BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.board=BLACK_F407ZE
 BLACK_F407XX.menu.subboard.BLACK_F407ZE.build.extra_flags=-DSTM32F407ZE -DHSE_VALUE=8000000
 
 BLACK_F407XX.menu.subboard.BLACK_F407ZG=BLACK F407ZG (M4 DEMO)
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_size=1232896
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_data_size=131072
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.variant=BLACK_F407ZG
+BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.board=BLACK_F407ZG
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VALUE=8000000
 
 ################################################################################
@@ -438,6 +444,7 @@ NUCLEO_64.menu.subboard.Nucleo_F030R8.upload.maximum_data_size=8192
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.mcu=cortex-m0
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.series=STM32F0
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.variant=NUCLEO_F030R8
+NUCLEO_64.menu.subboard.Nucleo_F030R8.build.board=NUCLEO_F030R8
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.extra_flags=-DSTM32F030R8
 NUCLEO_64.menu.subboard.Nucleo_F030R8.massstorage_drive=NUCLEO
 NUCLEO_64.menu.subboard.Nucleo_F030R8.build.f_cpu=48000000L
@@ -448,6 +455,7 @@ NUCLEO_64.menu.subboard.Nucleo_F103RB.upload.maximum_data_size=20480
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.mcu=cortex-m3
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.series=STM32F1
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.variant=NUCLEO_F103RB
+NUCLEO_64.menu.subboard.Nucleo_F103RB.build.board=NUCLEO_F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.extra_flags=-DSTM32F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.massstorage_drive=NODE_F103RB
 NUCLEO_64.menu.subboard.Nucleo_F103RB.build.f_cpu=64000000L
@@ -458,6 +466,7 @@ NUCLEO_64.menu.subboard.Nucleo_F303RE.upload.maximum_data_size=81920
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.series=STM32F3
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.variant=NUCLEO_F303RE
+NUCLEO_64.menu.subboard.Nucleo_F303RE.build.board=NUCLEO_F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.extra_flags=-DSTM32F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.massstorage_drive=NODE_F303RE
 NUCLEO_64.menu.subboard.Nucleo_F303RE.build.f_cpu=72000000L
@@ -468,6 +477,7 @@ NUCLEO_64.menu.subboard.Nucleo_F401RE.upload.maximum_data_size=98304
 NUCLEO_64.menu.subboard.Nucleo_F401RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.subboard.Nucleo_F401RE.build.series=STM32F4
 NUCLEO_64.menu.subboard.Nucleo_F401RE.build.variant=NUCLEO_F401RE
+NUCLEO_64.menu.subboard.Nucleo_F401RE.build.board=NUCLEO_F401RE
 NUCLEO_64.menu.subboard.Nucleo_F401RE.build.extra_flags=-DSTM32F401RE
 NUCLEO_64.menu.subboard.Nucleo_F401RE.massstorage_drive=NODE_F401RE
 NUCLEO_64.menu.subboard.Nucleo_F401RE.build.f_cpu=100000000L
@@ -478,6 +488,7 @@ NUCLEO_64.menu.subboard.Nucleo_F411RE.upload.maximum_data_size=131072
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.series=STM32F4
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.variant=NUCLEO_F411RE
+NUCLEO_64.menu.subboard.Nucleo_F411RE.build.board=NUCLEO_F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.extra_flags=-DSTM32F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.massstorage_drive=NODE_F411RE
 NUCLEO_64.menu.subboard.Nucleo_F411RE.build.f_cpu=100000000L
@@ -488,6 +499,7 @@ NUCLEO_64.menu.subboard.Nucleo_L053R8.upload.maximum_data_size=8192
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.mcu=cortex-m0
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.series=STM32L0
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.variant=NUCLEO_L053R8
+NUCLEO_64.menu.subboard.Nucleo_L053R8.build.board=NUCLEO_L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.extra_flags=-DSTM32L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.massstorage_drive=NODE_L053R8
 NUCLEO_64.menu.subboard.Nucleo_L053R8.build.f_cpu=32000000L
@@ -498,6 +510,7 @@ NUCLEO_64.menu.subboard.Nucleo_L152RE.upload.maximum_data_size=81920
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.mcu=cortex-m3
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.series=STM32L1
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.variant=NUCLEO_L152RE
+NUCLEO_64.menu.subboard.Nucleo_L152RE.build.board=NUCLEO_L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.extra_flags=-DSTM32L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.massstorage_drive=NODE_L152RE
 NUCLEO_64.menu.subboard.Nucleo_L152RE.build.f_cpu=32000000L
@@ -508,6 +521,7 @@ NUCLEO_64.menu.subboard.Nucleo_L476RG.upload.maximum_data_size=131072
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.series=STM32L4
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.variant=NUCLEO_L476RG
+NUCLEO_64.menu.subboard.Nucleo_L476RG.build.board=NUCLEO_L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.extra_flags=-DSTM32L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.massstorage_drive=NODE_L476RG
 NUCLEO_64.menu.subboard.Nucleo_L476RG.build.f_cpu=80000000L
@@ -541,6 +555,7 @@ NUCLEO_144.menu.subboard.Nucleo_F767ZI.upload.maximum_data_size=524288
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=8000000
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.series=STM32F7
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.variant=NUCLEO_F767ZI
+NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.board=NUCLEO_F767ZI
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.extra_flags=-DSTM32F767ZI
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.massstorage_drive=NODE_F767ZI
 NUCLEO_144.menu.subboard.Nucleo_F767ZI.build.f_cpu=216000000L
@@ -563,7 +578,7 @@ DISCOVERY_L053C8.upload.maximum_size=65536
 DISCOVERY_L053C8.upload.maximum_data_size=8192
 
 DISCOVERY_L053C8.build.core=arduino
-DISCOVERY_L053C8.build.board=DISCOVERY_L053C8
+DISCOVERY_L053C8.build.board=DISCO_L053C8
 
 DISCOVERY_L053C8.build.mcu=cortex-m0
 DISCOVERY_L053C8.build.series=STM32L0
@@ -603,7 +618,7 @@ DISCOVERY_F303VC.upload.maximum_size=524288
 DISCOVERY_F303VC.upload.maximum_data_size=40960
 
 DISCOVERY_F303VC.build.core=arduino
-DISCOVERY_F303VC.build.board=DISCOVERY_F303VC
+DISCOVERY_F303VC.build.board=DISCO_F303VC
 
 DISCOVERY_F303VC.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F303VC.build.series=STM32F3
@@ -637,7 +652,7 @@ DISCOVERY_F407VG.upload.maximum_size=1048576
 DISCOVERY_F407VG.upload.maximum_data_size=131072
 
 DISCOVERY_F407VG.build.core=arduino
-DISCOVERY_F407VG.build.board=DISCOVERY_F407VG
+DISCOVERY_F407VG.build.board=DISCO_F407VG
 
 DISCOVERY_F407VG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F407VG.build.series=STM32F4
@@ -669,7 +684,7 @@ DISCOVERY_F429ZI.upload.maximum_size=1048576
 DISCOVERY_F429ZI.upload.maximum_data_size=131072
 
 DISCOVERY_F429ZI.build.core=arduino
-DISCOVERY_F429ZI.build.board=DISCOVERY_F429ZI
+DISCOVERY_F429ZI.build.board=DISCO_F429ZI
 
 DISCOVERY_F429ZI.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F429ZI.build.series=STM32F4
@@ -702,7 +717,7 @@ DISCOVERY_F746NG.upload.maximum_size=1048576
 DISCOVERY_F746NG.upload.maximum_data_size=327680
 
 DISCOVERY_F746NG.build.core=arduino
-DISCOVERY_F746NG.build.board=DISCOVERY_F746NG
+DISCOVERY_F746NG.build.board=DISCO_F746NG
 
 DISCOVERY_F746NG.build.mcu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F746NG.build.series=STM32F7

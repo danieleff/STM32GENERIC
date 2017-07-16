@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Build macros - STM32GENERIC</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+         
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">STM32GENERIC</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+            
+            
+                <li >
+                    <a href="..">Installation</a>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../upload/">Uploading</a>
+                </li>
+            
+            
+            
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../menu_options/">Menu options</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../arduino_api/">Arduino API</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../spi/">SPI</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../i2c/">I2C</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../i2s/">I2S</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../sdio/">SDIO</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../uart/">UART Serial</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../usb_cdc/">USB Serial</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../usb_msc/">USB Mass Storage</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../stm32_hal/">STM32 HAL</a>
+</li>
+
+                    
+                        
+<li class="active">
+    <a href="./">Build macros</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../libraries/">Libraries</a>
+                </li>
+            
+            
+            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    
+                        
+<li >
+    <a href="../board_MapleMini_F103CB/">MapleMini F103CB</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_BluePill/">BluePill F103CB</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_Generic103RF/">Generic F103RF</a>
+</li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">huaweiwx F103Z boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_F103ZE1/">RedBull(F103ZE)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZE/">GENERIC(STM32F103ZE)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZF/">GENERIC(STM32F103ZF)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_F103ZG/">GENERIC(STM32F103ZG)</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">BLUE F103VE/ZE/ZG boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_BLUE_F103VE/">BLUE F103VE vcc-gnd.com</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLUE_F103ZE/">BLUE F103ZE vcc-gnd.com</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLUE_F103ZG/">BLUE F103ZG vcc-gnd.com</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">BLACK F407VE/ZE/ZG boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_BLACK_F407VE/">BLACK F407VE (V2.0)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLACK_F407ZE/">BLACK F407ZE (V3.0)</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_BLACK_F407ZG/">BLACK F407ZG (M4 DEMO)</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Nucleo-64 boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_Nucleo_F030R8/">Nucleo-F030R8</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F103RB/">Nucleo-F103RB</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F303RE/">Nucleo-F303RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F401RE/">Nucleo-F401RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_F411RE/">Nucleo-F411RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L053R8/">Nucleo-L053R8</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L152RE/">Nucleo-L152RE</a>
+</li>
+
+        
+            
+<li >
+    <a href="../board_Nucleo_L476RG/">Nucleo-L476RG</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+  <li class="dropdown-submenu">
+    <a tabindex="-1" href="">Nucleo-144 boards</a>
+    <ul class="dropdown-menu">
+        
+            
+<li >
+    <a href="../board_Nucleo_F767ZI/">Nucleo-F767ZI</a>
+</li>
+
+        
+    </ul>
+  </li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_L053C8/">Discovery L053C8</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F303VC/">Discovery F303VC</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F407VG/">Discovery F407VG</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../board_DISCOVERY_F746NG/">Discovery F746NG</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../add_board/">Adding a board</a>
+</li>
+
+                    
+                        
+<li >
+    <a href="../test/">Testing a board</a>
+</li>
+
+                    
+                    </ul>
+                </li>
+            
+            
+            
+                <li >
+                    <a href="../about/">About</a>
+                </li>
+            
+            
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="../stm32_hal/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../libraries/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+    
+        <li class="main active"><a href="#arduino_arch_stm32">ARDUINO_ARCH_STM32:</a></li>
+        
+    
+        <li class="main "><a href="#macros-specific-to-board">Macros specific to board:</a></li>
+        
+    
+    
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<p>When compiling, the following build macro definitions are set:</p>
+<h3 id="arduino_arch_stm32"><strong><code>ARDUINO_ARCH_STM32</code></strong>:</h3>
+<p>Meaning: </p>
+<ul>
+<li>The code is compiling on Arduino</li>
+<li>The code is compiling for STM32 chip</li>
+<li>CMSIS is present and useable. (For example: <code>GPIOA-&gt;BSRR</code>)</li>
+<li>The STM32 HAL API is present and useable. (For example: <code>HAL_GPIO_TogglePin(port, pin)</code>)</li>
+</ul>
+<p>This macro does not imply the avaibility of the STM32GENERIC private functions.</p>
+<h3 id="macros-specific-to-board">Macros specific to board:</h3>
+<p>These can be used to differentiate between boards
+Meaning: The code is compiled for that chip, board and form factor.</p>
+<table>
+<thead>
+<tr>
+<th>Board</th>
+<th>Build macro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BLACK F407VE (V2.0)</td>
+<td><strong><code>ARDUINO_BLACK_F407VE</code></strong></td>
+</tr>
+<tr>
+<td>BLACK F407ZE (V3.0)</td>
+<td><strong><code>ARDUINO_BLACK_F407ZE</code></strong></td>
+</tr>
+<tr>
+<td>BLACK F407ZG (M4 DEMO)</td>
+<td><strong><code>ARDUINO_BLACK_F407ZG</code></strong></td>
+</tr>
+<tr>
+<td>BLUE F103VE vcc-gnd.com</td>
+<td><strong><code>ARDUINO_BLUE_F103VE</code></strong></td>
+</tr>
+<tr>
+<td>BLUE F103ZE vcc-gnd.com</td>
+<td><strong><code>ARDUINO_BLUE_F103ZE</code></strong></td>
+</tr>
+<tr>
+<td>BLUE F103ZG vcc-gnd.com</td>
+<td><strong><code>ARDUINO_BLUE_F103ZG</code></strong></td>
+</tr>
+<tr>
+<td>BluePill F103CB</td>
+<td><strong><code>ARDUINO_BLUEPILL_F103C8</code></strong></td>
+</tr>
+<tr>
+<td>Discovery F303VC</td>
+<td><strong><code>ARDUINO_DISCO_F303VC</code></strong></td>
+</tr>
+<tr>
+<td>Discovery F407VG</td>
+<td><strong><code>ARDUINO_DISCO_F407VG</code></strong></td>
+</tr>
+<tr>
+<td>Discovery F429ZI</td>
+<td><strong><code>ARDUINO_DISCO_F429ZI</code></strong></td>
+</tr>
+<tr>
+<td>Discovery F746NG</td>
+<td><strong><code>ARDUINO_DISCO_F746NG</code></strong></td>
+</tr>
+<tr>
+<td>Discovery L053C8</td>
+<td><strong><code>ARDUINO_DISCO_L053C8</code></strong></td>
+</tr>
+<tr>
+<td>GENERIC(STM32F103ZE)</td>
+<td><strong><code>ARDUINO_GENERIC_F103ZE</code></strong></td>
+</tr>
+<tr>
+<td>RedBull(F103ZE)</td>
+<td><strong><code>ARDUINO_REDBULL</code></strong></td>
+</tr>
+<tr>
+<td>GENERIC(STM32F103ZF)</td>
+<td><strong><code>ARDUINO_GENERIC_F103ZF</code></strong></td>
+</tr>
+<tr>
+<td>GENERIC(STM32F103ZG)</td>
+<td><strong><code>ARDUINO_GENERIC_F103ZG</code></strong></td>
+</tr>
+<tr>
+<td>Generic F103RF</td>
+<td><strong><code>ARDUINO_GENERIC_103RF</code></strong></td>
+</tr>
+<tr>
+<td>MapleMini F103CB</td>
+<td><strong><code>ARDUINO_MAPLEMINI_F103CB</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F030R8</td>
+<td><strong><code>ARDUINO_NUCLEO_F030R8</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F103RB</td>
+<td><strong><code>ARDUINO_NUCLEO_F103RB</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F303RE</td>
+<td><strong><code>ARDUINO_NUCLEO_F303RE</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F401RE</td>
+<td><strong><code>ARDUINO_NUCLEO_F401RE</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F411RE</td>
+<td><strong><code>ARDUINO_NUCLEO_F411RE</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-F767ZI</td>
+<td><strong><code>ARDUINO_NUCLEO_F767ZI</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-L053R8</td>
+<td><strong><code>ARDUINO_NUCLEO_L053R8</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-L152RE</td>
+<td><strong><code>ARDUINO_NUCLEO_L152RE</code></strong></td>
+</tr>
+<tr>
+<td>Nucleo-L476RG</td>
+<td><strong><code>ARDUINO_NUCLEO_L476RG</code></strong></td>
+</tr>
+</tbody>
+</table></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
