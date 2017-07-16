@@ -6,9 +6,9 @@ Below are the pins usable for the peripherals. Pins in **bold** are the default.
 
 Instance |MOSI|MISO|SCK|
 -|-|-|-|
-SPI1|**11 (PA7)**, 4 (PB5)|**12 (PA6)**|**13 (PA5)**|
+SPI1|**11 (PA7)**, 4 (PB5)|**12 (PA6)**, 5 (PB4)|**13 (PA5)**, 3 (PB3)|
 SPI2|**33 (PB15)**, 35 (PC3)|**32 (PB14)**, 34 (PC2)|**6 (PB10)**, 31 (PB13)|
-SPI3|**4 (PB5)**, 43 (PC12)|**42 (PC11)**|**41 (PC10)**|
+SPI3|**4 (PB5)**, 43 (PC12)|**5 (PB4)**, 42 (PC11)|**3 (PB3)**, 41 (PC10)|
 
 ## I2C
 
@@ -33,8 +33,8 @@ USART3|**PB11**, 37 (PC5), 42 (PC11)|**6 (PB10)**, 36 (PC4), 41 (PC10)|
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**7 (PA8)**, <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">31 (PB13)</span>|**8 (PA9)**, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**2 (PA10)**, <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>|**22 (PA11)**|
-TIM2|**16 (PA0)**, 13 (PA5)|**17 (PA1)**|**1 (PA2)**, 6 (PB10)|**0 (PA3)**, PB11|
-TIM3|**12 (PA6)**, 38 (PC6)|**11 (PA7)**, 4 (PB5), 9 (PC7)|**19 (PB0)**, 39 (PC8)|**27 (PB1)**, 40 (PC9)|
+TIM2|**16 (PA0)**, 13 (PA5), 26 (PA15)|**17 (PA1)**, 3 (PB3)|**1 (PA2)**, 6 (PB10)|**0 (PA3)**, PB11|
+TIM3|**12 (PA6)**, 5 (PB4), 38 (PC6)|**11 (PA7)**, 4 (PB5), 9 (PC7)|**19 (PB0)**, 39 (PC8)|**27 (PB1)**, 40 (PC9)|
 TIM4|**10 (PB6)**|**29 (PB7)**|**15 (PB8)**|**14 (PB9)**|
 TIM5|**16 (PA0)**|**17 (PA1)**|**1 (PA2)**|**0 (PA3)**|
 TIM8|**38 (PC6)**, <span style="text-decoration: overline">13 (PA5)</span>, <span style="text-decoration: overline">11 (PA7)</span>|**9 (PC7)**, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**39 (PC8)**, <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>|**40 (PC9)**|
@@ -90,9 +90,9 @@ Pin | Peripheral signal available on the pin | Board macro
 0 (PA3) |ADC1_IN8, ADC2_IN8, LCD_SEG2, OPAMP1_VOUT, TIM2_CH4, TIM5_CH4, TIM15_CH2, USART2_RX||
 1 (PA2) |ADC1_IN7, ADC2_IN7, LCD_SEG1, RCC_LSCO, SAI2_EXTCLK, SYS_WKUP4, TIM2_CH3, TIM5_CH3, TIM15_CH1, USART2_TX||
 2 (PA10) |LCD_COM2, TIM1_CH3, TIM17_BKIN, USART1_RX, USB_OTG_FS_ID||
-3 (PB3) |COMP2_INM, LCD_SEG7, SAI1_SCK_B, SYS_JTDO-SWO||
+3 (PB3) |COMP2_INM, LCD_SEG7, SAI1_SCK_B, SPI1_SCK, SPI3_SCK, SYS_JTDO-SWO, TIM2_CH2, USART1_DE, USART1_RTS||
 4 (PB5) |COMP2_OUT, I2C1_SMBA, LCD_SEG9, LPTIM1_IN1, SAI1_SD_B, SPI1_MOSI, SPI3_MOSI, TIM3_CH2, TIM16_BKIN, TSC_G2_IO2, UART5_CTS, USART1_CK||
-5 (PB4) |COMP2_INP, LCD_SEG8, SAI1_MCLK_B, SYS_JTRST, TSC_G2_IO1, UART5_DE, UART5_RTS||
+5 (PB4) |COMP2_INP, LCD_SEG8, SAI1_MCLK_B, SPI1_MISO, SPI3_MISO, SYS_JTRST, TIM3_CH1, TIM17_BKIN, TSC_G2_IO1, UART5_DE, UART5_RTS, USART1_CTS||
 6 (PB10) |COMP1_OUT, DFSDM1_DATIN7, I2C2_SCL, LCD_SEG10, LPUART1_RX, QUADSPI_CLK, SAI1_SCK_A, SPI2_SCK, TIM2_CH3, USART3_TX||
 7 (PA8) |LCD_COM0, LPTIM2_OUT, RCC_MCO, TIM1_CH1, USART1_CK, USB_OTG_FS_SOF||
 8 (PA9) |LCD_COM1, TIM1_CH2, TIM15_BKIN, USART1_TX, USB_OTG_FS_VBUS||
@@ -111,9 +111,9 @@ Pin | Peripheral signal available on the pin | Board macro
 21 (PC0) |ADC1_IN1, ADC2_IN1, ADC3_IN1, DFSDM1_DATIN4, I2C3_SCL, LCD_SEG18, LPTIM1_IN1, LPTIM2_IN1, LPUART1_RX|**A5**|
 22 (PA11) |CAN1_RX, TIM1_BKIN2, TIM1_BKIN2_COMP1, TIM1_CH4, USART1_CTS, USB_OTG_FS_DM||
 23 (PA12) |CAN1_TX, TIM1_ETR, USART1_DE, USART1_RTS, USB_OTG_FS_DP||
-24 (PA13) |SYS_JTMS-SWDIO||
+24 (PA13) |IR_OUT, SYS_JTMS-SWDIO, USB_OTG_FS_NOE||
 25 (PA14) |SYS_JTCK-SWCLK||
-26 (PA15) |LCD_SEG17, SAI2_FS_B, SYS_JTDI, TSC_G3_IO1, UART4_DE, UART4_RTS||
+26 (PA15) |LCD_SEG17, SAI2_FS_B, SPI1_NSS, SPI3_NSS, SYS_JTDI, TIM2_CH1, TIM2_ETR, TSC_G3_IO1, UART4_DE, UART4_RTS||
 27 (PB1) |ADC1_IN16, ADC2_IN16, DFSDM1_DATIN0, LCD_SEG6, LPTIM2_IN1, QUADSPI_BK1_IO0, TIM1_CH3N, TIM3_CH4, TIM8_CH3N, USART3_DE, USART3_RTS||
 28 (PB2) |DFSDM1_CKIN0, I2C3_SMBA, LPTIM1_OUT, RTC_OUT_ALARM, RTC_OUT_CALIB||
 29 (PB7) |DFSDM1_CKIN5, I2C1_SDA, LCD_SEG21, LPTIM1_IN2, SYS_PVD_IN, TIM4_CH2, TIM8_BKIN, TIM8_BKIN_COMP1, TIM17_CH1N, TSC_G2_IO4, UART4_CTS, USART1_RX||

@@ -15,7 +15,7 @@ SPI3|**PB5**, PC12|**PB4**, PC11|**PB3**, PC10|
 Instance |SDA|SCL|
 -|-|-|
 I2C1|PA14, PB7, **PB9**|PA15, **PB6**, PB8|
-I2C2|**PA10**|**PA9**, PF6|
+I2C2|**PA10**, PF0|**PA9**, PF1, PF6|
 
 ## USART
 
@@ -38,7 +38,7 @@ I2S3|**PB3**, PC10|**PB5**, PC12|**PA4**, PA15|**PA9**, PC7|
 
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
-TIM1|**PA8**, PE9, <span style="text-decoration: overline">PA7</span>, <span style="text-decoration: overline">PA11</span>, <span style="text-decoration: overline">PB13</span>, <span style="text-decoration: overline">PC13</span>, <span style="text-decoration: overline">PE8</span>|**PA9**, PE11, <span style="text-decoration: overline">PA12</span>, <span style="text-decoration: overline">PB0</span>, <span style="text-decoration: overline">PB14</span>, <span style="text-decoration: overline">PE10</span>|**PA10**, PE13, <span style="text-decoration: overline">PB1</span>, <span style="text-decoration: overline">PB15</span>, <span style="text-decoration: overline">PE12</span>|**PA11**, PE14|
+TIM1|**PA8**, PE9, <span style="text-decoration: overline">PA7</span>, <span style="text-decoration: overline">PA11</span>, <span style="text-decoration: overline">PB13</span>, <span style="text-decoration: overline">PC13</span>, <span style="text-decoration: overline">PE8</span>|**PA9**, PE11, <span style="text-decoration: overline">PA12</span>, <span style="text-decoration: overline">PB0</span>, <span style="text-decoration: overline">PB14</span>, <span style="text-decoration: overline">PE10</span>|**PA10**, PE13, <span style="text-decoration: overline">PB1</span>, <span style="text-decoration: overline">PB15</span>, <span style="text-decoration: overline">PE12</span>, <span style="text-decoration: overline">PF0</span>|**PA11**, PE14|
 TIM2|**PA0**, PA5, PA15, PD3|**PA1**, PB3, PD4|**PA2**, PA9, PB10, PD7|**PA3**, PA10, PB11, PD6|
 TIM3|**PA6**, PB4, PC6, PE2|**PA4**, PA7, PB5, PC7, PE3|**PB0**, PC8, PE4|**PB1**, PB7, PC9, PE5|
 TIM4|**PA11**, PB6, PD12|**PA12**, PB7, PD13|**PA13**, PB8, PD14|**PB9**, PD15, PF6|
@@ -186,8 +186,8 @@ PE12 |ADC3_IN16, TIM1_CH3N|**LED_BUILTIN4**|
 PE13 |ADC3_IN3, TIM1_CH3||
 PE14 |ADC4_IN1, TIM1_BKIN2, TIM1_CH4|**LED_BUILTIN6**|
 PE15 |ADC4_IN2, TIM1_BKIN, USART3_RX|**LED_BUILTIN7**|
-PF0 |RCC_OSC_IN||
-PF1 |RCC_OSC_OUT||
+PF0 |I2C2_SDA, RCC_OSC_IN, TIM1_CH3N||
+PF1 |I2C2_SCL, RCC_OSC_OUT||
 PF2 |ADC1_IN10, ADC2_IN10||
 PF4 |ADC1_IN5, COMP1_OUT||
 PF6 |I2C2_SCL, TIM4_CH4, USART3_DE, USART3_RTS||

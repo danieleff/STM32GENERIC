@@ -7,7 +7,7 @@ Below are the pins usable for the peripherals. Pins in **bold** are the default.
 Instance |MOSI|MISO|SCK|
 -|-|-|-|
 SPI1|**11 (PA7)**, 4 (PB5)|**12 (PA6)**, 5 (PB4)|**13 (PA5)**, 3 (PB3)|
-SPI2|**22 (PA11)**, 33 (PB15)|**2 (PA10)**, 32 (PB14)|**31 (PB13)**|
+SPI2|**22 (PA11)**, 33 (PB15)|**2 (PA10)**, 32 (PB14)|**31 (PB13)**, PF1|
 SPI3|**4 (PB5)**, 43 (PC12)|**5 (PB4)**, 42 (PC11)|**3 (PB3)**, 41 (PC10)|
 
 ## I2C
@@ -15,7 +15,7 @@ SPI3|**4 (PB5)**, 43 (PC12)|**5 (PB4)**, 42 (PC11)|**3 (PB3)**, 41 (PC10)|
 Instance |SDA|SCL|
 -|-|-|
 I2C1|25 (PA14), 29 (PB7), **14 (PB9)**|26 (PA15), 10 (PB6), **15 (PB8)**|
-I2C2|**2 (PA10)**|**8 (PA9)**|
+I2C2|**2 (PA10)**, PF0|**8 (PA9)**, PF1|
 I2C3|**4 (PB5)**, 40 (PC9)|**7 (PA8)**|
 
 ## USART
@@ -32,14 +32,14 @@ USART3|**15 (PB8)**, PB11, 42 (PC11)|**14 (PB9)**, 6 (PB10), 41 (PC10)|
 
 Instance |CK|SD|WS|MCK|
 -|-|-|-|-|
-I2S2|**31 (PB13)**|**22 (PA11)**, 33 (PB15)|**30 (PB12)**|**7 (PA8)**, 38 (PC6)|
+I2S2|**31 (PB13)**, PF1|**22 (PA11)**, 33 (PB15)|**30 (PB12)**, PF0|**7 (PA8)**, 38 (PC6)|
 I2S3|**3 (PB3)**, 41 (PC10)|**4 (PB5)**, 43 (PC12)|**18 (PA4)**, 26 (PA15)|**8 (PA9)**, 9 (PC7)|
 
 ## TIM
 
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
-TIM1|**7 (PA8)**, 21 (PC0), <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">22 (PA11)</span>, <span style="text-decoration: overline">31 (PB13)</span>, <span style="text-decoration: overline">44 (PC13)</span>|**8 (PA9)**, 20 (PC1), <span style="text-decoration: overline">23 (PA12)</span>, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**2 (PA10)**, 34 (PC2), <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>|**22 (PA11)**, 35 (PC3)|
+TIM1|**7 (PA8)**, 21 (PC0), <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">22 (PA11)</span>, <span style="text-decoration: overline">31 (PB13)</span>, <span style="text-decoration: overline">44 (PC13)</span>|**8 (PA9)**, 20 (PC1), <span style="text-decoration: overline">23 (PA12)</span>, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**2 (PA10)**, 34 (PC2), <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>, <span style="text-decoration: overline">PF0</span>|**22 (PA11)**, 35 (PC3)|
 TIM2|**16 (PA0)**, 13 (PA5), 26 (PA15)|**17 (PA1)**, 3 (PB3)|**1 (PA2)**, 8 (PA9), 6 (PB10)|**0 (PA3)**, 2 (PA10), PB11|
 TIM3|**12 (PA6)**, 5 (PB4), 38 (PC6)|**18 (PA4)**, 11 (PA7), 4 (PB5), 9 (PC7)|**19 (PB0)**, 39 (PC8)|**27 (PB1)**, 29 (PB7), 40 (PC9)|
 TIM4|**22 (PA11)**, 10 (PB6)|**23 (PA12)**, 29 (PB7)|**24 (PA13)**, 15 (PB8)|**14 (PB9)**|
