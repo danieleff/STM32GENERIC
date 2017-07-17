@@ -44,6 +44,11 @@ HardwareTimer::HardwareTimer(TIM_TypeDef *instance, const stm32_tim_pin_list_typ
         channelOC[i].OCFastMode = TIM_OCFAST_DISABLE;
         channelOC[i].OCIdleState = TIM_OCIDLESTATE_RESET;
         channelOC[i].OCNIdleState = TIM_OCNIDLESTATE_RESET;
+
+        channelIC[i].ICPolarity = OCMODE_NOT_USED;
+        channelIC[i].ICSelection = TIM_ICSELECTION_DIRECTTI;
+        channelIC[i].ICPrescaler = TIM_ICPSC_DIV1;
+        channelIC[i].ICFilter = 0;
     }
 
 }
@@ -148,6 +153,16 @@ void HardwareTimer::resumeChannel(int channel, int timChannel) {
             HAL_TIM_OC_Start_IT(&handle, timChannel);
         } else {
             HAL_TIM_OC_Start(&handle, timChannel);
+        }
+    }
+
+    if (channelIC[channel - 1].ICPolarity != OCMODE_NOT_USED) {
+        HAL_TIM_IC_ConfigChannel(&handle, &channelIC[channel - 1], timChannel);
+
+        if (callbacks[channel] != NULL) {
+            HAL_TIM_IC_Start_IT(&handle, timChannel);
+        } else {
+            HAL_TIM_IC_Start(&handle, timChannel);
         }
     }
 }
@@ -306,6 +321,16 @@ void HardwareTimer::setMode(int channel, TIMER_MODES mode, uint8_t pin) {
             channelOC[channel - 1].OCMode = TIM_OCMODE_FORCED_INACTIVE;
             pinMode = GPIO_MODE_AF_PP;
             break;
+
+        case TIMER_INPUT_CAPTURE_RISING:
+            channelIC[channel - 1].ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+            pinMode = GPIO_MODE_AF_PP;
+            break;
+
+        case TIMER_INPUT_CAPTURE_FALLING:
+            channelIC[channel - 1].ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+            pinMode = GPIO_MODE_AF_PP;
+            break;
     }
 
     if (pinMode != PIN_NOT_USED) {
@@ -343,7 +368,11 @@ void HardwareTimer::setCompare(int channel, uint32_t compare) {
 }
 
 uint32_t HardwareTimer::getCompare(int channel) {
-    return channelOC[channel - 1].Pulse;
+    if (channel == 1) return __HAL_TIM_GET_COMPARE(&handle, TIM_CHANNEL_1);
+    if (channel == 2) return __HAL_TIM_GET_COMPARE(&handle, TIM_CHANNEL_2);
+    if (channel == 3) return __HAL_TIM_GET_COMPARE(&handle, TIM_CHANNEL_3);
+    if (channel == 4) return __HAL_TIM_GET_COMPARE(&handle, TIM_CHANNEL_4);
+    return 0;
 }
 
 void HardwareTimer::attachInterrupt(void (*callback)(void)) {

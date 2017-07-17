@@ -20,8 +20,8 @@ typedef enum {
     TIMER_OUTPUT_COMPARE_FORCED_INACTIVE,   // == TIM_OCMODE_FORCED_INACTIVE  pin always low
 
     //Input capture
-    //TIMER_INPUT_CAPTURE_RISING,          // == TIM_INPUTCHANNELPOLARITY_RISING
-    //TIMER_INPUT_CAPTURE_FALLING,         // == TIM_INPUTCHANNELPOLARITY_FALLING
+    TIMER_INPUT_CAPTURE_RISING,          // == TIM_INPUTCHANNELPOLARITY_RISING
+    TIMER_INPUT_CAPTURE_FALLING,         // == TIM_INPUTCHANNELPOLARITY_FALLING
 
     //PWM input capture on channel 1 + channel 2
     //TIMER_INPUT_CAPTURE_PWM,             // == TIM_INPUTCHANNELPOLARITY_RISING (channel 1) + TIM_INPUTCHANNELPOLARITY_FALLING (channel 2)
@@ -77,6 +77,8 @@ public:
     TIM_HandleTypeDef handle = {0};
 
     TIM_OC_InitTypeDef channelOC[4];
+
+    TIM_IC_InitTypeDef channelIC[4];
 
     //Callbacks: 0 for update, 1-4 for channels
     void (*callbacks[5])(void);
