@@ -43,7 +43,7 @@ I2S5|**19 (PB0)**|**2 (PA10)**, 15 (PB8)|**27 (PB1)**||
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**7 (PA8)**, <span style="text-decoration: overline">11 (PA7)</span>, <span style="text-decoration: overline">31 (PB13)</span>|**8 (PA9)**, <span style="text-decoration: overline">19 (PB0)</span>, <span style="text-decoration: overline">32 (PB14)</span>|**2 (PA10)**, <span style="text-decoration: overline">27 (PB1)</span>, <span style="text-decoration: overline">33 (PB15)</span>|**22 (PA11)**|
-TIM2|**13 (PA5)**, 26 (PA15)|**17 (PA1)**, 3 (PB3)|**1 (PA2)**, 6 (PB10)|**0 (PA3)**|
+TIM2|**16 (PA0)**, 13 (PA5), 26 (PA15)|**17 (PA1)**, 3 (PB3)|**1 (PA2)**, 6 (PB10)|**0 (PA3)**|
 TIM3|**12 (PA6)**, 5 (PB4), 38 (PC6)|**11 (PA7)**, 4 (PB5), 9 (PC7)|**19 (PB0)**, 39 (PC8)|**27 (PB1)**, 40 (PC9)|
 TIM4|**10 (PB6)**|**29 (PB7)**|**15 (PB8)**|**14 (PB9)**|
 TIM5|**16 (PA0)**|**17 (PA1)**|**1 (PA2)**|**0 (PA3)**|
@@ -92,7 +92,7 @@ Pin | Peripheral signal available on the pin | Board macro
 13 (PA5) |ADC1_IN5, I2S1_CK, SPI1_SCK, TIM2_CH1, TIM2_ETR|**LED_BUILTIN**, **SCK**|
 14 (PB9) |I2C1_SDA, I2C2_SDA, I2S2_WS, SDIO_D5, SPI2_NSS, TIM4_CH4, TIM11_CH1|**SDA**|
 15 (PB8) |I2C1_SCL, I2C3_SDA, I2S5_SD, SDIO_D4, SPI5_MOSI, TIM4_CH3, TIM10_CH1|**SCL**|
-16 (PA0) |ADC1_IN0, SYS_WKUP, TIM5_CH1, USART2_CTS|**A0**|
+16 (PA0) |ADC1_IN0, SYS_WKUP, TIM2_CH1, TIM2_ETR, TIM5_CH1, USART2_CTS|**A0**|
 17 (PA1) |ADC1_IN1, I2S4_SD, SPI4_MOSI, TIM2_CH2, TIM5_CH2, USART2_RTS|**A1**|
 18 (PA4) |ADC1_IN4, I2S1_WS, I2S3_WS, SPI1_NSS, SPI3_NSS, USART2_CK|**A2**, **SS**|
 19 (PB0) |ADC1_IN8, I2S5_CK, SPI5_SCK, TIM1_CH2N, TIM3_CH3|**A3**|

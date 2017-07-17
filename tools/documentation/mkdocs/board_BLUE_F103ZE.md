@@ -39,7 +39,7 @@ I2S3|**PB3**|**PB5**|**PA15**|**PC7**|
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**PA8**, PE9, <span style="text-decoration: overline">PA7</span>, <span style="text-decoration: overline">PB13</span>, <span style="text-decoration: overline">PE8</span>|**PA9**, PE11, <span style="text-decoration: overline">PB0</span>, <span style="text-decoration: overline">PB14</span>, <span style="text-decoration: overline">PE10</span>|**PA10**, PE13, <span style="text-decoration: overline">PB1</span>, <span style="text-decoration: overline">PB15</span>, <span style="text-decoration: overline">PE12</span>|**PA11**, PE14|
-TIM2|**PA15**|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
+TIM2|**PA0**, PA15|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
 TIM3|**PA6**, PB4, PC6|**PA7**, PB5, PC7|**PB0**, PC8|**PB1**, PC9|
 TIM4|**PB6**, PD12|**PB7**, PD13|**PB8**, PD14|**PB9**, PD15|
 TIM5|**PA0**|**PA1**|**PA2**|**PA3**|
@@ -99,7 +99,7 @@ ADC3|IN13|PC3|
 
 Pin | Peripheral signal available on the pin | Board macro
 -|-|-
-PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, SYS_WKUP, TIM5_CH1, TIM8_ETR||
+PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, SYS_WKUP, TIM2_CH1, TIM2_ETR, TIM5_CH1, TIM8_ETR, USART2_CTS||
 PA1 |ADC1_IN1, ADC2_IN1, ADC3_IN1, TIM2_CH2, TIM5_CH2, USART2_RTS||
 PA2 |ADC1_IN2, ADC2_IN2, ADC3_IN2, TIM2_CH3, TIM5_CH3, USART2_TX||
 PA3 |ADC1_IN3, ADC2_IN3, ADC3_IN3, TIM2_CH4, TIM5_CH4, USART2_RX||

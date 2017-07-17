@@ -9,6 +9,7 @@ const stm32_chip_adc1_channel_type chip_adc1_channel[] = {
     { ADC, GPIOA, GPIO_PIN_7  , ADC_CHANNEL_7  }, 
     { ADC, GPIOB, GPIO_PIN_0  , ADC_CHANNEL_8  }, 
     { ADC, GPIOB, GPIO_PIN_1  , ADC_CHANNEL_9  }, 
-    { LPTIM1, GPIOC, GPIO_PIN_0  , ADC_CHANNEL_1  }, 
-    { LPTIM1, GPIOA, GPIO_PIN_1  , ADC_CHANNEL_2  }, 
+    { ADC, GPIOC, GPIO_PIN_0  , ADC_CHANNEL_10 }, 
+    { ADC, GPIOC, GPIO_PIN_1  , ADC_CHANNEL_11 }, 
+    { ADC, GPIOC, GPIO_PIN_2  , ADC_CHANNEL_12 }, 
 };

@@ -26,7 +26,7 @@ I2C4|**PB7**, PB9, PD13, PF15|**PB6**, PB8, PD12, PF14|
 
 Instance |RX|TX|
 -|-|-|
-UART4|**PA1**, PA11, PC11, PD0|**PA12**, PC10, PD1|
+UART4|**PA1**, PA11, PC11, PD0|**PA0**, PA12, PC10, PD1|
 UART5|**PB5**, PB8, PB12, PD2|**PB6**, PB9, PB13, PC12|
 UART7|**PA8**, PB3, PE7, PF6|**PA15**, PB4, PE8, PF7|
 UART8|**PE0**|**PE1**|
@@ -48,7 +48,7 @@ I2S3|**PB3**, PC10|**PB2**, PB5, PC12, PD6|**PA4**, PA15|**PC7**|
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**PA8**, PE9, <span style="text-decoration: overline">PA7</span>, <span style="text-decoration: overline">PB13</span>, <span style="text-decoration: overline">PE8</span>|**PA9**, PE11, <span style="text-decoration: overline">PB0</span>, <span style="text-decoration: overline">PB14</span>, <span style="text-decoration: overline">PE10</span>|**PA10**, PE13, <span style="text-decoration: overline">PB1</span>, <span style="text-decoration: overline">PB15</span>, <span style="text-decoration: overline">PE12</span>|**PA11**, PE14|
-TIM2|**PA5**, PA15|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
+TIM2|**PA0**, PA5, PA15|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
 TIM3|**PA6**, PB4, PC6|**PA7**, PB5, PC7|**PB0**, PC8|**PB1**, PC9|
 TIM4|**PB6**, PD12|**PB7**, PD13|**PB8**, PD14|**PB9**, PD15|
 TIM5|**PA0**|**PA1**|**PA2**|**PA3**|
@@ -117,7 +117,7 @@ ADC3|IN15|PF5|
 
 Pin | Peripheral signal available on the pin | Board macro
 -|-|-
-PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, ETH_CRS, SYS_WKUP1, TIM5_CH1, TIM8_ETR||
+PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, ETH_CRS, SAI2_SD_B, SYS_WKUP1, TIM2_CH1, TIM2_ETR, TIM5_CH1, TIM8_ETR, UART4_TX, USART2_CTS||
 PA1 |ADC1_IN1, ADC2_IN1, ADC3_IN1, ETH_REF_CLK, ETH_RX_CLK, LTDC_R2, QUADSPI_BK1_IO3, SAI2_MCLK_B, TIM2_CH2, TIM5_CH2, UART4_RX, USART2_DE, USART2_RTS||
 PA2 |ADC1_IN2, ADC2_IN2, ADC3_IN2, ETH_MDIO, LTDC_R1, MDIOS_MDIO, SAI2_SCK_B, SYS_WKUP2, TIM2_CH3, TIM5_CH3, TIM9_CH1, USART2_TX||
 PA3 |ADC1_IN3, ADC2_IN3, ADC3_IN3, ETH_COL, LTDC_B2, LTDC_B5, TIM2_CH4, TIM5_CH4, TIM9_CH2, USART2_RX, USB_OTG_HS_ULPI_D0||

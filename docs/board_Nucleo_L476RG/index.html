@@ -435,8 +435,8 @@
 <tr>
 <td>SPI1</td>
 <td><strong>11 (PA7)</strong>, 4 (PB5)</td>
-<td><strong>12 (PA6)</strong></td>
-<td><strong>13 (PA5)</strong></td>
+<td><strong>12 (PA6)</strong>, 5 (PB4)</td>
+<td><strong>13 (PA5)</strong>, 3 (PB3)</td>
 <td></td>
 </tr>
 <tr>
@@ -449,8 +449,8 @@
 <tr>
 <td>SPI3</td>
 <td><strong>4 (PB5)</strong>, 43 (PC12)</td>
-<td><strong>42 (PC11)</strong></td>
-<td><strong>41 (PC10)</strong></td>
+<td><strong>5 (PB4)</strong>, 42 (PC11)</td>
+<td><strong>3 (PB3)</strong>, 41 (PC10)</td>
 <td></td>
 </tr>
 </tbody>
@@ -552,15 +552,15 @@
 </tr>
 <tr>
 <td>TIM2</td>
-<td><strong>16 (PA0)</strong>, 13 (PA5)</td>
-<td><strong>17 (PA1)</strong></td>
+<td><strong>16 (PA0)</strong>, 13 (PA5), 26 (PA15)</td>
+<td><strong>17 (PA1)</strong>, 3 (PB3)</td>
 <td><strong>1 (PA2)</strong>, 6 (PB10)</td>
 <td><strong>0 (PA3)</strong>, PB11</td>
 <td></td>
 </tr>
 <tr>
 <td>TIM3</td>
-<td><strong>12 (PA6)</strong>, 38 (PC6)</td>
+<td><strong>12 (PA6)</strong>, 5 (PB4), 38 (PC6)</td>
 <td><strong>11 (PA7)</strong>, 4 (PB5), 9 (PC7)</td>
 <td><strong>19 (PB0)</strong>, 39 (PC8)</td>
 <td><strong>27 (PB1)</strong>, 40 (PC9)</td>
@@ -835,7 +835,7 @@
 </tr>
 <tr>
 <td>3 (PB3)</td>
-<td>COMP2_INM, LCD_SEG7, SAI1_SCK_B, SYS_JTDO-SWO</td>
+<td>COMP2_INM, LCD_SEG7, SAI1_SCK_B, SPI1_SCK, SPI3_SCK, SYS_JTDO-SWO, TIM2_CH2, USART1_DE, USART1_RTS</td>
 <td></td>
 </tr>
 <tr>
@@ -845,7 +845,7 @@
 </tr>
 <tr>
 <td>5 (PB4)</td>
-<td>COMP2_INP, LCD_SEG8, SAI1_MCLK_B, SYS_JTRST, TSC_G2_IO1, UART5_DE, UART5_RTS</td>
+<td>COMP2_INP, LCD_SEG8, SAI1_MCLK_B, SPI1_MISO, SPI3_MISO, SYS_JTRST, TIM3_CH1, TIM17_BKIN, TSC_G2_IO1, UART5_DE, UART5_RTS, USART1_CTS</td>
 <td></td>
 </tr>
 <tr>
@@ -940,7 +940,7 @@
 </tr>
 <tr>
 <td>24 (PA13)</td>
-<td>SYS_JTMS-SWDIO</td>
+<td>IR_OUT, SYS_JTMS-SWDIO, USB_OTG_FS_NOE</td>
 <td></td>
 </tr>
 <tr>
@@ -950,7 +950,7 @@
 </tr>
 <tr>
 <td>26 (PA15)</td>
-<td>LCD_SEG17, SAI2_FS_B, SYS_JTDI, TSC_G3_IO1, UART4_DE, UART4_RTS</td>
+<td>LCD_SEG17, SAI2_FS_B, SPI1_NSS, SPI3_NSS, SYS_JTDI, TIM2_CH1, TIM2_ETR, TSC_G3_IO1, UART4_DE, UART4_RTS</td>
 <td></td>
 </tr>
 <tr>
