@@ -276,6 +276,7 @@ static const uint32_t PIN_NOT_USED = 0xFF;
 
 void HardwareTimer::setMode(int channel, TIMER_MODES mode, uint8_t pin) {
     int pinMode = PIN_NOT_USED;
+    int pull = GPIO_NOPULL;
 
     switch(mode) {
         case TIMER_PWM:
@@ -325,11 +326,13 @@ void HardwareTimer::setMode(int channel, TIMER_MODES mode, uint8_t pin) {
         case TIMER_INPUT_CAPTURE_RISING:
             channelIC[channel - 1].ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
             pinMode = GPIO_MODE_AF_PP;
+            pull = GPIO_PULLDOWN;
             break;
 
         case TIMER_INPUT_CAPTURE_FALLING:
             channelIC[channel - 1].ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
             pinMode = GPIO_MODE_AF_PP;
+            pull = GPIO_PULLDOWN;
             break;
     }
 
@@ -345,7 +348,7 @@ void HardwareTimer::setMode(int channel, TIMER_MODES mode, uint8_t pin) {
                     GPIO_InitTypeDef GPIO_InitStruct;
                     GPIO_InitStruct.Pin = tim_pin_list[i].pinMask;
                     GPIO_InitStruct.Mode = pinMode;
-                    GPIO_InitStruct.Pull = GPIO_NOPULL;
+                    GPIO_InitStruct.Pull = pull;
                     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 
                     #ifdef STM32F1
