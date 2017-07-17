@@ -318,7 +318,7 @@ void HardwareTimer::setMode(int channel, TIMER_MODES mode, uint8_t pin) {
                     stm32GpioClockEnable(tim_pin_list[i].port);
 
                     GPIO_InitTypeDef GPIO_InitStruct;
-                    GPIO_InitStruct.Pin = variant_pin_list[pin].pin_mask;
+                    GPIO_InitStruct.Pin = tim_pin_list[i].pinMask;
                     GPIO_InitStruct.Mode = pinMode;
                     GPIO_InitStruct.Pull = GPIO_NOPULL;
                     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
