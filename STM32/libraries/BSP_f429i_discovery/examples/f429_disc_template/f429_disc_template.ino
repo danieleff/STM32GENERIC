@@ -1,8 +1,8 @@
 /*
-  NOTE: This is a low level example for the F429 discovery board, and is not to be used as-is.
-  
-  Dear reader if you have the time, please rewrite this from BSP to be like all arduino libraries (most notably Arduino GFX, and LTDC).
-  Thank you.
+  Blink
+  Turns on an LED on for one second, then off for one second, repeatedly.
+
+  This example code is in the public domain.
 */
 
 #include "BSP_f429i_discovery.h"
@@ -35,7 +35,7 @@ void setup() {
   BSP_LCD_DisplayStringAt(0, 10, (uint8_t*)"STM32F429I BSP", CENTER_MODE);
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAt(0, 35, (uint8_t*)"Drivers examples", CENTER_MODE);
-
+  
   BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
 
 }
@@ -47,6 +47,7 @@ void loop() {
   BSP_LED_Toggle(LED4);
   delay(500);               // wait for a second
 }
+
 uint8_t ubKeyPressed;
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {

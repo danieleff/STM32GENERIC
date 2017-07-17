@@ -2,6 +2,7 @@
 #define VARIANT_H
 
 #define LED_BUILTIN PI1
+#define USER_BTN    PI11
 
 #define MOSI PB5
 #define MISO PB4

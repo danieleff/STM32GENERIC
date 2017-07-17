@@ -1,0 +1,570 @@
+#STemWin keywords.txt huaweiwx@sina.com 2017.7.2
+#See GUI.h
+#######################################
+# Syntax Coloring Map STemWin
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+STemWinGUI	KEYWORD1
+GUI	KEYWORD1
+
+GUI_RECT	KEYWORD1
+GUI_WRAPMODE	KEYWORD1
+GUI_Font24_ASCII	KEYWORD1
+GUI_Font8x16	KEYWORD1
+GUI_POINT	KEYWORD1
+GUI_ALPHA_STATE	KEYWORD1
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+#GUI General routines
+GUI_Init	KEYWORD2
+GUI_IsInitialized	KEYWORD2
+GUI_Exit	KEYWORD2
+GUI_SetDefaultFont	KEYWORD2
+GUI_SetDefault	KEYWORD2
+GUI_SetDrawMode	KEYWORD2
+GUI_GetVersionString	KEYWORD2
+GUI_SaveContext	KEYWORD2
+GUI_RestoreContext	KEYWORD2
+GUI_SetScreenSizeX	KEYWORD2
+GUI_SetScreenSizeY	KEYWORD2
+GUI_GetScreenSizeX	KEYWORD2
+GUI_GetScreenSizeY	KEYWORD2
+GUI_SetClipRect	KEYWORD2
+GUI_SetRefreshHook	KEYWORD2
+GUI_SetControlHook	KEYWORD2
+MainTask	KEYWORD2
+
+# Rectangle helper functions
+GUI_RectsIntersect	KEYWORD2
+GUI_MoveRect	KEYWORD2
+GUI_MergeRect	KEYWORD2
+GUI__IntersectRects	KEYWORD2
+GUI__IntersectRect	KEYWORD2
+GUI__ReduceRect	KEYWORD2
+
+# Misc helper functions
+GUI__ATan2	KEYWORD2
+GUI__ASinHQ	KEYWORD2
+GUI__CompactPixelIndices	KEYWORD2
+GUI__CompactPixelIndicesEx	KEYWORD2
+GUI__ConvertColor2Index	KEYWORD2
+GUI__Config	KEYWORD2
+GUI__CosHQ	KEYWORD2
+GUI__DivideRound	KEYWORD2
+GUI__DivideRound32	KEYWORD2
+GUI__ExpandPixelIndices	KEYWORD2
+GUI__ExpandPixelIndicesEx	KEYWORD2
+GUI__memcpy	KEYWORD2
+GUI__SetText	KEYWORD2
+GUI__SinHQ	KEYWORD2
+GUI__sqrt32	KEYWORD2
+GUI__DrawTwinArc2	KEYWORD2
+GUI__DrawTwinArc4	KEYWORD2
+GUI__FillTrippleArc	KEYWORD2
+GUI__RegisterExit	KEYWORD2
+
+# Get / Set Attributes
+GUI_COLOR GUI_GetBkColor	KEYWORD2
+GUI_GetBkColorIndex	KEYWORD2
+GUI_COLOR GUI_GetColor	KEYWORD2
+GUI_GetColorIndex	KEYWORD2
+GUI_GetLineStyle	KEYWORD2
+GUI_GetPenSize	KEYWORD2
+GUI_GetPenShape	KEYWORD2
+GUI_GetPixelIndex	KEYWORD2
+GUI_SetBkColor	KEYWORD2
+GUI_SetColor	KEYWORD2
+GUI_SetBkColorIndex	KEYWORD2
+GUI_SetColorIndex	KEYWORD2
+GUI_SetPenSize	KEYWORD2
+GUI_SetPenShape	KEYWORD2
+GUI_SetLineStyle	KEYWORD2
+
+# Get/Set Character used as decimal point (usually '.' or ',')
+GUI_GetDecChar	KEYWORD2
+GUI_SetDecChar	KEYWORD2
+
+# Color / Index related functions
+GUI_Color2Index	KEYWORD2
+GUI_Color2VisColor	KEYWORD2
+GUI_ColorIsAvailable	KEYWORD2
+GUI_Index2Color	KEYWORD2
+GUI_CalcColorDist	KEYWORD2
+GUI_CalcVisColorError	KEYWORD2
+
+# Error handler
+GUI_SetOnErrorFunc	KEYWORD2
+
+# Logging (for debugging primarily)
+GUI_Log	KEYWORD2
+GUI_Log1	KEYWORD2
+GUI_Log2	KEYWORD2
+GUI_Log3	KEYWORD2
+GUI_Log4	KEYWORD2
+GUI_Warn	KEYWORD2
+GUI_Warn1	KEYWORD2
+GUI_Warn2	KEYWORD2
+GUI_Warn3	KEYWORD2
+GUI_Warn4	KEYWORD2
+GUI_ErrorOut	KEYWORD2
+GUI_ErrorOut1	KEYWORD2
+GUI_ErrorOut2	KEYWORD2
+GUI_ErrorOut3	KEYWORD2
+GUI_ErrorOut4	KEYWORD2
+
+# 2d - GL
+GUI_Clear	KEYWORD2
+GUI_ClearRect	KEYWORD2
+GUI_ClearRectEx	KEYWORD2
+GUI_CopyRect	KEYWORD2
+GUI_DrawArc	KEYWORD2
+GUI_DrawBitmap	KEYWORD2
+GUI_DrawBitmapMag	KEYWORD2
+GUI_DrawBitmapEx	KEYWORD2
+GUI_DrawBitmapExp	KEYWORD2
+GUI_DrawBitmapHWAlpha	KEYWORD2
+GUI_DrawCircle	KEYWORD2
+GUI_DrawEllipse	KEYWORD2
+GUI_DrawGradientH	KEYWORD2
+GUI_DrawGradientV	KEYWORD2
+GUI_DrawGradientRoundedH	KEYWORD2
+GUI_DrawGradientRoundedV	KEYWORD2
+GUI_DrawGraph	KEYWORD2
+GUI_DrawGraphEx	KEYWORD2
+GUI_DrawHLine	KEYWORD2
+GUI_DrawLine	KEYWORD2
+GUI_DrawLineRel	KEYWORD2
+GUI_DrawLineTo	KEYWORD2
+GUI_DrawPie	KEYWORD2
+GUI_DrawPixel	KEYWORD2
+GUI_DrawPoint	KEYWORD2
+GUI_DrawPolygon	KEYWORD2
+GUI_DrawPolyLine	KEYWORD2
+GUI_DrawFocusRect	KEYWORD2
+GUI_DrawRect	KEYWORD2
+GUI_DrawRectEx	KEYWORD2
+GUI_DrawRoundedFrame	KEYWORD2
+GUI_DrawRoundedRect	KEYWORD2
+GUI_DrawVLine	KEYWORD2
+GUI_FillCircle	KEYWORD2
+GUI_FillEllipse	KEYWORD2
+GUI_FillPolygon	KEYWORD2
+GUI_FillRect	KEYWORD2
+GUI_FillRectEx	KEYWORD2
+GUI_FillRoundedFrame	KEYWORD2
+GUI_FillRoundedRect	KEYWORD2
+GUI_FillRoundedRectB	KEYWORD2
+GUI_FillRoundedRectT	KEYWORD2
+GUI_GetClientRect	KEYWORD2
+GUI_InvertRect	KEYWORD2
+GUI_MoveRel	KEYWORD2
+GUI_MoveTo	KEYWORD2
+GUI_SetAlphaMask8888	KEYWORD2
+
+#       GIF file support
+#       BMP file support
+#       PNG file support
+#       JPEG file support
+#       MOVIE file support
+#       Cursor routines
+#       Sprite support
+#       Cursors and their bitmaps
+
+# Text related routines
+
+GUI_DispCEOL	KEYWORD2
+GUI_DispChar	KEYWORD2
+GUI_DispCharAt	KEYWORD2
+GUI_DispChars	KEYWORD2
+GUI_DispNextLine	KEYWORD2
+GUI_DispString	KEYWORD2
+GUI_DispStringAt	KEYWORD2
+GUI_DispStringAtCEOL	KEYWORD2
+GUI_DispStringHCenterAt	KEYWORD2
+GUI__DispStringInRect	KEYWORD2
+GUI_DispStringInRect	KEYWORD2
+#if GUI_SUPPORT_ROTATION
+GUI_DispStringInRectEx	KEYWORD2
+#endif
+GUI_DispStringInRectMax	KEYWORD2
+GUI_DispStringInRectWrap	KEYWORD2
+GUI_DispStringLen	KEYWORD2
+GUI_GetTextExtend	KEYWORD2
+GUI_GetYAdjust	KEYWORD2
+GUI_GetDispPosX	KEYWORD2
+GUI_GetDispPosY	KEYWORD2
+GUI_GetFont	KEYWORD2
+GUI_GetCharDistX	KEYWORD2
+GUI_GetCharDistXEx	KEYWORD2
+GUI_GetStringDistX	KEYWORD2
+GUI_GetDrawMode	KEYWORD2
+GUI_GetFontDistY	KEYWORD2
+GUI_GetFontSizeY	KEYWORD2
+GUI_GetFontInfo	KEYWORD2
+GUI_GetOrg	KEYWORD2
+GUI_GetYSizeOfFont	KEYWORD2
+GUI_GetYDistOfFont	KEYWORD2
+GUI_GetTextAlign	KEYWORD2
+GUI_GetTextMode	KEYWORD2
+GUI_IsInFont	KEYWORD2
+GUI_SetTextAlign	KEYWORD2
+GUI_SetTextMode	KEYWORD2
+GUI_SetTextStyle	KEYWORD2
+GUI_SetLBorder	KEYWORD2
+GUI_SetFont	KEYWORD2
+GUI_GotoXY	KEYWORD2
+GUI_GotoX	KEYWORD2
+GUI_GotoY	KEYWORD2
+GUI_WrapGetNumLines	KEYWORD2
+
+GUI_GetLeadingBlankCols	KEYWORD2
+GUI_GetTrailingBlankCols	KEYWORD2
+
+#       Drawing of binary, decimal and hexadecimal values
+GUI_DispBin	KEYWORD2
+GUI_DispBinAt	KEYWORD2
+GUI_DispDec	KEYWORD2
+GUI_DispDecAt	KEYWORD2
+GUI_DispDecMin	KEYWORD2
+GUI_DispDecShift	KEYWORD2
+GUI_DispDecSpace	KEYWORD2
+GUI_DispHex	KEYWORD2
+GUI_DispHexAt	KEYWORD2
+GUI_DispSDec	KEYWORD2
+GUI_DispSDecShift	KEYWORD2
+
+#       Drawing of floating point values
+GUI_DispFloat	KEYWORD2
+GUI_DispFloatFix	KEYWORD2
+GUI_DispFloatMin	KEYWORD2
+GUI_DispSFloatFix	KEYWORD2
+GUI_DispSFloatMin	KEYWORD2
+
+#       Alpha blending
+GUI_EnableAlpha	KEYWORD2
+GUI_RestoreUserAlpha	KEYWORD2
+GUI_SetAlpha	KEYWORD2
+GUI_SetUserAlpha	KEYWORD2
+#GUI_SetFuncAlphaBlending	KEYWORD2
+#GUI_SetFuncMixColors	KEYWORD2
+#GUI_SetFuncMixColorsBulk	KEYWORD2
+GUI_PreserveTrans	KEYWORD2
+
+#       Polygon helpers
+GUI_RotatePolygon	KEYWORD2
+GUI_MagnifyPolygon	KEYWORD2
+GUI_EnlargePolygon	KEYWORD2
+
+#################################################
+# ARDUINO 
+#################################################
+IsInitialized	KEYWORD2
+Exit	KEYWORD2
+SetDefaultFont	KEYWORD2
+SetDefault	KEYWORD2
+SetDrawMode	KEYWORD2
+GetVersionString	KEYWORD2
+SaveContext	KEYWORD2
+RestoreContext	KEYWORD2
+SetScreenSizeX	KEYWORD2
+SetScreenSizeY	KEYWORD2
+GetScreenSizeX	KEYWORD2
+GetScreenSizeY	KEYWORD2
+SetClipRect	KEYWORD2
+SetRefreshHook	KEYWORD2
+SetControlHook	KEYWORD2
+
+
+# Get / Set Attributes
+COLOR GetBkColor	KEYWORD2
+GetBkColorIndex	KEYWORD2
+COLOR GetColor	KEYWORD2
+GetColorIndex	KEYWORD2
+GetLineStyle	KEYWORD2
+GetPenSize	KEYWORD2
+GetPenShape	KEYWORD2
+GetPixelIndex	KEYWORD2
+SetBkColor	KEYWORD2
+SetColor	KEYWORD2
+SetBkColorIndex	KEYWORD2
+SetColorIndex	KEYWORD2
+SetPenSize	KEYWORD2
+SetPenShape	KEYWORD2
+SetLineStyle	KEYWORD2
+
+# Get/Set Character used as decimal point (usually '.' or ',')
+GetDecChar	KEYWORD2
+SetDecChar	KEYWORD2
+
+# Color / Index related functions
+Color2Index	KEYWORD2
+COLOR Color2VisColor	KEYWORD2
+ColorIsAvailable	KEYWORD2
+COLOR Index2Color	KEYWORD2
+CalcColorDist	KEYWORD2
+CalcVisColorError	KEYWORD2
+
+# 2d - GL
+Clear	KEYWORD2
+ClearRect	KEYWORD2
+ClearRectEx	KEYWORD2
+CopyRect	KEYWORD2
+DrawArc	KEYWORD2
+DrawBitmap	KEYWORD2
+DrawBitmapMag	KEYWORD2
+DrawBitmapEx	KEYWORD2
+DrawBitmapExp	KEYWORD2
+DrawBitmapHWAlpha	KEYWORD2
+DrawCircle	KEYWORD2
+DrawEllipse	KEYWORD2
+DrawGradientH	KEYWORD2
+DrawGradientV	KEYWORD2
+DrawGradientRoundedH	KEYWORD2
+DrawGradientRoundedV	KEYWORD2
+DrawGraph	KEYWORD2
+DrawGraphEx	KEYWORD2
+DrawHLine	KEYWORD2
+DrawLine	KEYWORD2
+DrawLineRel	KEYWORD2
+DrawLineTo	KEYWORD2
+DrawPie	KEYWORD2
+DrawPixel	KEYWORD2
+DrawPoint	KEYWORD2
+DrawPolygon	KEYWORD2
+DrawPolyLine	KEYWORD2
+DrawFocusRect	KEYWORD2
+DrawRect	KEYWORD2
+DrawRectEx	KEYWORD2
+DrawRoundedFrame	KEYWORD2
+DrawRoundedRect	KEYWORD2
+DrawVLine	KEYWORD2
+FillCircle	KEYWORD2
+FillEllipse	KEYWORD2
+FillPolygon	KEYWORD2
+FillRect	KEYWORD2
+FillRectEx	KEYWORD2
+FillRoundedFrame	KEYWORD2
+FillRoundedRect	KEYWORD2
+FillRoundedRectB	KEYWORD2
+FillRoundedRectT	KEYWORD2
+GetClientRect	KEYWORD2
+InvertRect	KEYWORD2
+MoveRel	KEYWORD2
+MoveTo	KEYWORD2
+SetAlphaMask8888	KEYWORD2
+
+#       GIF file support
+#       BMP file support
+#       PNG file support
+#       JPEG file support
+#       MOVIE file support
+#       Cursor routines
+#       Sprite support
+#       Cursors and their bitmaps
+
+# Text related routines
+DispCEOL	KEYWORD2
+DispChar	KEYWORD2
+DispCharAt	KEYWORD2
+DispChars	KEYWORD2
+DispNextLine	KEYWORD2
+DispString	KEYWORD2
+DispStringAt	KEYWORD2
+DispStringAtCEOL	KEYWORD2
+DispStringHCenterAt	KEYWORD2
+DispStringInRect	KEYWORD2
+DispStringInRect	KEYWORD2
+#if SUPPORT_ROTATION
+DispStringInRectEx	KEYWORD2
+#endif
+DispStringInRectMax	KEYWORD2
+DispStringInRectWrap	KEYWORD2
+DispStringLen	KEYWORD2
+GetTextExtend	KEYWORD2
+GetYAdjust	KEYWORD2
+GetDispPosX	KEYWORD2
+GetDispPosY	KEYWORD2
+GetFont	KEYWORD2
+GetCharDistX	KEYWORD2
+GetCharDistXEx	KEYWORD2
+GetStringDistX	KEYWORD2
+GetDrawMode	KEYWORD2
+GetFontDistY	KEYWORD2
+GetFontSizeY	KEYWORD2
+GetFontInfo	KEYWORD2
+GetOrg	KEYWORD2
+GetYSizeOfFont	KEYWORD2
+GetYDistOfFont	KEYWORD2
+GetTextAlign	KEYWORD2
+GetTextMode	KEYWORD2
+IsInFont	KEYWORD2
+SetTextAlign	KEYWORD2
+SetTextMode	KEYWORD2
+SetTextStyle	KEYWORD2
+SetLBorder	KEYWORD2
+SetFont	KEYWORD2
+GotoXY	KEYWORD2
+GotoX	KEYWORD2
+GotoY	KEYWORD2
+WrapGetNumLines	KEYWORD2
+
+GetLeadingBlankCols	KEYWORD2
+
+#       Drawing of binary, decimal and hexadecimal values
+DispBin	KEYWORD2
+DispBinAt	KEYWORD2
+DispDec	KEYWORD2
+DispDecAt	KEYWORD2
+DispDecMin	KEYWORD2
+DispDecShift	KEYWORD2
+DispDecSpace	KEYWORD2
+DispHex	KEYWORD2
+DispHexAt	KEYWORD2
+DispSDec	KEYWORD2
+DispSDecShift	KEYWORD2
+
+#       Drawing of floating point values
+DispFloat	KEYWORD2
+DispFloatFix	KEYWORD2
+DispFloatMin	KEYWORD2
+DispSFloatFix	KEYWORD2
+DispSFloatMin	KEYWORD2
+
+#       Alpha blending
+EnableAlpha	KEYWORD2
+RestoreUserAlpha	KEYWORD2
+SetAlpha	KEYWORD2
+SetUserAlpha	KEYWORD2
+#SetFuncAlphaBlending	KEYWORD2
+#SetFuncMixColors	KEYWORD2
+#SetFuncMixColorsBulk	KEYWORD2
+GUI_PreserveTrans	KEYWORD2
+
+#       Polygon helpers
+RotatePolygon	KEYWORD2
+MagnifyPolygon	KEYWORD2
+EnlargePolygon	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+GUI_TM_TRANS	LITERAL1
+GUI_TM_XOR	LITERAL1
+GUI_TM_NORMAL	LITERAL1
+GUI_TM_REV	LITERAL1
+
+GUI_WRAPMODE_NONE	LITERAL1
+GUI_WRAPMODE_CHAR	LITERAL1
+GUI_WRAPMODE_WORD	LITERAL1
+
+GUI_TA_LEFT	LITERAL1
+
+#       Text styles
+GUI_TS_NORMAL	LITERAL1
+GUI_TS_UNDERLINE	LITERAL1
+GUI_TS_STRIKETHRU	LITERAL1
+GUI_TS_OVERLINE	LITERAL1
+
+#       Line styles
+GUI_LS_SOLID	LITERAL1
+GUI_LS_DASH	LITERAL1
+GUI_LS_DOT	LITERAL1
+GUI_LS_DASHDOT	LITERAL1
+GUI_LS_DASHDOTDOT	LITERAL1
+
+#       Pen shapes
+GUI_PS_ROUND	LITERAL1
+GUI_PS_FLAT	LITERAL1
+GUI_PS_SQUARE	LITERAL1
+
+#       Standard colors
+GUI_BLUE	LITERAL1
+GUI_GREEN	LITERAL1
+GUI_RED	LITERAL1
+GUI_CYAN	LITERAL1
+GUI_MAGENTA	LITERAL1
+GUI_YELLOW	LITERAL1
+GUI_LIGHTBLUE	LITERAL1
+GUI_LIGHTGREEN	LITERAL1
+GUI_LIGHTRED	LITERAL1
+GUI_LIGHTCYAN	LITERAL1
+GUI_LIGHTMAGENTA	LITERAL1
+GUI_LIGHTYELLOW	LITERAL1
+GUI_DARKBLUE	LITERAL1
+GUI_DARKGREEN	LITERAL1
+GUI_DARKRED	LITERAL1
+GUI_DARKCYAN	LITERAL1
+GUI_DARKMAGENTA	LITERAL1
+GUI_DARKYELLOW	LITERAL1
+GUI_WHITE	LITERAL1
+GUI_LIGHTGRAY	LITERAL1
+GUI_GRAY	LITERAL1
+GUI_DARKGRAY	LITERAL1
+GUI_BLACK	LITERAL1
+GUI_BROWN	LITERAL1
+GUI_ORANGE	LITERAL1
+GUI_TRANSPARENT	LITERAL1
+GUI_GRAY_3F	LITERAL1
+GUI_GRAY_50	LITERAL1
+GUI_GRAY_55	LITERAL1
+GUI_GRAY_60	LITERAL1
+GUI_GRAY_7C	LITERAL1
+GUI_GRAY_9A	LITERAL1
+GUI_GRAY_AA	LITERAL1
+GUI_GRAY_C0	LITERAL1
+GUI_GRAY_C8	LITERAL1
+GUI_GRAY_D0	LITERAL1
+GUI_GRAY_E7	LITERAL1
+GUI_BLUE_98	LITERAL1
+
+
+
+#    Text and drawing modes
+GUI_DRAWMODE_NORMAL	LITERAL1
+GUI_DRAWMODE_XOR	LITERAL1
+GUI_DRAWMODE_TRANS	LITERAL1
+GUI_DRAWMODE_REV	LITERAL1
+GUI_DM_NORMAL	LITERAL1
+GUI_DM_XOR	LITERAL1
+GUI_DM_TRANS	LITERAL1
+GUI_DM_REV	LITERAL1
+
+GUI_TEXTMODE_NORMAL	LITERAL1
+GUI_TEXTMODE_XOR	LITERAL1
+GUI_TEXTMODE_TRANS	LITERAL1
+GUI_TEXTMODE_REV	LITERAL1
+GUI_TM_NORMAL	LITERAL1
+GUI_TM_XOR	LITERAL1
+GUI_TM_TRANS	LITERAL1
+GUI_TM_REV	LITERAL1
+
+# Text alignment flags, horizontal
+GUI_TA_HORIZONTAL	LITERAL1
+GUI_TA_LEFT	LITERAL1
+GUI_TA_RIGHT	LITERAL1
+GUI_TA_CENTER	LITERAL1
+GUI_TA_HCENTER	LITERAL1
+
+# Text alignment flags, vertical
+GUI_TA_VERTICAL	LITERAL1
+GUI_TA_TOP	LITERAL1
+GUI_TA_BOTTOM	LITERAL1
+GUI_TA_BASELINE	LITERAL1
+GUI_TA_VCENTER	LITERAL1
+
+# General orientation flags
+GUI_MIRROR_X	LITERAL1
+GUI_MIRROR_Y	LITERAL1
+GUI_SWAP_XY	LITERAL1
+
+#       Min/Max coordinates
+GUI_XMIN	LITERAL1
+GUI_XMAX	LITERAL1
+GUI_YMIN	LITERAL1
+GUI_YMAX	LITERAL1
+
+

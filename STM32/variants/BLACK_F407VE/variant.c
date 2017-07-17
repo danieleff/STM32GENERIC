@@ -1,9 +1,10 @@
 #include "stm32_build_defines.h"
 #include "stm32_def.h"
 
-void Error_Handler();
+extern void Error_Handler(void);
 
-void SystemClock_Config(void) {
+void SystemClock_Config(void)
+ {
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
@@ -50,4 +51,5 @@ void SystemClock_Config(void) {
 
   /* SysTick_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+
 }
