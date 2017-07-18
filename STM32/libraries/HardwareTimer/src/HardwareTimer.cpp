@@ -73,9 +73,9 @@ void HardwareTimer::resume() {
         if (hasInterrupt) {
             HAL_NVIC_SetPriority(TIM1_UP_TIM10_IRQn, 0, 0);
             HAL_NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
-/*
+
             HAL_NVIC_SetPriority(TIM1_CC_IRQn, 0, 0);
-            HAL_NVIC_EnableIRQ(TIM1_CC_IRQn);*/
+            HAL_NVIC_EnableIRQ(TIM1_CC_IRQn);
         }
 
         TIM_ClockConfigTypeDef sClockSourceConfig;
