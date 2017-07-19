@@ -29,14 +29,18 @@ void init() {
   
   SystemClock_Config();
   
-  #ifdef STM32F1
+#ifdef STM32F1
   __HAL_RCC_AFIO_CLK_ENABLE();
-  #endif
+#endif
 }
 
 void SysTick_Handler(void) {
+#if __has_include("FreeRTOS.h")  //huawei (huaweiwx@sina.com)
+  osSystickHandler();	
+#else	
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
+#endif
 }
 
 void Error_Handler() {

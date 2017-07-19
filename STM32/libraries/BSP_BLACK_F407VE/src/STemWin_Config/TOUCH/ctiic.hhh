@@ -1,0 +1,29 @@
+#ifndef _MYIIC_H
+#define _MYIIC_H
+#include "utils/sys.h"
+//////////////////////////////////////////////////////////////////////////////////	 
+ 
+//IIC 驱动代码	   
+//STM32F4工程----库函数版本
+//淘宝店铺：http://mcudev.taobao.com							  
+////////////////////////////////////////////////////////////////////////////////// 	
+//IO方向设置
+#define CT_SDA_IN()   pinMode(PB13,INPUT) 	//PF11输入模式
+#define CT_SDA_OUT()  pinMode(PB13,OUTPUT)	//PF11输出模式
+//IO操作函数	 
+#define CT_IIC_SCL    PBout(0) 	//SCL
+#define CT_IIC_SDA    PBout(13) //SDA	 
+#define CT_READ_SDA   PBin(13)  //输入SDA 
+
+//IIC所有操作函数
+void CT_IIC_Init(void);                	//初始化IIC的IO口				 
+void CT_IIC_Start(void);				//发送IIC开始信号
+void CT_IIC_Stop(void);	  				//发送IIC停止信号
+void CT_IIC_Send_Byte(uint8_t txd);			//IIC发送一个字节
+uint8_t CT_IIC_Read_Byte(unsigned char ack);	//IIC读取一个字节
+uint8_t CT_IIC_Wait_Ack(void); 				//IIC等待ACK信号
+void CT_IIC_Ack(void);					//IIC发送ACK信号
+void CT_IIC_NAck(void);					//IIC不发送ACK信号
+
+
+#endif

@@ -255,6 +255,64 @@ void     BSP_LCD_DisplayOn(void);
   
 #ifdef __cplusplus
 }
+#if 0
+//C++ function here  arduino style
+class LCDClass: public Print{
+  public:	
+    LCDClass();   
+    void Init(void){
+		BSP_LCD_InitHard();
+		};
+    void InitHard(void){BSP_LCD_InitHard();};
+    uint16_t readID(void);
+ //   void getChipDescribe(char *_str){BSP_LCD_GetChipDescribe(_str);};
+    uint16_t getHeight(void){return BSP_LCD_GetHeight();};
+	uint16_t getWidth(void){return BSP_LCD_GetWidth();};
+	void dispOn(void){BSP_LCD_DispOn();};
+	void dispOff(void){BSP_LCD_DispOff();};
+	void clrScr(uint16_t _usColor){BSP_LCD_ClrScr(_usColor);};
+	void dispStr(uint16_t _usX, uint16_t _usY,char *_ptr){//tFont move to class huaweiwx@sina.com 2017.3.9
+		    BSP_LCD_DispStr(_usX, _usY, _ptr, &Font);};
+	uint16_t getPixel(uint16_t _usX, uint16_t _usY){
+			return BSP_LCD_GetPixel(_usX, _usY);};
+	void drawPixel(uint16_t _usX, uint16_t _usY, uint16_t _usColor){
+			BSP_LCD_PutPixel(_usX, _usY, _usColor);};
+	void drawLine(uint16_t _usX1 , uint16_t _usY1 , uint16_t _usX2 , uint16_t _usY2 , uint16_t _usColor){
+			BSP_LCD_DrawLine( _usX1 ,  _usY1 ,  _usX2 ,  _usY2 ,  _usColor);};
+	void drawPoints(uint16_t *x, uint16_t *y, uint16_t _usSize, uint16_t _usColor){
+			BSP_LCD_DrawPoints(x, y,  _usSize,  _usColor);};
+	void drawRect(uint16_t _usX, uint16_t _usY, uint16_t _usHeight, uint16_t _usWidth, uint16_t _usColor){
+			BSP_LCD_DrawRect( _usX,  _usY,  _usHeight,  _usWidth,  _usColor);};
+	void drawCircle(uint16_t _usX, uint16_t _usY, uint16_t _usRadius, uint16_t _usColor){
+			BSP_LCD_DrawCircle( _usX,  _usY,  _usRadius,  _usColor);};
+	void drawBitmap(uint16_t _usX, uint16_t _usY, uint16_t _usHeight, uint16_t _usWidth, uint16_t *_ptr){
+			BSP_LCD_DrawBMP( _usX,  _usY,  _usHeight,  _usWidth, _ptr);};
+	void drawIcon(uint16_t _usX, uint16_t _usY, uint16_t _usHeight, uint16_t _usWidth, uint16_t *_ptr){
+		BSP_LCD_DrawIcon( _usX,  _usY,  _usHeight,  _usWidth, _ptr);};
+	void drawIconActive(uint16_t _usX, uint16_t _usY, uint16_t _usHeight, uint16_t _usWidth, uint16_t *_ptr){
+		BSP_LCD_DrawIconActive( _usX,  _usY,  _usHeight,  _usWidth, _ptr);};
+	void setBackLight(uint8_t _bright){BSP_LCD_SetBackLight(_bright);};
+	uint8_t GetBackLight(void){return BSP_LCD_GetBackLight();};
+
+	void drawHLine(uint16_t _usX1 , uint16_t _usY1 , uint16_t _usX2 , uint16_t _usColor){
+		 BSP_LCD_DrawHLine( _usX1 ,  _usY1 ,  _usX2 ,  _usColor);};
+	void drawHColorLine(uint16_t _usX1 , uint16_t _usY1, uint16_t _usWidth, uint16_t *_pColor){
+		BSP_LCD_DrawHColorLine( _usX1 ,  _usY1,  _usWidth,  _pColor);};
+	void drawVLine(uint16_t _usX1 , uint16_t _usY1 , uint16_t _usY2 , uint16_t _usColor){
+		BSP_LCD_DrawVLine( _usX1 ,  _usY1 ,  _usY2 ,  _usColor);};
+
+	void setxy(uint16_t x,uint16_t y);
+
+	virtual size_t write(uint8_t);
+    using Print::write;
+
+	uint16_t currentXpos;
+	uint16_t currentYpos;
+
+	private:
+
+};   
+#endif 
 #endif
 
 #endif /* __STM32F429I_DISCOVERY_LCD_H */

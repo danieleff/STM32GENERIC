@@ -45,11 +45,8 @@
 #endif
                                               
 /* Includes ------------------------------------------------------------------*/
-#ifdef ARDUINO_ARCH_HALMX
-  #include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
-#else
-  #include "stm32f4xx_hal.h"
-#endif   
+#include "stm32_def.h"  //for use st hal bsp lib huaweiwx@sina.com 2017.5
+
 /** @addtogroup BSP
   * @{
   */
@@ -320,6 +317,7 @@ typedef enum
   * @{
   */
 uint32_t BSP_GetVersion(void);  
+
 void     BSP_LED_Init(Led_TypeDef Led);
 void     BSP_LED_On(Led_TypeDef Led);
 void     BSP_LED_Off(Led_TypeDef Led);

@@ -34,28 +34,32 @@ void setupUSB() { }
 int main(void)
 {
     //Used by FreeRTOS, see http://www.freertos.org/RTOS-Cortex-M3-M4.html
-    #ifdef NVIC_PRIORITYGROUP_4
+//#if defined(NVIC_PRIORITYGROUP_4)
+#if __has_include("FreeRTOS.h")                       //huawei (huaweiwx@sina.com)
+	HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+#elif defined(NVIC_PRIORITYGROUP_4) //huawei (huaweiwx@sina.com)
     HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-    #endif
+#endif
 
-    #ifdef STM32F7
+#ifdef STM32F7
     SCB_EnableICache();
     SCB_EnableDCache();
-    #endif
+#endif
 
 	init();
-
+	
 	initVariant();
+#ifdef STM32F1
+ #if defined(MENU_DEBUG_DISABLED)
+    __HAL_AFIO_REMAP_SWJ_DISABLE();
+ #elif defined(MENU_DEBUG_SWD)
+    __HAL_AFIO_REMAP_SWJ_NOJTAG();
+ #elif defined(MENU_DEBUG_JTAG)
+    __HAL_AFIO_REMAP_SWJ_ENABLE();
+ #endif
+#endif
 
-    #if defined(MENU_DEBUG_DISABLED)
-        __HAL_AFIO_REMAP_SWJ_DISABLE();
-    #elif defined(MENU_DEBUG_SWD)
-        __HAL_AFIO_REMAP_SWJ_NOJTAG();
-    #elif defined(MENU_DEBUG_JTAG)
-        __HAL_AFIO_REMAP_SWJ_ENABLE();
-    #endif
-
-    #if defined(USB_BASE) || defined(USB_OTG_DEVICE_BASE)
+#if defined(USB_BASE) || defined(USB_OTG_DEVICE_BASE)
 
     #ifdef MENU_USB_SERIAL
         USBDeviceFS.beginCDC();
@@ -63,7 +67,7 @@ int main(void)
         USBDeviceFS.beginMSC();
     #endif
 
-    #endif
+#endif
 	
 	setup();
     

@@ -2,6 +2,7 @@
 
 menu.serial=Serial communication
 menu.subboard=Specific Board
+menu.extern_lib=OS & Extern lib
 menu.upload_method=Upload method
 menu.usb=USB
 menu.jtag_swd=JTAG/SWD debugging
@@ -427,6 +428,14 @@ BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.variant=BLACK_F407ZG
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.board=BLACK_F407ZG
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VALUE=8000000
 
+BLACK_F407XX.menu.extern_lib.NONE = NONE
+BLACK_F407XX.menu.extern_lib.STemWin =STemWin
+BLACK_F407XX.menu.extern_lib.STemWin.build.extra_lib={build.system.path}/EXTRALIB/STemWin/STemWin532_CM4_GCC.a
+BLACK_F407XX.menu.extern_lib.STemWin.build.extra_flags_os=-DOS_SUPPORT=0
+BLACK_F407XX.menu.extern_lib.STemWinOS =STemWin_OS
+BLACK_F407XX.menu.extern_lib.STemWinOS.build.extra_lib={build.system.path}/EXTRALIB/STemWin/STemWin532_CM4_OS_GCC.a
+BLACK_F407XX.menu.extern_lib.STemWinOS.build.extra_flags_os=-DOS_SUPPORT=1
+
 ################################################################################
 # NUCLEO 64 board
 
@@ -693,6 +702,14 @@ DISCOVERY_F429ZI.build.variant=DISCOVERY_F429ZI
 DISCOVERY_F429ZI.build.extra_flags=-DSTM32F429ZI -DSTM32F429xx -DHSE_VALUE=8000000
 # TODO f_cpu, and check SystemClock_Config() 
 # DISCOVERY_F429ZI.build.f_cpu=168000000L
+
+DISCOVERY_F429ZI.menu.extern_lib.NONE = NONE
+DISCOVERY_F429ZI.menu.extern_lib.STemWin =STemWin
+DISCOVERY_F429ZI.menu.extern_lib.STemWin.build.extra_lib={build.system.path}/EXTRALIB/STemWin/STemWin532_CM4_GCC.a
+DISCOVERY_F429ZI.menu.extern_lib.STemWin.build.extra_flags_os=-DOS_SUPPORT=0
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS =STemWin_OS
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_lib={build.system.path}/EXTRALIB/STemWin/STemWin532_CM4_OS_GCC.a
+DISCOVERY_F429ZI.menu.extern_lib.STemWinOS.build.extra_flags_os=-DOS_SUPPORT=1
 
 DISCOVERY_F429ZI.upload.protocol=STLink
 DISCOVERY_F429ZI.upload.tool=stlink_upload
