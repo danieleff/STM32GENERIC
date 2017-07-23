@@ -199,7 +199,7 @@ uint32_t HardwareTimer::getBaseFrequency() {
     uint32_t pFreq = HAL_RCC_GetPCLK1Freq();
 
 #ifdef STM32F1
-    timer2FreqMul = 1;
+    freq2Mul = 1;
 #endif
 
 #ifdef TIM1
