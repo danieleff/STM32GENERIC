@@ -26,6 +26,26 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include "stm32_def.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+//Returns the name of the pin: "PA4" or "1 (PB3)"
+char *stm32PinName(uint8_t pin);
+
+// Returns the name of the pin: "PA4" or "1 (PB3)"
+char *stm32PortPinName(GPIO_TypeDef *port, uint32_t pinMask);
+
+// Internal: use PRINT_XXX instead
+void print_log(const char *format, const char *file, const int line, ...);
+
+#ifdef __cplusplus
+}
+#endif
+
+
 #define __FILENAME__ (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 : __FILE__)
 
 
@@ -76,16 +96,6 @@
 #define PRINT_TRACE(...) PRINT_LOG(__VA_ARGS__)
 #else
 #define PRINT_TRACE(...)
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void print_log(const char *format, const char *file, const int line, ...);
-
-#ifdef __cplusplus
-}
 #endif
 
 #endif
