@@ -20,49 +20,26 @@
   SOFTWARE.
 */
 
-#include "unistd.h"
+#include "stm32_debug.h"
 
-#include "STM32System.h"
+#include "Arduino.h"
 
-#include "cmsis_gcc.h"
+void print_log(const char *format, const char *file, const int line, ...) {
 
-static const int print_fileno = 3;
+    uint32_t m = micros();
 
-static Print *print;
+    uint32_t seconds = m / 1000000;
+    uint32_t fractions = m % 1000000;
 
-int stm32SetPrintOutput(Print *p) {
-    if (p == NULL) {
-        print = NULL;
-        return 0;
-    }
+    fprintf(stderr, "[%2u.%-6u]", seconds, fractions);
 
-    if (isInterrupt() && print != NULL) {
-        return 0;
-    }
+    fprintf(stderr, "%10s %3d:", file, line);
 
-    while(print != NULL);
-    print = p;
+    va_list argList;
 
-    return print_fileno;
-}
+    va_start(argList, line);
+    vfprintf(stderr, format, argList);
+    va_end(argList);
 
-extern "C" int _write( int file, char *ptr, int len ) {
-
-    if (file == STDOUT_FILENO) {
-
-        Serial.write(ptr, len);
-
-    } else if (file == STDERR_FILENO) {
-
-        Serial.write(ptr, len);
-        Serial.flush();
-
-    } else if (file == print_fileno) {
-
-        if (print != NULL)print->write(ptr, len);
-
-    } else {
-        // TODO show error
-    }
-
+    fprintf(stderr, "\n");
 }
