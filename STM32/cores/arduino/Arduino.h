@@ -186,6 +186,7 @@ long map(long, long, long, long, long);
 
 #include "SerialUART.h"
 #include <SerialUSB.h>
+#include <STM32System.h>
 
 #if defined(MENU_SERIAL)
 #define Serial MENU_SERIAL
