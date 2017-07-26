@@ -25,6 +25,7 @@
 #include <string.h>
 #include <math.h>
 #include "Arduino.h"
+#include <stdarg.h>
 
 #include "Print.h"
 
@@ -291,4 +292,27 @@ size_t Print::printFloat(double number, uint8_t digits)
   } 
   
   return n;
+}
+
+size_t Print::printf(const char* format, ...) {
+
+    va_list args;
+    va_start(args, format);
+    size_t ret = printf(format, args);
+    va_end(args);
+
+    return ret;
+}
+
+size_t Print::printf(const char* format, va_list args) {
+    int fileno = stm32SetPrintOutput(this);
+
+    size_t ret = 0;
+    if (fileno > 0) {
+       ret = vdprintf(fileno, format, args);
+    }
+
+    stm32SetPrintOutput(NULL);
+
+    return ret;
 }
