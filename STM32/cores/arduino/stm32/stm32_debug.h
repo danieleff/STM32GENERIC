@@ -39,7 +39,7 @@ char *stm32PinName(uint8_t pin);
 char *stm32PortPinName(GPIO_TypeDef *port, uint32_t pinMask);
 
 // Internal: use PRINT_XXX instead
-void print_log(const char *format, const char *file, const int line, ...);
+void print_log(const char *level, const char *format, const char *file, const int line, ...);
 
 #ifdef __cplusplus
 }
@@ -59,41 +59,41 @@ void print_log(const char *format, const char *file, const int line, ...);
 #define __LOG_TRACE   __LOG_LEVEL >= 6
 
 
-#define PRINT_LOG(format, ...) print_log(format, __FILENAME__, __LINE__, ##__VA_ARGS__)
+#define PRINT_LOG(level, format, ...) print_log(level, format, __FILENAME__, __LINE__, ##__VA_ARGS__)
 
 
 #if __LOG_FATAL
-#define PRINT_FATAL(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_FATAL(...) PRINT_LOG("FATAL", __VA_ARGS__)
 #else
 #define PRINT_FATAL(...)
 #endif
 
 #if __LOG_ERROR
-#define PRINT_ERROR(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_ERROR(...) PRINT_LOG("ERROR", __VA_ARGS__)
 #else
 #define PRINT_ERROR(...)
 #endif
 
 #if __LOG_WARNING
-#define PRINT_WARNING(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_WARNING(...) PRINT_LOG("WARNING", __VA_ARGS__)
 #else
 #define PRINT_WARNING(...)
 #endif
 
 #if __LOG_INFO
-#define PRINT_INFO(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_INFO(...) PRINT_LOG("INFO", __VA_ARGS__)
 #else
 #define PRINT_INFO(...)
 #endif
 
 #if __LOG_DEBUG
-#define PRINT_DEBUG(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_DEBUG(...) PRINT_LOG("DEBUG", __VA_ARGS__)
 #else
 #define PRINT_DEBUG(...)
 #endif
 
 #if __LOG_TRACE
-#define PRINT_TRACE(...) PRINT_LOG(__VA_ARGS__)
+#define PRINT_TRACE(...) PRINT_LOG("TRACE", __VA_ARGS__)
 #else
 #define PRINT_TRACE(...)
 #endif

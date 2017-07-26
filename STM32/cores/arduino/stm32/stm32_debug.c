@@ -24,16 +24,14 @@
 
 #include "Arduino.h"
 
-void print_log(const char *format, const char *file, const int line, ...) {
+void print_log(const char *level, const char *format, const char *file, const int line, ...) {
 
     uint32_t m = micros();
 
     uint32_t seconds = m / 1000000;
     uint32_t fractions = m % 1000000;
 
-    fprintf(stderr, "[%2u.%-6u]", seconds, fractions);
-
-    fprintf(stderr, "%10s %3d:", file, line);
+    fprintf(stderr, "[%2u.%-6u]%10s %3d %s:", seconds, fractions, file, line, level);
 
     va_list argList;
 
