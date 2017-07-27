@@ -80,6 +80,9 @@ public:
     const int dataSize = DATA_SIZE;
     const int entrySize = ((addressSize + dataSize + 4 - 1) / 4) * 4;
 
+    void setFormatListener(void (*formatListener)(void)) {
+        this->formatListener = formatListener;
+    }
 
 private:
     bool init();
@@ -97,6 +100,7 @@ private:
     FlashBlock *pages[2];
 
     bool inited = false;
+    void (*formatListener)(void);
 
 };
 
@@ -358,6 +362,10 @@ bool FlashVariables<DATA_SIZE>::format(void) {
             PRINT_ERROR("Failed to erase page 0");
             return false;
         }
+    }
+
+    if (formatListener != NULL) {
+        formatListener();
     }
 
     return true;
