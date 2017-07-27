@@ -385,10 +385,10 @@ PAGE_RESULT FlashVariables<DATA_SIZE>::verifyPageFullWriteVariable(uint16_t vari
 
             for(int i = 4; i < entrySize; i += 4) {
                 int remaining = 4;
-                if (dataSize - i < remaining) remaining = dataSize - i;
+                if (dataSize + addressSize - i < remaining) remaining = dataSize + addressSize - i;
 
                 uint8_t buf[4] = {0};
-                memcpy(buf, data + addressSize + i, remaining);
+                memcpy(buf, data + i - addressSize, remaining);
 
                 pages[validPage]->write(pageOffset + i, 4, buf);
             }
