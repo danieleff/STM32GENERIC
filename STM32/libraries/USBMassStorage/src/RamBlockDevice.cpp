@@ -34,7 +34,7 @@ RamBlockDevice::RamBlockDevice(uint32_t blockCount, bool doFormat) {
     this->buffer = (uint8_t *)calloc(blockCount * 512, 1);
 
     if (doFormat) {
-        formatFat12(buffer, blockCount);
+        formatFat12(this, blockCount);
     }
 }
 
