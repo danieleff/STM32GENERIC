@@ -1,0 +1,40 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+ILI9488_FSMC		KEYWORD1
+
+TFT_RED				KEYWORD1
+TFT_BLACK			KEYWORD1
+tftram				KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin				KEYWORD2
+bl_on				KEYWORD2
+bl_off				KEYWORD2
+writecommand			KEYWORD2
+writedata			KEYWORD2
+setScrollArea			KEYWORD2
+scroll				KEYWORD2
+setAddrWindow			KEYWORD2
+startAddrWindow			KEYWORD2
+drawImage			KEYWORD2
+pushColor			KEYWORD2
+pushColors			KEYWORD2
+write16BitColor			KEYWORD2
+drawPixel			KEYWORD2
+drawFastHLine			KEYWORD2
+drawFastVLine			KEYWORD2
+fillScreen			KEYWORD2
+fillRect			KEYWORD2
+color565			KEYWORD2
+setRotation			KEYWORD2
+invertDisplay			KEYWORD2
+
