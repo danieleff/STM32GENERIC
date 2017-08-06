@@ -44,6 +44,7 @@ void pwm_callback();
 
 typedef struct {
     GPIO_TypeDef *port;
+    void (*callback)();
     uint32_t pin_mask;
     uint32_t waveLengthCycles;
     uint32_t dutyCycle;
@@ -58,7 +59,7 @@ void analogWriteResolution(int bits) {
     analogWriteResolutionBits = bits;
 }
 
-void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
+static void initTimer() {
     static TIM_HandleTypeDef staticHandle;
 
     if (handle == NULL) {
@@ -91,6 +92,10 @@ void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
 
         HAL_TIM_Base_Start_IT(handle);
     }
+}
+
+void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
+    initTimer();
 
     for(size_t i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
         if (pwm_config[i].port == NULL ||
@@ -121,6 +126,21 @@ extern void tone(uint8_t pin, unsigned int frequency, unsigned long durationMill
 
 void analogWrite(uint8_t pin, int value) {
     pwmWrite(pin, value, PWM_FREQUENCY_HZ, 0);
+}
+
+void stm32ScheduleMicros(uint32_t microseconds, void (*callback)()) {
+    initTimer();
+
+    for(size_t i=0; i<sizeof(pwm_config) / sizeof(pwm_config[0]); i++) {
+        if (pwm_config[i].port == NULL && pwm_config[i].callback == NULL) {
+
+            pwm_config[i].callback = callback;
+
+            pwm_config[i].waveLengthCycles = HAL_RCC_GetPCLK2Freq() * (uint64_t)microseconds / 1000000;
+            pwm_config[i].counterCycles = pwm_config[i].waveLengthCycles;
+            break;
+        }
+    }
 }
 
 void stm32_pwm_disable(GPIO_TypeDef *port, uint32_t pin_mask) {
@@ -170,6 +190,12 @@ void pwm_callback() {
                         } else {
                             pwm_config[i].counterCycles -= waitCycles;
                         }
+                    }
+                } else if (pwm_config[i].callback != NULL) {
+                    pwm_config[i].counterCycles -= waitCycles;
+                    if (pwm_config[i].counterCycles < 0) {
+                        pwm_config[i].callback();
+                        pwm_config[i].counterCycles += pwm_config[i].waveLengthCycles;
                     }
                 } else {
                     break;
