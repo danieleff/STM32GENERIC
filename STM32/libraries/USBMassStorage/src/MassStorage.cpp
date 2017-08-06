@@ -96,7 +96,7 @@ const unsigned char fat12BootSector[] = {
     0x00, 0x02, // 512 bytes per block
     0x01, // blocks per allocation unit
     0x01, 0x00, // 1 reserved block for boot block
-    0x01, // number of FAT
+    0x02, // number of FAT
     0x10, 0x00, // max number of root dir entries
     0x42, 0x00, // number of blocks in the entire disk
     0xF8, // media descriptor
