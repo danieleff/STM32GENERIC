@@ -109,7 +109,7 @@ void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
             pwm_config[i].port = variant_pin_list[pin].port;
             pwm_config[i].pin_mask = variant_pin_list[pin].pin_mask;
             pwm_config[i].waveLengthCycles = HAL_RCC_GetPCLK2Freq() / frequency;
-            pwm_config[i].dutyCycle = pwm_config[i].waveLengthCycles * dutyCycle / (1 << analogWriteResolutionBits);
+            pwm_config[i].dutyCycle = (uint64_t)pwm_config[i].waveLengthCycles * dutyCycle >> 16;
 
             if (durationMillis > 0) {
                 pwm_config[i].counterCycles = HAL_RCC_GetPCLK2Freq() / 1000 * durationMillis;
@@ -121,11 +121,11 @@ void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
 }
 
 extern void tone(uint8_t pin, unsigned int frequency, unsigned long durationMillis) {
-    pwmWrite(pin, 1 << (analogWriteResolutionBits - 1), frequency, durationMillis);
+    pwmWrite(pin, 1 << 15, frequency, durationMillis);
 }
 
 void analogWrite(uint8_t pin, int value) {
-    pwmWrite(pin, value, PWM_FREQUENCY_HZ, 0);
+    pwmWrite(pin, ((uint32_t)value << 16) >> analogWriteResolutionBits, PWM_FREQUENCY_HZ, 0);
 }
 
 void stm32ScheduleMicros(uint32_t microseconds, void (*callback)()) {
