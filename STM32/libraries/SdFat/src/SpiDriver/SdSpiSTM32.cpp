@@ -30,13 +30,13 @@
     static SPIClass m_SPI3(SPI3);
 #endif
 #ifdef SPI4
-    static SPIClass m_SPI3(SPI4);
+    static SPIClass m_SPI4(SPI4);
 #endif
 #ifdef SPI5
-    static SPIClass m_SPI3(SPI5);
+    static SPIClass m_SPI5(SPI5);
 #endif
 #ifdef SPI6
-    static SPIClass m_SPI3(SPI6);
+    static SPIClass m_SPI6(SPI6);
 #endif
 
 static SPIClass* pSpi[] = {
