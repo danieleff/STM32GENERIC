@@ -436,9 +436,9 @@
 <tbody>
 <tr>
 <td>SPI1</td>
-<td>28 (PA7), <strong>39 (PB5)</strong></td>
-<td>27 (PA6), <strong>3 (PB4)</strong></td>
-<td>26 (PA5), <strong>38 (PB3)</strong></td>
+<td>28 (PA7), 39 (PB5)</td>
+<td>27 (PA6), 3 (PB4)</td>
+<td>26 (PA5), 38 (PB3)</td>
 <td></td>
 </tr>
 <tr>
@@ -504,7 +504,7 @@
 <tr>
 <td>I2C3</td>
 <td><strong>53 (PC9)</strong>, 124 (PH8)</td>
-<td><strong>5 (PA8)</strong>, 123 (PH7)</td>
+<td><strong>10 (PA8)</strong>, 123 (PH7)</td>
 <td></td>
 </tr>
 <tr>
@@ -529,7 +529,7 @@
 <tr>
 <td>UART4</td>
 <td><strong>22 (PA1)</strong>, 55 (PC11)</td>
-<td><strong>54 (PC10)</strong></td>
+<td><strong>16 (PA0)</strong>, 54 (PC10)</td>
 <td></td>
 </tr>
 <tr>
@@ -601,7 +601,7 @@
 <td>I2S2</td>
 <td><strong>29 (PA9)</strong>, 42 (PB10), 45 (PB13), 63 (PD3), 13 (PI1)</td>
 <td><strong>11 (PB15)</strong>, 47 (PC1), 49 (PC3), 7 (PI3)</td>
-<td><strong>3 (PB4)</strong>, 14 (PB9), 44 (PB12), 10 (PI0)</td>
+<td><strong>3 (PB4)</strong>, 14 (PB9), 44 (PB12), 5 (PI0)</td>
 <td><strong>1 (PC6)</strong></td>
 <td></td>
 </tr>
@@ -630,7 +630,7 @@
 <tbody>
 <tr>
 <td>TIM1</td>
-<td><strong>5 (PA8)</strong>, 85 (PE9), <span style="text-decoration: overline">28 (PA7)</span>, <span style="text-decoration: overline">45 (PB13)</span>, <span style="text-decoration: overline">84 (PE8)</span></td>
+<td><strong>10 (PA8)</strong>, 85 (PE9), <span style="text-decoration: overline">28 (PA7)</span>, <span style="text-decoration: overline">45 (PB13)</span>, <span style="text-decoration: overline">84 (PE8)</span></td>
 <td><strong>29 (PA9)</strong>, 87 (PE11), <span style="text-decoration: overline">35 (PB0)</span>, <span style="text-decoration: overline">12 (PB14)</span>, <span style="text-decoration: overline">86 (PE10)</span></td>
 <td><strong>30 (PA10)</strong>, 89 (PE13), <span style="text-decoration: overline">36 (PB1)</span>, <span style="text-decoration: overline">11 (PB15)</span>, <span style="text-decoration: overline">88 (PE12)</span></td>
 <td><strong>31 (PA11)</strong>, 90 (PE14)</td>
@@ -638,7 +638,7 @@
 </tr>
 <tr>
 <td>TIM2</td>
-<td><strong>26 (PA5)</strong>, 9 (PA15)</td>
+<td><strong>16 (PA0)</strong>, 26 (PA5), 9 (PA15)</td>
 <td><strong>22 (PA1)</strong>, 38 (PB3)</td>
 <td><strong>23 (PA2)</strong>, 42 (PB10)</td>
 <td><strong>24 (PA3)</strong>, 43 (PB11)</td>
@@ -662,10 +662,10 @@
 </tr>
 <tr>
 <td>TIM5</td>
-<td><strong>126 (PH10)</strong></td>
+<td><strong>16 (PA0)</strong>, 126 (PH10)</td>
 <td><strong>22 (PA1)</strong>, 127 (PH11)</td>
 <td><strong>23 (PA2)</strong>, 128 (PH12)</td>
-<td><strong>24 (PA3)</strong>, 10 (PI0)</td>
+<td><strong>24 (PA3)</strong>, 5 (PI0)</td>
 <td></td>
 </tr>
 <tr>
@@ -1006,7 +1006,7 @@
 <tr>
 <td>3 (PB4)</td>
 <td>I2S2_WS, SPI1_MISO, SPI2_NSS, SPI3_MISO, SYS_JTRST, TIM3_CH1</td>
-<td><strong>MISO</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>4 (PG7)</td>
@@ -1014,9 +1014,9 @@
 <td></td>
 </tr>
 <tr>
-<td>5 (PA8)</td>
-<td>I2C3_SCL, LTDC_R6, RCC_MCO_1, TIM1_CH1, TIM8_BKIN2, USART1_CK, USB_OTG_FS_SOF</td>
-<td></td>
+<td>5 (PI0)</td>
+<td>DCMI_D13, FMC_D24, I2S2_WS, LTDC_G5, SPI2_NSS, TIM5_CH4</td>
+<td><strong>SS</strong></td>
 </tr>
 <tr>
 <td>6 (PH6)</td>
@@ -1039,24 +1039,24 @@
 <td></td>
 </tr>
 <tr>
-<td>10 (PI0)</td>
-<td>DCMI_D13, FMC_D24, I2S2_WS, LTDC_G5, SPI2_NSS, TIM5_CH4</td>
+<td>10 (PA8)</td>
+<td>I2C3_SCL, LTDC_R6, RCC_MCO_1, TIM1_CH1, TIM8_BKIN2, USART1_CK, USB_OTG_FS_SOF</td>
 <td></td>
 </tr>
 <tr>
 <td>11 (PB15)</td>
 <td>I2S2_SD, RTC_REFIN, SPI2_MOSI, TIM1_CH3N, TIM8_CH3N, TIM12_CH2, USB_OTG_HS_DP</td>
-<td></td>
+<td><strong>MOSI</strong></td>
 </tr>
 <tr>
 <td>12 (PB14)</td>
 <td>SPI2_MISO, TIM1_CH2N, TIM8_CH2N, TIM12_CH1, USART3_DE, USART3_RTS, USB_OTG_HS_DM</td>
-<td></td>
+<td><strong>MISO</strong></td>
 </tr>
 <tr>
 <td>13 (PI1)</td>
 <td>DCMI_D8, FMC_D25, I2S2_CK, LTDC_G6, SPI2_SCK, TIM8_BKIN2</td>
-<td><strong>LED_BUILTIN</strong></td>
+<td><strong>LED_BUILTIN</strong>, <strong>SCK</strong></td>
 </tr>
 <tr>
 <td>14 (PB9)</td>
@@ -1070,33 +1070,33 @@
 </tr>
 <tr>
 <td>16 (PA0)</td>
-<td>ADC1_IN0, ADC2_IN0, ADC3_IN0, SYS_WKUP1</td>
-<td></td>
+<td>ADC1_IN0, ADC2_IN0, ADC3_IN0, ETH_CRS, SAI2_SD_B, SYS_WKUP1, TIM2_CH1, TIM2_ETR, TIM5_CH1, TIM8_ETR, UART4_TX, USART2_CTS</td>
+<td><strong>A0</strong></td>
 </tr>
 <tr>
 <td>17 (PF10)</td>
 <td>ADC3_IN8, DCMI_D11, LTDC_DE</td>
-<td></td>
+<td><strong>A1</strong></td>
 </tr>
 <tr>
 <td>18 (PF9)</td>
 <td>ADC3_IN7, QUADSPI_BK1_IO1, SAI1_FS_B, SPI5_MOSI, TIM14_CH1, UART7_CTS</td>
-<td></td>
+<td><strong>A2</strong></td>
 </tr>
 <tr>
 <td>19 (PF8)</td>
 <td>ADC3_IN6, QUADSPI_BK1_IO0, SAI1_SCK_B, SPI5_MISO, TIM13_CH1, UART7_DE, UART7_RTS</td>
-<td></td>
+<td><strong>A3</strong></td>
 </tr>
 <tr>
 <td>20 (PF7)</td>
 <td>ADC3_IN5, QUADSPI_BK1_IO2, SAI1_MCLK_B, SPI5_SCK, TIM11_CH1, UART7_TX</td>
-<td></td>
+<td><strong>A4</strong></td>
 </tr>
 <tr>
 <td>21 (PF6)</td>
 <td>ADC3_IN4, QUADSPI_BK1_IO3, SAI1_SD_B, SPI5_NSS, TIM10_CH1, UART7_RX</td>
-<td></td>
+<td><strong>A5</strong></td>
 </tr>
 <tr>
 <td>22 (PA1)</td>
@@ -1116,7 +1116,7 @@
 <tr>
 <td>25 (PA4)</td>
 <td>ADC1_IN4, ADC2_IN4, DAC_OUT1, DCMI_HSYNC, I2S1_WS, I2S3_WS, LTDC_VSYNC, SPI1_NSS, SPI3_NSS, USART2_CK, USB_OTG_HS_SOF</td>
-<td><strong>SS</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>26 (PA5)</td>
@@ -1181,12 +1181,12 @@
 <tr>
 <td>38 (PB3)</td>
 <td>I2S1_CK, I2S3_CK, SPI1_SCK, SPI3_SCK, SYS_JTDO-SWO, TIM2_CH2</td>
-<td><strong>SCK</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>39 (PB5)</td>
 <td>CAN2_RX, DCMI_D10, ETH_PPS_OUT, FMC_SDCKE1, I2C1_SMBA, I2S1_SD, I2S3_SD, SPI1_MOSI, SPI3_MOSI, TIM3_CH2, USB_OTG_HS_ULPI_D7</td>
-<td><strong>MOSI</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>40 (PB6)</td>

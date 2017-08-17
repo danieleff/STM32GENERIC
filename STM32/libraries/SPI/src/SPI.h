@@ -92,6 +92,14 @@ class SPIClass {
 		stm32SetSCK(sck);
 	};
 
+    SPIClass(uint8_t mosi, uint8_t miso, uint8_t sck) {
+        stm32SetMOSI(mosi);
+        stm32SetMISO(miso);
+        stm32SetSCK(sck);
+
+        spiHandle.Instance = stm32GetSPIInstance(mosiPort, mosiPin, misoPort, misoPin, sckPort, sckPin);
+    }
+
     void stm32SetMOSI(uint8_t mosi);
     void stm32SetMISO(uint8_t miso);
     void stm32SetSCK(uint8_t sck);

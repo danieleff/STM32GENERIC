@@ -29,7 +29,7 @@ USART3|**0 (PB11)**|**1 (PB10)**|
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**27 (PA8)**, <span style="text-decoration: overline">4 (PA7)</span>, <span style="text-decoration: overline">30 (PB13)</span>|**26 (PA9)**, <span style="text-decoration: overline">3 (PB0)</span>, <span style="text-decoration: overline">29 (PB14)</span>|**25 (PA10)**, <span style="text-decoration: overline">33 (PB1)</span>, <span style="text-decoration: overline">28 (PB15)</span>|**24 (PA11)**|
-TIM2|**20 (PA15)**|**10 (PA1)**, 19 (PB3)|**9 (PA2)**, 1 (PB10)|**8 (PA3)**, 0 (PB11)|
+TIM2|**11 (PA0)**, 20 (PA15)|**10 (PA1)**, 19 (PB3)|**9 (PA2)**, 1 (PB10)|**8 (PA3)**, 0 (PB11)|
 TIM3|**5 (PA6)**, 18 (PB4)|**4 (PA7)**, 17 (PB5)|**3 (PB0)**|**33 (PB1)**|
 TIM4|**16 (PB6)**|**15 (PB7)**|**32 (PB8)**|**34 (PB9)**|
 
@@ -73,7 +73,7 @@ Pin | Peripheral signal available on the pin | Board macro
 8 (PA3) |ADC1_IN3, ADC2_IN3, TIM2_CH4, USART2_RX||
 9 (PA2) |ADC1_IN2, ADC2_IN2, TIM2_CH3, USART2_TX||
 10 (PA1) |ADC1_IN1, ADC2_IN1, TIM2_CH2, USART2_RTS||
-11 (PA0) |ADC1_IN0, ADC2_IN0, SYS_WKUP, USART2_CTS||
+11 (PA0) |ADC1_IN0, ADC2_IN0, SYS_WKUP, TIM2_CH1, TIM2_ETR, USART2_CTS||
 12 (PC15) |ADC1_EXTI15, ADC2_EXTI15, RCC_OSC32_OUT||
 13 (PC14) |RCC_OSC32_IN||
 14 (PC13) |RTC_OUT, RTC_TAMPER||

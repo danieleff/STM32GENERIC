@@ -60,9 +60,12 @@ for (id, board) in boards.iteritems():
     board["pins"] = OrderedDict()
     
     for line in variant_lines:
-        values = line.split(" ", 2)
+        values = line.split(" ")
+        values = [x for x in values if x]
+        
         if line.startswith("#define") and len(values) > 2:
-            (_, key, value) = values
+            key = values[1]
+            value = values[2]
             if '//' in value:
                 value = value[:value.index('//')].strip()
             

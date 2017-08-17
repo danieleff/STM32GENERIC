@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/upload/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,67 +21,67 @@
         
     <url>
      <loc>/menu_options/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/arduino_api/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/spi/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/i2c/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/i2s/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/sdio/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/uart/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/usb_cdc/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/usb_msc/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/stm32_hal/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/build_macros/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -90,7 +90,7 @@
     
     <url>
      <loc>/libraries/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -99,19 +99,19 @@
         
     <url>
      <loc>/board_MapleMini_F103CB/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/board_BluePill/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/board_Generic103RF/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -147,37 +147,37 @@
         
     <url>
      <loc>/board_DISCOVERY_L053C8/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/board_DISCOVERY_F303VC/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/board_DISCOVERY_F407VG/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/board_DISCOVERY_F746NG/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/add_board/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/test/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -186,7 +186,7 @@
     
     <url>
      <loc>/about/</loc>
-     <lastmod>2017-07-15</lastmod>
+     <lastmod>2017-07-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

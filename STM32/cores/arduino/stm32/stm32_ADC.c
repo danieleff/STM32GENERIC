@@ -60,6 +60,25 @@ void analogReadResolution(int resolution) {
 
 int analogRead(uint8_t pin) {
 
+#ifdef A0
+    if (pin == 0) pin = A0;
+#endif
+#ifdef A1
+    if (pin == 1) pin = A1;
+#endif
+#ifdef A2
+    if (pin == 2) pin = A2;
+#endif
+#ifdef A3
+    if (pin == 3) pin = A3;
+#endif
+#ifdef A4
+    if (pin == 4) pin = A4;
+#endif
+#ifdef A5
+    if (pin == 5) pin = A5;
+#endif
+
     stm32_chip_adc1_channel_type config = stm32ADC1GetChannel(variant_pin_list[pin].port, variant_pin_list[pin].pin_mask);
 
 

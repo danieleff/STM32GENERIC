@@ -6,7 +6,7 @@ Below are the pins usable for the peripherals. Pins in **bold** are the default.
 
 Instance |MOSI|MISO|SCK|
 -|-|-|-|
-SPI1|**PA7**, PB5|**PA6**, PB4|PA5, PB3|
+SPI1|**PA7**, PB5|**PA6**, PB4|**PA5**, PB3|
 SPI2|**PB15**|**PB14**|**PB13**|
 SPI3|**PB5**|**PB4**|**PB3**|
 
@@ -39,7 +39,7 @@ I2S3|**PB3**|**PB5**|**PA15**|**PC7**|
 Instance |CH1|CH2|CH3|CH4|
 -|-|-|-|-|
 TIM1|**PA8**, PE9, <span style="text-decoration: overline">PA7</span>, <span style="text-decoration: overline">PB13</span>, <span style="text-decoration: overline">PE8</span>|**PA9**, PE11, <span style="text-decoration: overline">PB0</span>, <span style="text-decoration: overline">PB14</span>, <span style="text-decoration: overline">PE10</span>|**PA10**, PE13, <span style="text-decoration: overline">PB1</span>, <span style="text-decoration: overline">PB15</span>, <span style="text-decoration: overline">PE12</span>|**PA11**, PE14|
-TIM2|**PA15**|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
+TIM2|**PA0**, PA15|**PA1**, PB3|**PA2**, PB10|**PA3**, PB11|
 TIM3|**PA6**, PB4, PC6|**PA7**, PB5, PC7|**PB0**, PC8|**PB1**, PC9|
 TIM4|**PB6**, PD12|**PB7**, PD13|**PB8**, PD14|**PB9**, PD15|
 TIM5|**PA0**|**PA1**|**PA2**|**PA3**|
@@ -99,12 +99,12 @@ ADC3|IN13|PC3|
 
 Pin | Peripheral signal available on the pin | Board macro
 -|-|-
-PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, SYS_WKUP, TIM5_CH1, TIM8_ETR||
+PA0 |ADC1_IN0, ADC2_IN0, ADC3_IN0, SYS_WKUP, TIM2_CH1, TIM2_ETR, TIM5_CH1, TIM8_ETR, USART2_CTS|**KEY0_BUILTIN**|
 PA1 |ADC1_IN1, ADC2_IN1, ADC3_IN1, TIM2_CH2, TIM5_CH2, USART2_RTS||
 PA2 |ADC1_IN2, ADC2_IN2, ADC3_IN2, TIM2_CH3, TIM5_CH3, USART2_TX||
 PA3 |ADC1_IN3, ADC2_IN3, ADC3_IN3, TIM2_CH4, TIM5_CH4, USART2_RX||
-PA4 |ADC1_IN4, ADC2_IN4, DAC_OUT1, SPI1_NSS, USART2_CK||
-PA5 |ADC1_IN5, ADC2_IN5, DAC_OUT2, SPI1_SCK||
+PA4 |ADC1_IN4, ADC2_IN4, DAC_OUT1, SPI1_NSS, USART2_CK|**SS**|
+PA5 |ADC1_IN5, ADC2_IN5, DAC_OUT2, SPI1_SCK|**SCK**|
 PA6 |ADC1_IN6, ADC2_IN6, SPI1_MISO, TIM1_BKIN, TIM3_CH1, TIM8_BKIN|**MISO**|
 PA7 |ADC1_IN7, ADC2_IN7, SPI1_MOSI, TIM1_CH1N, TIM3_CH2, TIM8_CH1N|**MOSI**|
 PA8 |RCC_MCO, TIM1_CH1, USART1_CK|**KEY2_BUILTIN**|
@@ -125,7 +125,7 @@ PB6 |I2C1_SCL, TIM4_CH1, USART1_TX|**SCL**|
 PB7 |FSMC_NL, I2C1_SDA, TIM4_CH2, USART1_RX|**SDA**|
 PB8 |CAN_RX, I2C1_SCL, SDIO_D4, TIM4_CH3||
 PB9 |CAN_TX, I2C1_SDA, SDIO_D5, TIM4_CH4||
-PB10 |I2C2_SCL, TIM2_CH3, USART3_TX||
+PB10 |I2C2_SCL, TIM2_CH3, USART3_TX|**BEEP_BUILTIN**|
 PB11 |I2C2_SDA, TIM2_CH4, USART3_RX||
 PB12 |I2C2_SMBA, I2S2_WS, SPI2_NSS, TIM1_BKIN, USART3_CK||
 PB13 |I2S2_CK, SPI2_SCK, TIM1_CH1N, USART3_CTS||
@@ -185,10 +185,10 @@ PF2 |FSMC_A2||
 PF3 |FSMC_A3||
 PF4 |FSMC_A4||
 PF5 |FSMC_A5||
-PF6 |ADC3_IN4, FSMC_NIORD||
-PF7 |ADC3_IN5, FSMC_NREG||
-PF8 |ADC3_IN6, FSMC_NIOWR||
-PF9 |ADC3_IN7, DAC_EXTI9, FSMC_CD||
+PF6 |ADC3_IN4, FSMC_NIORD|**LED_BUILTIN**|
+PF7 |ADC3_IN5, FSMC_NREG|**LED_BUILTIN1**|
+PF8 |ADC3_IN6, FSMC_NIOWR|**LED_BUILTIN2**|
+PF9 |ADC3_IN7, DAC_EXTI9, FSMC_CD|**LED_BUILTIN3**|
 PF10 |ADC3_IN8, FSMC_INTR||
 PF11 |ADC1_EXTI11, ADC2_EXTI11, FSMC_NIOS16||
 PF12 |FSMC_A6||

@@ -4,13 +4,21 @@
 #define LED_BUILTIN PI1
 #define USER_BTN    PI11
 
-#define MOSI PB5
-#define MISO PB4
-#define SCK PB3
-#define SS PA4
+// SPI on SPI2
+#define MOSI PB15
+#define MISO PB14
+#define SCK PI1
+#define SS PI0
 
 #define SDA PB9
 #define SCL PB8
+
+#define A0 PA0
+#define A1 PF10
+#define A2 PF9
+#define A3 PF8
+#define A4 PF7
+#define A5 PF6
 
 #define I2C1_100KHZ_TIMING 0x20404768
 #define I2C2_100KHZ_TIMING 0x20404768
@@ -23,12 +31,12 @@
    PIN(G,6 ), /* D2 */ \
    PIN(B,4 ), /* D3 */ \
    PIN(G,7 ), /* D4 */ \
-   PIN(A,8 ), /* D5 */ \
+   PIN(I,0 ), /* D5 */ \
    PIN(H,6 ), /* D6 */ \
    PIN(I,3 ), /* D7 */ \
    PIN(I,2 ), /* D8 */ \
    PIN(A,15), /* D9 */ \
-   PIN(I,0 ), /* D10 */ \
+   PIN(A,8 ), /* D10 */ \
    PIN(B,15), /* D11 */ \
    PIN(B,14), /* D12 */ \
    PIN(I,1 ), /* D13 */ \

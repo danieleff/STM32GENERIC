@@ -22,6 +22,7 @@
 
 #include <inttypes.h>
 #include <stdio.h> // for size_t
+#include <stdarg.h>
 
 #include "WString.h"
 #include "Printable.h"
@@ -89,6 +90,9 @@ class Print
     size_t println(double, int = 2);
     size_t println(const Printable&);
     size_t println(void);
+
+    size_t printf(const char* format, ...);
+    size_t printf(const char* format, va_list);
 };
 
 #endif

@@ -181,11 +181,13 @@ long map(long, long, long, long, long);
 #include "stm32_def.h"
 #include "stm32_clock.h"
 #include "stm32_gpio.h"
+#include "stm32_debug.h"
 
 #ifdef __cplusplus
 
 #include "SerialUART.h"
 #include <SerialUSB.h>
+#include <STM32System.h>
 
 #if defined(MENU_SERIAL)
 #define Serial MENU_SERIAL
