@@ -107,7 +107,7 @@
  * Set FAT12_SUPPORT nonzero to enable use if FAT12 volumes.
  * FAT12 has not been well tested and requires additional flash.
  */
-#define FAT12_SUPPORT 0
+#define FAT12_SUPPORT 1
 //------------------------------------------------------------------------------
 /**
  * Set DESTRUCTOR_CLOSES_FILE nonzero to close a file in its destructor.

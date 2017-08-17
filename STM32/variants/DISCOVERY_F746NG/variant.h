@@ -25,6 +25,18 @@
 #define I2C3_100KHZ_TIMING 0x20404768
 #define I2C4_100KHZ_TIMING 0x20404768
 
+#define ETHERNET_RMII_MODE_CONFIGURATION
+
+#define ETH_RMII_CRS_DV     PA7
+#define ETH_RMII_MDC        PC1
+#define ETH_RMII_MDIO       PA2
+#define ETH_RMII_REF_CLK    PA1
+#define ETH_RMII_RXD0       PC4
+#define ETH_RMII_RXD1       PC5
+#define ETH_RMII_TXD0       PG13
+#define ETH_RMII_TXD1       PG14
+#define ETH_RMII_TX_EN      PG11
+
 #define VARIANT_PIN_LIST \
    PIN(C,7 ), /* D0 */ \
    PIN(C,6 ), /* D1 */ \

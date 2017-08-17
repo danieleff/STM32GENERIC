@@ -31,6 +31,8 @@
 
 #include "stdio.h"
 
+#include "Arduino.h"
+
 /**
  * Represents a part of STM32 chip embedded flash, from baseAddress, size bytes length
  */

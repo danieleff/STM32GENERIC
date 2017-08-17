@@ -110,6 +110,9 @@ void analogReference(uint8_t mode);
 void analogWrite(uint8_t, int);
 void analogWriteResolution(int bits);
 
+//STM32GENERIC only:
+void pwmWrite(uint8_t pin, int dutyCycle16Bits, int frequency, int durationMillis);
+
 //unsigned long millis(void);
 //unsigned long micros(void);
 //void delay(unsigned long);

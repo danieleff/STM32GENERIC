@@ -5,6 +5,6 @@
 
 extern BlockDevice *getMassStorage();
 
-void formatFat12(uint8_t *buffer, uint32_t blockCount);
+void formatFat12(BlockDevice *blockDevice, uint32_t blockCount);
 
 #endif

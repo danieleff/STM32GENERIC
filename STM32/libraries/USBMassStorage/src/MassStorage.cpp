@@ -96,7 +96,7 @@ const unsigned char fat12BootSector[] = {
     0x00, 0x02, // 512 bytes per block
     0x01, // blocks per allocation unit
     0x01, 0x00, // 1 reserved block for boot block
-    0x01, // number of FAT
+    0x02, // number of FAT
     0x10, 0x00, // max number of root dir entries
     0x42, 0x00, // number of blocks in the entire disk
     0xF8, // media descriptor
@@ -113,7 +113,10 @@ const unsigned char fat12BootSector[] = {
     'F', 'A', 'T', '1', '2', ' ', ' ', ' ', // file system type
 };
 
-void formatFat12(uint8_t *buffer, uint32_t blockCount) {
+void formatFat12(BlockDevice *blockDevice, uint32_t blockCount) {
+    const uint8_t blocksToWrite = 3;
+    uint8_t buffer[512 * blocksToWrite] = {0};
+
     memcpy(buffer, fat12BootSector, sizeof(fat12BootSector));
 
     buffer[19] = blockCount & 0xFF;
@@ -132,4 +135,6 @@ void formatFat12(uint8_t *buffer, uint32_t blockCount) {
         buffer[1024 + i] = ' ';
     }
     buffer[1024 + 11] = 0x8; // Volume label dir entry
+
+    blockDevice->writeBlocks(0, buffer, blocksToWrite);
 }
