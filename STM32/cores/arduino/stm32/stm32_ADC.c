@@ -149,7 +149,12 @@ int analogRead(uint8_t pin) {
 
     ADC_ChannelConfTypeDef sConfig;
     sConfig.Channel = config.channel;
-    sConfig.Rank = 1;
+
+    #ifdef ADC_RANK_CHANNEL_NUMBER
+        sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
+    #else
+        sConfig.Rank = 1;
+    #endif
 
     #if STM32L0
         //in handle
@@ -188,6 +193,11 @@ int analogRead(uint8_t pin) {
     int ret = (HAL_ADC_GetValue(&handle[instanceIndex]) << readResolution) >> 12;
 
     HAL_ADC_Stop(&handle[instanceIndex]);
+
+    #ifdef ADC_RANK_NONE
+        sConfig.Rank = ADC_RANK_NONE;
+        HAL_ADC_ConfigChannel(&handle[instanceIndex], &sConfig);
+    #endif
 
     return ret;
 }
