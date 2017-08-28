@@ -199,6 +199,8 @@ def generate_source_code(mcu):
         (instance, channel) = instance_signal.split('_', 1)
         if not channel[2:].isdigit():
             continue
+        if instance == 'ADC':
+            instance = 'ADC1'
             
         pin = mcu.instance_signal_to_default_pin[instance_signal]
         adc_source_code += '    { ' + instance + ', GPIO' + pin[1:2] + ', GPIO_PIN_' + pin[2:].ljust(3) + ', ADC_CHANNEL_' + channel[2:].ljust(3) + '}, \n'

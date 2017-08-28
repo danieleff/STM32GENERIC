@@ -34,6 +34,7 @@
  */
 
 #include "stm32_gpio_af.h"
+#include "stm32_debug.h"
 
 void stm32_adc_init(ADC_HandleTypeDef *handle);
 
@@ -139,13 +140,21 @@ int analogRead(uint8_t pin) {
             handle[instanceIndex].Init.Resolution = ADC_RESOLUTION_12B;
         #endif
 
-        HAL_ADC_Init(&handle);
-
+        HAL_StatusTypeDef error = HAL_ADC_Init(&handle[instanceIndex]);
+        if (error != HAL_OK) {
+            PRINT_ERROR("HAL_ADC_Init failed, error: %d", error);
+            return 0;
+        }
     }
 
     ADC_ChannelConfTypeDef sConfig;
     sConfig.Channel = config.channel;
-    sConfig.Rank = 1;
+
+    #ifdef ADC_RANK_CHANNEL_NUMBER
+        sConfig.Rank = ADC_RANK_CHANNEL_NUMBER;
+    #else
+        sConfig.Rank = 1;
+    #endif
 
     #if STM32L0
         //in handle
@@ -163,13 +172,32 @@ int analogRead(uint8_t pin) {
         #error "unknown sampleing time"
     #endif
 
-    HAL_ADC_ConfigChannel(&handle[instanceIndex], &sConfig);
-
-    HAL_ADC_Start(&handle[instanceIndex]);
-
-    if (HAL_ADC_PollForConversion(&handle[instanceIndex], 1000) != HAL_OK) {
-            return 0;
+    HAL_StatusTypeDef error = HAL_ADC_ConfigChannel(&handle[instanceIndex], &sConfig);
+    if (error != HAL_OK) {
+        PRINT_ERROR("HAL_ADC_ConfigChannel failed, error: %d", error);
+        return 0;
     }
 
-    return (HAL_ADC_GetValue(&handle[instanceIndex]) << readResolution) >> 12;
+    error = HAL_ADC_Start(&handle[instanceIndex]);
+    if (error != HAL_OK) {
+        PRINT_ERROR("HAL_ADC_Start failed, error: %d", error);
+        return 0;
+    }
+
+    error = HAL_ADC_PollForConversion(&handle[instanceIndex], 1000);
+    if (error != HAL_OK) {
+        PRINT_ERROR("HAL_ADC_PollForConversion failed, error: %d", error);
+        return 0;
+    }
+
+    int ret = (HAL_ADC_GetValue(&handle[instanceIndex]) << readResolution) >> 12;
+
+    HAL_ADC_Stop(&handle[instanceIndex]);
+
+    #ifdef ADC_RANK_NONE
+        sConfig.Rank = ADC_RANK_NONE;
+        HAL_ADC_ConfigChannel(&handle[instanceIndex], &sConfig);
+    #endif
+
+    return ret;
 }
