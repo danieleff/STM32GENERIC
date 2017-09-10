@@ -2,8 +2,6 @@
 /* Entry Point */
 ENTRY(Reset_Handler)
 
-/* Highest address of the user mode stack */
-_estack = 0x20000000 + 131072;    /* end of RAM */
 
 /* Specify the memory areas */
 /* 2MB   FLASH */
@@ -13,11 +11,15 @@ _estack = 0x20000000 + 131072;    /* end of RAM */
 
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 0x00200000
-  RAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 0x00030000
-  RAM1 (rwx)  : ORIGIN = 0x10000000, LENGTH = 0x00010000
-  SDRAM (rwx) : ORIGIN = 0xD0100000, LENGTH = 0x00400000
+  FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 2048K
+  RAM (xrw)   : ORIGIN = 0x20000000, LENGTH =  192K
+  CCMRAM (rwx): ORIGIN = 0x10000000, LENGTH =   64K
+  SDRAM (rwx) : ORIGIN = 0xD0100000, LENGTH =    8M
 }
+
+/* Highest address of the user mode stack */
+/* _estack = ORIGIN(   RAM) + LENGTH(   RAM); */ /* Stack in normal RAM */
+_estack    = ORIGIN(CCMRAM) + LENGTH(CCMRAM);    /* Stack in    CCM RAM */
 
 /* Define output sections */
 SECTIONS
