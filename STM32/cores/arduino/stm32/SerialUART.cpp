@@ -27,6 +27,7 @@
  * TODO: add constructor with custom buffer parameter
  */
 #include "SerialUART.h"
+#include "STM32System.h"
 #include "stm32_gpio_af.h"
 
 /**
@@ -158,6 +159,15 @@ void SerialUART::begin(const uint32_t baud) {
   HAL_UART_Init(handle);
 
   HAL_UART_Receive_IT(handle, &receive_buffer, 1);
+
+
+  if (stdoutStream == NULL) {
+      #if defined(MENU_SERIAL) && MENU_SERIAL == SerialUART1
+          stdoutStream = this;
+      #elif defined(MENU_SERIAL_AUTO) && MENU_SERIAL_AUTO == SerialUART1
+          stdoutStream = this;
+      #endif
+  }
     
 }
 

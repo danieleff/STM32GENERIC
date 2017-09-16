@@ -81,7 +81,7 @@ extern SerialUART SerialUART3;
 
 #if defined(USART4) || defined(UART4)
 extern SerialUART SerialUART4;
-#define Serial5 SerialUART5
+#define Serial4 SerialUART4
 #endif
 
 #if defined(USART5) || defined(UART5)

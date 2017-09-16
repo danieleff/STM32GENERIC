@@ -71,6 +71,7 @@ class LTDCClass : public Adafruit_GFX {
         };
         virtual void init() = 0;
 
+        void begin(); // uses buffer from heap
         void begin(uint16_t *buffer);
 
         void drawPixel(int16_t x, int16_t y, uint16_t color);
@@ -97,6 +98,12 @@ class LTDCClass : public Adafruit_GFX {
         LTDC_HandleTypeDef  hLtdcHandler;
 
 };
+
+template <int W, int H>
+void LTDCClass<W, H>::begin() {
+    void *buffer = malloc(W * H * sizeof(uint16_t));
+    begin((uint16_t *)buffer);
+}
 
 template <int W, int H>
 void LTDCClass<W, H>::begin(uint16_t *buffer) {

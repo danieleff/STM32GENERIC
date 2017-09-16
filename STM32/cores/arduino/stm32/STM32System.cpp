@@ -28,7 +28,9 @@
 
 static const int print_fileno = 3;
 
-static Print *print;
+static Print *print = NULL;
+Stream *stdoutStream = NULL;
+Stream *stderrStream = NULL;
 
 int stm32SetPrintOutput(Print *p) {
     if (p == NULL) {
@@ -50,12 +52,12 @@ extern "C" int _write( int file, char *ptr, int len ) {
 
     if (file == STDOUT_FILENO) {
 
-        Serial.write(ptr, len);
+        if (stdoutStream) stdoutStream->write(ptr, len);
 
     } else if (file == STDERR_FILENO) {
 
-        Serial.write(ptr, len);
-        Serial.flush();
+        if (stderrStream) stderrStream->write(ptr, len);
+        if (stderrStream) stderrStream->flush();
 
     } else if (file == print_fileno) {
 
