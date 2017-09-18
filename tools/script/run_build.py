@@ -14,6 +14,7 @@ import argparse
 import board
 import json
 import hashlib
+import collections
 
 #print(board.boards)
 #exit(-1)
@@ -29,7 +30,7 @@ arm_gcc_path_default = "C:\\Users\\" + str(os.environ.get('USERNAME')) + "\\AppD
 git_hash = subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD']).decode("ascii").strip()
 git_date = subprocess.check_output(['git', 'show', '-s', '--format=%ci']).decode("ascii").strip()
 
-def build(args, build_target, sketch_path, build_path):
+def build(args, build_target, sketch_path, build_path, include_external_libraries):
     print("Building: ", sketch_path) 
     print("Variant: ", build_target) 
     print("Build path: ", build_path) 
@@ -69,8 +70,15 @@ def build(args, build_target, sketch_path, build_path):
     command.append("-build-path")
     command.append(os.path.abspath(build_path))
     
+    if include_external_libraries:
+        command.append("-libraries")
+        command.append(args.external_libraries)
+    
     command.append("-prefs")
-    command.append("runtime.tools.arm-none-eabi-gcc.path=" + args.arm_gcc_path)
+    if 'F7' in build_target:
+        command.append("runtime.tools.arm-none-eabi-gcc.path=" + args.arm_gcc_path_f7)
+    else:
+        command.append("runtime.tools.arm-none-eabi-gcc.path=" + args.arm_gcc_path)
     
     command.append(sketch_path)
     
@@ -119,10 +127,12 @@ def find_inos(path):
     for root, dirnames, filenames in os.walk(path):
         for filename in fnmatch.filter(filenames, '*.ino'):
             ret.append(os.path.join(root, filename))
-    return ret
+    return sorted(ret)
     
             
-def run(args, build_target, sketch):
+def run(args, build_target, sketch, include_external_libraries = False):
+    sketch = os.path.relpath(sketch, stm32generic_root)
+    
     sketch_path = sketch
     
     if not sketch.startswith('/'):
@@ -130,23 +140,26 @@ def run(args, build_target, sketch):
 
     hash = hashlib.sha256(sketch.encode('utf-8')).hexdigest()[:10].strip()
         
-    build_path = os.path.join(os.path.abspath("."), "build", build_target.replace(":", "_").replace(",", "_").replace("=", "_"), git_hash, hash)
+    build_path = os.path.join(os.path.abspath("."), "build", git_hash, build_target.replace(":", "_").replace(",", "_").replace("=", "_"), hash)
             
-    build(args, build_target, sketch_path, build_path)
-    return {"build_path": build_path, "result": process_stdout(args, build_target, sketch_path, build_path)}
+    build(args, build_target, sketch_path, build_path, include_external_libraries)
+    
+    result = {"build_path": build_path, "result": process_stdout(args, build_target, sketch_path, build_path)}
+    
+    key = build_target + "|" + git_hash + "|" + sketch
+    results[key] = result
 
+
+    
 def run_manual(args):
     for variant in args.variant:
         for sketch in args.sketch:
-            build_target = "STM32GENERIC:STM32:" + variant
+            run(args, "STM32GENERIC:STM32:" + variant, sketch)
             
-            result = run(args, build_target, sketch)
-            
-            key = build_target + "|" + git_hash + "|" + sketch
-            results[key] = result
 
 def run_auto(args):
     
+    # Common stuff, should mostly work on all boards
     variants = [
         "MapleMini_F103CB:upload_method=STLinkMethod,usb=Disabled",
         "MapleMini_F103CB:upload_method=STLinkMethod,usb=SerialUSB",
@@ -157,20 +170,17 @@ def run_auto(args):
         
         "BLACK_F407XX:upload_method=STLinkMethod,usb=Disabled,subboard=BLACK_F407VE",
         "BLACK_F407XX:upload_method=STLinkMethod,usb=SerialUSB,subboard=BLACK_F407VE",
-        
-        
-        "BLACK_F407XX:upload_method=STLinkMethod,usb=SerialUSB,subboard=BLACK_F407VE",
     ]
     
     for variant in board.boards:
-        if 'Nucleo' in variant: # Nucleo 64
-            if variant[11] == 'R':
+        if 'Nucleo' in variant:
+            if variant[11] == 'R': # Nucleo 64
                 variants.append('NUCLEO_64:subboard=' + variant)
             else:
                 variants.append('NUCLEO_144:subboard=' + variant)
                 
-        if 'DISCOVERY' in variant:
-            variants.append(variant)
+        if 'DISCO' in variant:
+            variants.append(variant + ":usb=Disabled,serial=SerialUART1") # TODO sometimes serial=SerialUART2
 
     for variant in variants:
         inos = []
@@ -181,24 +191,47 @@ def run_auto(args):
         inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/EEPROM/examples")))
         
         for sketch in inos:
-            build_target = "STM32GENERIC:STM32:" + variant
+            run(args, "STM32GENERIC:STM32:" + variant, sketch)
             
-            sketch = os.path.relpath(sketch, stm32generic_root)
-            
-            result = run(args, build_target, sketch)
-            
-            key = build_target + "|" + git_hash + "|" + sketch
-            results[key] = result
+    # Board specific stuff:
+    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/BlackF407VE"))
+    for sketch in inos:
+        run(args, "STM32GENERIC:STM32:BLACK_F407XX:upload_method=STLinkMethod,usb=Disabled,subboard=BLACK_F407VE", sketch, True)
     
+    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/BluePillF103"))
+    for sketch in inos:
+        run(args, "STM32GENERIC:STM32:BluePill:upload_method=STLinkMethod,usb=SerialUSB", sketch, True)
+    
+    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery407VG"))
+    for sketch in inos:
+        run(args, "STM32GENERIC:STM32:DISCOVERY_F407VG:usb=Disabled,serial=SerialUART2", sketch, True)
+    
+    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery429ZI"))
+    for sketch in inos:
+        run(args, "STM32GENERIC:STM32:DISCOVERY_F429ZI:usb=Disabled,serial=SerialUART1", sketch, True)
+    
+    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery746NG"))
+    for sketch in inos:
+        run(args, "STM32GENERIC:STM32:DISCOVERY_F746NG:usb=Disabled,serial=SerialUART1", sketch, True)
+    
+    
+    # all libraries:
+    if args.external_libraries:
+        inos = find_inos(os.path.join(stm32generic_root, args.external_libraries))
+        for sketch in inos:
+            run(args, "STM32GENERIC:STM32:MapleMini_F103CB:upload_method=STLinkMethod,usb=Disabled", sketch, True)
+
 parser = argparse.ArgumentParser(description='Process some integers.')
 
 parser.add_argument('-v', '--variant', choices = board.boards, action = 'append', default = [])
 parser.add_argument('-s', '--sketch', action = 'append', default = [])
 parser.add_argument('-b', '--arduino_builder', default = arduino_builder_default)
 parser.add_argument('-g', '--arm_gcc_path', default = arm_gcc_path_default)
+parser.add_argument('--arm_gcc_path_f7', default = arm_gcc_path_default)
 parser.add_argument('-i', '--ignore_already_compiled', action="store_true")
 parser.add_argument('-a', '--auto', action="store_true")
 parser.add_argument('-o', '--output')
+parser.add_argument('-e', '--external_libraries')
 
 args = parser.parse_args()
 
@@ -217,7 +250,7 @@ if not os.path.exists(args.arduino_builder):
     print("       please use -g to set")
     exit(-1)
 
-results = {}
+results = collections.OrderedDict()
 if not args.auto:
     run_manual(args)
 else:
