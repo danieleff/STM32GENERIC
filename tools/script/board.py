@@ -8,7 +8,7 @@ from collections import OrderedDict
 with open(config.arch_dir + "boards.txt") as f:
     boardLines = f.readlines()
 
-boards = {}
+boards = OrderedDict()
 del_boards = []
 tree = OrderedDict()
 
@@ -49,9 +49,9 @@ for line in boardLines:
 for id in set(del_boards):
     del boards[id]
 
-for (id, board) in boards.iteritems():
+for (id, board) in boards.items():
     variant_dir = board["build.variant"]
-    with open(config.arch_dir + "variants/" + variant_dir + "/variant.h") as f:
+    with open(config.arch_dir + "variants/" + variant_dir + "/variant.h", encoding='utf-8') as f:
         variant_lines = f.read().splitlines()
     
     board["variant_lines"] = variant_lines

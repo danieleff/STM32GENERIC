@@ -1,0 +1,134 @@
+<head>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    
+    <style>
+        td.number {
+            font-family: monospace;
+            text-align: right;
+            font-weight: bold;
+        }
+        td.failed {
+            color: red;
+            text-align: center;
+        }
+        tr.new_build_target {
+            border-top: solid 2px black;
+        }
+        
+        td.build_target, td.sketch {
+            font-size: small;
+        }
+        
+        .info {
+            font-weight: bold;
+        }
+        
+        .failed {
+            color: red;
+        }
+        .passed {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    
+    <p>Compilation results for: <span class="info" id="core"></span></p>
+    <!--<p>Compiler version: <span class="info" id="compiler"></span></p>-->
+    <p>
+    Commit date: <span class="info" id="git_date"></span> (git commit hash: <span class="info" id="git_hash"></span>)
+    </p>
+    
+    <p>Passed: <span id="passed" class="passed number"></span>, failed: <span id="failed" class="failed number"></span></p>
+
+    <table cellpadding="1" cellspacing="1" border="1" style="border-collapse: collapse;">
+        <thead>
+            <th>Target</th>
+            <th>Sketch</th>
+            
+            <th>Flash bytes</th>
+            <th>RAM bytes</th>
+            
+            <th>elf</th>
+            <th>bin</th>
+            
+            <th>stdout</th>
+            <th>stderr</th>
+            <th>asm</th>
+            <th>nm</th>
+            <th>map</th>
+        </thead>
+        <tbody id="result">
+        </tbody>
+    </table>
+    
+    <script>
+        //$.getJSON("http://danieleff.com/stm32/build_STM32GENERIC/latest.json", function(json) {
+        $.getJSON("build/latest.json", function(json) {
+            var html = "";
+            var prev_build_target = "";
+            
+            var results = json.results;
+            
+            var passed = 0;
+            var failed = 0;
+            
+            $("#core").html(json.core);
+            $("#compiler").html(json.compiler);
+            $("#git_hash").html(json.git_hash);
+            $("#git_date").html(json.git_date);
+            
+            for(build in results) {
+                var split = build.split("|");
+                
+                var build_target = split[0];
+                var hash = split[1];
+                var sketch = split[2];
+                var build_path = results[build]["build_path"];
+                var result = results[build]["result"];
+                
+                build_target = build_target.replace("STM32GENERIC:STM32:", "")
+                sketch = sketch.replace("STM32\\libraries\\", "");
+                
+                html += "<tr class=\"" + ((prev_build_target == build_target) ? "" : "new_build_target") + "\">";
+                
+                html += "<td class=\"build_target\">" + build_target + "</td>";
+                html += "<td class=\"sketch\"><a href=\"https://github.com/danieleff/STM32GENERIC/blob/master/" + sketch + "\">" + sketch + "</a></td>";
+                if (result[0]) {
+                    html += "<td class=\"number\">" + Number(result[0]).toLocaleString('en') + "</td>";
+                    html += "<td class=\"number\">" + Number(result[1]).toLocaleString('en') + "</td>";
+                    passed++;
+                } else {
+                    html += "<td class=\"failed number\" colspan=\"2\">FAILED</td>";
+                    failed++;
+                }
+                
+                var build_path_part = build_path.substr(build_path.indexOf('build') + 6);
+                
+                var ino_filename = sketch.split(/[\\/]/).pop();
+                var map_filename = ino_filename + ".map";
+                var elf_filename = ino_filename + ".elf";
+                var bin_filename = ino_filename + ".bin";
+                
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/" + elf_filename + "\">elf</a>";
+                
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/" + bin_filename + "\">bin</a>";
+                
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/stdout.txt\">stdout</a>";
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/stderr.txt\">stderr</a>";
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/disassembly.asm\">asm</a>";
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/build_STM32GENERIC/" + build_path_part + "/nm.txt\">nm</a>";
+                html += "<td class=\"sketch\"><a href=\"http://danieleff.com/stm32/map_analizer/?map=" + build_path_part + "/" + map_filename + "\">map</a>";
+                
+                html += "</tr>";
+                
+                prev_build_target = build_target;
+            }
+            
+            $("tbody#result").html(html);
+            
+            $("#passed").html(passed);
+            $("#failed").html(failed)
+        });
+    </script>
+</body>
