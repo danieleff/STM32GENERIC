@@ -772,4 +772,3 @@ DISCO_B_L475E_IOT01A.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SER
 DISCO_B_L475E_IOT01A.menu.serial.SerialUSB=SerialUSB
 DISCO_B_L475E_IOT01A.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
 
-
