@@ -747,3 +747,29 @@ DISCOVERY_F746NG.menu.serial.SerialUART1=SerialUART1 [Through ST-Link Virtual CO
 DISCOVERY_F746NG.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
 DISCOVERY_F746NG.menu.serial.SerialUSB=SerialUSB
 DISCOVERY_F746NG.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+
+
+################################################################################
+# DISCO-B-L475E-IOT01A board
+
+
+
+DISCO_B_L475E_IOT01A.name=Discovery B-L475E-IOT01A
+DISCO_B_L475E_IOT01A.upload.maximum_size=1048576
+DISCO_B_L475E_IOT01A.upload.maximum_data_size=131072
+DISCO_B_L475E_IOT01A.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+DISCO_B_L475E_IOT01A.build.series=STM32L4
+DISCO_B_L475E_IOT01A.build.variant=DISCO_B_L475E_IOT01A
+DISCO_B_L475E_IOT01A.build.board=DISCO_B_L475E_IOT01A
+DISCO_B_L475E_IOT01A.build.extra_flags=-DSTM32L475VG
+DISCO_B_L475E_IOT01A.massstorage_drive=NODE_L475VG
+DISCO_B_L475E_IOT01A.build.f_cpu=80000000L
+DISCO_B_L475E_IOT01A.upload.protocol=STLink
+DISCO_B_L475E_IOT01A.upload.tool=stlink_upload
+
+DISCO_B_L475E_IOT01A.menu.serial.SerialUART1=SerialUART1 [Through ST-Link Virtual COM port] [PB7/PB6]
+DISCO_B_L475E_IOT01A.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+DISCO_B_L475E_IOT01A.menu.serial.SerialUSB=SerialUSB
+DISCO_B_L475E_IOT01A.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+
+
