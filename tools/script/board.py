@@ -8,7 +8,7 @@ from collections import OrderedDict
 with open(config.arch_dir + "boards.txt") as f:
     boardLines = f.readlines()
 
-boards = {}
+boards = OrderedDict()
 del_boards = []
 tree = OrderedDict()
 
