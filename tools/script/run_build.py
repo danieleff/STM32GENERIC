@@ -1,6 +1,6 @@
 # Compile from command line
 
-# Example: python run_build.py -v MapleMini_F103CB -s STM32/libraries\HardwareTest\examples\AutomaticCompilation\Basic\Basic.ino -i
+# Example: python run_build.py -v MapleMini_F103CB -s STM32\libraries\HardwareTest\examples\AutomaticCompilation\Basic\Basic.ino -i
 
 import sys
 sys.dont_write_bytecode = True
@@ -35,9 +35,9 @@ def build(args, build_target, sketch_path, build_path, include_external_librarie
     print("Variant: ", build_target) 
     print("Build path: ", build_path) 
     
-    already_compiled = os.path.join(build_path, "already_compiled.txt")
+    result_filename = os.path.join(build_path, "info.json")
     
-    if os.path.exists(already_compiled) and args.ignore_already_compiled:
+    if os.path.exists(result_filename) and args.ignore_already_compiled:
         return
     
     if os.path.exists(build_path):
@@ -100,27 +100,9 @@ def build(args, build_target, sketch_path, build_path, include_external_librarie
     with open(os.path.join(build_path, "nm.txt"), "w") as f:
         proc = subprocess.Popen([os.path.join(args.arm_gcc_path, "bin", "arm-none-eabi-nm"), '-S', '--size-sort', '-t', 'd', os.path.join(build_path, os.path.basename(sketch_path) + ".elf")], stdout = f)
         
-    with open(already_compiled, "w") as f:
-        f.write("Compilation finished")
-
-
-def process_stdout(args, build_target, sketch_path, build_path):
-    with open(os.path.join(build_path, "stdout.txt")) as f:
-        lines = f.readlines()
-    
-    flash = None
-    ram = None
-    
-    for line in lines:
-        if 'Sketch uses' in line:
-            flash = line.split(' ')[2]
-        if 'Global variables use ' in line:
-            ram = line.split(' ')[3]
-    
-    print("Result: ", flash, ram)
-    print("--------")
-    return (flash, ram)
-            
+    with open(result_filename, "w") as f:
+        info = {"build_target": build_target, "sketch_path": sketch_path, "build_path": build_path, "git_hash": git_hash}
+        json.dump(info, f, indent=4)
 
 def find_inos(path):
     ret = []
@@ -131,25 +113,20 @@ def find_inos(path):
     
             
 def run(args, build_target, sketch, include_external_libraries = False):
-    sketch = os.path.relpath(sketch, stm32generic_root)
     
     sketch_path = sketch
     
-    if not sketch.startswith('/'):
+    if not sketch.startswith('/') and ":\\" not in sketch:
         sketch_path = stm32generic_root + '/' + sketch
-
+        
+    sketch = os.path.relpath(sketch, stm32generic_root)
+    
     hash = hashlib.sha256(sketch.encode('utf-8')).hexdigest()[:10].strip()
         
     build_path = os.path.join(os.path.abspath("."), "build", git_hash, build_target.replace(":", "_").replace(",", "_").replace("=", "_"), hash)
             
     build(args, build_target, sketch_path, build_path, include_external_libraries)
     
-    result = {"build_path": build_path, "result": process_stdout(args, build_target, sketch_path, build_path)}
-    
-    key = build_target + "|" + git_hash + "|" + sketch
-    results[key] = result
-
-
     
 def run_manual(args):
     for variant in args.variant:
@@ -184,33 +161,33 @@ def run_auto(args):
 
     for variant in variants:
         inos = []
-        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/HardwareTest/examples/AutomaticCompilation")))
+        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "HardwareTest", "examples", "AutomaticCompilation")))
         inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/all_boards")))
-        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/HardwareTimer/examples")))
-        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/FreeRTOS/examples")))
-        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32/libraries/EEPROM/examples")))
+        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "HardwareTimer", "examples")))
+        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "FreeRTOS", "examples")))
+        inos.extend(find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "EEPROM", "examples")))
         
         for sketch in inos:
             run(args, "STM32GENERIC:STM32:" + variant, sketch)
             
     # Board specific stuff:
-    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/BlackF407VE"))
+    inos = find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "BoardExamples", "examples", "BlackF407VE"))
     for sketch in inos:
         run(args, "STM32GENERIC:STM32:BLACK_F407XX:upload_method=STLinkMethod,usb=Disabled,subboard=BLACK_F407VE", sketch, True)
     
-    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/BluePillF103"))
+    inos = find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "BoardExamples", "examples", "BluePillF103"))
     for sketch in inos:
         run(args, "STM32GENERIC:STM32:BluePill:upload_method=STLinkMethod,usb=SerialUSB", sketch, True)
     
-    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery407VG"))
+    inos = find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "BoardExamples", "examples", "Discovery407VG"))
     for sketch in inos:
         run(args, "STM32GENERIC:STM32:DISCOVERY_F407VG:usb=Disabled,serial=SerialUART2", sketch, True)
     
-    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery429ZI"))
+    inos = find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "BoardExamples", "examples", "Discovery429ZI"))
     for sketch in inos:
         run(args, "STM32GENERIC:STM32:DISCOVERY_F429ZI:usb=Disabled,serial=SerialUART1", sketch, True)
     
-    inos = find_inos(os.path.join(stm32generic_root, "STM32/libraries/BoardExamples/examples/Discovery746NG"))
+    inos = find_inos(os.path.join(stm32generic_root, "STM32", "libraries", "BoardExamples", "examples", "Discovery746NG"))
     for sketch in inos:
         run(args, "STM32GENERIC:STM32:DISCOVERY_F746NG:usb=Disabled,serial=SerialUART1", sketch, True)
     
@@ -258,11 +235,12 @@ else:
     
 compiler = os.path.basename(os.path.dirname(args.arm_gcc_path)) + " " + os.path.basename(args.arm_gcc_path)
 
-json_data = {"core": "STM32GENERIC", "compiler": compiler, "git_date": git_date, "git_hash": git_hash, "results": results}
 
-with open("build/STM32GENERIC-" + git_hash + ".json", "w") as f:
-    json.dump(json_data, f, indent=4)
+#json_data = {"core": "STM32GENERIC", "compiler": compiler, "git_date": git_date, "git_hash": git_hash, "results": results}
+
+#with open("build/STM32GENERIC-" + git_hash + ".json", "w") as f:
+#    json.dump(json_data, f, indent=4)
     
-if args.output:
-    with open(args.output, "w") as f:
-        json.dump(json_data, f, indent=4)
+#if args.output:
+#    with open(args.output, "w") as f:
+#        json.dump(json_data, f, indent=4)
