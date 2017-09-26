@@ -51,6 +51,14 @@ void stm32_adc_init(ADC_HandleTypeDef *handle);
 #error "Unknown clock"
 #endif
 
+
+#ifndef __HAL_RCC_ADC2_CLK_ENABLE
+#define __HAL_RCC_ADC2_CLK_ENABLE __HAL_RCC_ADC_CLK_ENABLE
+#endif
+#ifndef __HAL_RCC_ADC3_CLK_ENABLE
+#define __HAL_RCC_ADC3_CLK_ENABLE __HAL_RCC_ADC_CLK_ENABLE
+#endif
+
 static int readResolution = 10;
 
 static ADC_HandleTypeDef handle[3];
