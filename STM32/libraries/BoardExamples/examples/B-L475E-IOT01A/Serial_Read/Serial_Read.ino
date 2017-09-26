@@ -7,8 +7,6 @@ int incomingByte;      // variable to save incoming serial data
 
 void setup() {
   // initialize SerialUART1 communication:
-  SerialUART1.stm32SetTX(PB6);
-  SerialUART1.stm32SetRX(PB7);
   SerialUART1.begin(115200);
   
   // initialize the LED pin as an output:
