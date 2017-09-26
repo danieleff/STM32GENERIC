@@ -5,6 +5,17 @@
 // F3 RM0316 http://www.st.com/content/ccc/resource/technical/document/reference_manual/4a/19/6e/18/9d/92/43/32/DM00043574.pdf/files/DM00043574.pdf/jcr:content/translations/en.DM00043574.pdf#page=272
 // L1 RM0038 http://www.st.com/content/ccc/resource/technical/document/reference_manual/cc/f9/93/b2/f0/82/42/57/CD00240193.pdf/files/CD00240193.pdf/jcr:content/translations/en.CD00240193.pdf#page=255
 
+#ifndef DMA1_Channel2_IRQn
+#define DMA1_Channel2_IRQn DMA1_Channel2_3_IRQn
+#define DMA1_Channel3_IRQn DMA1_Channel2_3_IRQn
+#endif
+
+#ifndef DMA1_Channel4_IRQn
+#define DMA1_Channel4_IRQn DMA1_Channel4_5_6_7_IRQn
+#define DMA1_Channel5_IRQn DMA1_Channel4_5_6_7_IRQn
+#define DMA1_Channel6_IRQn DMA1_Channel4_5_6_7_IRQn
+#define DMA1_Channel7_IRQn DMA1_Channel4_5_6_7_IRQn
+#endif
 
 
 typedef struct {

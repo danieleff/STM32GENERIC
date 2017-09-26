@@ -168,19 +168,24 @@ extern void DMA2_Stream7_IRQHandler() {
 
 
 // F0
+#ifndef DMA1_Ch1_IRQHandler
 extern void DMA1_Ch1_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[1]);
 }
+#endif
 
 // F0
+#ifndef DMA1_Ch2_3_DMA2_Ch1_2_IRQHandler
 extern void DMA1_Ch2_3_DMA2_Ch1_2_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[2]);
     HAL_DMA_IRQHandler(dmaHandles[3]);
     HAL_DMA_IRQHandler(dmaHandles[1 + 8]);
     HAL_DMA_IRQHandler(dmaHandles[2 + 8]);
 }
+#endif
 
 // F0
+#ifndef DMA1_Ch4_7_DMA2_Ch3_5_IRQHandler
 extern void DMA1_Ch4_7_DMA2_Ch3_5_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4]);
     HAL_DMA_IRQHandler(dmaHandles[5]);
@@ -191,6 +196,7 @@ extern void DMA1_Ch4_7_DMA2_Ch3_5_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4 + 8]);
     HAL_DMA_IRQHandler(dmaHandles[5 + 8]);
 }
+#endif
 
 // F0, F1, F3, L0, L1, L4
 extern void DMA1_Channel1_IRQHandler() {
@@ -214,12 +220,14 @@ extern void DMA1_Channel3_IRQHandler() {
 }
 
 // F0, L0
+#ifndef DMA1_Channel4_5_6_7_IRQHandler
 extern void DMA1_Channel4_5_6_7_IRQHandler() {
     HAL_DMA_IRQHandler(dmaHandles[4]);
     HAL_DMA_IRQHandler(dmaHandles[5]);
     HAL_DMA_IRQHandler(dmaHandles[6]);
     HAL_DMA_IRQHandler(dmaHandles[7]);
 }
+#endif
 
 // F0
 extern void DMA1_Channel4_5_IRQHandler() {

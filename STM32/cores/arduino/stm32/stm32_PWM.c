@@ -106,13 +106,19 @@ void pwmWrite(uint8_t pin, int dutyCycle, int frequency, int durationMillis) {
                 pinMode(pin, OUTPUT);
             }
 
+            #ifdef STM32F0 // TODO better condition for when there is no pclk2
+                uint32_t timerFreq = HAL_RCC_GetPCLK1Freq();
+            #else
+                uint32_t timerFreq = HAL_RCC_GetPCLK2Freq();
+            #endif
+
             pwm_config[i].port = variant_pin_list[pin].port;
             pwm_config[i].pin_mask = variant_pin_list[pin].pin_mask;
-            pwm_config[i].waveLengthCycles = HAL_RCC_GetPCLK2Freq() / frequency;
+            pwm_config[i].waveLengthCycles = timerFreq / frequency;
             pwm_config[i].dutyCycle = (uint64_t)pwm_config[i].waveLengthCycles * dutyCycle >> 16;
 
             if (durationMillis > 0) {
-                pwm_config[i].counterCycles = HAL_RCC_GetPCLK2Freq() / 1000 * durationMillis;
+                pwm_config[i].counterCycles = timerFreq / 1000 * durationMillis;
             }
 
             break;

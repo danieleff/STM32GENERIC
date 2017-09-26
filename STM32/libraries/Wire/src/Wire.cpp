@@ -4,6 +4,13 @@
 #include "stm32_gpio_af.h"
 #include <Arduino.h>
 
+#ifndef I2C1_EV_IRQn
+#define I2C1_EV_IRQn I2C1_IRQn
+#endif
+#ifndef I2C2_EV_IRQn
+#define I2C2_EV_IRQn I2C1_IRQn
+#endif
+
 /** TwoWire object used when in slave interrupt
  */
 TwoWire *slaveTwoWire[4];
