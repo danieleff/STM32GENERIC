@@ -10,6 +10,8 @@ void setup() {
   
   digitalWrite(0, HIGH);
   
+  analogRead(0);
+  
   analogWrite(0, 128);
   
   digitalWrite(0, 128);
