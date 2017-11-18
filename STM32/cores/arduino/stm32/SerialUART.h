@@ -35,6 +35,7 @@ class SerialUART : public Stream  {
     void begin(const uint32_t baud);
     void end(void);
     int available(void);
+    int availableForWrite(void);
     int peek(void);
     int read(void);
     void flush(void);
