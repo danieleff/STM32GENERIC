@@ -174,6 +174,11 @@ void SerialUART::begin(const uint32_t baud) {
 int SerialUART::available() {
     return rxEnd != rxStart;
 }
+
+int SerialUART::availableForWrite() {
+    return txEnd != txStart;
+}
+
 int SerialUART::peek() {
     if (available()) {
     return rxBuffer[rxStart % BUFFER_SIZE];
