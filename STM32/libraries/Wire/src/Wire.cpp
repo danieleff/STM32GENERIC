@@ -4,10 +4,8 @@
 #include "stm32_gpio_af.h"
 #include <Arduino.h>
 
-#ifndef I2C1_EV_IRQn
+#if defined(STM32F0)||defined(STM32L0)  /*F0/L0*/
 #define I2C1_EV_IRQn I2C1_IRQn
-#endif
-#ifndef I2C2_EV_IRQn
 #define I2C2_EV_IRQn I2C1_IRQn
 #endif
 
