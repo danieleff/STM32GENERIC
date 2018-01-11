@@ -714,7 +714,7 @@ DISCOVERY_F429ZI.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=
 DISCOVERY_F746NG.name=Discovery F746NG
 
 DISCOVERY_F746NG.upload.maximum_size=1048576
-DISCOVERY_F746NG.upload.maximum_data_size=327680
+DISCOVERY_F746NG.upload.maximum_data_size=327680 
 
 DISCOVERY_F746NG.build.core=arduino
 DISCOVERY_F746NG.build.board=DISCO_F746NG
@@ -773,3 +773,55 @@ DISCO_B_L475E_IOT01A.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SER
 DISCO_B_L475E_IOT01A.menu.serial.SerialUSB=SerialUSB
 DISCO_B_L475E_IOT01A.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
 
+################################################################################
+# The Borg board
+
+BORG_F765.name=The Borg
+
+BORG_F765.upload.maximum_size=1048576
+BORG_F765.upload.maximum_data_size=524288
+
+BORG_F765.build.core=arduino
+BORG_F765.build.board=BORG_F765
+
+BORG_F765.build.mcu=cortex-m7 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -DHSE_VALUE=12000000
+BORG_F765.build.series=STM32F7
+BORG_F765.build.variant=BORG_F765
+BORG_F765.build.extra_flags=-DSTM32F765ZG -DHSE_VALUE=12000000
+BORG_F765.build.f_cpu=216000000L
+
+BORG_F765.upload.protocol=STLink
+BORG_F765.upload.tool=stlink_upload
+
+BORG_F765.menu.upload_method.STLinkMethod=STLink
+BORG_F765.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BORG_F765.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+BORG_F765.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT0=1, BOOT1=0]
+BORG_F765.menu.upload_method.serialMethod.upload.protocol=maple_serial
+BORG_F765.menu.upload_method.serialMethod.upload.tool=serial_upload
+BORG_F765.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+BORG_F765.menu.upload_method.DFUUploadMethod2=USB DFU - Custom bootloader (0x10000)
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.protocol=pico_upload
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.tool=pico_upload
+BORG_F765.menu.upload_method.DFUUploadMethod2.build.extra_flags=-DSTM32F765ZG -DVECT_TAB_OFFSET=0x10000 -DHSE_VALUE=12000000
+BORG_F765.menu.upload_method.DFUUploadMethod2.build.ldscript=ldscript_bootloader_10000.ld
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.usbID=0483:df11
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.altID=2
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.maximum_size=1048576
+BORG_F765.menu.upload_method.DFUUploadMethod2.upload.maximum_data_size=524288
+BORG_F765.menu.upload_method.DFUUploadMethod2.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB
+
+BORG_F765.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
+BORG_F765.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
+BORG_F765.menu.usb.Disabled=Disabled, no USB
+
+BORG_F765.menu.serial.Automatic=Automatically selected based on upload method
+BORG_F765.menu.serial.SerialUSB=SerialUSB
+BORG_F765.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+BORG_F765.menu.serial.SerialUART1=SerialUART1
+BORG_F765.menu.serial.SerialUART1.build.extra_flags_serial=-DMENU_SERIAL=SerialUART1
+
+
+################################################################################
