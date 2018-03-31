@@ -31,19 +31,24 @@ void initVariant() { }
 void setupUSB() __attribute__((weak));
 void setupUSB() { }
 
+// Force init to be called *first*, i.e. before static object allocation.
+// Otherwise, statically allocated objects that need HAL may fail.
+ __attribute__(( constructor (101))) void premain() {
+
+// Required by FreeRTOS, see http://www.freertos.org/RTOS-Cortex-M3-M4.html
+#ifdef NVIC_PRIORITYGROUP_4
+  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+#endif
+
+    init();
+}
+
 int main(void)
 {
-    //Used by FreeRTOS, see http://www.freertos.org/RTOS-Cortex-M3-M4.html
-    #ifdef NVIC_PRIORITYGROUP_4
-    HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
-    #endif
-
     #ifdef STM32F7
     SCB_EnableICache();
     SCB_EnableDCache();
     #endif
-
-	init();
 
 	initVariant();
 
