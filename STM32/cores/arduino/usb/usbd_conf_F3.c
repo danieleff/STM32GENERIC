@@ -305,7 +305,6 @@ USBD_StatusTypeDef  USBD_LL_Init (USBD_HandleTypeDef *pdev)
   hpcd_USB_FS.Init.low_power_enable = DISABLE;
   hpcd_USB_FS.Init.battery_charging_enable = DISABLE;
 
-  for (volatile int i=0;i<200000;i++);
   if (HAL_PCD_Init(&hpcd_USB_FS) != HAL_OK)
   {
     //_Error_Handler(__FILE__, __LINE__);
