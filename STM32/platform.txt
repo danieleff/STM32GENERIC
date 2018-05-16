@@ -134,6 +134,16 @@ tools.stlink_upload.upload.params.verbose=-d
 tools.stlink_upload.upload.params.quiet=
 tools.stlink_upload.upload.pattern="{path}/{cmd}" {serial.port.file} {upload.altID} {upload.usbID} "{build.path}/{build.project_name}.bin"
 
+# dfu_util
+tools.dfuutil_upload.cmd=dfu-util
+tools.dfuutil_upload.cmd.windows=dfu-util-static.exe
+tools.dfuutil_upload.path.windows={runtime.hardware.path}/tools/win/dfu-util-0.9-win64
+tools.dfuutil_upload.path.macosx={runtime.ide.path}/hardware/tools/macosx
+tools.dfuutil_upload.path.linux={runtime.ide.path}/hardware/tools/linux
+
+tools.dfuutil_upload.upload.params.verbose=-d
+tools.dfuutil_upload.upload.params.quiet=
+tools.dfuutil_upload.upload.pattern="{path}/{cmd}" -d 0483:df11 -a 0 -s 0x08000000 -D "{build.path}/{build.project_name}.bin"
 
 # Upload using Maple bootloader over DFU
 tools.maple_upload.cmd=maple_upload
