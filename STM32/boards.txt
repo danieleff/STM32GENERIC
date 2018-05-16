@@ -665,9 +665,10 @@ BLUE_F303C.menu.upload_method.dfu_util.upload.tool=dfuutil_upload
 BLUE_F303C.menu.upload_method.dfu_util.upload.protocol=dfu-util
 
 #-DMENU_SERIAL_AUTO=SerialUART2
-BLUE_F303C.build.extra_flags_serial_auto=-DMENU_USB_SERIAL
+#BLUE_F303C.build.extra_flags_serial_auto=-DMENU_USB_SERIAL
 #-DMENU_SERIAL_AUTO=SerialUSB
 #-DMENU_USB_SERIAL
+BLUE_F303C.build.extra_flags_serial_auto=-DMENU_SERIAL=SerialUART2
 
 BLUE_F303C.menu.subboard.128k = F303CB (128KB)
 BLUE_F303C.menu.subboard.128k.upload.maximum_size=131072
