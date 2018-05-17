@@ -644,10 +644,9 @@ DISCOVERY_F303VC.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
 #DISCOVERY_F303VC.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
 
 ####################################### Discovery F303VC #########################################
-# Franken BluePill F303C board
+# Franken Pill F303C board
 
-BLUE_F303C.name=Franken BluePill F303C
-
+BLUE_F303C.name=Franken Pill F303C
 
 BLUE_F303C.build.core=arduino
 BLUE_F303C.build.board=BLUE_F303C
@@ -663,33 +662,39 @@ BLUE_F303C.menu.upload_method.stlink.upload.tool=stlink_upload
 BLUE_F303C.menu.upload_method.dfu_util=dfu-util
 BLUE_F303C.menu.upload_method.dfu_util.upload.tool=dfuutil_upload
 BLUE_F303C.menu.upload_method.dfu_util.upload.protocol=dfu-util
+BLUE_F303C.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+BLUE_F303C.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+BLUE_F303C.menu.upload_method.BMPMethod.upload.tool=bmp_upload
 
-BLUE_F303C.build.extra_flags_usb=-DMENU_USB_SERIAL
-BLUE_F303C.build.extra_flags_serial_auto=-DMENU_SERIAL=SerialUSB
+BLUE_F303C.menu.subboard.Blue128k = Blue F303CB (128KB)
+BLUE_F303C.menu.subboard.Blue128k.upload.maximum_size=131072
+BLUE_F303C.menu.subboard.Blue128k.build.ldscript=ldscript128k.ld
+BLUE_F303C.menu.subboard.Blue128k.upload.maximum_data_size=32768
+BLUE_F303C.menu.subboard.Blue128k.build.extra_flags=-DSTM32F303CB -DLED_BUILTIN=PC13
 
-BLUE_F303C.menu.subboard.128k = F303CB (128KB)
-BLUE_F303C.menu.subboard.128k.upload.maximum_size=131072
-BLUE_F303C.menu.subboard.128k.build.ldscript=ldscript128k.ld
-BLUE_F303C.menu.subboard.128k.upload.maximum_data_size=32768
-BLUE_F303C.menu.subboard.128k.build.extra_flags=-DSTM32F303CB
+BLUE_F303C.menu.subboard.Blue256k = Blue F303CC (256KB)
+BLUE_F303C.menu.subboard.Blue256k.upload.maximum_size=262144
+BLUE_F303C.menu.subboard.Blue256k.upload.maximum_data_size=40960
+BLUE_F303C.menu.subboard.Blue256k.build.ldscript=ldscript256k.ld
+BLUE_F303C.menu.subboard.Blue256k.build.extra_flags=-DSTM32F303CC -DLED_BUILTIN=PC13
 
-BLUE_F303C.menu.subboard.256k = F303CC (256KB)
-BLUE_F303C.menu.subboard.256k.upload.maximum_size=262144
-BLUE_F303C.menu.subboard.256k.upload.maximum_data_size=40960
-BLUE_F303C.menu.subboard.256k.build.ldscript=ldscript256k.ld
-BLUE_F303C.menu.subboard.256k.build.extra_flags=-DSTM32F303CC
+BLUE_F303C.menu.subboard.Black128k = Black F303CB (128KB)
+BLUE_F303C.menu.subboard.Black128k.upload.maximum_size=131072
+BLUE_F303C.menu.subboard.Black128k.build.ldscript=ldscript128k.ld
+BLUE_F303C.menu.subboard.Black128k.upload.maximum_data_size=32768
+BLUE_F303C.menu.subboard.Black128k.build.extra_flags=-DSTM32F303CB -DLED_BUILTIN=PC13
 
-#BLUE_F303C.menu.usb.Disabled=Disabled, no USB
-#BLUE_F303C.menu.usb.SerialUSB=Serial [Virtual COM port]
-#BLUE_F303C.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
-#BLUE_F303C.menu.usb.SerialMSC=Mass storage
-#BLUE_F303C.menu.usb.SerialMSC.build.extra_flags_usb=-DMENU_USB_MASS_STORAGE
+BLUE_F303C.menu.subboard.Black256k = Black F303CC (256KB)
+BLUE_F303C.menu.subboard.Black256k.upload.maximum_size=262144
+BLUE_F303C.menu.subboard.Black256k.upload.maximum_data_size=40960
+BLUE_F303C.menu.subboard.Black256k.build.ldscript=ldscript256k.ld
+BLUE_F303C.menu.subboard.Black256k.build.extra_flags=-DSTM32F303CC -DLED_BUILTIN=PB12
 
-#BLUE_F303C.menu.serial.SerialUSB=SerialUSB
-#BLUE_F303C.menu.serial.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
-
-#BLUE_F303C.menu.serial.SerialUART2=SerialUART2 [PA2/PA3]
-#BLUE_F303C.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
+BLUE_F303C.menu.usb.Disabled=Disabled, no USB
+BLUE_F303C.menu.usb.Disabled.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
+BLUE_F303C.menu.usb.SerialUSB=Serial [Virtual COM port]
+BLUE_F303C.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL 
+BLUE_F303C.menu.usb.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
 
 ################################################################################
 # Discovery F407VG board
