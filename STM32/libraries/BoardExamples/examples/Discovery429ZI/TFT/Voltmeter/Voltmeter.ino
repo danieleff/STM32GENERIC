@@ -8,10 +8,13 @@
 
   ! Do not attache more than 3.3V to the analog input !
 
-  Sept. 2017, ChrisMicro
+  June 2018, ChrisMicro
 
-  Remark: at the moment only the ADC connected to PA0 seems to return
-  useful values. PA0 is connected to the blue button on the board.
+  Remark: 
+  The analog input PA0 is connected to the blue button on the board
+  and therefore it can not be used as analog input. Many other pins
+  are also ocupied.
+  In this example PA5 is used. 
 
 ************************************************************************/
 
@@ -19,7 +22,7 @@
 
 LTDC_F429_Discovery tft;
 
-#define ANALOG_SIGNAL_INPUT PA0
+#define ANALOG_SIGNAL_INPUT PA5
 
 void setup()
 {
@@ -52,8 +55,7 @@ void loop(void)
   tft.setCursor(0, 0);  
   tft.setTextColor(LTDC_BLUE);
   tft.setTextSize(2);
-  tft.println("analog input PA0");
-  tft.println("(blue button)");
+  tft.println("analog input PA5");
   
   tft.setTextColor(LTDC_GREEN);
   tft.setTextSize(3);
