@@ -130,6 +130,11 @@ BluePill.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
 BluePill.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
 BluePill.menu.upload_method.BMPMethod.upload.tool=bmp_upload
 
+BluePill.menu.upload_method.HIDMethod=HID Bootloader 2.0 (0x1000)
+BluePill.menu.upload_method.HIDMethod.upload.tool=hid_upload
+BluePill.menu.upload_method.HIDMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB -DVECT_TAB_OFFSET=0x1000 -DHIDBL_F1
+BluePill.menu.upload_method.HIDMethod.build.ldscript=hid_bootloader.ld
+
 BluePill.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 BluePill.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
 BluePill.menu.usb.SerialMSC=Mass storage [testing, see documentation]
@@ -370,7 +375,7 @@ BLUE_F103XX.menu.subboard.BLUE_F103ZG.build.extra_flags=-DSTM32F103ZG -DHSE_VALU
 ################################################################################
 # BLACK_F407XX board
 
-BLACK_F407XX.name=BLACK F407VE/ZE/ZG boards
+BLACK_F407XX.name=BLACK F407VG/VE/ZE/ZG boards
 
 BLACK_F407XX.upload.maximum_size=524288
 BLACK_F407XX.upload.maximum_data_size=131072
@@ -393,6 +398,11 @@ BLACK_F407XX.menu.upload_method.serialMethod=Serial UART1 [TX/PA9, RX/PA10, BOOT
 BLACK_F407XX.menu.upload_method.serialMethod.upload.protocol=maple_serial
 BLACK_F407XX.menu.upload_method.serialMethod.upload.tool=serial_upload
 BLACK_F407XX.menu.upload_method.serialMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART1
+
+BLACK_F407XX.menu.upload_method.HIDMethod=HID Bootloader 2.0
+BLACK_F407XX.menu.upload_method.HIDMethod.upload.tool=hid_upload
+BLACK_F407XX.menu.upload_method.HIDMethod.build.ldscript=ldscript_bootloader_4000.ld
+BLACK_F407XX.menu.upload_method.HIDMethod.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUSB -DVECT_TAB_OFFSET=0x4000 -DHIDBL_F4
 
 BLACK_F407XX.menu.usb.SerialUSB=Serial [Virtual COM port, PA11/PA12 pins]
 BLACK_F407XX.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL
@@ -426,6 +436,13 @@ BLACK_F407XX.menu.subboard.BLACK_F407ZG.upload.maximum_data_size=131072
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.variant=BLACK_F407ZG
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.board=BLACK_F407ZG
 BLACK_F407XX.menu.subboard.BLACK_F407ZG.build.extra_flags=-DSTM32F407ZG -DHSE_VALUE=8000000
+
+BLACK_F407XX.menu.subboard.BLACK_F407VG=BLACK F407VG
+BLACK_F407XX.menu.subboard.BLACK_F407VG.upload.maximum_size=1232896
+BLACK_F407XX.menu.subboard.BLACK_F407VG.upload.maximum_data_size=131072
+BLACK_F407XX.menu.subboard.BLACK_F407VG.build.variant=BLACK_F407VG
+BLACK_F407XX.menu.subboard.BLACK_F407VG.build.board=BLACK_F407VG
+BLACK_F407XX.menu.subboard.BLACK_F407VG.build.extra_flags=-DSTM32F407VG -DHSE_VALUE=8000000
 
 ################################################################################
 # NUCLEO 64 board
