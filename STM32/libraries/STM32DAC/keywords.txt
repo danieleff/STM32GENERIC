@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map STM32DAC
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+STM32DAC	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+PA4_DACOUT	KEYWORD2
+PA5_DACOUT	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+DAC	LITERAL1
+DAC1	LITERAL1
+DAC2	LITERAL1
+
+DAC_CHANNEL_1	LITERAL1
+DAC_CHANNEL_2	LITERAL1
