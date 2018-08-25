@@ -1,1 +1,1 @@
-mkdocs build -e mkdocs_theme -d ../../docs
+mkdocs build -d ../../docs

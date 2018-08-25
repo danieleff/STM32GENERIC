@@ -10,395 +10,276 @@
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>STM32 HAL - STM32GENERIC</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
-        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <script src="../js/jquery-1.10.2.min.js"></script>
-        <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script>
-         
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap-3.0.3.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
     </head>
 
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
+            <div class="container">
 
-        <!-- Collapsed navigation -->
-        <div class="navbar-header">
-            <!-- Expander button -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="..">STM32GENERIC</a>
-        </div>
+                <!-- Collapsed navigation -->
+                <div class="navbar-header">
+                    <!-- Expander button -->
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="..">STM32GENERIC</a>
+                </div>
 
-        <!-- Expanded navigation -->
-        <div class="navbar-collapse collapse">
-            <!-- Main navigation -->
-            <ul class="nav navbar-nav">
-            
-            
-                <li >
-                    <a href="..">Installation</a>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../upload/">Uploading</a>
-                </li>
-            
-            
-            
-                <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        
+                <!-- Expanded navigation -->
+                <div class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li >
+                                <a href="..">Installation</a>
+                            </li>
+                            <li >
+                                <a href="../upload/">Uploading</a>
+                            </li>
+                            <li class="dropdown active">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../menu_options/">Menu options</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../arduino_api/">Arduino API</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../spi/">SPI</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../i2c/">I2C</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../i2s/">I2S</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../sdio/">SDIO</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../uart/">UART Serial</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../usb_cdc/">USB Serial</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../usb_msc/">USB Mass Storage</a>
 </li>
-
-                    
-                        
+                                    
 <li class="active">
     <a href="./">STM32 HAL</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../build_macros/">Build macros</a>
 </li>
-
-                    
-                    </ul>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../libraries/">Libraries</a>
-                </li>
-            
-            
-            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                    
-                        
+                                </ul>
+                            </li>
+                            <li >
+                                <a href="../libraries/">Libraries</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">STM32 Boards <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
 <li >
     <a href="../board_MapleMini_F103CB/">MapleMini F103CB</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_BluePill/">BluePill F103CB</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_Generic103RF/">Generic F103RF</a>
 </li>
-
-                    
-                        
+                                    
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">huaweiwx F103Z boards</a>
+    <a href="#">huaweiwx F103Z boards</a>
     <ul class="dropdown-menu">
-        
             
 <li >
     <a href="../board_F103ZE1/">RedBull(F103ZE)</a>
 </li>
-
-        
             
 <li >
     <a href="../board_F103ZE/">GENERIC(STM32F103ZE)</a>
 </li>
-
-        
             
 <li >
     <a href="../board_F103ZF/">GENERIC(STM32F103ZF)</a>
 </li>
-
-        
             
 <li >
     <a href="../board_F103ZG/">GENERIC(STM32F103ZG)</a>
 </li>
-
-        
     </ul>
   </li>
-
-                    
-                        
+                                    
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">BLUE F103VE/ZE/ZG boards</a>
+    <a href="#">BLUE F103VE/ZE/ZG boards</a>
     <ul class="dropdown-menu">
-        
             
 <li >
     <a href="../board_BLUE_F103VE/">BLUE F103VE vcc-gnd.com</a>
 </li>
-
-        
             
 <li >
     <a href="../board_BLUE_F103ZE/">BLUE F103ZE vcc-gnd.com</a>
 </li>
-
-        
             
 <li >
     <a href="../board_BLUE_F103ZG/">BLUE F103ZG vcc-gnd.com</a>
 </li>
-
-        
     </ul>
   </li>
-
-                    
-                        
+                                    
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">BLACK F407VE/ZE/ZG boards</a>
+    <a href="#">BLACK F407VE/ZE/ZG boards</a>
     <ul class="dropdown-menu">
-        
             
 <li >
     <a href="../board_BLACK_F407VE/">BLACK F407VE (V2.0)</a>
 </li>
-
-        
             
 <li >
     <a href="../board_BLACK_F407ZE/">BLACK F407ZE (V3.0)</a>
 </li>
-
-        
             
 <li >
     <a href="../board_BLACK_F407ZG/">BLACK F407ZG (M4 DEMO)</a>
 </li>
-
-        
     </ul>
   </li>
-
-                    
-                        
+                                    
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Nucleo-64 boards</a>
+    <a href="#">Nucleo-64 boards</a>
     <ul class="dropdown-menu">
-        
             
 <li >
     <a href="../board_Nucleo_F030R8/">Nucleo-F030R8</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_F103RB/">Nucleo-F103RB</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_F303RE/">Nucleo-F303RE</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_F401RE/">Nucleo-F401RE</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_F411RE/">Nucleo-F411RE</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_L053R8/">Nucleo-L053R8</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_L152RE/">Nucleo-L152RE</a>
 </li>
-
-        
             
 <li >
     <a href="../board_Nucleo_L476RG/">Nucleo-L476RG</a>
 </li>
-
-        
     </ul>
   </li>
-
-                    
-                        
+                                    
   <li class="dropdown-submenu">
-    <a tabindex="-1" href="">Nucleo-144 boards</a>
+    <a href="#">Nucleo-144 boards</a>
     <ul class="dropdown-menu">
-        
             
 <li >
     <a href="../board_Nucleo_F767ZI/">Nucleo-F767ZI</a>
 </li>
-
-        
     </ul>
   </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_DISCOVERY_L053C8/">Discovery L053C8</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_DISCOVERY_F303VC/">Discovery F303VC</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_DISCOVERY_F407VG/">Discovery F407VG</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../board_DISCOVERY_F746NG/">Discovery F746NG</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../add_board/">Adding a board</a>
 </li>
-
-                    
-                        
+                                    
 <li >
     <a href="../test/">Testing a board</a>
 </li>
+                                </ul>
+                            </li>
+                            <li >
+                                <a href="../about/">About</a>
+                            </li>
+                        </ul>
 
-                    
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li >
+                                <a rel="next" href="../usb_msc/">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li >
+                                <a rel="prev" href="../build_macros/">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
-                </li>
-            
-            
-            
-                <li >
-                    <a href="../about/">About</a>
-                </li>
-            
-            
-            </ul>
-
-            <!-- Search, Navigation and Repo links -->
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
-                        <i class="fa fa-search"></i> Search
-                    </a>
-                </li>
-                    <li >
-                        <a rel="next" href="../usb_msc/">
-                            <i class="fa fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="prev" href="../build_macros/">
-                            Next <i class="fa fa-arrow-right"></i>
-                        </a>
-                    </li>
-                
-            </ul>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-    
-    
-    
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
@@ -408,36 +289,78 @@
 
         <footer class="col-md-12">
             <hr>
-            
-            <center>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</center>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script>var base_url = '..';</script>
-        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-        <script src="../js/base.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
-                    <div class="modal-body">
-                        <p>
-                            From here you can search these documents. Enter
-                            your search terms below.
-                        </p>
-                        <form role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
-                            </div>
-                        </form>
-                        <div id="mkdocs-search-results"></div>
-                    </div>
-                    <div class="modal-footer">
-                    </div>
-                </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="Keyboard Shortcuts Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Keyboard Shortcuts</h4>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
     </body>
 </html>
