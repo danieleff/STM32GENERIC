@@ -265,6 +265,23 @@ static int8_t CDC_Receive_FS (uint8_t* Buf, uint32_t *Len)
 		 */
 		if(dtr_pin > 3){
       if((Buf[0] == '1')&&(Buf[1] == 'E')&&(Buf[2] == 'A')&&(Buf[3] == 'F')){
+
+#if defined (HIDBL_F1)  
+   
+        RTC_HandleTypeDef hrtc;
+        __HAL_RCC_PWR_CLK_ENABLE();
+        __HAL_RCC_BKP_CLK_ENABLE();
+        HAL_PWR_EnableBkUpAccess();
+        HAL_RTCEx_BKUPWrite(&hrtc,RTC_BKP_DR10,0x424C);  //Write the magic number 0x424C  
+        
+#elif defined (HIDBL_F4)
+
+        __HAL_RCC_PWR_CLK_ENABLE();
+        HAL_PWR_EnableBkUpAccess();
+        __BKPSRAM_CLK_ENABLE();
+        *(__IO uint32_t *)(BKPSRAM_BASE) = 0x424C; //Write the magic number 0x424C at Backup SRAM address 0x40024000    
+        
+#endif       
         HAL_NVIC_SystemReset();
       }
       dtr_pin = 0;
