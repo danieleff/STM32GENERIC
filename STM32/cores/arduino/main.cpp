@@ -56,7 +56,7 @@ int main(void)
     #endif
 
     #if defined(USB_BASE) || defined(USB_OTG_DEVICE_BASE)
-
+        setupUSB();
     #ifdef MENU_USB_SERIAL
         USBDeviceFS.beginCDC();
     #elif MENU_USB_MASS_STORAGE
@@ -64,12 +64,12 @@ int main(void)
     #endif
 
     #endif
-	
+
 	setup();
-    
+
 	for (;;) {
 		loop();
 	}
-        
+
 	return 0;
 }
