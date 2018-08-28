@@ -2,6 +2,8 @@
 #define VARIANT_H
 
 #define LED_BUILTIN PA5
+//On-board user button
+#define USER_BTN    PC13  
 
 #define MOSI PA7
 #define MISO PA6
