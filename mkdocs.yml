@@ -1,7 +1,13 @@
+# Use with mkdocs documentation generator https://www.mkdocs.org/
+# docs.md => docs
+# To build run:
+# mkdocs build
+
 site_name: STM32GENERIC
-docs_dir: mkdocs
+docs_dir: docs.md
+site_dir: docs
 pages:
-- Installation: index.md
+- Installation: README.md
 - Uploading: upload.md
 - Documentation:
     - Menu options: menu_options.md
