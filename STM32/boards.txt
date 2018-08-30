@@ -660,6 +660,60 @@ DISCOVERY_F303VC.build.extra_flags_serial_auto=-DMENU_SERIAL_AUTO=SerialUART2
 #DISCOVERY_F303VC.menu.serial.SerialUART2=SerialUART2 [PA2/PA3]
 #DISCOVERY_F303VC.menu.serial.SerialUART2.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
 
+####################################### Franken Pill F303C #########################################
+# Franken Pill F303C board
+# Made by transplaning F303C in place of F103C on a Blue or Black Pill board
+
+FRANKEN_F303C.name=Franken Pill F303C
+
+FRANKEN_F303C.build.core=arduino
+FRANKEN_F303C.build.board=FRANKEN_F303C
+
+FRANKEN_F303C.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+FRANKEN_F303C.build.series=STM32F3
+FRANKEN_F303C.build.variant=FRANKEN_F303C
+FRANKEN_F303C.build.f_cpu=72000000L
+
+FRANKEN_F303C.menu.upload_method.stlink=STLink
+FRANKEN_F303C.menu.upload_method.stlink.upload.protocol=STLink
+FRANKEN_F303C.menu.upload_method.stlink.upload.tool=stlink_upload
+FRANKEN_F303C.menu.upload_method.dfu_util=dfu-util
+FRANKEN_F303C.menu.upload_method.dfu_util.upload.tool=dfuutil_upload
+FRANKEN_F303C.menu.upload_method.dfu_util.upload.protocol=dfu-util
+FRANKEN_F303C.menu.upload_method.BMPMethod=BMP (Black Magic Probe)
+FRANKEN_F303C.menu.upload_method.BMPMethod.upload.protocol=gdb_bmp
+FRANKEN_F303C.menu.upload_method.BMPMethod.upload.tool=bmp_upload
+
+FRANKEN_F303C.menu.subboard.Blue128k = Blue F303CB (128KB)
+FRANKEN_F303C.menu.subboard.Blue128k.upload.maximum_size=131072
+FRANKEN_F303C.menu.subboard.Blue128k.build.ldscript=ldscript128k.ld
+FRANKEN_F303C.menu.subboard.Blue128k.upload.maximum_data_size=32768
+FRANKEN_F303C.menu.subboard.Blue128k.build.extra_flags=-DSTM32F303CB -DLED_BUILTIN=PC13
+
+FRANKEN_F303C.menu.subboard.Blue256k = Blue F303CC (256KB)
+FRANKEN_F303C.menu.subboard.Blue256k.upload.maximum_size=262144
+FRANKEN_F303C.menu.subboard.Blue256k.upload.maximum_data_size=40960
+FRANKEN_F303C.menu.subboard.Blue256k.build.ldscript=ldscript256k.ld
+FRANKEN_F303C.menu.subboard.Blue256k.build.extra_flags=-DSTM32F303CC -DLED_BUILTIN=PC13
+
+FRANKEN_F303C.menu.subboard.Black128k = Black F303CB (128KB)
+FRANKEN_F303C.menu.subboard.Black128k.upload.maximum_size=131072
+FRANKEN_F303C.menu.subboard.Black128k.build.ldscript=ldscript128k.ld
+FRANKEN_F303C.menu.subboard.Black128k.upload.maximum_data_size=32768
+FRANKEN_F303C.menu.subboard.Black128k.build.extra_flags=-DSTM32F303CB -DLED_BUILTIN=PC13
+
+FRANKEN_F303C.menu.subboard.Black256k = Black F303CC (256KB)
+FRANKEN_F303C.menu.subboard.Black256k.upload.maximum_size=262144
+FRANKEN_F303C.menu.subboard.Black256k.upload.maximum_data_size=40960
+FRANKEN_F303C.menu.subboard.Black256k.build.ldscript=ldscript256k.ld
+FRANKEN_F303C.menu.subboard.Black256k.build.extra_flags=-DSTM32F303CC -DLED_BUILTIN=PB12
+
+FRANKEN_F303C.menu.usb.Disabled=Disabled, no USB
+FRANKEN_F303C.menu.usb.Disabled.build.extra_flags_serial=-DMENU_SERIAL=SerialUART2
+FRANKEN_F303C.menu.usb.SerialUSB=Serial [Virtual COM port]
+FRANKEN_F303C.menu.usb.SerialUSB.build.extra_flags_usb=-DMENU_USB_SERIAL 
+FRANKEN_F303C.menu.usb.SerialUSB.build.extra_flags_serial=-DMENU_SERIAL=SerialUSB
+
 ################################################################################
 # Discovery F407VG board
 
