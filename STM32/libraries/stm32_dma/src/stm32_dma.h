@@ -26,7 +26,7 @@
 #include "stdbool.h"
 
 typedef enum {
-    SPI_TX, SPI_RX, SDIO_RXTX
+    SPI_TX, SPI_RX, SDIO_RXTX, ADC_DMA
 } dmaRequest;
 
 
