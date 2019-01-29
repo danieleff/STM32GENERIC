@@ -28,6 +28,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_core.h"
 
+//Handle Vendor Commands on EP0
+__weak void VendorCommand(USBD_SetupReqTypedef* req) { }
+
 /** @addtogroup STM32_USBD_DEVICE_LIBRARY
 * @{
 */
@@ -267,6 +270,15 @@ USBD_StatusTypeDef USBD_LL_SetupStage(USBD_HandleTypeDef *pdev, uint8_t *psetup)
 
   pdev->ep0_state = USBD_EP0_SETUP;
   pdev->ep0_data_len = pdev->request.wLength;
+ 
+  //Handle Vendor Command with Request Code 0x40
+  if ((pdev->request.bmRequest & 0x40) == 0x40) {
+    VendorCommand(&pdev->request); //Get Vendor setup request (no data)
+    //If there is data len then must take data or Setup will fail
+    //Send ACK if no other trasmission required (so dont make Host to fail request)
+    if (pdev->request.wLength == 0) USBD_CtlSendStatus(pdev); //ACK by sending 0 len packet  
+    return USBD_OK;
+  }
 
   switch (pdev->request.bmRequest & 0x1F)
   {
