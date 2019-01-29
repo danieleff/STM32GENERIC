@@ -28,13 +28,14 @@ const dma_request_to_instance_t dmaRequestToStream[] = {
 
     {ADC1, ADC_DMA, DMA2_Stream0, DMA_CHANNEL_0, 0 + 8, DMA2_Stream0_IRQn},
     {ADC1, ADC_DMA, DMA2_Stream4, DMA_CHANNEL_0, 4 + 8, DMA2_Stream4_IRQn},
-    
+#ifdef ADC2
     {ADC2, ADC_DMA, DMA2_Stream2, DMA_CHANNEL_1, 2 + 8, DMA2_Stream2_IRQn},
     {ADC2, ADC_DMA, DMA2_Stream3, DMA_CHANNEL_1, 3 + 8, DMA2_Stream3_IRQn},
-    
+#endif
+#ifdef ADC3
     {ADC3, ADC_DMA, DMA2_Stream0, DMA_CHANNEL_2, 0 + 8, DMA2_Stream0_IRQn},
     {ADC3, ADC_DMA, DMA2_Stream1, DMA_CHANNEL_2, 1 + 8, DMA2_Stream1_IRQn},
-
+#endif
 #ifdef SPI3
     {SPI3, SPI_TX, DMA1_Stream5, DMA_CHANNEL_0, 5, DMA1_Stream5_IRQn},
     {SPI3, SPI_RX, DMA1_Stream0, DMA_CHANNEL_0, 0, DMA1_Stream0_IRQn},
