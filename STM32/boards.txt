@@ -671,7 +671,8 @@ DISCOVERY_F407VG.upload.maximum_data_size=131072
 DISCOVERY_F407VG.build.core=arduino
 DISCOVERY_F407VG.build.board=DISCO_F407VG
 
-DISCOVERY_F407VG.build.mcu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard
+DISCOVERY_F407VG.build.mcu=cortex-m4
+DISCOVERY_F407VG.build.flags.fp=-mfpu=fpv4-sp-d16 -mfloat-abi=hard
 DISCOVERY_F407VG.build.series=STM32F4
 DISCOVERY_F407VG.build.variant=DISCOVERY_F407VG
 DISCOVERY_F407VG.build.extra_flags=-DSTM32F407VG -DHSE_VALUE=8000000
